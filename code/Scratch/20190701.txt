@@ -1,0 +1,17 @@
+author: wzr
+
+【地图界面】
+使用百度/高德地图进行原型开发
+尝试使用React-native，发现其难以使用，遂决定使用Android native开发
+申请了高德地图API Key，学习该API用法
+
+【Scratch】
+Android demo
+
+【界面分栏】
+Android界面：底栏切换
+（一级）
+GO | 宠 | 我
+（二级）
+Go：跑步模式 | 自由模式
+我：登录
