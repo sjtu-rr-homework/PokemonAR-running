@@ -12,7 +12,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
 
-        SDKInitializer.initialize(this);
+        //SDKInitializer.initialize(this);
         super.onCreate();
     }
 }
