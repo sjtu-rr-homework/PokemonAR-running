@@ -1,0 +1,4 @@
+#Wed Jul 03 10:01:43 CST 2019
+base.0=C\:\\Users\\fl632\\pkmDemo2\\app\\build\\intermediates\\transforms\\dex\\release\\0
+path.0=classes.dex
+renamed.0=classes.dex
