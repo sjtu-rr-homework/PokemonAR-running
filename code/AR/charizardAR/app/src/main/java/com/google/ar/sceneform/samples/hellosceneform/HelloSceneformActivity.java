@@ -90,6 +90,7 @@ public class HelloSceneformActivity extends AppCompatActivity {
                                   return null;
                               });
               break;
+
           case 2:
               ModelRenderable.builder()
                       .setSource(this, R.raw.bulbasaur)
@@ -107,7 +108,7 @@ public class HelloSceneformActivity extends AppCompatActivity {
 
           default:
               ModelRenderable.builder()
-                      .setSource(this, R.raw.charizard)
+                      .setSource(this, R.raw.andy)
                       .build()
                       .thenAccept(renderable -> andyRenderable = renderable)
                       .exceptionally(

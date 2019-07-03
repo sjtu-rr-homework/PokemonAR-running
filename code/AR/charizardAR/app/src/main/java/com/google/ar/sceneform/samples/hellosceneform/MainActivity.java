@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.putExtra("", 1);
+                intent.putExtra("variety", 1);
                 intent.setClass(MainActivity.this, HelloSceneformActivity.class);//this前面为当前activty名称，class前面为要跳转到得activity名称
                 startActivity(intent);
             }
