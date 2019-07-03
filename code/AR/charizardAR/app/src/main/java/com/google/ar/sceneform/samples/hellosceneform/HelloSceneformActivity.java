@@ -26,6 +26,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.HitResult;
@@ -44,6 +46,7 @@ public class HelloSceneformActivity extends AppCompatActivity {
 
   private ArFragment arFragment;
   private ModelRenderable andyRenderable;
+  private Button returnButton;
 
   @Override
   @SuppressWarnings({"AndroidApiChecker", "FutureReturnValueIgnored"})
@@ -51,13 +54,21 @@ public class HelloSceneformActivity extends AppCompatActivity {
   // FutureReturnValueIgnored is not valid
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
     if (!checkIsSupportedDeviceOrFinish(this)) {
       return;
     }
 
     setContentView(R.layout.activity_ux);
     arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment);
+    returnButton=findViewById(R.id.returnButton);
+    returnButton.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              Intent intent = new Intent();
+              intent.setClass(HelloSceneformActivity.this, MainActivity.class);//this前面为当前activty名称，class前面为要跳转到得activity名称
+              startActivity(intent);
+          }
+      });
 
     Intent intent=getIntent();
     int variety=intent.getIntExtra("variety", -1);
