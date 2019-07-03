@@ -18,6 +18,7 @@ package com.google.ar.sceneform.samples.hellosceneform;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
@@ -25,6 +26,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.HitResult;
@@ -43,6 +46,7 @@ public class HelloSceneformActivity extends AppCompatActivity {
 
   private ArFragment arFragment;
   private ModelRenderable andyRenderable;
+  private Button returnButton;
 
   @Override
   @SuppressWarnings({"AndroidApiChecker", "FutureReturnValueIgnored"})
@@ -50,28 +54,73 @@ public class HelloSceneformActivity extends AppCompatActivity {
   // FutureReturnValueIgnored is not valid
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
     if (!checkIsSupportedDeviceOrFinish(this)) {
       return;
     }
 
     setContentView(R.layout.activity_ux);
     arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment);
+    returnButton=findViewById(R.id.returnButton);
+    returnButton.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              Intent intent = new Intent();
+              intent.setClass(HelloSceneformActivity.this, MainActivity.class);//this前面为当前activty名称，class前面为要跳转到得activity名称
+              startActivity(intent);
+          }
+      });
+
+    Intent intent=getIntent();
+    int variety=intent.getIntExtra("variety", -1);
 
     // When you build a Renderable, Sceneform loads its resources in the background while returning
     // a CompletableFuture. Call thenAccept(), handle(), or check isDone() before calling get().
-    ModelRenderable.builder()
-        .setSource(this, R.raw.charizard)
-        .build()
-        .thenAccept(renderable -> andyRenderable = renderable)
-        .exceptionally(
-            throwable -> {
-              Toast toast =
-                  Toast.makeText(this, "Unable to load andy renderable", Toast.LENGTH_LONG);
-              toast.setGravity(Gravity.CENTER, 0, 0);
-              toast.show();
-              return null;
-            });
+      switch (variety){
+          case 1:
+              ModelRenderable.builder()
+                      .setSource(this, R.raw.charizard)
+                      .build()
+                      .thenAccept(renderable -> andyRenderable = renderable)
+                      .exceptionally(
+                              throwable -> {
+                                  Toast toast =
+                                          Toast.makeText(this, "Unable to load andy renderable", Toast.LENGTH_LONG);
+                                  toast.setGravity(Gravity.CENTER, 0, 0);
+                                  toast.show();
+                                  return null;
+                              });
+              break;
+
+          case 2:
+              ModelRenderable.builder()
+                      .setSource(this, R.raw.bulbasaur)
+                      .build()
+                      .thenAccept(renderable -> andyRenderable = renderable)
+                      .exceptionally(
+                              throwable -> {
+                                  Toast toast =
+                                          Toast.makeText(this, "Unable to load andy renderable", Toast.LENGTH_LONG);
+                                  toast.setGravity(Gravity.CENTER, 0, 0);
+                                  toast.show();
+                                  return null;
+                              });
+              break;
+
+          default:
+              ModelRenderable.builder()
+                      .setSource(this, R.raw.andy)
+                      .build()
+                      .thenAccept(renderable -> andyRenderable = renderable)
+                      .exceptionally(
+                              throwable -> {
+                                  Toast toast =
+                                          Toast.makeText(this, "Unable to load andy renderable", Toast.LENGTH_LONG);
+                                  toast.setGravity(Gravity.CENTER, 0, 0);
+                                  toast.show();
+                                  return null;
+                              });
+      }
+
 
     arFragment.setOnTapArPlaneListener(
         (HitResult hitResult, Plane plane, MotionEvent motionEvent) -> {

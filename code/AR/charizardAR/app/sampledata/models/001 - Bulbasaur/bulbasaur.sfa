@@ -79,14 +79,14 @@
   },
   samplers: [
     {
-      file: 'sampledata/models/001 - Bulbasaur\\Textures\\FushigidaneDh.tga',
+      file: 'sampledata/models/001 - Bulbasaur\\Textures\\FushigidaneDh.png',
       name: 'FushigidaneDh',
-      pipeline_name: 'Textures\\FushigidaneDh.tga',
+      pipeline_name: 'Textures\\FushigidaneDh.png',
     },
     {
-      file: 'sampledata/models/001 - Bulbasaur\\Textures\\FushigidaneEyeDh.tga',
+      file: 'sampledata/models/001 - Bulbasaur\\Textures\\FushigidaneEyeDh.png',
       name: 'FushigidaneEyeDh',
-      pipeline_name: 'Textures\\FushigidaneEyeDh.tga',
+      pipeline_name: 'Textures\\FushigidaneEyeDh.png',
     },
   ],
   version: '0.54:2',

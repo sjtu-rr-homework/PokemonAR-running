@@ -19,9 +19,16 @@
     android:layout_height="match_parent"
     tools:context=".HelloSceneformActivity">
 
-  <fragment android:name="com.google.ar.sceneform.ux.ArFragment"
+  <fragment
       android:id="@+id/ux_fragment"
+      android:name="com.google.ar.sceneform.ux.ArFragment"
       android:layout_width="match_parent"
       android:layout_height="match_parent" />
+
+  <RadioButton
+      android:id="@+id/returnButton"
+      android:layout_width="57dp"
+      android:layout_height="53dp"
+      android:layout_gravity="bottom|center" />
 
 </FrameLayout>

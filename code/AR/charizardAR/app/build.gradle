@@ -60,14 +60,9 @@ sceneform.asset('sampledata/models/001 - Bulbasaur/Bulbasaur.obj',
         'sampledata/models/001 - Bulbasaur/bulbasaur.sfa',
         'src/main/res/raw/bulbasaur')
 
-sceneform.asset('sampledata/models/andy.obj',
-        'default',
-        'sampledata/models/andy.sfa',
-        'src/main/res/raw/andy')
-
-apply plugin: 'com.google.ar.sceneform.plugin'
 sceneform.asset('sampledata/models/006 - Charizard/Charizard.obj',
         'default',
         'sampledata/models/006 - Charizard/Charizard.sfa',
         'src/main/res/raw/Charizard')
+
 
