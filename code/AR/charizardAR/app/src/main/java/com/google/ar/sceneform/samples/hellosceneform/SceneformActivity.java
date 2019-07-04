@@ -40,8 +40,8 @@ import com.google.ar.sceneform.ux.TransformableNode;
 /**
  * This is an example activity that uses the Sceneform UX package to make common AR tasks easier.
  */
-public class HelloSceneformActivity extends AppCompatActivity {
-  private static final String TAG = HelloSceneformActivity.class.getSimpleName();
+public class SceneformActivity extends AppCompatActivity {
+  private static final String TAG = SceneformActivity.class.getSimpleName();
   private static final double MIN_OPENGL_VERSION = 3.0;
 
   private ArFragment arFragment;
@@ -65,7 +65,7 @@ public class HelloSceneformActivity extends AppCompatActivity {
           @Override
           public void onClick(View v) {
               Intent intent = new Intent();
-              intent.setClass(HelloSceneformActivity.this, MainActivity.class);//this前面为当前activty名称，class前面为要跳转到得activity名称
+              intent.setClass(SceneformActivity.this, MainActivity.class);//this前面为当前activty名称，class前面为要跳转到得activity名称
               startActivity(intent);
           }
       });
