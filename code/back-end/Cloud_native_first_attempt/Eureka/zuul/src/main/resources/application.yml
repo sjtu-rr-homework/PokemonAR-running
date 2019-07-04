@@ -1,0 +1,32 @@
+
+server:
+  port: 8766
+
+spring:
+  application:
+    name: Zuul
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://172.17.0.2:8761/eureka/
+  instance:
+    prefer-ip-address: true
+zuul:
+  ribbon:
+    Readtimeout: 0
+    Sockettimeout: 0
+  routes:
+    simulation-service:
+      path: /simulation/**
+      serviceId: simulation
+    save-service:
+      path: /save/**
+      serviceId: save
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000

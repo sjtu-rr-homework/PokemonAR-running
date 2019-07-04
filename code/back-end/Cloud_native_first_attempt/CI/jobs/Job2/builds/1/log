@@ -1,0 +1,33 @@
+Started by upstream project "[8mha:////4PPC31GuOQhIl/q7D9Dx6RJJWup1+wZstH2UbtwF00GgAAAAlB+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyWEgYu/az8JBA21AcAJ+qPHb8AAAA=[0mjob1" build number [8mha:////4Iexo81711yiDwdG265eTB1WkS/NalyjnovExgiUxt2mAAAAlB+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLQIwSBm79rPwkEDbUtwAAdp8198AAAAA=[0m8
+originally caused by:
+ Started by user unknown or anonymous
+Building in workspace /var/jenkins_home/jobs/Job2/workspace
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/sjtu-rr-homework/testrepo.git
+ > git init /var/jenkins_home/jobs/Job2/workspace # timeout=10
+Fetching upstream changes from https://github.com/sjtu-rr-homework/testrepo.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/sjtu-rr-homework/testrepo.git +refs/heads/*:refs/remotes/origin/*
+ > git config remote.origin.url https://github.com/sjtu-rr-homework/testrepo.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/sjtu-rr-homework/testrepo.git # timeout=10
+Fetching upstream changes from https://github.com/sjtu-rr-homework/testrepo.git
+ > git fetch --tags --progress https://github.com/sjtu-rr-homework/testrepo.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision 4c8f2d7dd201c8fb3f1f6702bcd643655623973f (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 4c8f2d7dd201c8fb3f1f6702bcd643655623973f
+Commit message: "first commit"
+First time build. Skipping changelog.
+[workspace] $ /bin/bash /tmp/jenkins7147462006541338935.sh
+
+..... Intergration Phase Started :: Copying Artifacts::.....
+
+......Provision Phase Started :: Building Docker Container::.....
+cp: cannot create regular file 'target/': Not a directory
+/tmp/jenkins7147462006541338935.sh: line 8: cd: target: No such file or directory
+/tmp/jenkins7147462006541338935.sh: line 9: sudo: command not found
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE

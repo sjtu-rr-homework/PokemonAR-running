@@ -1,0 +1,54 @@
+version: '2'
+services:
+  eureka:
+    build:
+      context: ./eureka/
+    image: eureka
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://eureka:8761/eureka/
+    tty: false
+    ports:
+      - 8761:8761
+  zuul:
+    build:
+      context: ./zuul/
+    image: zuul-service
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://eureka:8761/eureka/
+    tty: false
+    ports:
+      - 8766:8766 
+  simulate:
+    build:
+      context: ./simulate/
+    image: simulate-service
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://eureka:8761/eureka/
+    tty: false
+    ports:
+      - 8764:8764
+  statistic:
+    build:
+      context: ./statistic/
+    image: statistic-service
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://eureka:8761/eureka/
+    tty: false
+    ports:
+      - 8762:8762
+  save:
+    build:
+      context: ./save/
+    image: save-service
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://eureka:8761/eureka/
+    tty: false
+    ports:
+      - 8765:8765
+
+volumes:
+  maven-home:
+
+networks:
+  services-network-01:
+    driver: bridge
