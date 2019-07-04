@@ -1,0 +1,27 @@
+Started by user unknown or anonymous
+Building in workspace /var/jenkins_home/jobs/Job2/workspace
+No credentials specified
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/sjtu-rr-homework/testrepo.git # timeout=10
+Fetching upstream changes from https://github.com/sjtu-rr-homework/testrepo.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/sjtu-rr-homework/testrepo.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision 4c8f2d7dd201c8fb3f1f6702bcd643655623973f (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 4c8f2d7dd201c8fb3f1f6702bcd643655623973f
+Commit message: "first commit"
+ > git rev-list --no-walk 4c8f2d7dd201c8fb3f1f6702bcd643655623973f # timeout=10
+[workspace] $ /bin/bash /tmp/jenkins4654415617949387852.sh
+
+..... Intergration Phase Started :: Copying Artifacts::.....
+
+......Provision Phase Started :: Building Docker Container::.....
+/tmp/jenkins4654415617949387852.sh: line 7: mvn: command not found
+cp: cannot create regular file 'target/': Not a directory
+/tmp/jenkins4654415617949387852.sh: line 9: cd: target: No such file or directory
+/tmp/jenkins4654415617949387852.sh: line 10: sudo: command not found
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE

@@ -1,0 +1,152 @@
+Started by user unknown or anonymous
+Building in workspace /var/jenkins_home/jobs/Job2/workspace
+No credentials specified
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/sjtu-rr-homework/testrepo.git # timeout=10
+Fetching upstream changes from https://github.com/sjtu-rr-homework/testrepo.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/sjtu-rr-homework/testrepo.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision 4c8f2d7dd201c8fb3f1f6702bcd643655623973f (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 4c8f2d7dd201c8fb3f1f6702bcd643655623973f
+Commit message: "first commit"
+ > git rev-list --no-walk 4c8f2d7dd201c8fb3f1f6702bcd643655623973f # timeout=10
+[workspace] $ /bin/bash /tmp/jenkins5267233623998888842.sh
+
+..... Intergration Phase Started :: Copying Artifacts::.....
+
+......Provision Phase Started :: Building Docker Container::.....
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] Building easy-calculator 0.0.1-SNAPSHOT-20190406a
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- spring-boot-maven-plugin:2.1.4.RELEASE:build-info (default) @ easy-calculator ---
+[INFO] 
+[INFO] --- maven-resources-plugin:3.1.0:resources (default-resources) @ easy-calculator ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] Copying 7 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ easy-calculator ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 11 source files to /var/jenkins_home/jobs/Job2/workspace/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:3.1.0:testResources (default-testResources) @ easy-calculator ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /var/jenkins_home/jobs/Job2/workspace/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ easy-calculator ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 2 source files to /var/jenkins_home/jobs/Job2/workspace/target/test-classes
+[ERROR] /var/jenkins_home/jobs/Job2/workspace/src/test/java/org/easycalculator/arithmetic/RationalTest.java:[16,15] unmappable character for encoding UTF-8
+[ERROR] /var/jenkins_home/jobs/Job2/workspace/src/test/java/org/easycalculator/arithmetic/RationalTest.java:[16,16] unmappable character for encoding UTF-8
+[ERROR] /var/jenkins_home/jobs/Job2/workspace/src/test/java/org/easycalculator/arithmetic/RationalTest.java:[16,17] unmappable character for encoding UTF-8
+[ERROR] /var/jenkins_home/jobs/Job2/workspace/src/test/java/org/easycalculator/arithmetic/RationalTest.java:[16,18] unmappable character for encoding UTF-8
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.1:test (default-test) @ easy-calculator ---
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running org.easycalculator.arithmetic.RationalTest
+ArithmeticException caught: divided by zero
+ArithmeticException caught: divided by zero
+ArithmeticException caught: divided by zero
+ArithmeticException caught: only integers can do mods
+ArithmeticException caught: only integers can do mods
+ArithmeticException caught: only integers can do mods
+ArithmeticException caught: only integers can do mods
+ParseException caught: unknown digit
+ParseException caught: more than one dot is not allowed
+ParseException caught: unknown digit
+[INFO] Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.042 s - in org.easycalculator.arithmetic.RationalTest
+[INFO] Running org.easycalculator.EasyCalculatorApplicationTests
+12:34:10.542 [main] DEBUG org.springframework.test.context.junit4.SpringJUnit4ClassRunner - SpringJUnit4ClassRunner constructor called with [class org.easycalculator.EasyCalculatorApplicationTests]
+12:34:10.546 [main] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+12:34:10.551 [main] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+12:34:10.564 [main] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [org.easycalculator.EasyCalculatorApplicationTests] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+12:34:10.573 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [org.easycalculator.EasyCalculatorApplicationTests], using SpringBootContextLoader
+12:34:10.576 [main] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [org.easycalculator.EasyCalculatorApplicationTests]: class path resource [org/easycalculator/EasyCalculatorApplicationTests-context.xml] does not exist
+12:34:10.576 [main] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [org.easycalculator.EasyCalculatorApplicationTests]: class path resource [org/easycalculator/EasyCalculatorApplicationTestsContext.groovy] does not exist
+12:34:10.576 [main] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [org.easycalculator.EasyCalculatorApplicationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+12:34:10.577 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.easycalculator.EasyCalculatorApplicationTests]: EasyCalculatorApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+12:34:10.609 [main] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [org.easycalculator.EasyCalculatorApplicationTests]
+12:34:10.669 [main] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [/var/jenkins_home/jobs/Job2/workspace/target/classes/org/easycalculator/EasyCalculatorApplication.class]
+12:34:10.670 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.easycalculator.EasyCalculatorApplication for test class org.easycalculator.EasyCalculatorApplicationTests
+12:34:10.760 [main] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [org.easycalculator.EasyCalculatorApplicationTests]: using defaults.
+12:34:10.760 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+12:34:10.767 [main] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.transaction.TransactionalTestExecutionListener] due to a missing dependency. Specify custom listener classes or make the default listener classes and their required dependencies available. Offending class: [org/springframework/transaction/TransactionDefinition]
+12:34:10.768 [main] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener] due to a missing dependency. Specify custom listener classes or make the default listener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttribute]
+12:34:10.768 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@40005471, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@2cd76f31, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@367ffa75, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@49438269, org.springframework.test.context.support.DirtiesContextTestExecutionListener@ba2f4ec, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@1c1bbc4e, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@55fe41ea, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@fbd1f6, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@1ce24091, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@5dda768f]
+12:34:10.769 [main] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [org.easycalculator.EasyCalculatorApplicationTests]
+12:34:10.769 [main] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [org.easycalculator.EasyCalculatorApplicationTests]
+12:34:10.770 [main] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [org.easycalculator.EasyCalculatorApplicationTests]
+12:34:10.770 [main] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [org.easycalculator.EasyCalculatorApplicationTests]
+12:34:10.770 [main] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [org.easycalculator.EasyCalculatorApplicationTests]
+12:34:10.770 [main] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [org.easycalculator.EasyCalculatorApplicationTests]
+12:34:10.772 [main] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@24313fcc testClass = EasyCalculatorApplicationTests, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@7d20d0b testClass = EasyCalculatorApplicationTests, locations = '{}', classes = '{class org.easycalculator.EasyCalculatorApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@a74868d, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@365185bd, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@481a15ff, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@b3d7190], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> true]], class annotated with @DirtiesContext [false] with mode [null].
+12:34:10.772 [main] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [org.easycalculator.EasyCalculatorApplicationTests]
+12:34:10.772 [main] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [org.easycalculator.EasyCalculatorApplicationTests]
+12:34:10.787 [main] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=-1}
+2019-05-18 12:34:11.210  INFO 2089 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$9b54cabe] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.1.4.RELEASE)
+
+2019-05-18 12:34:11.403  INFO 2089 --- [           main] o.e.EasyCalculatorApplicationTests       : No active profile set, falling back to default profiles: default
+2019-05-18 12:34:12.454  WARN 2089 --- [           main] o.s.boot.actuate.endpoint.EndpointId     : Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2019-05-18 12:34:12.622  INFO 2089 --- [           main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=c6146da9-92e1-3630-8eae-e8e4984a21e3
+2019-05-18 12:34:12.669  INFO 2089 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.easycalculator.lib.LoginService' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-05-18 12:34:12.745  INFO 2089 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$9b54cabe] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-05-18 12:34:12.991  WARN 2089 --- [           main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-05-18 12:34:12.991  INFO 2089 --- [           main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2019-05-18 12:34:13.001  INFO 2089 --- [           main] c.netflix.config.DynamicPropertyFactory  : DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@65e21ce3
+2019-05-18 12:34:13.477  WARN 2089 --- [           main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-05-18 12:34:13.477  INFO 2089 --- [           main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2019-05-18 12:34:13.679  INFO 2089 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-05-18 12:34:13.872  INFO 2089 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2019-05-18 12:34:15.175  INFO 2089 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 19 endpoint(s) beneath base path '/actuator'
+2019-05-18 12:34:15.237  INFO 2089 --- [           main] o.e.EasyCalculatorApplicationTests       : Started EasyCalculatorApplicationTests in 4.444 seconds (JVM running for 5.05)
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.946 s - in org.easycalculator.EasyCalculatorApplicationTests
+2019-05-18 12:34:15.467  INFO 2089 --- [       Thread-5] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2019-05-18 12:34:15.471  INFO 2089 --- [       Thread-5] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application EASYCALCULATOR with eureka with status DOWN
+2019-05-18 12:34:15.479  INFO 2089 --- [       Thread-5] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 19, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- maven-jar-plugin:3.1.1:jar (default-jar) @ easy-calculator ---
+[INFO] Building jar: /var/jenkins_home/jobs/Job2/workspace/target/easy-calculator-0.0.1-SNAPSHOT-20190406a.jar
+[INFO] 
+[INFO] --- spring-boot-maven-plugin:2.1.4.RELEASE:repackage (repackage) @ easy-calculator ---
+[INFO] Replacing main artifact with repackaged archive
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:unpack (unpack) @ easy-calculator ---
+[INFO] Configured Artifact: org:easy-calculator:0.0.1-SNAPSHOT-20190406a:jar
+[INFO] Unpacking /var/jenkins_home/jobs/Job2/workspace/target/easy-calculator-0.0.1-SNAPSHOT-20190406a.jar to /var/jenkins_home/jobs/Job2/workspace/target/dependency with includes "" and excludes ""
+[INFO] 
+[INFO] --- maven-install-plugin:2.5.2:install (default-install) @ easy-calculator ---
+[INFO] Installing /var/jenkins_home/jobs/Job2/workspace/target/easy-calculator-0.0.1-SNAPSHOT-20190406a.jar to /var/jenkins_home/.m2/repository/org/easy-calculator/0.0.1-SNAPSHOT-20190406a/easy-calculator-0.0.1-SNAPSHOT-20190406a.jar
+[INFO] Installing /var/jenkins_home/jobs/Job2/workspace/pom.xml to /var/jenkins_home/.m2/repository/org/easy-calculator/0.0.1-SNAPSHOT-20190406a/easy-calculator-0.0.1-SNAPSHOT-20190406a.pom
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 9.233 s
+[INFO] Finished at: 2019-05-18T12:34:16Z
+[INFO] Final Memory: 51M/362M
+[INFO] ------------------------------------------------------------------------
+/tmp/jenkins5267233623998888842.sh: line 12: sudo: command not found
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE
