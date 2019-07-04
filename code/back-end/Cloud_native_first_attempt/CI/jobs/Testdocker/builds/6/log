@@ -1,0 +1,9 @@
+Started by user unknown or anonymous
+Building in workspace /var/jenkins_home/jobs/Testdocker/workspace
+[workspace] $ /bin/sh -xe /tmp/jenkins5113667184042320253.sh
++ docker run helloworld
+Unable to find image 'helloworld:latest' locally
+docker: Error response from daemon: pull access denied for helloworld, repository does not exist or may require 'docker login'.
+See 'docker run --help'.
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE

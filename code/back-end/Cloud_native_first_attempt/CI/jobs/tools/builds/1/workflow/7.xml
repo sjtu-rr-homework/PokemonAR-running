@@ -1,0 +1,142 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<Tag plugin="workflow-support@3.3">
+  <node class="cps.n.StepAtomNode" plugin="workflow-cps@2.68">
+    <parentIds>
+      <string>6</string>
+    </parentIds>
+    <id>7</id>
+    <descriptorId>org.jenkinsci.plugins.workflow.steps.ToolStep</descriptorId>
+  </node>
+  <actions>
+    <cps.a.ArgumentsActionImpl plugin="workflow-cps@2.68">
+      <arguments>
+        <entry>
+          <string>name</string>
+          <string>jdk7</string>
+        </entry>
+        <entry>
+          <string>type</string>
+          <string>hudson.model.JDK</string>
+        </entry>
+      </arguments>
+      <isUnmodifiedBySanitization>true</isUnmodifiedBySanitization>
+    </cps.a.ArgumentsActionImpl>
+    <wf.a.TimingAction plugin="workflow-api@2.34">
+      <startTime>1558178694711</startTime>
+    </wf.a.TimingAction>
+    <s.a.LogStorageAction/>
+    <wf.a.ErrorAction plugin="workflow-api@2.34">
+      <error class="java.io.IOException">
+        <detailMessage>Failed to install file:/var/jenkins_home/downloads/jdk-7u76-linux-x64.tar.gz to /var/jenkins_home/tools/hudson.model.JDK/jdk7</detailMessage>
+        <cause class="java.io.IOException">
+          <detailMessage>Failed to unpack file:/var/jenkins_home/downloads/jdk-7u76-linux-x64.tar.gz (320 bytes read of total 320)</detailMessage>
+          <cause class="java.io.IOException">
+            <detailMessage>Failed to extract input stream</detailMessage>
+            <cause class="java.io.IOException">
+              <detailMessage>incorrect header check</detailMessage>
+              <stackTrace>
+                <trace>com.jcraft.jzlib.InflaterInputStream.read(InflaterInputStream.java:112)</trace>
+                <trace>org.apache.commons.compress.utils.IOUtils.readFully(IOUtils.java:160)</trace>
+                <trace>org.apache.commons.compress.utils.IOUtils.readFully(IOUtils.java:134)</trace>
+                <trace>org.apache.commons.compress.archivers.tar.TarArchiveInputStream.readRecord(TarArchiveInputStream.java:419)</trace>
+                <trace>org.apache.commons.compress.archivers.tar.TarArchiveInputStream.getRecord(TarArchiveInputStream.java:388)</trace>
+                <trace>org.apache.commons.compress.archivers.tar.TarArchiveInputStream.getNextTarEntry(TarArchiveInputStream.java:269)</trace>
+                <trace>hudson.FilePath.readFromTar(FilePath.java:2563)</trace>
+                <trace>hudson.FilePath.access$500(FilePath.java:210)</trace>
+                <trace>hudson.FilePath$UntarFrom.invoke(FilePath.java:811)</trace>
+                <trace>hudson.FilePath$UntarFrom.invoke(FilePath.java:802)</trace>
+                <trace>hudson.FilePath.act(FilePath.java:1075)</trace>
+                <trace>hudson.FilePath.act(FilePath.java:1058)</trace>
+                <trace>hudson.FilePath.untarFrom(FilePath.java:797)</trace>
+                <trace>hudson.FilePath.installIfNecessaryFrom(FilePath.java:929)</trace>
+                <trace>hudson.FilePath.installIfNecessaryFrom(FilePath.java:845)</trace>
+                <trace>hudson.tools.ZipExtractionInstaller.performInstallation(ZipExtractionInstaller.java:83)</trace>
+                <trace>hudson.tools.InstallerTranslator.getToolHome(InstallerTranslator.java:72)</trace>
+                <trace>hudson.tools.ToolLocationNodeProperty.getToolHome(ToolLocationNodeProperty.java:109)</trace>
+                <trace>hudson.tools.ToolInstallation.translateFor(ToolInstallation.java:206)</trace>
+                <trace>hudson.model.JDK.forNode(JDK.java:148)</trace>
+                <trace>hudson.model.JDK.forNode(JDK.java:61)</trace>
+                <trace>org.jenkinsci.plugins.workflow.steps.ToolStep$Execution.run(ToolStep.java:152)</trace>
+                <trace>org.jenkinsci.plugins.workflow.steps.ToolStep$Execution.run(ToolStep.java:133)</trace>
+                <trace>org.jenkinsci.plugins.workflow.steps.SynchronousNonBlockingStepExecution.lambda$start$0(SynchronousNonBlockingStepExecution.java:47)</trace>
+                <trace>java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)</trace>
+                <trace>java.util.concurrent.FutureTask.run(FutureTask.java:266)</trace>
+                <trace>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)</trace>
+                <trace>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)</trace>
+                <trace>java.lang.Thread.run(Thread.java:748)</trace>
+              </stackTrace>
+              <suppressedExceptions class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </suppressedExceptions>
+            </cause>
+            <stackTrace>
+              <trace>hudson.FilePath.readFromTar(FilePath.java:2589)</trace>
+              <trace>hudson.FilePath.access$500(FilePath.java:210)</trace>
+              <trace>hudson.FilePath$UntarFrom.invoke(FilePath.java:811)</trace>
+              <trace>hudson.FilePath$UntarFrom.invoke(FilePath.java:802)</trace>
+              <trace>hudson.FilePath.act(FilePath.java:1075)</trace>
+              <trace>hudson.FilePath.act(FilePath.java:1058)</trace>
+              <trace>hudson.FilePath.untarFrom(FilePath.java:797)</trace>
+              <trace>hudson.FilePath.installIfNecessaryFrom(FilePath.java:929)</trace>
+              <trace>hudson.FilePath.installIfNecessaryFrom(FilePath.java:845)</trace>
+              <trace>hudson.tools.ZipExtractionInstaller.performInstallation(ZipExtractionInstaller.java:83)</trace>
+              <trace>hudson.tools.InstallerTranslator.getToolHome(InstallerTranslator.java:72)</trace>
+              <trace>hudson.tools.ToolLocationNodeProperty.getToolHome(ToolLocationNodeProperty.java:109)</trace>
+              <trace>hudson.tools.ToolInstallation.translateFor(ToolInstallation.java:206)</trace>
+              <trace>hudson.model.JDK.forNode(JDK.java:148)</trace>
+              <trace>hudson.model.JDK.forNode(JDK.java:61)</trace>
+              <trace>org.jenkinsci.plugins.workflow.steps.ToolStep$Execution.run(ToolStep.java:152)</trace>
+              <trace>org.jenkinsci.plugins.workflow.steps.ToolStep$Execution.run(ToolStep.java:133)</trace>
+              <trace>org.jenkinsci.plugins.workflow.steps.SynchronousNonBlockingStepExecution.lambda$start$0(SynchronousNonBlockingStepExecution.java:47)</trace>
+              <trace>java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)</trace>
+              <trace>java.util.concurrent.FutureTask.run(FutureTask.java:266)</trace>
+              <trace>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)</trace>
+              <trace>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)</trace>
+              <trace>java.lang.Thread.run(Thread.java:748)</trace>
+            </stackTrace>
+            <suppressedExceptions class="java.util.Collections$UnmodifiableRandomAccessList" reference="../cause/suppressedExceptions"/>
+          </cause>
+          <stackTrace>
+            <trace>hudson.FilePath.installIfNecessaryFrom(FilePath.java:931)</trace>
+            <trace>hudson.FilePath.installIfNecessaryFrom(FilePath.java:845)</trace>
+            <trace>hudson.tools.ZipExtractionInstaller.performInstallation(ZipExtractionInstaller.java:83)</trace>
+            <trace>hudson.tools.InstallerTranslator.getToolHome(InstallerTranslator.java:72)</trace>
+            <trace>hudson.tools.ToolLocationNodeProperty.getToolHome(ToolLocationNodeProperty.java:109)</trace>
+            <trace>hudson.tools.ToolInstallation.translateFor(ToolInstallation.java:206)</trace>
+            <trace>hudson.model.JDK.forNode(JDK.java:148)</trace>
+            <trace>hudson.model.JDK.forNode(JDK.java:61)</trace>
+            <trace>org.jenkinsci.plugins.workflow.steps.ToolStep$Execution.run(ToolStep.java:152)</trace>
+            <trace>org.jenkinsci.plugins.workflow.steps.ToolStep$Execution.run(ToolStep.java:133)</trace>
+            <trace>org.jenkinsci.plugins.workflow.steps.SynchronousNonBlockingStepExecution.lambda$start$0(SynchronousNonBlockingStepExecution.java:47)</trace>
+            <trace>java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)</trace>
+            <trace>java.util.concurrent.FutureTask.run(FutureTask.java:266)</trace>
+            <trace>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)</trace>
+            <trace>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)</trace>
+            <trace>java.lang.Thread.run(Thread.java:748)</trace>
+          </stackTrace>
+          <suppressedExceptions class="java.util.Collections$UnmodifiableRandomAccessList" reference="../cause/cause/suppressedExceptions"/>
+        </cause>
+        <stackTrace>
+          <trace>hudson.FilePath.installIfNecessaryFrom(FilePath.java:937)</trace>
+          <trace>hudson.FilePath.installIfNecessaryFrom(FilePath.java:845)</trace>
+          <trace>hudson.tools.ZipExtractionInstaller.performInstallation(ZipExtractionInstaller.java:83)</trace>
+          <trace>hudson.tools.InstallerTranslator.getToolHome(InstallerTranslator.java:72)</trace>
+          <trace>hudson.tools.ToolLocationNodeProperty.getToolHome(ToolLocationNodeProperty.java:109)</trace>
+          <trace>hudson.tools.ToolInstallation.translateFor(ToolInstallation.java:206)</trace>
+          <trace>hudson.model.JDK.forNode(JDK.java:148)</trace>
+          <trace>hudson.model.JDK.forNode(JDK.java:61)</trace>
+          <trace>org.jenkinsci.plugins.workflow.steps.ToolStep$Execution.run(ToolStep.java:152)</trace>
+          <trace>org.jenkinsci.plugins.workflow.steps.ToolStep$Execution.run(ToolStep.java:133)</trace>
+          <trace>org.jenkinsci.plugins.workflow.steps.SynchronousNonBlockingStepExecution.lambda$start$0(SynchronousNonBlockingStepExecution.java:47)</trace>
+          <trace>java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)</trace>
+          <trace>java.util.concurrent.FutureTask.run(FutureTask.java:266)</trace>
+          <trace>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)</trace>
+          <trace>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)</trace>
+          <trace>java.lang.Thread.run(Thread.java:748)</trace>
+        </stackTrace>
+        <suppressedExceptions class="java.util.Collections$UnmodifiableRandomAccessList" reference="../cause/cause/cause/suppressedExceptions"/>
+      </error>
+    </wf.a.ErrorAction>
+  </actions>
+</Tag>

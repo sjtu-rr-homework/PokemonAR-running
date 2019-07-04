@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.peng.main.provider.mapper.mapper.BaseModuleResourcesMapper" >
+  <resultMap id="BaseResultMap" type="com.peng.main.api.mapper.model.BaseModuleResources" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="MODULE_NAME" property="moduleName" jdbcType="VARCHAR" />
+    <result column="MODULE_CODE" property="moduleCode" jdbcType="VARCHAR" />
+    <result column="MODULE_PATH" property="modulePath" jdbcType="VARCHAR" />
+    <result column="PARENT_ID" property="parentId" jdbcType="VARCHAR" />
+    <result column="MODULE_ICON" property="moduleIcon" jdbcType="VARCHAR" />
+    <result column="HTTP_METHOD" property="httpMethod" jdbcType="VARCHAR" />
+    <result column="IS_OPERATING" property="isOperating" jdbcType="INTEGER" />
+    <result column="SORT" property="sort" jdbcType="INTEGER" />
+    <result column="SYSTEM_ID" property="systemId" jdbcType="VARCHAR" />
+    <result column="ACTIVE" property="active" jdbcType="INTEGER" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <resultMap id="menuMap" type="com.peng.main.api.mapper.model.BaseModuleResources">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="MODULE_NAME" property="moduleName" jdbcType="VARCHAR" />
+    <result column="MODULE_CODE" property="moduleCode" jdbcType="VARCHAR" />
+    <result column="MODULE_PATH" property="modulePath" jdbcType="VARCHAR" />
+    <result column="PARENT_ID" property="parentId" jdbcType="VARCHAR" />
+    <result column="MODULE_ICON" property="moduleIcon" jdbcType="VARCHAR" />
+    <result column="HTTP_METHOD" property="httpMethod" jdbcType="VARCHAR" />
+    <result column="IS_OPERATING" property="isOperating" jdbcType="INTEGER" />
+    <result column="SORT" property="sort" jdbcType="INTEGER" />
+    <result column="SYSTEM_ID" property="systemId" jdbcType="VARCHAR" />
+    <result column="ACTIVE" property="active" jdbcType="INTEGER" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+    <collection  column="{ID=ID,USER_ID=USER_ID}" property="subModules" select="selectMenusByParentIdWithOperating" />
+  </resultMap>
+
+  <resultMap id="rolesMap" type="com.peng.main.api.mapper.model.BaseModuleResources">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="MODULE_NAME" property="moduleName" jdbcType="VARCHAR" />
+    <result column="MODULE_CODE" property="moduleCode" jdbcType="VARCHAR" />
+    <result column="MODULE_PATH" property="modulePath" jdbcType="VARCHAR" />
+    <result column="PARENT_ID" property="parentId" jdbcType="VARCHAR" />
+    <result column="MODULE_ICON" property="moduleIcon" jdbcType="VARCHAR" />
+    <result column="HTTP_METHOD" property="httpMethod" jdbcType="VARCHAR" />
+    <result column="IS_OPERATING" property="isOperating" jdbcType="INTEGER" />
+    <result column="SORT" property="sort" jdbcType="INTEGER" />
+    <result column="SYSTEM_ID" property="systemId" jdbcType="VARCHAR" />
+    <result column="ACTIVE" property="active" jdbcType="INTEGER" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="PROJECT_NAME" property="projectName" jdbcType="VARCHAR" />
+    <collection  column="{ID=ID,USER_ID=USER_ID}" property="subModules" select="selectModuleByParentId" />
+  </resultMap>
+
+  <resultMap id="moduleTree" type="com.peng.main.api.mapper.model.BaseModuleResources">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="MODULE_NAME" property="moduleName" jdbcType="VARCHAR" />
+    <result column="MODULE_CODE" property="moduleCode" jdbcType="VARCHAR" />
+    <result column="MODULE_PATH" property="modulePath" jdbcType="VARCHAR" />
+    <result column="PARENT_ID" property="parentId" jdbcType="VARCHAR" />
+    <result column="MODULE_ICON" property="moduleIcon" jdbcType="VARCHAR" />
+    <result column="HTTP_METHOD" property="httpMethod" jdbcType="VARCHAR" />
+    <result column="IS_OPERATING" property="isOperating" jdbcType="INTEGER" />
+    <result column="SORT" property="sort" jdbcType="INTEGER" />
+    <result column="SYSTEM_ID" property="systemId" jdbcType="VARCHAR" />
+    <result column="ACTIVE" property="active" jdbcType="INTEGER" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="PROJECT_NAME" property="projectName" jdbcType="VARCHAR" />
+    <collection  column="{ID=ID}" property="subModules" select="selectModuleTreeByParentId" />
+  </resultMap>
+
+  <resultMap id="ModuleAndSystemMap" type="com.peng.main.api.pojo.response.ModuleAndSystemResponse" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="MODULE_NAME" property="moduleName" jdbcType="VARCHAR" />
+    <collection  column="{ID=ID}" property="subModules"
+                 select="selectModuleAndSystemByParentId" />
+  </resultMap>
+
+  <select id="getMenusByUserId" resultMap="menuMap">
+    SELECT DISTINCT bmr.*, bur.user_id as USER_ID FROM
+    base_user_role bur LEFT JOIN base_role_module brm ON bur.role_id = brm.role_id
+    LEFT JOIN base_module_resources bmr ON brm.module_id = bmr.id
+    LEFT JOIN base_system bs ON  bmr.SYSTEM_ID = bs.ID
+    WHERE bur.user_id = #{userId} AND bmr.parent_id IS NULL AND bmr.IS_OPERATING = 0 AND bs.ACTIVE = 1
+  </select>
+
+  <select id="selectMenusByParentIdWithOperating" resultMap="menuMap">
+    SELECT DISTINCT bmr.*, bur.user_id as USER_ID FROM
+    base_user_role bur LEFT JOIN base_role_module brm ON bur.role_id = brm.role_id
+    LEFT JOIN base_module_resources bmr ON brm.module_id = bmr.id
+    WHERE bur.user_id = #{USER_ID} AND bmr.parent_id = #{ID} AND bmr.IS_OPERATING = 0
+  </select>
+
+  <select id="selectModuleByRoleId" resultMap="rolesMap">
+    SELECT bmr.*, bur.user_id as USER_ID, bs.PROJECT_NAME FROM base_role_module brm
+    LEFT JOIN base_module_resources bmr on brm.MODULE_ID = bmr.ID
+    LEFT JOIN base_system bs ON  bmr.SYSTEM_ID = bs.ID
+    LEFT JOIN base_user_role bur ON bur.role_id = brm.role_id
+    WHERE brm.ROLE_ID = #{ID} and bur.user_id = #{USER_ID} and bmr.parent_id is null and bs.ACTIVE = 1
+  </select>
+
+  <select id="selectModuleByParentId" resultMap="rolesMap">
+    SELECT DISTINCT bmr.*, bur.user_id as USER_ID, bs.PROJECT_NAME FROM base_user_role bur
+    LEFT JOIN base_role_module brm ON bur.role_id = brm.role_id
+    LEFT JOIN base_module_resources bmr ON brm.module_id = bmr.id
+    LEFT JOIN base_system bs ON  bmr.SYSTEM_ID = bs.ID
+    WHERE bur.user_id = #{USER_ID} AND bmr.parent_id = #{ID}
+  </select>
+
+  <select id="selectModuleTree" resultMap="moduleTree">
+    SELECT * FROM base_module_resources
+    <where>
+      <if test="id == 'root'">
+        PARENT_ID IS NULL AND SYSTEM_ID = #{systemId}
+      </if>
+      <if test="id != 'root'">
+        PARENT_ID = #{id}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectModuleTreeByParentId" resultMap="BaseResultMap">
+    SELECT * FROM base_module_resources
+    WHERE PARENT_ID = #{ID}
+  </select>
+
+  <select id="selectModuleAndSystemBySystemId" resultMap="ModuleAndSystemMap">
+    SELECT ID, MODULE_NAME FROM base_module_resources
+    WHERE SYSTEM_ID = #{ID} AND PARENT_ID is null
+  </select>
+
+  <select id="selectModuleAndSystemByParentId" resultMap="ModuleAndSystemMap">
+    SELECT ID, MODULE_NAME FROM base_module_resources
+    WHERE  PARENT_ID = #{ID}
+  </select>
+
+</mapper>

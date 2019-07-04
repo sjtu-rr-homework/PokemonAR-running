@@ -1,0 +1,7 @@
+Started by user unknown or anonymous
+Building in workspace /var/jenkins_home/jobs/Testdocker/workspace
+[workspace] $ /bin/sh -xe /tmp/jenkins8086519744670533538.sh
++ sudo docker run helloworld
+sudo: docker: command not found
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE
