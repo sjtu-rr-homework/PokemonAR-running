@@ -7,9 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
-import example.com.pkmnavidemo4.MainActivity;
 import example.com.pkmnavidemo4.R;
 import example.com.pkmnavidemo4.SceneformActivity;
 

@@ -40,5 +40,5 @@ sceneform.asset('sampledata/models/001 - Bulbasaur/Bulbasaur.obj',
 
 sceneform.asset('sampledata/models/006 - Charizard/Charizard.obj',
         'default',
-        'sampledata/models/006 - Charizard/Charizard.sfa',
-        'src/main/res/raw/Charizard')
+        'sampledata/models/006 - Charizard/charizard.sfa',
+        'src/main/res/raw/charizard')
