@@ -30,19 +30,23 @@ public class ElfsFragment extends Fragment {
         arButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.putExtra("variety", 1);
-                intent=new Intent(getActivity(), SceneformActivity.class);
-                startActivity(intent);
+                Intent intent = new Intent(getActivity(), SceneformActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("variety", 1);
+                intent.putExtras(bundle);
+//这里一定要获取到所在Activity再startActivity()；
+                getActivity().startActivity(intent);
             }
         });
         arButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.putExtra("variety", 2);
-                intent=new Intent(getActivity(), SceneformActivity.class);
-                startActivity(intent);
+                Intent intent = new Intent(getActivity(), SceneformActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("variety", 2);
+                intent.putExtras(bundle);
+//这里一定要获取到所在Activity再startActivity()；
+                getActivity().startActivity(intent);
             }
         });
         return view;

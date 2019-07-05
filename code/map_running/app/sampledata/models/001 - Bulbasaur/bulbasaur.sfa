@@ -59,19 +59,7 @@
       'TexCoord',
       'Orientation',
     ],
-   suggested_collision: {
-            center: {
-               x: 0,
-               y: 0,
-               z: 0,
-            },
-            size: {
-               x: 1,
-               y: 1,
-               z: 1,
-            },
-            type: "Box",
-         },
+    collision: {},
     file: 'sampledata/models/001 - Bulbasaur/Bulbasaur.obj',
     name: 'Bulbasaur',
     recenter: 'root',
@@ -81,13 +69,13 @@
     {
       file: 'sampledata/models/001 - Bulbasaur\\Textures\\FushigidaneDh.png',
       name: 'FushigidaneDh',
-      pipeline_name: 'Textures\\FushigidaneDh.png',
+      pipeline_name: 'Textures\\FushigidaneDh.tga',
     },
     {
       file: 'sampledata/models/001 - Bulbasaur\\Textures\\FushigidaneEyeDh.png',
       name: 'FushigidaneEyeDh',
-      pipeline_name: 'Textures\\FushigidaneEyeDh.png',
+      pipeline_name: 'Textures\\FushigidaneEyeDh.tga',
     },
   ],
-  version: '0.54:2',
+  version: '0.52:1',
 }

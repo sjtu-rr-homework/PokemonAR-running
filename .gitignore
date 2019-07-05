@@ -1,2 +1,13 @@
 *.tmp
 ~*
+code/navi/app/local.properties
+code/navi/app/gradlew.bat
+code/navi/app/gradlew
+code/navi/app/gradle/wrapper/gradle-wrapper.properties
+code/navi/app/gradle/wrapper/gradle-wrapper.jar
+code/navi/app/app.iml
+code/navi/app/app.iml
+code/AR/pkmnavidemo4/.idea/vcs.xml
+code/AR/pkmnavidemo4/build.gradle
+code/AR/pkmnavidemo4/build.gradle
+code/AR/pkmnavidemo4/build.gradle
