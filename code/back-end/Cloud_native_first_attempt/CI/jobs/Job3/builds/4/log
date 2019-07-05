@@ -1,0 +1,30 @@
+Started by user unknown or anonymous
+Building in workspace /var/jenkins_home/jobs/Job3/workspace
+No credentials specified
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/sjtu-rr-homework/testrepo.git # timeout=10
+Fetching upstream changes from https://github.com/sjtu-rr-homework/testrepo.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/sjtu-rr-homework/testrepo.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision 4c8f2d7dd201c8fb3f1f6702bcd643655623973f (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 4c8f2d7dd201c8fb3f1f6702bcd643655623973f
+Commit message: "first commit"
+ > git rev-list --no-walk 4c8f2d7dd201c8fb3f1f6702bcd643655623973f # timeout=10
+[workspace] $ /bin/sh -xe /tmp/jenkins6029242250272849131.sh
++ echo 
+
++ echo .....Deployment Phase Started :: Building Docker Container:: ......
+.....Deployment Phase Started :: Building Docker Container:: ......
++ docker run -d -p 8180:8080 --name devops_pipeline_demo devops_pipeline_demo
+81bf1bae5713d5716e40da2f19918b7ed7bcc273bd494205df4bfa09e5f7077a
++ echo .............................................
+.............................................
++ echo View App deployed here: http://server-ip:8180/
+View App deployed here: http://server-ip:8180/
++ echo .............................................
+.............................................
+Finished: SUCCESS

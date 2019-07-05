@@ -1,0 +1,83 @@
+version: '3'
+services:
+  consul:
+    image: consul:0.7.3
+    restart: always
+    ports:
+      - "8500:8500"
+  auth-center:
+    image: auth-center-provider
+    restart: always
+    ports:
+      - '18001:18001'
+    depends_on:
+      - 'consul'
+      - 'mysql'
+      - 'redis'
+    entrypoint: ./wait-for-it.sh consul:8500 -t 600 -- ./wait-for-it.sh mysql:3306 -t 600 --
+    command: java -Djava.security.egd=file:/dev/./urandom -jar /app.jar
+    environment:
+      - CONSUL_HOST=consul
+      - CONSUL_PORT=8500
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+  api-gateway:
+    image: api-gateway
+    restart: always
+    ports:
+      - '18000:18000'
+    depends_on:
+      - 'consul'
+      - 'auth-center'
+    entrypoint: ./wait-for-it.sh auth-center:18001 -t 600 --
+    command: java -Djava.security.egd=file:/dev/./urandom -jar /app.jar
+    environment:
+      - CONSUL_HOST=consul
+      - CONSUL_PORT=8500
+      - AUTH_CENTER_HOST=auth-center
+      - AUTH_CENTER_PORT=18001
+  main-data:
+    image: main-data-provider
+    restart: always
+    ports:
+      - '18002:18002'
+    depends_on:
+      - 'consul'
+      - 'auth-center'
+      - 'mysql'
+      - 'redis'
+    entrypoint: ./wait-for-it.sh auth-center:18001 -t 600 --
+    command: java -Djava.security.egd=file:/dev/./urandom -jar /app.jar
+    environment:
+      - CONSUL_HOST=consul
+      - CONSUL_PORT=8500
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+      - AUTH_CENTER_HOST=auth-center
+      - AUTH_CENTER_PORT=18001
+  mysql:
+    build: ./mysql
+    ports:
+      - '3306:3306'
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - '6379:6379'
+  node-app:
+    image: node-app
+    ports:
+      - '8080:8080'
+    depends_on:
+      - 'auth-center'
+      - 'api-gateway'
+    environment:
+      - HOST=node-app
+      - PORT=8080
+      - BASE_URL=http://192.168.99.100:8080
+      - SERVER_URL=http://192.168.99.100:18000
+      - AUTH_URL=http://192.168.99.100:18001/auth

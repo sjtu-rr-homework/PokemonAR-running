@@ -1,0 +1,52 @@
+Started by user unknown or anonymous
+Running in Durability level: MAX_SURVIVABILITY
+[8mha:////4C7536DGR52B4/PFnbD2ihokHoj5S2lR36yxplKf3asfAAAAoh+LCAAAAAAAAP9tjTEOwjAQBM8BClpKHuFItIiK1krDC0x8GCfWnbEdkooX8TX+gCESFVvtrLSa5wtWKcKBo5UdUu8otU4GP9jS5Mixv3geZcdn2TIl9igbHBs2eJyx4YwwR1SwULBGaj0nRzbDRnX6rmuvydanHMu2V1A5c4MHCFXMWcf8hSnC9jqYxPTz/BXAFEIGsfuclm8zQVqFvQAAAA==[0m[Pipeline] Start of Pipeline
+[8mha:////4GMDFMJ7/E4FQ9TAB5rY1FnBc2MDelbtaGrGEzJiASGjAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycohUghExsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jduZBmjwAAAAA==[0m[Pipeline] node
+Running on [8mha:////4PrD+iWj1YgGzsH3CJaMCemGee5m1MQ5PVp78rgRRhyaAAAAnh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz2EgZh/eT83ILSktQifY3cxGIgrakPAHib2iPIAAAA[0mJenkins in /var/jenkins_home/jobs/tools/workspace
+[8mha:////4IYmL4LCjT4p8jBifs/xFuBTyfQF1HDQX/SvMF0oc4ZcAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gA0xsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jfoP95RwAAAAA==[0m[Pipeline] {
+[8mha:////4DrbPXQVFoSb+vK8u1NgHeIyU9stoJA6SWx2Xwth7B0OAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gQkxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jc09154wAAAAA==[0m[Pipeline] stage
+[8mha:////4Nkh/iGdgRuuNJTRL5hMFbYNTASE3kEalex8ZJrcEtsqAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0ggUxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jek7ggRwAAAAA==[0m[Pipeline] { (Declarative: Tool Install)
+[8mha:////4PU4bg7JilR9XgCoF3NFwtA4Uvymp84U/98En5d2W+F+AAAAoh+LCAAAAAAAAP9tjTEOAiEURD9rLGwtPQTbaWGsbAmNJ0AWEZb8zwLrbuWJvJp3kLiJlZNMMm+a93rDOic4UbLcG+wdZu14DKOti0+U+lugiXu6ck2YKRguzSSpM+cFJRUDS1gDKwEbgzpQdmgLbIVXD9UGhba9lFS/o4DGdQM8gYlqLiqVL8wJdvexy4Q/z18BzLEA29ce4gfg7KmOvAAAAA==[0m[Pipeline] tool
+Unpacking file:/var/jenkins_home/downloads/jdk-7u76-linux-x64.tar.gz to /var/jenkins_home/tools/hudson.model.JDK/jdk7 on Jenkins
+[8mha:////4DRkjvoTZiANMlCAwErq83NGpA5YPIxLVorJeErJTAT7AAAAoh+LCAAAAAAAAP9tjTEOAiEURD9rLGwtPQTbGRNjZUtoPAGyiLDkfxZYdytP5NW8g8RNrJxkknnTvNcb1jnBiZLl3mDvMGvHYxhtXXyi1N8CTdzTlWvCTMFwaSZJnTkvKKkYWMIaWAnYGNSBskNbYCu8eqg2KLTtpaT6HQU0rhvgCUxUc1GpfGFOsLuPXSb8ef4KYI6xADvU7j9Dg2gqvAAAAA==[0m[Pipeline] }
+[8mha:////4CoqP2qJY/xl1lTBxfLPKanwOBCCsGINEqk7rRc7N4HpAAAAoh+LCAAAAAAAAP9tjTEOAiEURD9rLGwtPQRbWRhjZUtoPAGyiLDkfxZYdytP5NW8g8RNrJxkknnTvNcb1jnBiZLl3mDvMGvHYxhtXXyi1N8CTdzTlWvCTMFwaSZJnTkvKKkYWMIaWAnYGNSBskNbYCu8eqg2KLTtpaT6HQU0rhvgCUxUc1GpfGFOsLuPXSb8ef4KYI6xADvU7j9J+wGOvAAAAA==[0m[Pipeline] // stage
+[8mha:////4A4wnIjbzUoNM/yQKMDZw2UqX+/P6P4ZQGCh9+8opooKAAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMIBiQ5R0VppeIFJjHFi3QX7QlLxIr7GH4iIRMVWO9PM641lijhydKqx1HpKlVdd6N301MCxvQYeVMMXVTElDlaVdii5tqcZSxaLeVmOhcbKUhU4eXKCtW7MwxTBkCvOEid30Mh9fccTmZ7KYqJ8YYzY3Po6Mf06fwMYu06Q77aCbP8BhStF0r0AAAA=[0m[Pipeline] }
+[8mha:////4MvyxT47sHLzcnv3DEvXKpsgreYVB+n3E3qS8/xGk4R3AAAAoh+LCAAAAAAAAP9tjbEOgjAURS8YB1dHP6KEOBon14bFL6hQa6F5D9uHMPlF/pr/IJHEyTvdc5bzemOdIo4cnWotdZ5S7VUfBjc/NXLsroFH1fJF1UyJg1WVHStu7GnBisViWZZjpbGxVAdOnpxgq1vzMEUw5IqzxNkdNHLf3PFEpueymChfmCJ2t6FJTL/O3wCmvhfkZSnI9h+Wl0FxvQAAAA==[0m[Pipeline] // node
+[8mha:////4L+ao1Nh6mFv9p95MeQN7pGZKEJqHh28pMuFjt3BF+FnAAAAoh+LCAAAAAAAAP9tjTESgjAQRT84FraWHiKMtI6VbYbGE0SIMZDZxWQRKk/k1byDjMxY+av/XvNeb6xTxJGjU62lzlOqverD4OanRo7dNfCoWr6omilxsKqyY8WNPS1YsVgsy3KsNDaW6sDJkxNsdWsepgiGXHGWOLuDRu6bO57I9FwWE+ULU8TuNjSJ6df5G8DU94J8Xwqy8gPQ3eZBvQAAAA==[0m[Pipeline] End of Pipeline
+java.io.IOException: incorrect header check
+	at com.jcraft.jzlib.InflaterInputStream.read(InflaterInputStream.java:112)
+	at org.apache.commons.compress.utils.IOUtils.readFully(IOUtils.java:160)
+	at org.apache.commons.compress.utils.IOUtils.readFully(IOUtils.java:134)
+	at org.apache.commons.compress.archivers.tar.TarArchiveInputStream.readRecord(TarArchiveInputStream.java:419)
+	at org.apache.commons.compress.archivers.tar.TarArchiveInputStream.getRecord(TarArchiveInputStream.java:388)
+	at org.apache.commons.compress.archivers.tar.TarArchiveInputStream.getNextTarEntry(TarArchiveInputStream.java:269)
+	at hudson.FilePath.readFromTar(FilePath.java:2563)
+Caused: java.io.IOException: Failed to extract input stream
+	at hudson.FilePath.readFromTar(FilePath.java:2589)
+	at hudson.FilePath.access$500(FilePath.java:210)
+	at hudson.FilePath$UntarFrom.invoke(FilePath.java:811)
+	at hudson.FilePath$UntarFrom.invoke(FilePath.java:802)
+	at hudson.FilePath.act(FilePath.java:1075)
+	at hudson.FilePath.act(FilePath.java:1058)
+	at hudson.FilePath.untarFrom(FilePath.java:797)
+	at hudson.FilePath.installIfNecessaryFrom(FilePath.java:929)
+Caused: java.io.IOException: Failed to unpack file:/var/jenkins_home/downloads/jdk-7u76-linux-x64.tar.gz (320 bytes read of total 320)
+	at hudson.FilePath.installIfNecessaryFrom(FilePath.java:931)
+Caused: java.io.IOException: Failed to install file:/var/jenkins_home/downloads/jdk-7u76-linux-x64.tar.gz to /var/jenkins_home/tools/hudson.model.JDK/jdk7
+	at hudson.FilePath.installIfNecessaryFrom(FilePath.java:937)
+	at hudson.FilePath.installIfNecessaryFrom(FilePath.java:845)
+	at hudson.tools.ZipExtractionInstaller.performInstallation(ZipExtractionInstaller.java:83)
+	at hudson.tools.InstallerTranslator.getToolHome(InstallerTranslator.java:72)
+	at hudson.tools.ToolLocationNodeProperty.getToolHome(ToolLocationNodeProperty.java:109)
+	at hudson.tools.ToolInstallation.translateFor(ToolInstallation.java:206)
+	at hudson.model.JDK.forNode(JDK.java:148)
+	at hudson.model.JDK.forNode(JDK.java:61)
+	at org.jenkinsci.plugins.workflow.steps.ToolStep$Execution.run(ToolStep.java:152)
+	at org.jenkinsci.plugins.workflow.steps.ToolStep$Execution.run(ToolStep.java:133)
+	at org.jenkinsci.plugins.workflow.steps.SynchronousNonBlockingStepExecution.lambda$start$0(SynchronousNonBlockingStepExecution.java:47)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Finished: FAILURE

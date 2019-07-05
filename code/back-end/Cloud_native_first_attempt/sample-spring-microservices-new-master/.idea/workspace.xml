@@ -623,19 +623,19 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
+            <state relative-caret-position="266">
               <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gateway-service/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-752" />
+            <state relative-caret-position="-399" />
           </provider>
         </entry>
       </file>
@@ -652,7 +652,7 @@
         <entry file="file://$PROJECT_DIR$/config-service/src/main/resources/bootstrap.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="152">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
             </state>
           </provider>
         </entry>
@@ -695,7 +695,7 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-25" />
     <option name="y" value="150" />
     <option name="width" value="1920" />
@@ -714,6 +714,11 @@
             <path>
               <item name="sample-spring-microservices-new" type="b2602c69:ProjectViewProjectNode" />
               <item name="sample-spring-microservices-new-master" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sample-spring-microservices-new" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sample-spring-microservices-new-master" type="462c0819:PsiDirectoryNode" />
+              <item name="gateway-service" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -815,17 +820,17 @@
       <updated>1562292095177</updated>
       <workItem from="1562292096552" duration="556000" />
       <workItem from="1562292791841" duration="4000" />
-      <workItem from="1562293015174" duration="2417000" />
+      <workItem from="1562293015174" duration="5364000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2977000" />
+    <option name="totallyTimeSpent" value="5924000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25637585" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25637585" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -848,7 +853,7 @@
       <window_info anchor="bottom" id="Java Enterprise" order="11" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
       <window_info anchor="bottom" id="Version Control" order="13" />
-      <window_info active="true" anchor="bottom" x="23" y="178" width="1490" height="468" id="Run Dashboard" order="14" visible="true" weight="0.5184136" />
+      <window_info anchor="bottom" x="23" y="178" width="1490" height="468" id="Run Dashboard" order="14" visible="true" weight="0.07648725" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -877,11 +882,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gateway-service/src/main/resources/bootstrap.yml">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gateway-service/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-752" />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config-service/src/main/java/pl/piomin/services/config/ConfigApplication.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -923,15 +923,20 @@
     <entry file="file://$PROJECT_DIR$/config-service/src/main/resources/bootstrap.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
+        <state relative-caret-position="266">
           <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gateway-service/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-399" />
       </provider>
     </entry>
   </component>

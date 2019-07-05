@@ -1,0 +1,7 @@
+Started by user unknown or anonymous
+Building in workspace /var/jenkins_home/jobs/Testdocker/workspace
+[workspace] $ /bin/sh -xe /tmp/jenkins4898545088599833201.sh
++ docker run helloworld
+/tmp/jenkins4898545088599833201.sh: 2: /tmp/jenkins4898545088599833201.sh: docker: not found
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE
