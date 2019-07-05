@@ -1,0 +1,28 @@
+Started by user unknown or anonymous
+Building in workspace /var/jenkins_home/jobs/job1/workspace
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/sjtu-rr-homework/testrepo.git
+ > git init /var/jenkins_home/jobs/job1/workspace # timeout=10
+Fetching upstream changes from https://github.com/sjtu-rr-homework/testrepo.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/sjtu-rr-homework/testrepo.git +refs/heads/*:refs/remotes/origin/*
+ > git config remote.origin.url https://github.com/sjtu-rr-homework/testrepo.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/sjtu-rr-homework/testrepo.git # timeout=10
+Fetching upstream changes from https://github.com/sjtu-rr-homework/testrepo.git
+ > git fetch --tags --progress https://github.com/sjtu-rr-homework/testrepo.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision 4c8f2d7dd201c8fb3f1f6702bcd643655623973f (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 4c8f2d7dd201c8fb3f1f6702bcd643655623973f
+Commit message: "first commit"
+First time build. Skipping changelog.
+[workspace] $ /bin/bash /tmp/jenkins2971981813856843276.sh
+*******-Starting CI CD Pipeline Tasks-*******
+
+.....Build Phase Started ::Compiling Source Code:: ......
+/tmp/jenkins2971981813856843276.sh: line 6: mvn: command not found
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE

@@ -1,0 +1,30 @@
+Started by upstream project "[8mha:////4LSzEH9XI03IBTBHOsLQ0MnBDs/hk6VMlqTnLGE3D0L5AAAAlh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyWEgYu/az8JH2v/CQjfQDglmP3vwAAAA==[0mJob2" build number [8mha:////4LxrMAd/oTRn5OTihyCq9348jW6ZyFcAqLO+zxEutpmPAAAAlh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLQIwSBm79rPwkfa/8JCN9SwCPFNiFwAAAAA==[0m9
+originally caused by:
+ Started by upstream project "[8mha:////4JOf0HTO0sh8EYlYZgp9Sqs8bBtfIklpJwePMuMOP79fAAAAlB+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyWEgYu/az8JBA21AcAJ+qPHb8AAAA=[0mjob1" build number [8mha:////4K0Raid1cw2FhtJ/JNrNf3T2+wDMbPH4zOEtdklDtQcvAAAAlh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAymEgYe/az8JBA21Dc0AgB4Vj0mwQAAAA==[0m12
+ originally caused by:
+  Started by user unknown or anonymous
+Building in workspace /var/jenkins_home/jobs/Job3/workspace
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/sjtu-rr-homework/testrepo.git
+ > git init /var/jenkins_home/jobs/Job3/workspace # timeout=10
+Fetching upstream changes from https://github.com/sjtu-rr-homework/testrepo.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/sjtu-rr-homework/testrepo.git +refs/heads/*:refs/remotes/origin/*
+ > git config remote.origin.url https://github.com/sjtu-rr-homework/testrepo.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/sjtu-rr-homework/testrepo.git # timeout=10
+Fetching upstream changes from https://github.com/sjtu-rr-homework/testrepo.git
+ > git fetch --tags --progress https://github.com/sjtu-rr-homework/testrepo.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision 4c8f2d7dd201c8fb3f1f6702bcd643655623973f (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 4c8f2d7dd201c8fb3f1f6702bcd643655623973f
+Commit message: "first commit"
+First time build. Skipping changelog.
+[workspace] $ /bin/sh -xe /tmp/jenkins3985752055286012071.sh
++ sudo docker rm -f devops_pipeline_demo
+/tmp/jenkins3985752055286012071.sh: 2: /tmp/jenkins3985752055286012071.sh: sudo: not found
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE
