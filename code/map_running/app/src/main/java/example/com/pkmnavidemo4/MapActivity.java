@@ -57,6 +57,9 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
             aMap = mMapView.getMap();
 
         }
+        //设置初始点位
+        LatLng latLng = new LatLng(31.02228,121.442316);//构造一个位置
+        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,16));
         //设置地图的放缩级别
         aMap.moveCamera(CameraUpdateFactory.zoomTo(19));
         // 设置定位监听

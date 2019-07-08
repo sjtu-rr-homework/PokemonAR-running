@@ -38,14 +38,13 @@ import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.ux.ArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
 
-import java.util.Vector;
-
 /**
- * AR界面,根据传入参数生成对应精灵图像
+ * This is an example activity that uses the Sceneform UX package to make common AR tasks easier.
  */
 public class SceneformActivity extends AppCompatActivity {
   private static final String TAG = SceneformActivity.class.getSimpleName();
   private static final double MIN_OPENGL_VERSION = 3.0;
+
   private ArFragment arFragment;
   private ModelRenderable andyRenderable;
   private Button returnButton;
@@ -62,7 +61,7 @@ public class SceneformActivity extends AppCompatActivity {
 
     setContentView(R.layout.activity_ux);
     arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment);
-    returnButton=findViewById(R.id.act_ux_button_return);
+    returnButton=findViewById(R.id.returnButton);
     returnButton.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
@@ -74,12 +73,16 @@ public class SceneformActivity extends AppCompatActivity {
 
     Intent intent=getIntent();
     int variety=intent.getIntExtra("variety", -1);
+      Toast toast2 =
+              Toast.makeText(this, variety+"", Toast.LENGTH_LONG);
+      toast2.setGravity(Gravity.CENTER, 0, 0);
+      toast2.show();
     // When you build a Renderable, Sceneform loads its resources in the background while returning
     // a CompletableFuture. Call thenAccept(), handle(), or check isDone() before calling get().
       switch (variety){
           case 1:
               ModelRenderable.builder()
-                      .setSource(this, R.raw.bulbasaur)
+                      .setSource(this, R.raw.charizard)
                       .build()
                       .thenAccept(renderable -> andyRenderable = renderable)
                       .exceptionally(
@@ -94,7 +97,7 @@ public class SceneformActivity extends AppCompatActivity {
 
           case 2:
               ModelRenderable.builder()
-                      .setSource(this, R.raw.charizard)
+                      .setSource(this, R.raw.bulbasaur)
                       .build()
                       .thenAccept(renderable -> andyRenderable = renderable)
                       .exceptionally(
@@ -122,6 +125,7 @@ public class SceneformActivity extends AppCompatActivity {
                               });
       }
 
+
     arFragment.setOnTapArPlaneListener(
         (HitResult hitResult, Plane plane, MotionEvent motionEvent) -> {
           if (andyRenderable == null) {
@@ -142,7 +146,6 @@ public class SceneformActivity extends AppCompatActivity {
   }
 
   /**
-   * 检查设备是否支持AR
    * Returns false and displays an error message if Sceneform can not run, true if Sceneform can run
    * on this device.
    *

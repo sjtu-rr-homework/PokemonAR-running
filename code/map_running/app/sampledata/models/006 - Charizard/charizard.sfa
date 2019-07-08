@@ -59,7 +59,19 @@
       'TexCoord',
       'Orientation',
     ],
-    collision: {},
+    suggested_collision: {
+             center: {
+                x: 0,
+                y: 0,
+                z: 0,
+             },
+             size: {
+                x: 1,
+                y: 1,
+                z: 1,
+             },
+             type: "Box",
+          },
     file: 'sampledata/models/006 - Charizard/Charizard.obj',
     name: 'Charizard',
     recenter: 'root',
@@ -69,13 +81,13 @@
     {
       file: 'sampledata/models/006 - Charizard\\Textures\\LizardonDh.png',
       name: 'LizardonDh',
-      pipeline_name: 'Textures\\LizardonDh.tga',
+      pipeline_name: 'Textures\\LizardonDh.png',
     },
     {
       file: 'sampledata/models/006 - Charizard\\Textures\\LizardonEyeDh.png',
       name: 'LizardonEyeDh',
-      pipeline_name: 'Textures\\LizardonEyeDh.tga',
+      pipeline_name: 'Textures\\LizardonEyeDh.png',
     },
   ],
-  version: '0.52:1',
+  version: '0.54:2',
 }

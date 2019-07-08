@@ -6,6 +6,7 @@
     <!-- This tag indicates that this application requires ARCore. This results in the application
         only being visible in the Google Play Store on devices that support ARCore. -->
     <uses-feature android:name="android.hardware.camera.ar" android:required="true"/>
+
     <!--用于进行网络定位-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
     <!--用于访问GPS定位-->
@@ -28,8 +29,6 @@
     <uses-permission android:name="android.permission.BLUETOOTH"></uses-permission>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"></uses-permission>
 
-
-
     <application
         android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
@@ -41,6 +40,9 @@
             application only being visible in the Google Play Store on devices that support
             ARCore. -->
         <meta-data android:name="com.google.ar.core" android:value="required" />
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="	72ecd89123f8d1fc1cf7c0493e2f8c5a"></meta-data>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
