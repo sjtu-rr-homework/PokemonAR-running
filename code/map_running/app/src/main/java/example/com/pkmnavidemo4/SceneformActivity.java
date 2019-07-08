@@ -171,13 +171,12 @@ public class SceneformActivity extends AppCompatActivity implements Scene.OnUpda
                     //place the first object only if no previous anchors were added
                     if(!iterableAnchor.hasNext()) {
                         //Perform a hit test at the center of the screen to place an object without tapping
-                        List<HitResult> hitTest = frame.hitTest(0,0);
-                        hitTest.add((HitResult) frame.hitTest((float) 0.1, (float) 0.1));
-                        hitTest.add((HitResult) frame.hitTest((float) 0.0, (float) 0.1));
-                        hitTest.add((HitResult) frame.hitTest((float) 0.1, (float) 0.0));
-                        hitTest.add((HitResult) frame.hitTest((float) -0.1, (float) -0.1));
-                        hitTest.add((HitResult) frame.hitTest((float) 0.0, (float) -0.1));
-                        hitTest.add((HitResult) frame.hitTest((float) -0.1, (float) 0.0));
+                        List<HitResult> hitTest = null;
+                        try {
+                            hitTest = frame.hitTest(frame.acquireCameraImage().getHeight()/2,frame.acquireCameraImage().getWidth()/2);
+                        } catch (NotYetAvailableException e) {
+                            e.printStackTrace();
+                        }
                         //iterate through all hits
                         Iterator<HitResult> hitTestIterator = hitTest.iterator();
                         while(hitTestIterator.hasNext()) {
