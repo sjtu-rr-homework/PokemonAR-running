@@ -1,4 +1,4 @@
-## May 20,2019,CI
+## CI
 
 ### Step one:build jenkins
 
