@@ -40,6 +40,7 @@ import com.google.ar.core.exceptions.NotYetAvailableException;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.FrameTime;
 import com.google.ar.sceneform.Scene;
+import com.google.ar.sceneform.math.Vector3;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.ux.ArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
@@ -158,10 +159,6 @@ public class SceneformActivity extends AppCompatActivity implements Scene.OnUpda
 
     @Override
     public void onUpdate(FrameTime frameTime) {
-        /*Toast toast2 =
-                Toast.makeText(this, "平面出现", Toast.LENGTH_LONG);
-        toast2.setGravity(Gravity.CENTER, 0, 0);
-        toast2.show();*/
         //get the frame from the scene for shorthand
        Frame frame = arFragment.getArSceneView().getArFrame();
         if (frame != null) {
@@ -177,7 +174,9 @@ public class SceneformActivity extends AppCompatActivity implements Scene.OnUpda
                     if(!iterableAnchor.hasNext()) {
                         //Perform a hit test at the center of the screen to place an object without tapping
                         List<HitResult> hitTest = null;
-                        hitTest = frame.hitTest((float)-42,(float)-35.5);
+                        View vw = findViewById(android.R.id.content);
+                        Vector3 vector3=new Vector3(vw.getWidth() / 2f, vw.getHeight() / 2f, 0f);
+                            hitTest = frame.hitTest(vector3.x,vector3.y);
                         //iterate through all hits
                         Iterator<HitResult> hitTestIterator = hitTest.iterator();
                         while(hitTestIterator.hasNext()) {
