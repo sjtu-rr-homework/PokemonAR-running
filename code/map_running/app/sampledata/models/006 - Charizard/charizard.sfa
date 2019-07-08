@@ -63,7 +63,7 @@
     file: 'sampledata/models/006 - Charizard/Charizard.obj',
     name: 'Charizard',
     recenter: 'root',
-    scale: 8.51565,
+    scale: 0.051565,
   },
   samplers: [
     {

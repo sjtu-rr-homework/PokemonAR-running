@@ -73,7 +73,7 @@ public class SceneformActivity extends AppCompatActivity implements Scene.OnUpda
 
     setContentView(R.layout.activity_ux);
     arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment);
-    returnButton=findViewById(R.id.returnButton);
+    returnButton=findViewById(R.id.act_ux_button_return);
     returnButton.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
@@ -177,11 +177,7 @@ public class SceneformActivity extends AppCompatActivity implements Scene.OnUpda
                     if(!iterableAnchor.hasNext()) {
                         //Perform a hit test at the center of the screen to place an object without tapping
                         List<HitResult> hitTest = null;
-                        try {
-                            hitTest = frame.hitTest(frame.acquireCameraImage().getHeight()/2,frame.acquireCameraImage().getWidth()/2);
-                        } catch (NotYetAvailableException e) {
-                            e.printStackTrace();
-                        }
+                        hitTest = frame.hitTest((float)-42,(float)-35.5);
                         //iterate through all hits
                         Iterator<HitResult> hitTestIterator = hitTest.iterator();
                         while(hitTestIterator.hasNext()) {

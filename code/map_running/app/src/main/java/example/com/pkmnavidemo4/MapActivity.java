@@ -1,6 +1,7 @@
 package example.com.pkmnavidemo4;
 
 import android.graphics.Color;
+import android.icu.text.SimpleDateFormat;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,17 +23,25 @@ import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.maps.model.Polyline;
 import com.amap.api.maps.model.PolylineOptions;
+import com.amap.api.maps.model.Text;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import example.com.pkmnavidemo4.classes.RunningMessage;
 
 public class MapActivity extends AppCompatActivity implements LocationSource, AMapLocationListener {
 
     MapView mMapView = null;
     private TextView positionText;
+    private TextView distText;
+    private TextView timePerKM;
+    private TextView timeText;
     private StringBuilder currentPosition;
-    private List<LatLng> latLngs=new ArrayList<LatLng>();
-    private double run_dist=0;
+    private RunningMessage runningMessage;
+    //private List<LatLng> latLngs=new ArrayList<LatLng>();
+    //private double run_dist=0;
 
     //初始化地图控制器对象
     AMap aMap;
@@ -50,7 +59,13 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        positionText=(TextView)findViewById(R.id.textView);
+
+        //绑定文本控件
+        positionText=(TextView)findViewById(R.id.act_map_textView);
+        distText=(TextView)findViewById(R.id.act_map_textView_dist);
+        timePerKM=(TextView)findViewById(R.id.act_map_textView_speed);
+        timeText=(TextView)findViewById(R.id.act_map_textView_time);
+
         //获取地图控件引用
         mMapView = (MapView) findViewById(R.id.map);
         //在activity执行onCreate时执行mMapView.onCreate(savedInstanceState)，创建地图
@@ -89,8 +104,10 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
             }
         });
 
-        //将跑步里程初始化为0
-        run_dist=0;
+        //初始化跑步信息管理器
+        Date date=new Date(System.currentTimeMillis());
+        //System.out.println(date);
+        runningMessage=new RunningMessage(date);
 
         drawPoint();
     }
@@ -101,17 +118,65 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
     }
 
     private void drawLine(LatLng latLng){
-        if(latLngs.isEmpty()){
-            latLngs.add(latLng);
+        if(runningMessage.getLength()==0){
+            Date date=new Date(System.currentTimeMillis());
+            //System.out.println(date);
+            runningMessage.newPoing(latLng,date);
             return;
         }
         else{
-            LatLng tmp=latLngs.get(latLngs.size()-1);
-            latLngs.clear();
-            latLngs.add(tmp);
-            latLngs.add(latLng);
-            run_dist+= AMapUtils.calculateLineDistance(tmp,latLng);//累计里程
-            Polyline polyline=aMap.addPolyline(new PolylineOptions().addAll(latLngs).width(10).color(Color.argb(255, 1, 1, 1)));//连线
+            Date date=new Date(System.currentTimeMillis());
+            System.out.println(date);
+            runningMessage.newPoing(latLng,date);
+            //显示跑步里程，单位km
+            double showDist;
+            showDist=((double)((int)(runningMessage.getLength())/10))/100;
+            distText.setText(""+showDist);
+            Polyline polyline=aMap.addPolyline(new PolylineOptions().addAll(runningMessage.getPresentLatLng()).width(10).color(Color.argb(255, 1, 1, 1)));//连线
+            //显示跑步配速，格式XX分XX秒
+            int min=0;
+            int sec=0;
+            min=(int)runningMessage.getTimePerKM()/60;
+            sec=(int)runningMessage.getTimePerKM()%60;
+            timePerKM.setText(""+min+"分"+sec+"秒");
+            //显示跑步总时长
+            Date tmpdate=new Date(runningMessage.getLastTime()*1000-8*3600*1000);
+            SimpleDateFormat formater=new SimpleDateFormat("HH:mm:ss");
+            timeText.setText(formater.format(tmpdate));
+            //显示跑步总时长，格式XX:XX:XX
+            /*int hou=0;
+            sec=(int)runningMessage.getLastTime()%60;
+            min=(int)runningMessage.getLastTime()/60%60;
+            hou=(int)runningMessage.getLastTime()/60/60;
+            String timeString;
+            if(hou==0){
+                timeString="00";
+            }
+            else if(hou>0&&hou<10){
+                timeString="0"+hou;
+            }
+            else {
+                timeString=""+hou;
+            }
+            if(min==0){
+                timeString+=":00";
+            }
+            else if(min>0&&min<10){
+                timeString+=(":0"+min);
+            }
+            else{
+                timeString+=(":"+min);
+            }
+            if(sec==0){
+                timeString+=":00";
+            }
+            else if(sec>0&&sec<10){
+                timeString+=(":0"+sec);
+            }
+            else{
+                timeString+=(":"+sec);
+            }
+            timeText.setText(timeString);*/
         }
     }
 
@@ -187,9 +252,12 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         if (mListener != null && aMapLocation != null) {
             if (aMapLocation != null && aMapLocation.getErrorCode() == 0) {
                 mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点
+                //Date date=new Date(System.currentTimeMillis());
+                //SimpleDateFormat formatter=new SimpleDateFormat("HH:mm:ss");
                 currentPosition=new StringBuilder();
                 currentPosition.append("经度：").append(aMapLocation.getLongitude()).append("\n");
                 currentPosition.append("纬度：").append(aMapLocation.getLatitude()).append("\n");
+                //currentPosition.append("时间：").append(date.getTime()).append("\n");
                 positionText.setText(currentPosition);
                 LatLng latLng=new LatLng(aMapLocation.getLatitude(),aMapLocation.getLongitude());
                 drawLine(latLng);

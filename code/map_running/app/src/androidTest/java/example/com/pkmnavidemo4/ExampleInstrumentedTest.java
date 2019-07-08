@@ -7,8 +7,6 @@ import android.support.test.runner.AndroidJUnit4;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import example.com.pkmnavidemo4.Fragments.ElfsFragment;
-
 import static org.junit.Assert.*;
 
 /**
@@ -22,6 +20,7 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
+
         assertEquals("example.com.pkmnavidemo4", appContext.getPackageName());
     }
 }
