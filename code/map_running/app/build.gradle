@@ -1,4 +1,26 @@
 apply plugin: 'com.android.application'
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        mavenLocal()
+
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.4.1'
+        classpath 'com.google.ar.sceneform:plugin:1.5.0'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+
+    }
+}
 
 android {
     compileSdkVersion 28
@@ -34,12 +56,13 @@ dependencies {
     implementation files('libs/AMap3DMap_6.9.0_AMapNavi_6.8.0_AMapSearch_6.9.0_AMapTrack_1.1.0_AMapLocation_4.6.0_20190530.jar')
 }
 apply plugin: 'com.google.ar.sceneform.plugin'
+
 sceneform.asset('sampledata/models/001 - Bulbasaur/Bulbasaur.obj',
         'default',
         'sampledata/models/001 - Bulbasaur/bulbasaur.sfa',
-        'src/main/res/raw/bulbasaur')
+        'src/main/assets/bulbasaur')
 
 sceneform.asset('sampledata/models/006 - Charizard/Charizard.obj',
         'default',
-        'sampledata/models/006 - Charizard/Charizard.sfa',
-        'src/main/res/raw/Charizard')
+        'sampledata/models/006 - Charizard/charizard.sfa',
+        'src/main/assets/charizard')

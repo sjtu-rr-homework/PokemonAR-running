@@ -73,16 +73,12 @@ public class SceneformActivity extends AppCompatActivity {
 
     Intent intent=getIntent();
     int variety=intent.getIntExtra("variety", -1);
-      Toast toast2 =
-              Toast.makeText(this, variety+"", Toast.LENGTH_LONG);
-      toast2.setGravity(Gravity.CENTER, 0, 0);
-      toast2.show();
     // When you build a Renderable, Sceneform loads its resources in the background while returning
     // a CompletableFuture. Call thenAccept(), handle(), or check isDone() before calling get().
       switch (variety){
           case 1:
               ModelRenderable.builder()
-                      .setSource(this, R.raw.charizard)
+                      .setSource(this, R.raw.bulbasaur)
                       .build()
                       .thenAccept(renderable -> andyRenderable = renderable)
                       .exceptionally(
@@ -97,7 +93,7 @@ public class SceneformActivity extends AppCompatActivity {
 
           case 2:
               ModelRenderable.builder()
-                      .setSource(this, R.raw.bulbasaur)
+                      .setSource(this, R.raw.charizard)
                       .build()
                       .thenAccept(renderable -> andyRenderable = renderable)
                       .exceptionally(
