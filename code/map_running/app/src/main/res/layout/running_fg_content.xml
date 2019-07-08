@@ -14,7 +14,7 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <Button
-            android:id="@+id/fg_running_button_start"
+            android:id="@+id/button3"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_centerInParent="true"

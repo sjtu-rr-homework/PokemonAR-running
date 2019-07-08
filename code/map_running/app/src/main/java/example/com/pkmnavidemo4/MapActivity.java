@@ -12,6 +12,7 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
@@ -31,6 +32,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
     private TextView positionText;
     private StringBuilder currentPosition;
     private List<LatLng> latLngs=new ArrayList<LatLng>();
+    private double run_dist=0;
 
     //初始化地图控制器对象
     AMap aMap;
@@ -55,8 +57,10 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         mMapView.onCreate(savedInstanceState);
         if (aMap == null) {
             aMap = mMapView.getMap();
-
         }
+        //设置初始点位
+        LatLng latLng = new LatLng(31.02228,121.442316);//构造一个位置
+        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,16));
         //设置地图的放缩级别
         aMap.moveCamera(CameraUpdateFactory.zoomTo(19));
         // 设置定位监听
@@ -85,6 +89,9 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
             }
         });
 
+        //将跑步里程初始化为0
+        run_dist=0;
+
         drawPoint();
     }
 
@@ -103,7 +110,8 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
             latLngs.clear();
             latLngs.add(tmp);
             latLngs.add(latLng);
-            Polyline polyline=aMap.addPolyline(new PolylineOptions().addAll(latLngs).width(10).color(Color.argb(255, 1, 1, 1)));
+            run_dist+= AMapUtils.calculateLineDistance(tmp,latLng);//累计里程
+            Polyline polyline=aMap.addPolyline(new PolylineOptions().addAll(latLngs).width(10).color(Color.argb(255, 1, 1, 1)));//连线
         }
     }
 
