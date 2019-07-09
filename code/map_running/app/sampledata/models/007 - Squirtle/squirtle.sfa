@@ -1,0 +1,81 @@
+{
+  materials: [
+    {
+      name: 'mat1',
+      parameters: [
+        {
+          baseColor: 'ZenigameDh',
+        },
+        {
+          baseColorTint: [
+            0.90000000000000002,
+            0.90000000000000002,
+            0.90000000000000002,
+            1,
+          ],
+        },
+        {
+          metallic: 1,
+        },
+        {
+          roughness: 0.408248,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/obj_material.sfm',
+    },
+    {
+      name: 'mat2',
+      parameters: [
+        {
+          baseColor: 'ZenigameEyeDh',
+        },
+        {
+          baseColorTint: [
+            0.90000000000000002,
+            0.90000000000000002,
+            0.90000000000000002,
+            1,
+          ],
+        },
+        {
+          metallic: 1,
+        },
+        {
+          roughness: 0.408248,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/obj_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+    ],
+    collision: {},
+    file: 'sampledata/models/007 - Squirtle/Squirtle.obj',
+    name: 'Squirtle',
+    recenter: 'root',
+    scale: 0.31388199999999999,
+  },
+  samplers: [
+    {
+      file: 'sampledata/models/007 - Squirtle\\Textures\\ZenigameDh.png',
+      name: 'ZenigameDh',
+      pipeline_name: 'Textures\\ZenigameDh.tga',
+    },
+    {
+      file: 'sampledata/models/007 - Squirtle\\Textures\\ZenigameEyeDh.png',
+      name: 'ZenigameEyeDh',
+      pipeline_name: 'Textures\\ZenigameEyeDh.tga',
+    },
+  ],
+  version: '0.54:2',
+}

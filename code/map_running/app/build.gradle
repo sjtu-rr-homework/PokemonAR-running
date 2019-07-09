@@ -8,6 +8,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.1'
+        classpath 'com.google.ar.sceneform:plugin:1.10.0'
         classpath 'com.google.ar.sceneform:plugin:1.5.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -18,7 +19,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-
+        mavenLocal()
     }
 }
 
@@ -42,6 +43,13 @@ android {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
     }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildToolsVersion = '28.0.3'
 }
 
 dependencies {
@@ -66,3 +74,25 @@ sceneform.asset('sampledata/models/006 - Charizard/Charizard.obj',
         'default',
         'sampledata/models/006 - Charizard/charizard.sfa',
         'src/main/assets/charizard')
+
+
+
+sceneform.asset('sampledata/models/007 - Squirtle/Squirtle.obj',
+        'default',
+        'sampledata/models/007 - Squirtle/squirtle.sfa',
+        'src/main/res/raw/squirtle')
+
+sceneform.asset('sampledata/models/025 - Pikachu/Pikachu.obj',
+        'default',
+        'sampledata/models/025 - Pikachu/pikachu.sfa',
+        'src/main/res/raw/pikachu')
+
+sceneform.asset('sampledata/models/054 - Psyduck/Psyduck.obj',
+        'default',
+        'sampledata/models/054 - Psyduck/Psyduck.sfa',
+        'src/main/assets/Psyduck')
+
+sceneform.asset('sampledata/models/054 - Psyduck/Psyduck.obj',
+        'default',
+        'sampledata/models/054 - Psyduck/psyduck.sfa',
+        'src/main/res/raw/psyduck')

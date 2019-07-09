@@ -119,6 +119,52 @@ public class SceneformActivity extends AppCompatActivity implements Scene.OnUpda
                               });
               break;
 
+          case 3:
+              ModelRenderable.builder()
+                      .setSource(this, R.raw.squirtle)
+                      .build()
+                      .thenAccept(renderable -> andyRenderable = renderable)
+                      .exceptionally(
+                              throwable -> {
+                                  Toast toast =
+                                          Toast.makeText(this, "Unable to load andy renderable", Toast.LENGTH_LONG);
+                                  toast.setGravity(Gravity.CENTER, 0, 0);
+                                  toast.show();
+                                  return null;
+                              });
+              break;
+
+          case 4:
+              ModelRenderable.builder()
+                      .setSource(this, R.raw.pikachu)
+                      .build()
+                      .thenAccept(renderable -> andyRenderable = renderable)
+                      .exceptionally(
+                              throwable -> {
+                                  Toast toast =
+                                          Toast.makeText(this, "Unable to load andy renderable", Toast.LENGTH_LONG);
+                                  toast.setGravity(Gravity.CENTER, 0, 0);
+                                  toast.show();
+                                  return null;
+                              });
+              break;
+
+          case 5:
+              ModelRenderable.builder()
+                      .setSource(this, R.raw.psyduck
+                      )
+                      .build()
+                      .thenAccept(renderable -> andyRenderable = renderable)
+                      .exceptionally(
+                              throwable -> {
+                                  Toast toast =
+                                          Toast.makeText(this, "Unable to load andy renderable", Toast.LENGTH_LONG);
+                                  toast.setGravity(Gravity.CENTER, 0, 0);
+                                  toast.show();
+                                  return null;
+                              });
+              break;
+
           default:
               ModelRenderable.builder()
                       .setSource(this, R.raw.andy)
