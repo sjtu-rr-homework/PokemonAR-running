@@ -67,12 +67,12 @@
   },
   samplers: [
     {
-      file: 'sampledata/models/054 - Psyduck\\Textures\\KoduckDh.tga',
+      file: 'sampledata/models/054 - Psyduck\\Textures\\KoduckDh.png',
       name: 'KoduckDh',
       pipeline_name: 'Textures\\KoduckDh.tga',
     },
     {
-      file: 'sampledata/models/054 - Psyduck\\Textures\\KoduckEyeDh.tga',
+      file: 'sampledata/models/054 - Psyduck\\Textures\\KoduckEyeDh.png',
       name: 'KoduckEyeDh',
       pipeline_name: 'Textures\\KoduckEyeDh.tga',
     },

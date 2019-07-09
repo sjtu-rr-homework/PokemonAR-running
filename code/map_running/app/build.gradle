@@ -87,10 +87,6 @@ sceneform.asset('sampledata/models/025 - Pikachu/Pikachu.obj',
         'sampledata/models/025 - Pikachu/pikachu.sfa',
         'src/main/res/raw/pikachu')
 
-sceneform.asset('sampledata/models/054 - Psyduck/Psyduck.obj',
-        'default',
-        'sampledata/models/054 - Psyduck/Psyduck.sfa',
-        'src/main/assets/Psyduck')
 
 sceneform.asset('sampledata/models/054 - Psyduck/Psyduck.obj',
         'default',
