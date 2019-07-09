@@ -1,0 +1,71 @@
+version: "3.7"
+services:
+  config-service:
+    image: discovery-service
+    ports:
+      - "8088:8088"
+    networks:
+      - spring-cloud-network
+    volumes:
+      - spring-cloud-config-repo:/var/lib/spring-cloud/config-repo
+
+  discovery-service:
+    hostname: discovery-service
+    image: discovery-service
+    links:
+      - "config-service"
+    ports:
+      - "8061:8061"
+    networks:
+      - spring-cloud-network
+      
+  department-service:
+    image: department-service
+    links:
+      - "discovery-service"
+      - "config-service"
+    ports:
+      - "8091:8091"
+    networks:
+      - spring-cloud-network
+
+  employee-service:
+    image: employee-service
+    links:
+      - "discovery-service"
+      - "config-service"
+    ports:
+      - "8090:8090"
+    networks:
+      - spring-cloud-network
+      
+  gateway-service:
+    image: gateway-service
+    links:
+      - "discovery-service"
+      - "config-service"
+    ports:
+      - "8060:8060"
+    networks:
+      - spring-cloud-network
+
+  organization-service:
+    image: organization-service
+    links:
+      - "discovery-service"
+      - "config-service"
+    ports:
+      - "8092:8092"
+    networks:
+      - spring-cloud-network
+
+networks:
+  spring-cloud-network:
+    driver: bridge
+
+volumes:
+  spring-cloud-config-repo:
+    external: true
+      
+        
+ 

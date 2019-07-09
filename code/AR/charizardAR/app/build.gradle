@@ -66,3 +66,14 @@ sceneform.asset('sampledata/models/006 - Charizard/Charizard.obj',
         'src/main/res/raw/Charizard')
 
 
+
+
+sceneform.asset('sampledata/models/007 - Squirtle/Squirtle.obj',
+        'default',
+        'sampledata/models/007 - Squirtle/squirtle.sfa',
+        'src/main/assets/squirtle')
+
+sceneform.asset('sampledata/models/007 - Squirtle/Squirtle.obj',
+        'default',
+        'sampledata/models/007 - Squirtle/squirtle.sfa',
+        'src/main/res/raw/squirtle')

@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+
+import example.com.pkmnavidemo4.MainActivity;
 import example.com.pkmnavidemo4.R;
 import example.com.pkmnavidemo4.SceneformActivity;
 
@@ -31,7 +34,7 @@ public class ElfsFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putInt("variety", 1);
                 intent.putExtras(bundle);
-                //这里一定要获取到所在Activity再startActivity()；
+//这里一定要获取到所在Activity再startActivity()；
                 getActivity().startActivity(intent);
             }
         });
@@ -42,7 +45,7 @@ public class ElfsFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putInt("variety", 2);
                 intent.putExtras(bundle);
-                //这里一定要获取到所在Activity再startActivity()；
+//这里一定要获取到所在Activity再startActivity()；
                 getActivity().startActivity(intent);
             }
         });

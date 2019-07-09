@@ -31,25 +31,37 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.ar.core.Anchor;
+import com.google.ar.core.Frame;
 import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
+import com.google.ar.core.Trackable;
+import com.google.ar.core.TrackingState;
+import com.google.ar.core.exceptions.NotYetAvailableException;
 import com.google.ar.sceneform.AnchorNode;
+import com.google.ar.sceneform.FrameTime;
+import com.google.ar.sceneform.Scene;
+import com.google.ar.sceneform.math.Vector3;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.ux.ArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
+import java.util.logging.Logger;
+
 
 /**
- * AR界面,根据传入参数生成对应精灵图像
+ * This is an example activity that uses the Sceneform UX package to make common AR tasks easier.
  */
-public class SceneformActivity extends AppCompatActivity {
+public class SceneformActivity extends AppCompatActivity implements Scene.OnUpdateListener {
   private static final String TAG = SceneformActivity.class.getSimpleName();
   private static final double MIN_OPENGL_VERSION = 3.0;
+
   private ArFragment arFragment;
   private ModelRenderable andyRenderable;
   private Button returnButton;
-
+  private boolean elfSetted=false;
   @Override
   @SuppressWarnings({"AndroidApiChecker", "FutureReturnValueIgnored"})
   // CompletableFuture requires api level 24
@@ -107,6 +119,52 @@ public class SceneformActivity extends AppCompatActivity {
                               });
               break;
 
+          case 3:
+              ModelRenderable.builder()
+                      .setSource(this, R.raw.squirtle)
+                      .build()
+                      .thenAccept(renderable -> andyRenderable = renderable)
+                      .exceptionally(
+                              throwable -> {
+                                  Toast toast =
+                                          Toast.makeText(this, "Unable to load andy renderable", Toast.LENGTH_LONG);
+                                  toast.setGravity(Gravity.CENTER, 0, 0);
+                                  toast.show();
+                                  return null;
+                              });
+              break;
+
+          case 4:
+              ModelRenderable.builder()
+                      .setSource(this, R.raw.pikachu)
+                      .build()
+                      .thenAccept(renderable -> andyRenderable = renderable)
+                      .exceptionally(
+                              throwable -> {
+                                  Toast toast =
+                                          Toast.makeText(this, "Unable to load andy renderable", Toast.LENGTH_LONG);
+                                  toast.setGravity(Gravity.CENTER, 0, 0);
+                                  toast.show();
+                                  return null;
+                              });
+              break;
+
+          case 5:
+              ModelRenderable.builder()
+                      .setSource(this, R.raw.psyduck
+                      )
+                      .build()
+                      .thenAccept(renderable -> andyRenderable = renderable)
+                      .exceptionally(
+                              throwable -> {
+                                  Toast toast =
+                                          Toast.makeText(this, "Unable to load andy renderable", Toast.LENGTH_LONG);
+                                  toast.setGravity(Gravity.CENTER, 0, 0);
+                                  toast.show();
+                                  return null;
+                              });
+              break;
+
           default:
               ModelRenderable.builder()
                       .setSource(this, R.raw.andy)
@@ -122,27 +180,76 @@ public class SceneformActivity extends AppCompatActivity {
                               });
       }
 
+
+    arFragment.getArSceneView().getScene().addOnUpdateListener(this);
+
     arFragment.setOnTapArPlaneListener(
         (HitResult hitResult, Plane plane, MotionEvent motionEvent) -> {
           if (andyRenderable == null) {
             return;
           }
+          if(!elfSetted) {
+              elfSetted=true;
+              // Create the Anchor.
+              Anchor anchor = hitResult.createAnchor();
+              AnchorNode anchorNode = new AnchorNode(anchor);
+              anchorNode.setParent(arFragment.getArSceneView().getScene());
 
-          // Create the Anchor.
-          Anchor anchor = hitResult.createAnchor();
-          AnchorNode anchorNode = new AnchorNode(anchor);
-          anchorNode.setParent(arFragment.getArSceneView().getScene());
-
-          // Create the transformable andy and add it to the anchor.
-          TransformableNode andy = new TransformableNode(arFragment.getTransformationSystem());
-          andy.setParent(anchorNode);
-          andy.setRenderable(andyRenderable);
-          andy.select();
+              // Create the transformable andy and add it to the anchor.
+              TransformableNode andy = new TransformableNode(arFragment.getTransformationSystem());
+              andy.setParent(anchorNode);
+              andy.setRenderable(andyRenderable);
+          }
         });
   }
 
+    @Override
+    public void onUpdate(FrameTime frameTime) {
+        //get the frame from the scene for shorthand
+       Frame frame = arFragment.getArSceneView().getArFrame();
+        if (frame != null) {
+            //get the trackables to ensure planes are detected
+            Iterator<Plane> var3 = frame.getUpdatedTrackables(Plane.class).iterator();
+            while(var3.hasNext()) {
+                Plane plane = var3.next();
+                //If a plane has been detected & is being tracked by ARCore
+                if (plane.getTrackingState() == TrackingState.TRACKING) {
+                    //Get all added anchors to the frame
+                    Iterator<Anchor> iterableAnchor = frame.getUpdatedAnchors().iterator();
+                    //place the first object only if no previous anchors were added
+                    if(!iterableAnchor.hasNext()) {
+                        //Perform a hit test at the center of the screen to place an object without tapping
+                        List<HitResult> hitTest = null;
+                        View vw = findViewById(android.R.id.content);
+                        Vector3 vector3=new Vector3(vw.getWidth() / 2f, vw.getHeight() / 2f, 0f);
+                            hitTest = frame.hitTest(vector3.x,vector3.y);
+                        //iterate through all hits
+                        Iterator<HitResult> hitTestIterator = hitTest.iterator();
+                        while(hitTestIterator.hasNext()) {
+                            HitResult hitResult = hitTestIterator.next();
+                            //Create an anchor at the plane hit
+                            Anchor modelAnchor = hitResult.createAnchor();
+                            //Attach a node to this anchor with the scene as the parent
+                            if(!elfSetted){
+                                elfSetted=true;
+                              AnchorNode anchorNode = new AnchorNode(modelAnchor);
+                              anchorNode.setParent(arFragment.getArSceneView().getScene());
+                              TransformableNode andy = new TransformableNode(arFragment.getTransformationSystem());
+                              andy.setParent(anchorNode);
+                              andy.setRenderable(andyRenderable);
+                              Toast toast2 =
+                                     Toast.makeText(this, "精灵出现", Toast.LENGTH_LONG);
+                              toast2.setGravity(Gravity.CENTER, 0, 0);
+                              toast2.show();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
   /**
-   * 检查设备是否支持AR
    * Returns false and displays an error message if Sceneform can not run, true if Sceneform can run
    * on this device.
    *
@@ -170,4 +277,5 @@ public class SceneformActivity extends AppCompatActivity {
     }
     return true;
   }
+
 }
