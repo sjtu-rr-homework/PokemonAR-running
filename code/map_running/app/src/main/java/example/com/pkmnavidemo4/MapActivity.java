@@ -1,11 +1,17 @@
 package example.com.pkmnavidemo4;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
@@ -13,21 +19,18 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
-import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
+import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.maps.model.Polyline;
 import com.amap.api.maps.model.PolylineOptions;
-import com.amap.api.maps.model.Text;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import example.com.pkmnavidemo4.classes.RunningMessage;
 
@@ -103,18 +106,65 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                 //从location对象中获取经纬度信息，地址描述信息，建议拿到位置之后调用逆地理编码接口获取
             }
         });
-
+        /*
+        AMap.OnMarkerClickListener markerClickListener=new AMap.OnMarkerClickListener(){
+            @Override
+            public boolean onMarkerClick(Marker marker){
+                return false;
+            }
+        };*/
+        //aMap.setOnMapClickListener((AMap.OnMapClickListener) markerClickListener);
         //初始化跑步信息管理器
         Date date=new Date(System.currentTimeMillis());
         //System.out.println(date);
         runningMessage=new RunningMessage(date);
 
         drawPoint();
+        aMap.setOnMarkerClickListener(new AMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                Intent intent=new Intent(MapActivity.this,SceneformActivity.class);
+                intent.putExtra("variety",1);
+                MapActivity.this.startActivity(intent);
+                return true;
+            }
+        });
     }
 
     private void drawPoint(){
         LatLng latlng =new LatLng(31.0239310214,121.4350658655);
-        final Marker marker=aMap.addMarker(new MarkerOptions().position(latlng).title("王凯源法学院").snippet("DefaultMarker"));
+        //final Marker marker=aMap.addMarker(new MarkerOptions().position(latlng).title("王凯源法学院").snippet("DefaultMarker"));
+        /*MarkerOptions markerOptions=new MarkerOptions();
+        markerOptions.position(latlng);
+        markerOptions.title("精灵").snippet("id");
+        markerOptions.anchor(0.5F,0.5F);
+        markerOptions.draggable(false);
+        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.npc_86)));
+        markerOptions.setFlat(true);
+        final Marker marker=aMap.addMarker(markerOptions);*/
+        addMarkersToMap(getApplicationContext(),aMap,latlng);
+    }
+
+    public static void addMarkersToMap(Context context, AMap aMap, LatLng latlng) {
+        if (aMap != null) {
+            View view = View.inflate(context, R.layout.view_marker, null);
+            ImageView imageView = (ImageView) view.findViewById(R.id.ivQuality);
+            //int aqi=Integer.parseInt(model.getAqi());
+            imageView.setImageResource(R.drawable.npc_86);
+            Bitmap bitmap = convertViewToBitmap(view);
+            MarkerOptions markerOptions = new MarkerOptions()
+                    .position(latlng)
+                    .draggable(true)
+                    .icon(BitmapDescriptorFactory.fromBitmap(bitmap));
+            Marker marker = aMap.addMarker(markerOptions);
+        }
+    }
+    public static Bitmap convertViewToBitmap(View view) {
+        view.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
+        view.buildDrawingCache();
+        Bitmap bitmap = view.getDrawingCache();
+        return bitmap;
     }
 
     private void drawLine(LatLng latLng){
