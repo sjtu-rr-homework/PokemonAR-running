@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -30,8 +31,11 @@ import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.maps.model.Polyline;
 import com.amap.api.maps.model.PolylineOptions;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import example.com.pkmnavidemo4.classes.ElfPoint;
 import example.com.pkmnavidemo4.classes.RunningMessage;
 
 public class MapActivity extends AppCompatActivity implements LocationSource, AMapLocationListener {
@@ -43,6 +47,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
     private TextView timeText;
     private StringBuilder currentPosition;
     private RunningMessage runningMessage;
+    private ElfPoint elfPoint;
     //private List<LatLng> latLngs=new ArrayList<LatLng>();
     //private double run_dist=0;
 
@@ -118,13 +123,22 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         Date date=new Date(System.currentTimeMillis());
         //System.out.println(date);
         runningMessage=new RunningMessage(date);
+        /*elfPoint=new ElfPoint();
+        elfPoint.setMax_id(5);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                elfPoint.generateElfPoing(2,getApplicationContext(),aMap);
+            }
+        });*/
 
         drawPoint();
         aMap.setOnMarkerClickListener(new AMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
                 Intent intent=new Intent(MapActivity.this,SceneformActivity.class);
-                intent.putExtra("variety",1);
+                int id=Integer.parseInt(marker.getSnippet());
+                intent.putExtra("variety",id);
                 MapActivity.this.startActivity(intent);
                 return true;
             }
@@ -133,6 +147,32 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
 
     private void drawPoint(){
         LatLng latlng =new LatLng(31.0239310214,121.4350658655);
+        List<LatLng> allPoint;
+        allPoint=new ArrayList<LatLng>();
+        allPoint.add(new LatLng(31.022264,121.442783));
+        allPoint.add(new LatLng(31.02276,121.444548));
+        allPoint.add(new LatLng(31.024365,121.444634));
+        allPoint.add(new LatLng(31.026056,121.439752));
+        allPoint.add(new LatLng(31.025275,121.437338));
+        allPoint.add(new LatLng(31.023882,121.435122));
+        allPoint.add(new LatLng(31.024585,121.43634));
+        allPoint.add(new LatLng(31.022638,121.435305));
+        allPoint.add(new LatLng(31.024136,121.436539));
+        allPoint.add(new LatLng(31.023401,121.436834));
+        allPoint.add(new LatLng(31.022224,121.437209));
+        allPoint.add(new LatLng(31.022932,121.440229));
+        allPoint.add(new LatLng(31.021622,121.440809));
+        allPoint.add(new LatLng(31.023419,121.446629));
+        allPoint.add(new LatLng(31.022431,121.434393));
+        allPoint.add(new LatLng(31.024996,121.440245));
+        allPoint.add(new LatLng(31.02427,121.4412));
+        allPoint.add(new LatLng(31.026724,121.443689));
+        allPoint.add(new LatLng(31.023828,121.439881));
+        allPoint.add(new LatLng(31.026531,121.438647));
+
+        for(int i=0;i<20;++i){
+            addMarkersToMap(getApplicationContext(),aMap,allPoint.get(i),i%5+1);
+        }
         //final Marker marker=aMap.addMarker(new MarkerOptions().position(latlng).title("王凯源法学院").snippet("DefaultMarker"));
         /*MarkerOptions markerOptions=new MarkerOptions();
         markerOptions.position(latlng);
@@ -142,17 +182,18 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         markerOptions.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.npc_86)));
         markerOptions.setFlat(true);
         final Marker marker=aMap.addMarker(markerOptions);*/
-        addMarkersToMap(getApplicationContext(),aMap,latlng);
+        //elfPoint.addMarkersToMap(getApplicationContext(),aMap,latlng);
     }
-
-    public static void addMarkersToMap(Context context, AMap aMap, LatLng latlng) {
+    public static void addMarkersToMap(Context context, AMap aMap, LatLng latlng,int id) {
         if (aMap != null) {
             View view = View.inflate(context, R.layout.view_marker, null);
             ImageView imageView = (ImageView) view.findViewById(R.id.ivQuality);
+            imageView.setImageResource(convertID(id));
             //int aqi=Integer.parseInt(model.getAqi());
-            imageView.setImageResource(R.drawable.npc_86);
+            //String s= Environment.getExternalStorageDirectory().getAbsolutePath()
             Bitmap bitmap = convertViewToBitmap(view);
             MarkerOptions markerOptions = new MarkerOptions()
+                    .snippet(""+id)
                     .position(latlng)
                     .draggable(true)
                     .icon(BitmapDescriptorFactory.fromBitmap(bitmap));
@@ -165,6 +206,22 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         view.buildDrawingCache();
         Bitmap bitmap = view.getDrawingCache();
         return bitmap;
+    }
+    public static int convertID(int id){
+        switch (id){
+            case 1:
+                return R.drawable.elf_1;
+            case 2:
+                return R.drawable.elf_2;
+            case 3:
+                return R.drawable.elf_3;
+            case 4:
+                return R.drawable.elf_4;
+            case 5:
+                return R.drawable.elf_5;
+            default:
+                return 0;
+        }
     }
 
     private void drawLine(LatLng latLng){
