@@ -5,28 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@color/bg_white"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="杰尼龟" />
+        tools:layout_editor_absoluteX="-29dp">
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="喷火龙" />
+        <Switch
+            android:id="@+id/elf_fg_button_switch"
+            android:layout_width="132dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="280dp"
+            android:text="只看已拥有"
+            app:layout_constraintStart_toStartOf="@+id/elf_fg_recycle_view"
+            app:layout_constraintTop_toTopOf="@+id/elf_fg_recycle_view" />
 
-    </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/elf_fg_recycle_view"
+            android:layout_width="match_parent"
+            android:layout_height="676dp"
+            android:layout_marginTop="55dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
