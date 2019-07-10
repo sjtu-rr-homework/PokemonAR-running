@@ -1,19 +1,23 @@
 version: "3.7"
 services:
   config-service:
-    image: discovery-service
+    image: config-service
+    build:
+      context: ./config-service
     ports:
       - "8088:8088"
     networks:
       - spring-cloud-network
-    volumes:
-      - spring-cloud-config-repo:/var/lib/spring-cloud/config-repo
 
   discovery-service:
     hostname: discovery-service
     image: discovery-service
+    build:
+      context: ./discovery-service
     links:
       - "config-service"
+    environment:
+      SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     ports:
       - "8061:8061"
     networks:
@@ -21,9 +25,13 @@ services:
       
   department-service:
     image: department-service
+    build:
+      context: ./department-service
     links:
       - "discovery-service"
       - "config-service"
+    environment:
+      SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     ports:
       - "8091:8091"
     networks:
@@ -31,9 +39,13 @@ services:
 
   employee-service:
     image: employee-service
+    build:
+      context: ./employee-service
     links:
       - "discovery-service"
       - "config-service"
+    environment:
+      SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     ports:
       - "8090:8090"
     networks:
@@ -41,9 +53,13 @@ services:
       
   gateway-service:
     image: gateway-service
+    build:
+      context: ./gateway-service
     links:
       - "discovery-service"
       - "config-service"
+    environment:
+      SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     ports:
       - "8060:8060"
     networks:
@@ -51,9 +67,15 @@ services:
 
   organization-service:
     image: organization-service
+    build:
+      context: ./organization-service
     links:
       - "discovery-service"
       - "config-service"
+      - "department-service"
+      - "employee-service"
+    environment:
+      SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     ports:
       - "8092:8092"
     networks:
@@ -63,9 +85,5 @@ networks:
   spring-cloud-network:
     driver: bridge
 
-volumes:
-  spring-cloud-config-repo:
-    external: true
-      
         
  

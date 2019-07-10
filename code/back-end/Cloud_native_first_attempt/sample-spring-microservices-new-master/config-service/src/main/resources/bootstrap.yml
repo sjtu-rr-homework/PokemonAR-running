@@ -5,4 +5,4 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/sjtu-rr-homework/test-config-localhost.git
+          uri: https://github.com/sjtu-rr-homework/test-config-docker.git
