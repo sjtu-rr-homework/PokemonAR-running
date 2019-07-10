@@ -18,10 +18,12 @@ package example.com.pkmnavidemo4;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -60,6 +62,7 @@ public class SceneformActivity extends AppCompatActivity implements Scene.OnUpda
   private ArFragment arFragment;
   private ModelRenderable andyRenderable;
   private Button returnButton;
+  private Button catchButton;
   private boolean elfSetted=false;
   @Override
   @SuppressWarnings({"AndroidApiChecker", "FutureReturnValueIgnored"})
@@ -82,6 +85,32 @@ public class SceneformActivity extends AppCompatActivity implements Scene.OnUpda
               Intent intent = new Intent();
               intent.setClass(SceneformActivity.this, MainActivity.class);//this前面为当前activty名称，class前面为要跳转到得activity名称
               startActivity(intent);
+          }
+      });
+      catchButton=findViewById(R.id.act_ux_button_catch);
+      catchButton.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              if(elfSetted) {
+                  AlertDialog alertDialog = new AlertDialog.Builder(SceneformActivity.this)
+                          .setTitle("捕捉成功")
+                          .setMessage("是否返回")
+                          .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                              @Override
+                              public void onClick(DialogInterface dialogInterface, int i) {
+                                  finish();
+                              }
+                          })
+                          .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                              @Override
+                              public void onClick(DialogInterface dialogInterface, int i) {
+                                  return;
+                              }
+                          }).create();
+                  alertDialog.show();
+              }
+              else
+                  Toast.makeText(getApplicationContext(), "尚未发现精灵", Toast.LENGTH_SHORT).show();
           }
       });
 
