@@ -63,6 +63,9 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
     //定位蓝点
     MyLocationStyle myLocationStyle;
 
+    //是否第一次定位
+    boolean isFirstLocate=true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,16 +126,18 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         Date date=new Date(System.currentTimeMillis());
         //System.out.println(date);
         runningMessage=new RunningMessage(date);
-        /*elfPoint=new ElfPoint();
+        elfPoint=new ElfPoint();
         elfPoint.setMax_id(5);
+        /*
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                elfPoint.generateElfPoing(2,getApplicationContext(),aMap);
+                elfPoint.generateElfPoing(getApplicationContext(),aMap,new LatLng(31.022346,121.442783));
+                //elfPoint.showAllPoints(aMap);
             }
         });*/
 
-        drawPoint();
+        //drawPoint();
         aMap.setOnMarkerClickListener(new AMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -144,7 +149,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
             }
         });
     }
-
+    /*
     private void drawPoint(){
         LatLng latlng =new LatLng(31.0239310214,121.4350658655);
         List<LatLng> allPoint;
@@ -170,10 +175,10 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         allPoint.add(new LatLng(31.023828,121.439881));
         allPoint.add(new LatLng(31.026531,121.438647));
 
-        for(int i=0;i<20;++i){
+        for(int i=0;i<1;++i){
             addMarkersToMap(getApplicationContext(),aMap,allPoint.get(i),i%5+1);
         }
-        //final Marker marker=aMap.addMarker(new MarkerOptions().position(latlng).title("王凯源法学院").snippet("DefaultMarker"));
+        final Marker marker2=aMap.addMarker(new MarkerOptions().position(allPoint.get(0)).title("王凯源法学院").snippet("DefaultMarker"));
         /*MarkerOptions markerOptions=new MarkerOptions();
         markerOptions.position(latlng);
         markerOptions.title("精灵").snippet("id");
@@ -181,7 +186,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         markerOptions.draggable(false);
         markerOptions.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.npc_86)));
         markerOptions.setFlat(true);
-        final Marker marker=aMap.addMarker(markerOptions);*/
+        final Marker marker=aMap.addMarker(markerOptions);
         //elfPoint.addMarkersToMap(getApplicationContext(),aMap,latlng);
     }
     public static void addMarkersToMap(Context context, AMap aMap, LatLng latlng,int id) {
@@ -196,6 +201,8 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                     .snippet(""+id)
                     .position(latlng)
                     .draggable(true)
+                    .setFlat(true)
+                    .anchor(0.5F,0.5F)
                     .icon(BitmapDescriptorFactory.fromBitmap(bitmap));
             Marker marker = aMap.addMarker(markerOptions);
         }
@@ -222,7 +229,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
             default:
                 return 0;
         }
-    }
+    }*/
 
     private void drawLine(LatLng latLng){
         if(runningMessage.getLength()==0){
@@ -358,6 +365,18 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
     public void onLocationChanged(AMapLocation aMapLocation) {
         if (mListener != null && aMapLocation != null) {
             if (aMapLocation != null && aMapLocation.getErrorCode() == 0) {
+                if(isFirstLocate){
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            LatLng start=new LatLng(aMapLocation.getLatitude(),aMapLocation.getLongitude());
+                            elfPoint.generateElfPoing(getApplicationContext(),aMap,start);
+                            //elfPoint.showAllPoints(aMap);
+                        }
+                    });
+                    isFirstLocate=false;
+                }
                 mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点
                 //Date date=new Date(System.currentTimeMillis());
                 //SimpleDateFormat formatter=new SimpleDateFormat("HH:mm:ss");
