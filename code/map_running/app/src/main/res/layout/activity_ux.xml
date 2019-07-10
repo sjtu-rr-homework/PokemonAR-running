@@ -13,55 +13,41 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SceneformActivity">
-
-  <android.support.constraint.ConstraintLayout
+  <RelativeLayout
       android:layout_width="match_parent"
-      android:layout_height="match_parent">
+      android:layout_height="match_parent"
+      android:orientation="vertical">
 
     <Button
         android:id="@+id/act_ux_button_catch"
-        android:layout_width="0dp"
+        android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_centerInParent="false"
-        android:layout_marginTop="708dp"
-        android:layout_marginEnd="16dp"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/catchball"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="@+id/checkBox"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ux_fragment"
         tools:text="testButton" />
 
     <Button
         android:id="@+id/act_ux_button_return"
         android:layout_width="73dp"
-        android:layout_height="72dp"
-        android:layout_marginStart="320dp"
-        android:layout_marginTop="728dp"
+        android:layout_height="73dp"
         android:background="@drawable/button_circle"
         android:text="返回"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="15dp"/>
 
     <fragment
         android:id="@+id/ux_fragment"
         android:name="com.google.ar.sceneform.ux.ArFragment"
-        android:layout_width="411dp"
-        android:layout_height="731dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <CheckBox
         android:id="@+id/checkBox"
@@ -69,10 +55,6 @@
         android:layout_height="25dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="16dp"
-        android:text="自由放置"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-  </android.support.constraint.ConstraintLayout>
-
-</FrameLayout>
+        android:text="自由放置" />
+  </RelativeLayout>
+</android.support.constraint.ConstraintLayout>
