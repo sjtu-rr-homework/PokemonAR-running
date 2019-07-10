@@ -16,9 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import example.com.pkmnavidemo4.MainActivity;
 import example.com.pkmnavidemo4.R;
-import example.com.pkmnavidemo4.SceneformActivity;
 import example.com.pkmnavidemo4.classes.TestRecycleViewAdapter;
 
 public class ElfsFragment extends Fragment {
@@ -37,7 +35,7 @@ public class ElfsFragment extends Fragment {
         initData();
         //实例化并传输数据给adapter
         TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity().getApplicationContext(), list);
-       mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setAdapter(adapter);
         return view;
     }
 

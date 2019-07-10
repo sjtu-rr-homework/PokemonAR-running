@@ -1,6 +1,7 @@
 package example.com.pkmnavidemo4.classes;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,7 @@ import example.com.pkmnavidemo4.R;
 public class TestRecycleViewAdapter extends RecyclerView.Adapter<TestRecycleViewAdapter.ViewHolderA> {
     private Context mContext;
     private List<String> mList;
-
+    private ElfSourceController elfSourceController;
     public TestRecycleViewAdapter(Context context, List<String> list) {
         mContext = context;
         mList = list;
@@ -25,6 +26,7 @@ public class TestRecycleViewAdapter extends RecyclerView.Adapter<TestRecycleView
     @Override
     public ViewHolderA onCreateViewHolder(ViewGroup parent, int viewType) {
         //此处动态加载ViewHolder的布局文件并返回holder
+        elfSourceController=new ElfSourceController(mContext);
         View view = LayoutInflater.from(mContext).inflate(R.layout.recycleview_item, parent, false);
         ViewHolderA holderA = new ViewHolderA(view);
         return holderA;
@@ -34,66 +36,13 @@ public class TestRecycleViewAdapter extends RecyclerView.Adapter<TestRecycleView
     public void onBindViewHolder(ViewHolderA holder, final int position) {
         //此处设置Item中view的数据
         holder.mTextView.setText(mList.get(position));
-        switch (position) {
-
-            case 0:
-            holder.mTextView.setBackgroundResource(R.drawable.bulbasaur);
-            holder.mTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(mContext, "elf" + position, Toast.LENGTH_SHORT).show();
-                }
-            });
-                break;
-
-            case 1:
-                holder.mTextView.setBackgroundResource(R.drawable.charizard);
-                holder.mTextView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(mContext, "elf" + position, Toast.LENGTH_SHORT).show();
-                    }
-                });
-                break;
-
-            case 2:
-                holder.mTextView.setBackgroundResource(R.drawable.squirtle);
-                holder.mTextView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(mContext, "elf" + position, Toast.LENGTH_SHORT).show();
-                    }
-                });
-                break;
-
-            case 3:
-                holder.mTextView.setBackgroundResource(R.drawable.pikachu);
-                holder.mTextView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(mContext, "elf" + position, Toast.LENGTH_SHORT).show();
-                    }
-                });
-                break;
-            case 4:
-                holder.mTextView.setBackgroundResource(R.drawable.psyduck);
-                holder.mTextView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(mContext, "elf" + position, Toast.LENGTH_SHORT).show();
-                    }
-                });
-                break;
-            default:
-                holder.mTextView.setBackgroundResource(R.drawable.charizard);
-                holder.mTextView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(mContext, "elf" + position, Toast.LENGTH_SHORT).show();
-                    }
-                });
-                break;
-        }
+        holder.mTextView.setBackgroundResource(elfSourceController.getBackground(position));
+        holder.mTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mContext, "elf" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
