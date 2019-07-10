@@ -93,3 +93,8 @@ sceneform.asset('sampledata/models/054 - psyduck/psyduck.obj',
         'default',
         'sampledata/models/054 - psyduck/psyduck.sfa',
         'src/main/res/raw/psyduck')
+
+sceneform.asset('sampledata/models/004 - Charmander/Charmander.obj',
+        'default',
+        'sampledata/models/004 - Charmander/charmander.sfa',
+        'src/main/res/raw/charmander')

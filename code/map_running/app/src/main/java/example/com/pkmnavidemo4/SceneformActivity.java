@@ -49,11 +49,7 @@ import com.google.ar.sceneform.ux.TransformableNode;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Vector;
-import java.util.logging.Logger;
-
 import example.com.pkmnavidemo4.classes.ElfSourceController;
-import example.com.pkmnavidemo4.classes.TestRecycleViewAdapter;
 
 
 /**
@@ -116,6 +112,7 @@ public class SceneformActivity extends AppCompatActivity implements Scene.OnUpda
           }
       });
 
+    //获取生成精灵模型的id
     Intent intent=getIntent();
     int variety=intent.getIntExtra("variety", -1);
     // When you build a Renderable, Sceneform loads its resources in the background while returning

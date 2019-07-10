@@ -2,8 +2,6 @@ package example.com.pkmnavidemo4.classes;
 
 import android.content.Context;
 
-import java.util.List;
-
 import example.com.pkmnavidemo4.R;
 
 public class ElfSourceController {
@@ -17,7 +15,7 @@ public class ElfSourceController {
             case 0:
                 return R.drawable.bulbasaur;
             case 1:
-                return R.drawable.charizard;
+                return R.drawable.charmander;
             case 2:
                 return R.drawable.squirtle;
             case 3:
@@ -33,7 +31,7 @@ public class ElfSourceController {
             case 1:
                 return R.raw.bulbasaur;
             case 2:
-                return R.raw.charizard;
+                return R.raw.charmander;
             case 3:
                 return R.raw.squirtle;
             case 4:

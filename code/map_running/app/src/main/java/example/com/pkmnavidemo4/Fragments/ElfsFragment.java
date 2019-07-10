@@ -1,8 +1,6 @@
 package example.com.pkmnavidemo4.Fragments;
 
 import android.app.Fragment;
-import android.content.Intent;
-import android.graphics.drawable.AdaptiveIconDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,9 +8,6 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,8 +48,6 @@ public class ElfsFragment extends Fragment {
     public ElfsFragment() {
 
     }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.elfs_fg_content,container,false);
