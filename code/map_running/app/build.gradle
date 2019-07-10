@@ -62,6 +62,7 @@ dependencies {
     implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.10.0'
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation files('libs/AMap3DMap_6.9.0_AMapNavi_6.8.0_AMapSearch_6.9.0_AMapTrack_1.1.0_AMapLocation_4.6.0_20190530.jar')
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
 }
 apply plugin: 'com.google.ar.sceneform.plugin'
 
@@ -88,7 +89,7 @@ sceneform.asset('sampledata/models/025 - Pikachu/Pikachu.obj',
         'src/main/res/raw/pikachu')
 
 
-sceneform.asset('sampledata/models/054 - Psyduck/Psyduck.obj',
+sceneform.asset('sampledata/models/054 - psyduck/psyduck.obj',
         'default',
-        'sampledata/models/054 - Psyduck/psyduck.sfa',
+        'sampledata/models/054 - psyduck/psyduck.sfa',
         'src/main/res/raw/psyduck')
