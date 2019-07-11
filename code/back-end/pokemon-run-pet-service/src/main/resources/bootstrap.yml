@@ -13,7 +13,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost/pokemon_run_pet
     username: root
-    password: w8043ZRR
+    password: pwdpwd
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     database: MYSQL
