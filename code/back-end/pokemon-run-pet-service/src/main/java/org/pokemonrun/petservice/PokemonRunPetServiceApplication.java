@@ -1,4 +1,4 @@
-package org.sjturr.pokemonrunpetservice;
+package org.pokemonrun.petservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

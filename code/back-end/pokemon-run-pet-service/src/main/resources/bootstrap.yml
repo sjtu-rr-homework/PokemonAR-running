@@ -1,8 +1,23 @@
 spring:
+  application:
+    name: pokemon-run-pet-service
+  cloud:
+    config:
+      uri: http://localhost:8088
+      failFast: true
+      retry:
+        initialInterval: 3000
+        multiplier: 1.3
+        maxInterval: 5000
+        maxAttempts: 20
   datasource:
-    url: jdbc:mysql://localhost/pokemon
-spring.datasource.url=jdbc:mysql://localhost/ebook
-spring.datasource.username=root
-spring.datasource.password=w8043ZRR
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.data.mongodb.uri=mongodb://wzr:w8043ZRR@localhost/ebook
+    url: jdbc:mysql://localhost/pokemon_run_pet
+    username: root
+    password: w8043ZRR
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+feign.hystrix.enabled: true
