@@ -5,12 +5,9 @@ import android.content.Context;
 import example.com.pkmnavidemo4.R;
 
 public class ElfSourceController {
-    private Context mContext;
+    //private Context mContext;
 
-    public ElfSourceController(Context context) {
-        mContext = context;
-    }
-    public int getBackground(int id){
+    public static int getBackground(int id){
         switch (id){
             case 0:
                 return R.drawable.bulbasaur;
@@ -26,7 +23,7 @@ public class ElfSourceController {
                 return R.drawable.charizard;
         }
     }
-    public int getModel(int id){
+    public static int getModel(int id){
         switch (id){
             case 1:
                 return R.raw.bulbasaur;
@@ -42,4 +39,21 @@ public class ElfSourceController {
                 return R.raw.charizard;
         }
     }
+    public static int getMapPic(int id){
+        switch (id){
+            case 1:
+                return R.drawable.elf_1;
+            case 2:
+                return R.drawable.elf_2;
+            case 3:
+                return R.drawable.elf_3;
+            case 4:
+                return R.drawable.elf_4;
+            case 5:
+                return R.drawable.elf_5;
+            default:
+                return 0;
+        }
+    }
+
 }
