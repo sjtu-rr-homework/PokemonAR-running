@@ -41,12 +41,14 @@
             application only being visible in the Google Play Store on devices that support
             ARCore. -->
         <meta-data android:name="com.google.ar.core" android:value="required" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity">
         </activity>
         <activity
             android:name=".SceneformActivity"

@@ -3,7 +3,7 @@ spring:
     name: gateway-service
   cloud:
     config:
-      uri: http://config-service:8088
+      uri: http://localhost:8088
       failFast: true
       retry:
         initialInterval: 3000
