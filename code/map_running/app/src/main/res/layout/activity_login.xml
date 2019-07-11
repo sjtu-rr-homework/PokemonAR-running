@@ -48,6 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#ffffffff"
+            android:inputType="textPassword"
             android:hint="密码"
             android:paddingLeft="20dp"
             android:textColor="#ff000000"
