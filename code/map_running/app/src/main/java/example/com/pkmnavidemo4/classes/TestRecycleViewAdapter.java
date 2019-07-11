@@ -17,7 +17,6 @@ import example.com.pkmnavidemo4.R;
 public class TestRecycleViewAdapter extends RecyclerView.Adapter<TestRecycleViewAdapter.ViewHolderA> {
     private Context mContext;
     private List<String> mList;
-    private ElfSourceController elfSourceController;
     public TestRecycleViewAdapter(Context context, List<String> list) {
         mContext = context;
         mList = list;
@@ -26,7 +25,6 @@ public class TestRecycleViewAdapter extends RecyclerView.Adapter<TestRecycleView
     @Override
     public ViewHolderA onCreateViewHolder(ViewGroup parent, int viewType) {
         //此处动态加载ViewHolder的布局文件并返回holder
-        elfSourceController=new ElfSourceController(mContext);
         View view = LayoutInflater.from(mContext).inflate(R.layout.recycleview_item, parent, false);
         ViewHolderA holderA = new ViewHolderA(view);
         return holderA;
@@ -36,7 +34,7 @@ public class TestRecycleViewAdapter extends RecyclerView.Adapter<TestRecycleView
     public void onBindViewHolder(ViewHolderA holder, final int position) {
         //此处设置Item中view的数据
         holder.mTextView.setText(mList.get(position));
-        holder.mTextView.setBackgroundResource(elfSourceController.getBackground(position));
+        holder.mTextView.setBackgroundResource(ElfSourceController.getBackground(position));
         holder.mTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

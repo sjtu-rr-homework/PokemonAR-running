@@ -284,7 +284,7 @@ public class ElfPoint {
         if (aMap != null) {
             View view = View.inflate(context, R.layout.view_marker, null);
             ImageView imageView = (ImageView) view.findViewById(R.id.ivQuality);
-            imageView.setImageResource(convertID(id));
+            imageView.setImageResource(ElfSourceController.getMapPic(id));
             Bitmap bitmap = convertViewToBitmap(view);
             MarkerOptions markerOptions = new MarkerOptions()
                     .snippet(""+id)
@@ -302,21 +302,5 @@ public class ElfPoint {
         view.buildDrawingCache();
         Bitmap bitmap = view.getDrawingCache();
         return bitmap;
-    }
-    public static int convertID(int id){
-        switch (id){
-            case 1:
-                return R.drawable.elf_1;
-            case 2:
-                return R.drawable.elf_2;
-            case 3:
-                return R.drawable.elf_3;
-            case 4:
-                return R.drawable.elf_4;
-            case 5:
-                return R.drawable.elf_5;
-                default:
-                    return 0;
-        }
     }
 }

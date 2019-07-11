@@ -58,7 +58,6 @@ import example.com.pkmnavidemo4.classes.ElfSourceController;
 public class SceneformActivity extends AppCompatActivity implements Scene.OnUpdateListener {
   private static final String TAG = SceneformActivity.class.getSimpleName();
   private static final double MIN_OPENGL_VERSION = 3.0;
-  private ElfSourceController elfSourceController;
   private ArFragment arFragment;
   private ModelRenderable andyRenderable;
   private Button returnButton;
@@ -73,8 +72,6 @@ public class SceneformActivity extends AppCompatActivity implements Scene.OnUpda
     if (!checkIsSupportedDeviceOrFinish(this)) {
       return;
     }
-    //获得精灵资源控制类
-    elfSourceController= new ElfSourceController(getApplicationContext());
 
     setContentView(R.layout.activity_ux);
     arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment);
@@ -118,7 +115,7 @@ public class SceneformActivity extends AppCompatActivity implements Scene.OnUpda
     // When you build a Renderable, Sceneform loads its resources in the background while returning
     // a CompletableFuture. Call thenAccept(), handle(), or check isDone() before calling get().
       ModelRenderable.builder()
-              .setSource(this, elfSourceController.getModel(variety))
+              .setSource(this, ElfSourceController.getModel(variety))
               .build()
               .thenAccept(renderable -> andyRenderable = renderable)
               .exceptionally(
