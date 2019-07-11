@@ -1,27 +1,53 @@
 package example.com.pkmnavidemo4.Fragments;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.List;
 
-import example.com.pkmnavidemo4.MainActivity;
 import example.com.pkmnavidemo4.R;
-import example.com.pkmnavidemo4.SceneformActivity;
+import example.com.pkmnavidemo4.classes.TestRecycleViewAdapter;
 
 public class ElfsFragment extends Fragment {
-
-    private Button arButton;
-    private Button arButton2;
+    private List<String> list;
     public ElfsFragment() {
 
     }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+       View view = inflater.inflate(R.layout.elfs_fg_content,container,false);
+        RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.elf_fg_recycle_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL));
+        initData();
+        //实例化并传输数据给adapter
+        TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity().getApplicationContext(), list);
+        mRecyclerView.setAdapter(adapter);
+        return view;
+    }
 
+    /**
+     *  添加数据
+     * */
+    private void initData() {
+        list = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            list.add("elf" + i);
+        }
+    }
+    /*private Button arButton;
+    private Button arButton2;
+    public ElfsFragment() {
+
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.elfs_fg_content,container,false);
@@ -50,5 +76,5 @@ public class ElfsFragment extends Fragment {
             }
         });
         return view;
-    }
+    }*/
 }
