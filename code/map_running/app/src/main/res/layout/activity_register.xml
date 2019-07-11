@@ -53,52 +53,58 @@
             android:textColor="#ff000000"
             android:textSize="14sp" />
 
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center">
-
-        <Button
-            android:id="@+id/act_login_button_login"
+        <View
+            android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:gravity="center"
-            android:text="登 陆"
-            android:textColor="#ffffffff"
-            android:textSize="16sp" />
+            android:layout_height="1dp"
+            android:background="#11000000" />
+
+        <EditText
+            android:id="@+id/password2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#ffffffff"
+            android:hint="确认密码"
+            android:paddingLeft="20dp"
+            android:textColor="#ff000000"
+            android:textSize="14sp" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#11000000" />
+
+        <EditText
+            android:id="@+id/emailedit"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#ffffffff"
+            android:ems="10"
+            android:hint="e-mail"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="20dp"
+            android:textColor="#ff000000"
+            android:textSize="14sp" />
+
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:gravity="bottom">
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/act_login_text_jaccount"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/act_register_button_register"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:text="jaccount" />
-
-        <TextView
-            android:id="@+id/act_login_text_new"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_gravity="bottom|right"
-            android:gravity="left"
-            android:text="新用户" />
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:text="提 交"
+            android:textColor="#ffffffff"
+            android:textSize="16sp" />
     </LinearLayout>
 
 
