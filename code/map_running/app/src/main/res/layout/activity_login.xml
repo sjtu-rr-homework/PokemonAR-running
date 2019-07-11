@@ -47,6 +47,7 @@
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:inputType="textPassword"
             android:background="#ffffffff"
             android:hint="密码"
             android:paddingLeft="20dp"
@@ -75,15 +76,27 @@
             android:textSize="16sp" />
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                />
+        </ScrollView>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:gravity="bottom">
-
         <TextView
-            android:id="@+id/act_login_text_jaccount"
+            android:id="@+id/non"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -92,7 +105,7 @@
             android:text="jaccount" />
 
         <TextView
-            android:id="@+id/act_login_text_new"
+            android:id="@+id/news"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
