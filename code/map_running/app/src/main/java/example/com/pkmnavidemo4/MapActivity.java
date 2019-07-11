@@ -1,6 +1,7 @@
 package example.com.pkmnavidemo4;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,17 +10,20 @@ import android.icu.text.SimpleDateFormat;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
@@ -36,18 +40,21 @@ import java.util.Date;
 import java.util.List;
 
 import example.com.pkmnavidemo4.classes.ElfPoint;
+import example.com.pkmnavidemo4.classes.ElfPointController;
 import example.com.pkmnavidemo4.classes.RunningMessage;
 
 public class MapActivity extends AppCompatActivity implements LocationSource, AMapLocationListener {
 
     MapView mMapView = null;
+    private int countDown=0;
     private TextView positionText;
     private TextView distText;
     private TextView timePerKM;
     private TextView timeText;
     private StringBuilder currentPosition;
     private RunningMessage runningMessage;
-    private ElfPoint elfPoint;
+    private ElfPointController elfPointController;
+    private List<ElfPoint> presentElfPoint=new ArrayList<ElfPoint>();
     //private List<LatLng> latLngs=new ArrayList<LatLng>();
     //private double run_dist=0;
 
@@ -120,8 +127,8 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         Date date=new Date(System.currentTimeMillis());
         //System.out.println(date);
         runningMessage=new RunningMessage(date);
-        elfPoint=new ElfPoint();
-        elfPoint.setMax_id(5);
+        elfPointController=new ElfPointController();
+        elfPointController.setMax_id(5);
 
         aMap.setOnMarkerClickListener(new AMap.OnMarkerClickListener() {
             @Override
@@ -164,6 +171,30 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         }
     }
 
+    public void showCatchMessage(int id,Marker marker){
+        AlertDialog alertDialog = new AlertDialog.Builder(MapActivity.this)
+                .setTitle("你已到达一个精灵点位")
+                .setMessage("是否开始捕捉")
+                .setPositiveButton("确定，开始捕捉", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(MapActivity.this, "开始捕捉", Toast.LENGTH_SHORT).show();
+                        marker.remove();
+                        Intent intent=new Intent(MapActivity.this,SceneformActivity.class);
+                        intent.putExtra("variety",id);
+                        MapActivity.this.startActivity(intent);
+                    }
+                })
+                .setNegativeButton("放弃，继续跑步", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(MapActivity.this, "继续跑步", Toast.LENGTH_SHORT).show();
+                        countDown=3;
+                        return;
+                    }
+                }).create();
+        alertDialog.show();
+    }
 
     @Override
     protected void onResume() {
@@ -241,11 +272,38 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                         @Override
                         public void run() {
                             LatLng start=new LatLng(aMapLocation.getLatitude(),aMapLocation.getLongitude());
-                            elfPoint.generateElfPoing(getApplicationContext(),aMap,start);
+                            elfPointController.generateElfPoing(getApplicationContext(),aMap,start);
+                            presentElfPoint=elfPointController.getPresentElfPoint();
                             //elfPoint.showAllPoints(aMap);
                         }
                     });
                     isFirstLocate=false;
+                }
+                else{
+                    LatLng present=new LatLng(aMapLocation.getLatitude(),aMapLocation.getLongitude());
+                    List<Marker> mapScreenMarkers=aMap.getMapScreenMarkers();
+                    if(countDown==0) {
+                        for (int i = 0; i < mapScreenMarkers.size(); ++i) {
+                            Marker marker = mapScreenMarkers.get(i);
+                            LatLng point = marker.getPosition();
+                            float distance = AMapUtils.calculateLineDistance(point, present);
+                            if (distance < 10) {
+                                showCatchMessage(Integer.parseInt(marker.getSnippet()), marker);
+                                break;
+                            }
+                        }
+                    }
+                    else if(countDown>=1){
+                        --countDown;
+                    }
+                    /*
+                    for(int i=0;i<presentElfPoint.size();++i){
+                        float distance=AMapUtils.calculateLineDistance(present,presentElfPoint.get(i).getLatLng());
+                        if(distance<10){
+                            showCatchMessage(presentElfPoint.get(i).getElfId());
+                            break;
+                        }
+                    }*/
                 }
                 mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点
                 currentPosition=new StringBuilder();
