@@ -10,8 +10,6 @@
         <module name="gateway-service" />
         <module name="config-service" />
         <module name="organization-service" />
-        <module name="employee-service" />
-        <module name="department-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
