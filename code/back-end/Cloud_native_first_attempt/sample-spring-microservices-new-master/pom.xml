@@ -11,6 +11,7 @@
 		<module>config-service</module>
 		<module>organization-service</module>
 		<module>gateway-service</module>
+		<module>pet-service</module>
 	</modules>
 
 </project>
