@@ -19,7 +19,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import example.com.pkmnavidemo4.classes.HttpHandler;
-import example.com.pkmnavidemo4.classes.UserData;
 
 public class LoginActivity  extends AppCompatActivity {
     private Button login;
@@ -42,7 +41,6 @@ public class LoginActivity  extends AppCompatActivity {
                 HttpHandler.getRun();
                 /*String username=usernameText.getText().toString();
                 String password=passwordText.getText().toString();
-<<<<<<< HEAD
                 List<LatLng> course=new ArrayList<LatLng>();
                 course.add(new LatLng(31.024944,121.43619));
                 course.add(new LatLng(31.025279,121.437376));
@@ -63,10 +61,6 @@ public class LoginActivity  extends AppCompatActivity {
                 catch (Exception e){
 
                 }
-=======
-                HttpHandler.login(LoginActivity.this,username,password);
-                HttpHandler.getElfs(username);
->>>>>>> ec2b1546e4c00448c4fcfcdafcdc342c7b3c6c6a
             }
         });
         toRegister=findViewById(R.id.act_login_text_new);

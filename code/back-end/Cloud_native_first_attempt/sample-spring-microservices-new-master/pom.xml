@@ -9,9 +9,8 @@
 	<modules>
 		<module>discovery-service</module>
 		<module>config-service</module>
-		<module>user-service</module>
+		<module>organization-service</module>
 		<module>gateway-service</module>
-		<module>pet-service</module>
 	</modules>
 
 </project>

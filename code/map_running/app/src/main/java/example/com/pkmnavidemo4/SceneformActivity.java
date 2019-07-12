@@ -50,8 +50,6 @@ import com.google.ar.sceneform.ux.TransformableNode;
 import java.util.Iterator;
 import java.util.List;
 import example.com.pkmnavidemo4.classes.ElfSourceController;
-import example.com.pkmnavidemo4.classes.HttpHandler;
-import example.com.pkmnavidemo4.classes.UserData;
 
 
 /**
@@ -76,9 +74,6 @@ public class SceneformActivity extends AppCompatActivity implements Scene.OnUpda
     }
 
     setContentView(R.layout.activity_ux);
-      //获取生成精灵模型的id
-      Intent intent=getIntent();
-      int variety=intent.getIntExtra("variety", -1);
     arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment);
     returnButton=findViewById(R.id.act_ux_button_return);
     returnButton.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +87,6 @@ public class SceneformActivity extends AppCompatActivity implements Scene.OnUpda
           @Override
           public void onClick(View v) {
               if(elfSetted) {
-                  HttpHandler.successCatch(SceneformActivity.this, UserData.getUserName(),variety+"",""+1);
                   AlertDialog alertDialog = new AlertDialog.Builder(SceneformActivity.this)
                           .setTitle("捕捉成功")
                           .setMessage("是否返回")
@@ -115,6 +109,9 @@ public class SceneformActivity extends AppCompatActivity implements Scene.OnUpda
           }
       });
 
+    //获取生成精灵模型的id
+    Intent intent=getIntent();
+    int variety=intent.getIntExtra("variety", -1);
     // When you build a Renderable, Sceneform loads its resources in the background while returning
     // a CompletableFuture. Call thenAccept(), handle(), or check isDone() before calling get().
       ModelRenderable.builder()

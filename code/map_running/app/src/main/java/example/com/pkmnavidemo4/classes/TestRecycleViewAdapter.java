@@ -30,8 +30,8 @@ public class TestRecycleViewAdapter extends RecyclerView.Adapter<TestRecycleView
     @Override
     public void onBindViewHolder(ViewHolderA holder, final int position) {
         //此处设置Item中view的数据
-        holder.mTextView.setText("");
-        holder.mTextView.setBackgroundResource(ElfSourceController.getBackground(Integer.valueOf(mList.get(position))));
+        holder.mTextView.setText(mList.get(position));
+        holder.mTextView.setBackgroundResource(ElfSourceController.getBackground(position+1));
         holder.mTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
