@@ -29,7 +29,7 @@ public class ElfsFragment extends Fragment {
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL));
         initData();
         //实例化并传输数据给adapter
-        TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity().getApplicationContext(), list);
+        TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity(),list);
         mRecyclerView.setAdapter(adapter);
         return view;
     }

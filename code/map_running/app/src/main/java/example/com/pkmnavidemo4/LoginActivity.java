@@ -33,11 +33,11 @@ public class LoginActivity  extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-                //startActivity(intent);
-                String username=usernameText.getText().toString();
+                Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                startActivity(intent);
+                /*String username=usernameText.getText().toString();
                 String password=passwordText.getText().toString();
-                login(username,password);
+                login(username,password);*/
             }
         });
         toRegister=findViewById(R.id.act_login_text_new);
