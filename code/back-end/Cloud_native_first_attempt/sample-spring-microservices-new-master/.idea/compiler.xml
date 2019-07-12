@@ -6,10 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="discovery-service" />
         <module name="gateway-service" />
+        <module name="pet-service" />
+        <module name="user-service" />
         <module name="config-service" />
-        <module name="organization-service" />
+        <module name="discovery-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -18,9 +19,10 @@
       <module name="discovery-service" target="1.8" />
       <module name="employee-service" target="1.8" />
       <module name="gateway-service" target="1.8" />
-      <module name="organization-service" target="1.8" />
+      <module name="pet-service" target="1.8" />
       <module name="proxy-service" target="1.8" />
       <module name="sample-spring-microservices-new" target="1.5" />
+      <module name="user-service" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -30,8 +32,9 @@
       <module name="discovery-service" options="-parameters" />
       <module name="employee-service" options="-parameters" />
       <module name="gateway-service" options="-parameters" />
-      <module name="organization-service" options="-parameters" />
+      <module name="pet-service" options="-parameters" />
       <module name="proxy-service" options="-parameters" />
+      <module name="user-service" options="-parameters" />
     </option>
   </component>
 </project>
