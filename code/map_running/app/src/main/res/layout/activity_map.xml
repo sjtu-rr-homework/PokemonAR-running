@@ -23,6 +23,18 @@
             android:layout_height="wrap_content"
             android:text="TextView" />
 
+        <Button
+            android:id="@+id/act_map_endButton"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/button_circle_white"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:text="结束"
+            android:visibility="visible" />
+
         <RelativeLayout
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
