@@ -18,6 +18,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import example.com.pkmnavidemo4.classes.HttpHandler;
+
 public class LoginActivity  extends AppCompatActivity {
     private Button login;
     private TextView toRegister;
@@ -35,9 +37,10 @@ public class LoginActivity  extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                 startActivity(intent);
-                /*String username=usernameText.getText().toString();
+                String username=usernameText.getText().toString();
                 String password=passwordText.getText().toString();
-                login(username,password);*/
+
+                HttpHandler.login(LoginActivity.this,username,password);
             }
         });
         toRegister=findViewById(R.id.act_login_text_new);
@@ -56,7 +59,7 @@ public class LoginActivity  extends AppCompatActivity {
                 Log.d("haha","go1");
                 HttpURLConnection conn=null;
                 BufferedReader br=null;
-                String loginUrl="https://5184c2d6.ngrok.io/user/login/username/"+username+"/password/"+password;
+                String loginUrl="https://6ed30734.ngrok.io/user/login/username/"+username+"/password/"+password;
                 try {
                     //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
                     URL url=new URL(loginUrl);
