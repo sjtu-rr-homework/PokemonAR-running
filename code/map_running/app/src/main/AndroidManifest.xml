@@ -49,6 +49,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity">
+<<<<<<< HEAD
+
+=======
+>>>>>>> ec2b1546e4c00448c4fcfcdafcdc342c7b3c6c6a
         </activity>
 
         <activity android:name=".ElfDetailsActivity">
