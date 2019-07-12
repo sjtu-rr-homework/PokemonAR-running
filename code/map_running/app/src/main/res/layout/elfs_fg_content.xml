@@ -13,6 +13,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="-29dp">
 
+        <TextView
+            android:id="@+id/elf_fg_text_wait"
+            android:layout_width="132dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="10dp"
+            android:textSize="16dp"
+            android:text="点击刷新精灵信息" />
+
+        <Button
+            android:id="@+id/elf_fg_button_refresh"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:drawable/ic_menu_rotate" />
+
         <Switch
             android:id="@+id/elf_fg_button_switch"
             android:layout_width="132dp"
