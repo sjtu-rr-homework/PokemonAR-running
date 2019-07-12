@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="example.com.pkmnavidemo4.MapActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout3"
+        android:layout_width="180dp"
+        android:layout_height="480dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="220dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_white"
+        android:clickable="true"
+        app:layout_constraintBottom_toTopOf="@+id/act_elf_details_elf_button_return"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/act_elf_details_elf_image1"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/catchball" />
+
+        <ImageView
+            android:id="@+id/act_elf_details_elf_image2"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="170dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/catchball" />
+
+        <ImageView
+            android:id="@+id/act_elf_details_elf_image_3"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="325dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/catchball" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="14dp"
+        android:background="@drawable/bg_white"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:id="@+id/act_elf_details_elf_nowimage"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/catchball" />
+
+        <TextView
+            android:id="@+id/act_elf_details_elf_id"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="18dp"
+            android:text="编号"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/act_elf_details_elf_name"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="58dp"
+            android:text="精灵名"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/act_elf_details_elf_level"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="98dp"
+            android:text="形态"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout4"
+        android:layout_width="180dp"
+        android:layout_height="220dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/bg_white"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/act_elf_details_elf_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="5dp"
+            android:text="已有数量"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/act_elf_details_elf_exp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="50dp"
+            android:text="当前经验"
+            android:textSize="16dp" />
+
+        <EditText
+            android:id="@+id/act_elf_details_elf_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="90dp"
+            android:ems="10"
+            android:hint="输入要增加的经验"
+            android:inputType="textPersonName"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/act_elf_details_elf_button_add"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginEnd="20dp"
+            android:text="确认" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="180dp"
+        android:layout_height="240dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="420dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/bg_white"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/act_elf_details_elf_need_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="5dp"
+            android:text="需要数量"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/act_elf_details_elf_need_exp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="50dp"
+            android:text="需要经验"
+            android:textSize="16dp" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/act_elf_details_elf_button_return"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="7dp"
+        android:text="返回"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3" />
+
+</android.support.constraint.ConstraintLayout>

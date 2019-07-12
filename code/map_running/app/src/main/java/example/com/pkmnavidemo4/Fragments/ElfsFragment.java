@@ -29,7 +29,7 @@ public class ElfsFragment extends Fragment {
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL));
         initData();
         //实例化并传输数据给adapter
-        TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity().getApplicationContext(), list);
+        TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity(),list);
         mRecyclerView.setAdapter(adapter);
         return view;
     }
@@ -39,7 +39,7 @@ public class ElfsFragment extends Fragment {
      * */
     private void initData() {
         list = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 100; i++) {
             list.add("elf" + i);
         }
     }

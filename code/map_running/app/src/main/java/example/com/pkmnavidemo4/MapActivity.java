@@ -14,6 +14,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,6 +52,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
     private TextView distText;
     private TextView timePerKM;
     private TextView timeText;
+    private Button endButton;
     private StringBuilder currentPosition;
     private RunningMessage runningMessage;
     private ElfPointController elfPointController;
@@ -83,6 +85,8 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         distText=(TextView)findViewById(R.id.act_map_textView_dist);
         timePerKM=(TextView)findViewById(R.id.act_map_textView_speed);
         timeText=(TextView)findViewById(R.id.act_map_textView_time);
+
+        endButton=(Button)findViewById(R.id.act_map_endButton);
 
         //获取地图控件引用
         mMapView = (MapView) findViewById(R.id.map);
@@ -138,6 +142,13 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                 intent.putExtra("variety",id);
                 MapActivity.this.startActivity(intent);
                 return true;
+            }
+        });
+
+        endButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                MapActivity.this.finish();
             }
         });
     }
@@ -320,6 +331,29 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
             }
         }
     }
+
+
+    @Override
+    public void finish() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(MapActivity.this);
+        dialog.setTitle("温馨提示");
+        dialog.setMessage("是否结束跑步？");
+        dialog.setCancelable(false);
+        dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                MapActivity.super.finish();
+            }
+        });
+        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                return;
+            }
+        });
+        dialog.show();
+    }
+
 
     @Override
     protected void onDestroy() {

@@ -28,7 +28,6 @@ import example.com.pkmnavidemo4.Fragments.RunningFragment;
  * Created by Coder-pig on 2015/8/28 0028.
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-
     //UI Object
     private TextView txt_topbar;
     private TextView txt_channel;

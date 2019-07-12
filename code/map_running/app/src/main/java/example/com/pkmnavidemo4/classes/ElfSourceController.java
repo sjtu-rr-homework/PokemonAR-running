@@ -9,15 +9,15 @@ public class ElfSourceController {
 
     public static int getBackground(int id){
         switch (id){
-            case 0:
-                return R.drawable.bulbasaur;
             case 1:
-                return R.drawable.charmander;
+                return R.drawable.bulbasaur;
             case 2:
-                return R.drawable.squirtle;
+                return R.drawable.charmander;
             case 3:
-                return R.drawable.pikachu;
+                return R.drawable.squirtle;
             case 4:
+                return R.drawable.pikachu;
+            case 5:
                 return R.drawable.psyduck;
             default:
                 return R.drawable.charizard;
