@@ -51,6 +51,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".ElfDetailsActivity">
+        </activity>
         <activity android:name=".RegisterActivity">
         </activity>
         <activity
