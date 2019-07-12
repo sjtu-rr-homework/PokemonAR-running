@@ -1,6 +1,7 @@
 package example.com.pkmnavidemo4;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,17 +10,20 @@ import android.icu.text.SimpleDateFormat;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
@@ -36,18 +40,21 @@ import java.util.Date;
 import java.util.List;
 
 import example.com.pkmnavidemo4.classes.ElfPoint;
+import example.com.pkmnavidemo4.classes.ElfPointController;
 import example.com.pkmnavidemo4.classes.RunningMessage;
 
 public class MapActivity extends AppCompatActivity implements LocationSource, AMapLocationListener {
 
     MapView mMapView = null;
+    private int countDown=0;
     private TextView positionText;
     private TextView distText;
     private TextView timePerKM;
     private TextView timeText;
     private StringBuilder currentPosition;
     private RunningMessage runningMessage;
-    private ElfPoint elfPoint;
+    private ElfPointController elfPointController;
+    private List<ElfPoint> presentElfPoint=new ArrayList<ElfPoint>();
     //private List<LatLng> latLngs=new ArrayList<LatLng>();
     //private double run_dist=0;
 
@@ -87,6 +94,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         //设置初始点位
         LatLng latLng = new LatLng(31.02228,121.442316);//构造一个位置
         aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,16));
+
         //设置地图的放缩级别
         aMap.moveCamera(CameraUpdateFactory.zoomTo(19));
         // 设置定位监听
@@ -115,30 +123,13 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                 //从location对象中获取经纬度信息，地址描述信息，建议拿到位置之后调用逆地理编码接口获取
             }
         });
-        /*
-        AMap.OnMarkerClickListener markerClickListener=new AMap.OnMarkerClickListener(){
-            @Override
-            public boolean onMarkerClick(Marker marker){
-                return false;
-            }
-        };*/
-        //aMap.setOnMapClickListener((AMap.OnMapClickListener) markerClickListener);
-        //初始化跑步信息管理器
+
         Date date=new Date(System.currentTimeMillis());
         //System.out.println(date);
         runningMessage=new RunningMessage(date);
-        elfPoint=new ElfPoint();
-        elfPoint.setMax_id(5);
-        /*
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                elfPoint.generateElfPoing(getApplicationContext(),aMap,new LatLng(31.022346,121.442783));
-                //elfPoint.showAllPoints(aMap);
-            }
-        });*/
+        elfPointController=new ElfPointController();
+        elfPointController.setMax_id(5);
 
-        //drawPoint();
         aMap.setOnMarkerClickListener(new AMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -150,87 +141,6 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
             }
         });
     }
-    /*
-    private void drawPoint(){
-        LatLng latlng =new LatLng(31.0239310214,121.4350658655);
-        List<LatLng> allPoint;
-        allPoint=new ArrayList<LatLng>();
-        allPoint.add(new LatLng(31.022264,121.442783));
-        allPoint.add(new LatLng(31.02276,121.444548));
-        allPoint.add(new LatLng(31.024365,121.444634));
-        allPoint.add(new LatLng(31.026056,121.439752));
-        allPoint.add(new LatLng(31.025275,121.437338));
-        allPoint.add(new LatLng(31.023882,121.435122));
-        allPoint.add(new LatLng(31.024585,121.43634));
-        allPoint.add(new LatLng(31.022638,121.435305));
-        allPoint.add(new LatLng(31.024136,121.436539));
-        allPoint.add(new LatLng(31.023401,121.436834));
-        allPoint.add(new LatLng(31.022224,121.437209));
-        allPoint.add(new LatLng(31.022932,121.440229));
-        allPoint.add(new LatLng(31.021622,121.440809));
-        allPoint.add(new LatLng(31.023419,121.446629));
-        allPoint.add(new LatLng(31.022431,121.434393));
-        allPoint.add(new LatLng(31.024996,121.440245));
-        allPoint.add(new LatLng(31.02427,121.4412));
-        allPoint.add(new LatLng(31.026724,121.443689));
-        allPoint.add(new LatLng(31.023828,121.439881));
-        allPoint.add(new LatLng(31.026531,121.438647));
-
-        for(int i=0;i<1;++i){
-            addMarkersToMap(getApplicationContext(),aMap,allPoint.get(i),i%5+1);
-        }
-        final Marker marker2=aMap.addMarker(new MarkerOptions().position(allPoint.get(0)).title("王凯源法学院").snippet("DefaultMarker"));
-        /*MarkerOptions markerOptions=new MarkerOptions();
-        markerOptions.position(latlng);
-        markerOptions.title("精灵").snippet("id");
-        markerOptions.anchor(0.5F,0.5F);
-        markerOptions.draggable(false);
-        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.npc_86)));
-        markerOptions.setFlat(true);
-        final Marker marker=aMap.addMarker(markerOptions);
-        //elfPoint.addMarkersToMap(getApplicationContext(),aMap,latlng);
-    }
-    public static void addMarkersToMap(Context context, AMap aMap, LatLng latlng,int id) {
-        if (aMap != null) {
-            View view = View.inflate(context, R.layout.view_marker, null);
-            ImageView imageView = (ImageView) view.findViewById(R.id.ivQuality);
-            imageView.setImageResource(convertID(id));
-            //int aqi=Integer.parseInt(model.getAqi());
-            //String s= Environment.getExternalStorageDirectory().getAbsolutePath()
-            Bitmap bitmap = convertViewToBitmap(view);
-            MarkerOptions markerOptions = new MarkerOptions()
-                    .snippet(""+id)
-                    .position(latlng)
-                    .draggable(true)
-                    .setFlat(true)
-                    .anchor(0.5F,0.5F)
-                    .icon(BitmapDescriptorFactory.fromBitmap(bitmap));
-            Marker marker = aMap.addMarker(markerOptions);
-        }
-    }
-    public static Bitmap convertViewToBitmap(View view) {
-        view.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-        view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
-        view.buildDrawingCache();
-        Bitmap bitmap = view.getDrawingCache();
-        return bitmap;
-    }
-    public static int convertID(int id){
-        switch (id){
-            case 1:
-                return R.drawable.elf_1;
-            case 2:
-                return R.drawable.elf_2;
-            case 3:
-                return R.drawable.elf_3;
-            case 4:
-                return R.drawable.elf_4;
-            case 5:
-                return R.drawable.elf_5;
-            default:
-                return 0;
-        }
-    }*/
 
     private void drawLine(LatLng latLng){
         if(runningMessage.getLength()==0){
@@ -258,43 +168,33 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
             Date tmpdate=new Date(runningMessage.getLastTime()*1000-8*3600*1000);
             SimpleDateFormat formater=new SimpleDateFormat("HH:mm:ss");
             timeText.setText(formater.format(tmpdate));
-            //显示跑步总时长，格式XX:XX:XX
-            /*int hou=0;
-            sec=(int)runningMessage.getLastTime()%60;
-            min=(int)runningMessage.getLastTime()/60%60;
-            hou=(int)runningMessage.getLastTime()/60/60;
-            String timeString;
-            if(hou==0){
-                timeString="00";
-            }
-            else if(hou>0&&hou<10){
-                timeString="0"+hou;
-            }
-            else {
-                timeString=""+hou;
-            }
-            if(min==0){
-                timeString+=":00";
-            }
-            else if(min>0&&min<10){
-                timeString+=(":0"+min);
-            }
-            else{
-                timeString+=(":"+min);
-            }
-            if(sec==0){
-                timeString+=":00";
-            }
-            else if(sec>0&&sec<10){
-                timeString+=(":0"+sec);
-            }
-            else{
-                timeString+=(":"+sec);
-            }
-            timeText.setText(timeString);*/
         }
     }
 
+    public void showCatchMessage(int id,Marker marker){
+        AlertDialog alertDialog = new AlertDialog.Builder(MapActivity.this)
+                .setTitle("你已到达一个精灵点位")
+                .setMessage("是否开始捕捉")
+                .setPositiveButton("确定，开始捕捉", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(MapActivity.this, "开始捕捉", Toast.LENGTH_SHORT).show();
+                        marker.remove();
+                        Intent intent=new Intent(MapActivity.this,SceneformActivity.class);
+                        intent.putExtra("variety",id);
+                        MapActivity.this.startActivity(intent);
+                    }
+                })
+                .setNegativeButton("放弃，继续跑步", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(MapActivity.this, "继续跑步", Toast.LENGTH_SHORT).show();
+                        countDown=3;
+                        return;
+                    }
+                }).create();
+        alertDialog.show();
+    }
 
     @Override
     protected void onResume() {
@@ -372,15 +272,40 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                         @Override
                         public void run() {
                             LatLng start=new LatLng(aMapLocation.getLatitude(),aMapLocation.getLongitude());
-                            elfPoint.generateElfPoing(getApplicationContext(),aMap,start);
+                            elfPointController.generateElfPoing(getApplicationContext(),aMap,start);
+                            presentElfPoint=elfPointController.getPresentElfPoint();
                             //elfPoint.showAllPoints(aMap);
                         }
                     });
                     isFirstLocate=false;
                 }
+                else{
+                    LatLng present=new LatLng(aMapLocation.getLatitude(),aMapLocation.getLongitude());
+                    List<Marker> mapScreenMarkers=aMap.getMapScreenMarkers();
+                    if(countDown==0) {
+                        for (int i = 0; i < mapScreenMarkers.size(); ++i) {
+                            Marker marker = mapScreenMarkers.get(i);
+                            LatLng point = marker.getPosition();
+                            float distance = AMapUtils.calculateLineDistance(point, present);
+                            if (distance < 10) {
+                                showCatchMessage(Integer.parseInt(marker.getSnippet()), marker);
+                                break;
+                            }
+                        }
+                    }
+                    else if(countDown>=1){
+                        --countDown;
+                    }
+                    /*
+                    for(int i=0;i<presentElfPoint.size();++i){
+                        float distance=AMapUtils.calculateLineDistance(present,presentElfPoint.get(i).getLatLng());
+                        if(distance<10){
+                            showCatchMessage(presentElfPoint.get(i).getElfId());
+                            break;
+                        }
+                    }*/
+                }
                 mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点
-                //Date date=new Date(System.currentTimeMillis());
-                //SimpleDateFormat formatter=new SimpleDateFormat("HH:mm:ss");
                 currentPosition=new StringBuilder();
                 currentPosition.append("经度：").append(aMapLocation.getLongitude()).append("\n");
                 currentPosition.append("纬度：").append(aMapLocation.getLatitude()).append("\n");

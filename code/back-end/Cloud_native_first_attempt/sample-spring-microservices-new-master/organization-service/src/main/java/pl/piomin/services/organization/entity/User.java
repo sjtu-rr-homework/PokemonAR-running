@@ -12,7 +12,6 @@ import java.util.Objects;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "User", schema = "test", catalog = "")
 @JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
@@ -33,7 +32,7 @@ public class User implements Serializable {
     public void setUserID(int userID) { this.userID=userID; }
 
     @Basic
-    @Column(name = "username")
+    @Column(name = "username" ,unique=true)
     public String getUsername() {
         return username;
     }
