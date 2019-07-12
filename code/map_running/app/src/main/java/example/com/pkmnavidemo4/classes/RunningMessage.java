@@ -45,4 +45,7 @@ public class RunningMessage {
     public int getTimePerKM(){
         return timePerKM;
     }
+    public Date getStart(){
+        return this.start;
+    }
 }
