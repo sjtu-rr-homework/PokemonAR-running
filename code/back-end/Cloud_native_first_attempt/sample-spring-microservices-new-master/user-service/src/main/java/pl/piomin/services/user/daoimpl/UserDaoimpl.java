@@ -1,10 +1,10 @@
-package pl.piomin.services.organization.daoimpl;
+package pl.piomin.services.user.daoimpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import pl.piomin.services.organization.dao.UserDao;
-import pl.piomin.services.organization.entity.User;
-import pl.piomin.services.organization.repository.UserRepository;
+import pl.piomin.services.user.dao.UserDao;
+import pl.piomin.services.user.entity.User;
+import pl.piomin.services.user.repository.UserRepository;
 
 import java.util.List;
 

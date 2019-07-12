@@ -23,10 +23,10 @@ services:
     networks:
       - spring-cloud-network
       
-  department-service:
-    image: department-service
+  pet-service:
+    image: pet-service
     build:
-      context: ./department-service
+      context: ./pet-service
     links:
       - "discovery-service"
       - "config-service"
@@ -37,43 +37,14 @@ services:
     networks:
       - spring-cloud-network
 
-  employee-service:
-    image: employee-service
-    build:
-      context: ./employee-service
-    links:
-      - "discovery-service"
-      - "config-service"
-    environment:
-      SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
-    ports:
-      - "8090:8090"
-    networks:
-      - spring-cloud-network
-      
-  gateway-service:
-    image: gateway-service
-    build:
-      context: ./gateway-service
-    links:
-      - "discovery-service"
-      - "config-service"
-    environment:
-      SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
-    ports:
-      - "8060:8060"
-    networks:
-      - spring-cloud-network
 
-  organization-service:
-    image: organization-service
+  user-service:
+    image: user-service
     build:
-      context: ./organization-service
+      context: ./user-service
     links:
       - "discovery-service"
       - "config-service"
-      - "department-service"
-      - "employee-service"
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     ports:

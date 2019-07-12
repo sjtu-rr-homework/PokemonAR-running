@@ -1,14 +1,14 @@
-package pl.piomin.services.organization.controller;
+package pl.piomin.services.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import pl.piomin.services.organization.service.LoginService;
-import pl.piomin.services.organization.service.RegisterService;
+import pl.piomin.services.user.service.LoginService;
+import pl.piomin.services.user.service.RegisterService;
 
 @RestController
-public class OrganizationController {
+public class UserController {
 	@Autowired
 	private LoginService LoginService;
 	@Autowired
