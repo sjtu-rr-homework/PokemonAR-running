@@ -39,7 +39,7 @@ public class ElfsFragment extends Fragment {
      * */
     private void initData() {
         list = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 100; i++) {
             list.add("elf" + i);
         }
     }

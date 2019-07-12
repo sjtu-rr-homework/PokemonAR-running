@@ -19,7 +19,46 @@ import example.com.pkmnavidemo4.RegisterActivity;
 
 public class HttpHandler {
     private static String UrlHead="https://6ed30734.ngrok.io";
+    public static void successCatch(Context context,String username,String typeid){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String loginUrl=UrlHead+"/user/"+username+"/addnum/"+typeid;
+                try {
+                    //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
+                    URL url=new URL(loginUrl);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(8000);
+                    InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
 
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }finally {
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
     public static void login(Context context,String username, String password) {
         new Thread(new Runnable() {
             @Override
@@ -45,6 +84,7 @@ public class HttpHandler {
                     }
                     if(sb.toString().equals("true")){
                         Looper.prepare();
+                        UserData.setUserName(username);
                         Toast.makeText(context,"登陆成功",Toast.LENGTH_SHORT).show();
                         Intent intent=new Intent(context, MainActivity.class);
                         context.startActivity(intent);
