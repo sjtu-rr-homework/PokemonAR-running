@@ -9,27 +9,40 @@ services:
     networks:
       - spring-cloud-network
 
+  mysql-pet:
+    hostname: mysql-pet
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=c7o2r1e4
+      - MYSQL_DATABASE=pet
+      - MYSQL_USER=coredroid
+      - MYSQL_PASSWORD=c7o2r1e4
+    volumes:
+      - /data/mysql/pet
+    ports:
+      - "3306:3306"
+    networks:
+      - spring-cloud-network
+
   discovery-service:
     hostname: discovery-service
     image: discovery-service
     build:
       context: ./discovery-service
-    links:
-      - "config-service"
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     ports:
       - "8061:8061"
     networks:
       - spring-cloud-network
-      
+  
   pet-service:
+    hostname: pet-service
     image: pet-service
     build:
       context: ./pet-service
-    links:
-      - "discovery-service"
-      - "config-service"
+    depends_on:
+      - mysql-pet
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     ports:
@@ -37,18 +50,15 @@ services:
     networks:
       - spring-cloud-network
 
-
-  user-service:
-    image: user-service
+  gateway-service:
+    hostname: gateway-service
+    image: gateway-service
     build:
-      context: ./user-service
-    links:
-      - "discovery-service"
-      - "config-service"
+      context: ./gateway-service
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     ports:
-      - "8092:8092"
+      - "8060:8060"
     networks:
       - spring-cloud-network
 
