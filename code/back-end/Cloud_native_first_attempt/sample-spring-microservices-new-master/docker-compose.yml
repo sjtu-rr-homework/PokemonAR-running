@@ -8,6 +8,8 @@ services:
       - "8088:8088"
     networks:
       - spring-cloud-network
+    environment:
+      SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"server": {"git" :{"uri": "https://github.com/MaCoredroid/test-config-docker.git"}}}}}}'
 
   mysql-pet:
     hostname: mysql-pet
@@ -36,6 +38,21 @@ services:
       - /data/mysql/user
     ports:
       - "3307:3306"
+    networks:
+      - spring-cloud-network
+
+  mysql-record:
+    hostname: mysql-record
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=c7o2r1e4
+      - MYSQL_DATABASE=pet
+      - MYSQL_USER=coredroid
+      - MYSQL_PASSWORD=c7o2r1e4
+    volumes:
+      - /data/mysql/record
+    ports:
+      - "3308:3306"
     networks:
       - spring-cloud-network
 
@@ -76,6 +93,20 @@ services:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     ports:
       - "8092:8092"
+    networks:
+      - spring-cloud-network
+
+  record-service:
+    hostname: record-service
+    image: record-service
+    build:
+      context: ./record-service
+    depends_on:
+      - mysql-record
+    environment:
+      SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
+    ports:
+      - "8093:8093"
     networks:
       - spring-cloud-network
 
