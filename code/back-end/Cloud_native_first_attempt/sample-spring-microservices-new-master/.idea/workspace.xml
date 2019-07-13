@@ -2,63 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9e081181-8299-493f-963e-ccbac1105606" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_11.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_2_0_6_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_autoconfigure_2_1_4_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_5_1_6_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config-service/config-service.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/config-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/discovery-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/discovery-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/discovery-service/src/main/java/pl/piomin/services/discovery/DiscoveryApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/discovery-service/src/main/java/org/pokemonrun/DiscoveryApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway-service/src/main/java/pl/piomin/services/gateway/GatewayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway-service/src/main/java/org/pokemonrun/GatewayApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pet-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pet-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pet-service/src/main/java/org/pokemonrun/petservice/PetServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/pet-service/src/main/java/org/pokemonrun/PetServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pet-service/src/main/java/org/pokemonrun/petservice/controller/PetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/pet-service/src/main/java/org/pokemonrun/controller/PetController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pet-service/src/main/java/org/pokemonrun/petservice/dao/PetDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/pet-service/src/main/java/org/pokemonrun/dao/PetDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pet-service/src/main/java/org/pokemonrun/petservice/daoimpl/PetDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/pet-service/src/main/java/org/pokemonrun/daoimpl/PetDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pet-service/src/main/java/org/pokemonrun/petservice/entity/Pet.java" beforeDir="false" afterPath="$PROJECT_DIR$/pet-service/src/main/java/org/pokemonrun/entity/Pet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pet-service/src/main/java/org/pokemonrun/petservice/info/Petinfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/pet-service/src/main/java/org/pokemonrun/info/Petinfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pet-service/src/main/java/org/pokemonrun/petservice/repository/PetRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/pet-service/src/main/java/org/pokemonrun/repository/PetRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pet-service/src/main/java/org/pokemonrun/petservice/service/PetInfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/pet-service/src/main/java/org/pokemonrun/service/PetInfoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pet-service/src/main/java/org/pokemonrun/petservice/service/PetModifyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/pet-service/src/main/java/org/pokemonrun/service/PetModifyService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pet-service/src/main/java/org/pokemonrun/petservice/serviceimpl/PetInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/pet-service/src/main/java/org/pokemonrun/serviceimpl/PetInfoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pet-service/src/main/java/org/pokemonrun/petservice/serviceimpl/PetModifyServiceimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/pet-service/src/main/java/org/pokemonrun/serviceimpl/PetModifyServiceimpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/pl/piomin/services/user/UserApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/UserApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/pl/piomin/services/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/pl/piomin/services/user/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/dao/UserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/pl/piomin/services/user/daoimpl/UserDaoimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/daoimpl/UserDaoimpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/pl/piomin/services/user/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/pl/piomin/services/user/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/pl/piomin/services/user/service/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/service/LoginService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/pl/piomin/services/user/service/RegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/service/RegisterService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/pl/piomin/services/user/serviceimpl/LoginServiceimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/serviceimpl/LoginServiceimpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/pl/piomin/services/user/serviceimpl/RegisterServiceimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/serviceimpl/RegisterServiceimpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/user-service.iml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/user-service.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../running-record-service/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../running-record-service/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../running-record-service/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../running-record-service/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../running-record-service/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../running-record-service/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../running-record-service/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../running-record-service/src/main/java/org/pokemonrun/runningrecordservice/RunningRecordServiceApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../running-record-service/src/main/java/org/pokemonrun/runningrecordservice/controller/RunningRecordController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../running-record-service/src/main/java/org/pokemonrun/runningrecordservice/dao/RunningRecordDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../running-record-service/src/main/java/org/pokemonrun/runningrecordservice/daoimpl/RunningRecordDaoImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../running-record-service/src/main/java/org/pokemonrun/runningrecordservice/entity/RunningRecord.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../running-record-service/src/main/java/org/pokemonrun/runningrecordservice/info/RunningRecordInfo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../running-record-service/src/main/java/org/pokemonrun/runningrecordservice/repository/RunningRecordRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../running-record-service/src/main/java/org/pokemonrun/runningrecordservice/service/RecordService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../running-record-service/src/main/java/org/pokemonrun/runningrecordservice/serviceimpl/RecordServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../running-record-service/src/main/resources/bootstrap.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../running-record-service/src/test/java/org/pokemonrun/runningrecordservice/RunningRecordServiceApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/record-service/src/test/java/org/pokemonrun/runningrecordservice/RunningRecordServiceApplicationTests.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/config-service/target/" />
@@ -172,7 +116,7 @@
         <entry file="file://$PROJECT_DIR$/record-service/src/main/java/org.pokemonrun/controller/RunningRecordController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="20" lean-forward="true" selection-start-column="20" selection-end-column="20" />
+              <caret column="20" selection-start-column="20" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -313,6 +257,58 @@
               <item name="sample-spring-microservices-new" type="b2602c69:ProjectViewProjectNode" />
               <item name="sample-spring-microservices-new-master" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="sample-spring-microservices-new" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sample-spring-microservices-new-master" type="462c0819:PsiDirectoryNode" />
+              <item name="pet-service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sample-spring-microservices-new" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sample-spring-microservices-new-master" type="462c0819:PsiDirectoryNode" />
+              <item name="pet-service" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sample-spring-microservices-new" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sample-spring-microservices-new-master" type="462c0819:PsiDirectoryNode" />
+              <item name="pet-service" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sample-spring-microservices-new" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sample-spring-microservices-new-master" type="462c0819:PsiDirectoryNode" />
+              <item name="pet-service" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sample-spring-microservices-new" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sample-spring-microservices-new-master" type="462c0819:PsiDirectoryNode" />
+              <item name="record-service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sample-spring-microservices-new" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sample-spring-microservices-new-master" type="462c0819:PsiDirectoryNode" />
+              <item name="record-service" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sample-spring-microservices-new" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sample-spring-microservices-new-master" type="462c0819:PsiDirectoryNode" />
+              <item name="record-service" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sample-spring-microservices-new" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sample-spring-microservices-new-master" type="462c0819:PsiDirectoryNode" />
+              <item name="record-service" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -441,7 +437,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72055000" />
+    <option name="totallyTimeSpent" value="72069000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -468,7 +464,7 @@
       <window_info anchor="bottom" id="Java Enterprise" order="11" weight="0.3286119" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
       <window_info anchor="bottom" id="Version Control" order="13" />
-      <window_info anchor="bottom" x="23" y="178" width="1490" height="468" id="Run Dashboard" order="14" visible="true" weight="0.7577904" />
+      <window_info anchor="bottom" x="23" y="178" width="1490" height="468" id="Run Dashboard" order="14" visible="true" weight="0.04249292" />
       <window_info anchor="bottom" id="Messages" order="15" weight="0.5042493" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -839,7 +835,7 @@
     <entry file="file://$PROJECT_DIR$/record-service/src/main/java/org.pokemonrun/controller/RunningRecordController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="20" lean-forward="true" selection-start-column="20" selection-end-column="20" />
+          <caret column="20" selection-start-column="20" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
