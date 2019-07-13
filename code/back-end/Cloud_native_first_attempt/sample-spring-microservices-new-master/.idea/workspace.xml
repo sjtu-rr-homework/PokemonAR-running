@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9e081181-8299-493f-963e-ccbac1105606" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/record-service/src/test/java/org/pokemonrun/runningrecordservice/RunningRecordServiceApplicationTests.java" beforeDir="false" />
-    </list>
+    <list default="true" id="9e081181-8299-493f-963e-ccbac1105606" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/config-service/target/" />
     <ignored path="$PROJECT_DIR$/employee-service/target/" />
@@ -437,7 +435,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72069000" />
+    <option name="totallyTimeSpent" value="72666000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
