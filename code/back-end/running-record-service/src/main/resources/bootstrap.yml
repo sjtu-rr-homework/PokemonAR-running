@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: pokemon-run-runningrecord-service
+  cloud:
+    config:
+      uri: http://localhost:8088
+      failFast: true
+      retry:
+        initialInterval: 3000
+        multiplier: 1.3
+        maxInterval: 5000
+        maxAttempts: 20
+  datasource:
+    url: jdbc:mysql://localhost/pokemon_run_running_record
+    username: root
+    password: pwdpwd
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+feign.hystrix.enabled: true
