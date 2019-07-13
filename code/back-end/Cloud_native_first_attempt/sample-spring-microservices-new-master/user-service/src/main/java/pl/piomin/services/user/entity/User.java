@@ -1,4 +1,4 @@
-package pl.piomin.services.organization.entity;
+package pl.piomin.services.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -6,10 +6,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
-import java.io.Serializable;
 
 @Entity
 @JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})

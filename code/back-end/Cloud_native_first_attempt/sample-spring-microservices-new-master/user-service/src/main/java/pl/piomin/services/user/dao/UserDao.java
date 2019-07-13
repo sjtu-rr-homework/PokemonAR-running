@@ -1,6 +1,6 @@
-package pl.piomin.services.organization.dao;
+package pl.piomin.services.user.dao;
 
-import pl.piomin.services.organization.entity.User;
+import pl.piomin.services.user.entity.User;
 
 import java.util.List;
 
