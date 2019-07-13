@@ -24,6 +24,21 @@ services:
     networks:
       - spring-cloud-network
 
+  mysql-user:
+    hostname: mysql-user
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=c7o2r1e4
+      - MYSQL_DATABASE=pet
+      - MYSQL_USER=coredroid
+      - MYSQL_PASSWORD=c7o2r1e4
+    volumes:
+      - /data/mysql/user
+    ports:
+      - "3307:3306"
+    networks:
+      - spring-cloud-network
+
   discovery-service:
     hostname: discovery-service
     image: discovery-service
@@ -47,6 +62,20 @@ services:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     ports:
       - "8091:8091"
+    networks:
+      - spring-cloud-network
+
+  user-service:
+    hostname: user-service
+    image: user-service
+    build:
+      context: ./user-service
+    depends_on:
+      - mysql-user
+    environment:
+      SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
+    ports:
+      - "8092:8092"
     networks:
       - spring-cloud-network
 
