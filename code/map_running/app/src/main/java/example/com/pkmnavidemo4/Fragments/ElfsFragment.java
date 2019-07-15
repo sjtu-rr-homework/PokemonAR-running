@@ -32,6 +32,7 @@ public class ElfsFragment extends Fragment {
     private Button refresh;
     private TextView refreshText;
     private List<String> list;
+    RecyclerView mRecyclerView;
     private boolean lock;
     public ElfsFragment() {
 
@@ -40,8 +41,8 @@ public class ElfsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-       View view = inflater.inflate(R.layout.elfs_fg_content,container,false);
-        RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.elf_fg_recycle_view);
+        View view = inflater.inflate(R.layout.elfs_fg_content,container,false);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.elf_fg_recycle_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL));
         initData();
@@ -80,13 +81,18 @@ public class ElfsFragment extends Fragment {
     }
 
     private void refresh( RecyclerView mRecyclerView){
-        setLock();
         HttpHandler.getElfs(getActivity(),UserData.getUserName());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(100);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity(),UserData.getElfList());
+        mRecyclerView.setAdapter(adapter);
+    }
+
+    private void refresh(String userName){
+        HttpHandler.getElfs(UserData.getUserName());
         TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity(),UserData.getElfList());
         mRecyclerView.setAdapter(adapter);
     }

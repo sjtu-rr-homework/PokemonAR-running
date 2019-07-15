@@ -165,7 +165,6 @@ public class HttpHandler {
                         elfList.add(""+ list.get(i).get("typeID"));
                     }
                     UserData.setElfList(elfList);
-                    mainActivity.getElfsFragment().unLock();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }finally {
