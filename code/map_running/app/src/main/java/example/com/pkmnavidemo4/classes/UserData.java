@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserData {
-    private static String userName="test1";
+    private static String userName;
+    private static List<String> elfList;
     public static String getUserName(){
         return userName;
     }
@@ -18,4 +19,10 @@ public class UserData {
     public static List<String> rocordLength=new ArrayList<String>();
     public static List<String> recordLastTime=new ArrayList<String>();
     public static boolean isrecordGet=false;
+    public static List<String> getElfList(){
+        return elfList;
+    }
+    public static void setElfList( List<String> list){
+        elfList=list;
+    }
 }

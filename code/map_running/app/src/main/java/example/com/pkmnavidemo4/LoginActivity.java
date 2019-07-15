@@ -37,30 +37,10 @@ public class LoginActivity  extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //HttpHandler.postRunningRecord1(LoginActivity.this);
-                HttpHandler.test();
-                /*String username=usernameText.getText().toString();
+                String username=usernameText.getText().toString();
                 String password=passwordText.getText().toString();
-                List<LatLng> course=new ArrayList<LatLng>();
-                course.add(new LatLng(31.024944,121.43619));
-                course.add(new LatLng(31.025279,121.437376));
-                course.add(new LatLng(31.025831,121.438996));
-                String arr=String.valueOf(course);*/
-
-                //String json = JSONArray.
-                //List<LatLng> tmp= Arrays.asList(course.toString());
-                //text.setText(course.toString());
-                //HttpHandler.postRunningRecord();
-                //HttpHandler.login(LoginActivity.this,username,password);
-                try {
-                    //JSONObject un = new JSONObject();
-                    //un.put("username", "test1");
-                    //String Json = un.toString();
-
-                }
-                catch (Exception e){
-
-                }
+                HttpHandler.login(LoginActivity.this,username,password);
+                HttpHandler.getElfs(username);
             }
         });
         toRegister=findViewById(R.id.act_login_text_new);

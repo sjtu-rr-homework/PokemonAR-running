@@ -1,6 +1,8 @@
 package example.com.pkmnavidemo4.classes;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Looper;
@@ -11,6 +13,11 @@ import android.widget.Toast;
 
 import com.amap.api.maps.model.LatLng;
 
+import android.support.annotation.Nullable;
+import android.util.Log;
+import android.widget.TextView;
+import android.widget.Toast;
+import com.amap.api.maps.model.LatLng;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -27,14 +34,152 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import example.com.pkmnavidemo4.LoginActivity;
 import example.com.pkmnavidemo4.MainActivity;
-import example.com.pkmnavidemo4.RegisterActivity;
 
 public class HttpHandler {
-    private static String UrlHead="https://23d1c3fb.ngrok.io";
-    public static void successCatch(Context context,String username,String typeid){
+    private static String UrlHead="http://202.120.40.8:30751";
+
+    @Nullable
+    public static Activity findActivity(Context context) {
+        if (context instanceof Activity) {
+            return (Activity) context;
+        }
+        if (context instanceof ContextWrapper) {
+            ContextWrapper wrapper = (ContextWrapper) context;
+            return findActivity(wrapper.getBaseContext());
+        } else {
+            return null;
+        }
+    }
+
+
+    public static void getElfs(String username){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                List<Map> list = new ArrayList<Map>();
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String loginUrl=UrlHead+"/pet/user/"+username+"/getpets";
+                try {
+                    //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
+                    URL url=new URL(loginUrl);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(888000);
+                    conn.setReadTimeout(888000);
+                   /* InputStream is = conn.getInputStream(); // 获取输入流
+                    byte[] data = read(is);*/
+                    InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                    Log.d("123","---"+sb.toString());
+                    JSONArray jsonArray = new JSONArray(sb.toString());
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject item = jsonArray.getJSONObject(i); // 得到每个对象
+                        int id = item.getInt("typeID"); // 获取对象对应的值
+                        int num = item.getInt("num");
+                        int exp = item.getInt("exp");
+                        Map map = null;
+                        map = new HashMap(); // 存放到MAP里面
+                        map.put("typeID", id );
+                        map.put("num",num);
+                        map.put("exp",exp);
+                        list.add(map);
+                    }
+                    List<String> elfList = new ArrayList<>();
+                    for (int i = 0; i < list.size(); i++) {
+                        elfList.add(""+ list.get(i).get("typeID"));
+                    }
+                    UserData.setElfList(elfList);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }finally {
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+
+    public static void getElfs(Context context,String username){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                List<Map> list = new ArrayList<Map>();
+                MainActivity mainActivity=(MainActivity)context;
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String loginUrl=UrlHead+"/pet/user/"+username+"/getpets";
+                try {
+                    //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
+                    URL url=new URL(loginUrl);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(888000);
+                    conn.setReadTimeout(888000);
+                   /* InputStream is = conn.getInputStream(); // 获取输入流
+                    byte[] data = read(is);*/
+
+                    InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                    Log.d("123","---"+sb.toString());
+                    JSONArray jsonArray = new JSONArray(sb.toString());
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject item = jsonArray.getJSONObject(i); // 得到每个对象
+                        int id = item.getInt("typeID"); // 获取对象对应的值
+                        int num = item.getInt("num");
+                        int exp = item.getInt("exp");
+                        Map map = null;
+                        map = new HashMap(); // 存放到MAP里面
+                        map.put("typeID", id );
+                        map.put("num",num);
+                        map.put("exp",exp);
+                        list.add(map);
+                    }
+                    List<String> elfList = new ArrayList<>();
+                    for (int i = 0; i < list.size(); i++) {
+                        elfList.add(""+ list.get(i).get("typeID"));
+                    }
+                    UserData.setElfList(elfList);
+                    mainActivity.getElfsFragment().unLock();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }finally {
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -132,6 +277,8 @@ public class HttpHandler {
             }
         }).start();
     }
+
+
     public static void register(Context context,String username,String password,String email) {
         new Thread(new Runnable() {
             @Override
