@@ -9,7 +9,6 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.1'
         classpath 'com.google.ar.sceneform:plugin:1.10.0'
-        classpath 'com.google.ar.sceneform:plugin:1.5.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -98,3 +97,26 @@ sceneform.asset('sampledata/models/004 - Charmander/Charmander.obj',
         'default',
         'sampledata/models/004 - Charmander/charmander.sfa',
         'src/main/res/raw/charmander')
+sceneform.asset('sampledata/models/005 - Charmeleon/Charmeleon.obj',
+        'default',
+        'sampledata/models/005 - Charmeleon/charmeleon.sfa',
+        'src/main/res/raw/charmeleon')
+
+
+
+
+
+sceneform.asset('sampledata/models/002 - Ivysaur/lvysaur.obj',
+        'default',
+        'sampledata/models/002 - Ivysaur/lvysaur.sfa',
+        'src/main/res/raw/lvysaur')
+
+sceneform.asset('sampledata/models/003 - Venusaur/Venusaur.obj',
+        'default',
+        'sampledata/models/003 - Venusaur/venusaur.sfa',
+        'src/main/res/raw/venusaur')
+
+sceneform.asset('sampledata/models/026 - Raichu/Raichu.obj',
+        'default',
+        'sampledata/models/026 - Raichu/raichu.sfa',
+        'src/main/res/raw/raichu')
