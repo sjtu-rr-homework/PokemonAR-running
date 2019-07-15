@@ -160,4 +160,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         fTransaction.commit();
     }
+    public ElfsFragment getElfsFragment(){
+        return elfsFragment;
+    }
 }

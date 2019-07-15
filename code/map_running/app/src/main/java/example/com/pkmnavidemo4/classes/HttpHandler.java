@@ -180,12 +180,16 @@ public class HttpHandler {
                         }
                     }
                 }
+            }
+        }).start();
+    }
+    public static void successCatch(Context context,String username,String typeid,String num){
         new Thread(new Runnable() {
             @Override
             public void run() {
                 HttpURLConnection conn=null;
                 BufferedReader br=null;
-                String loginUrl=UrlHead+"/user/"+username+"/addnum/"+typeid;
+                String loginUrl=UrlHead+"/pet/user/"+username+"/addnum/"+typeid+"/num/"+num;
                 try {
                     //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
                     URL url=new URL(loginUrl);
@@ -212,7 +216,6 @@ public class HttpHandler {
                             br.close();
                         } catch (IOException e) {
                             e.printStackTrace();
-
                         }
                     }
                 }
@@ -369,7 +372,7 @@ public class HttpHandler {
                     un.put("duration",String.valueOf(Lasttime));
                     un.put("courseLength",String.valueOf(length));
                     String Json=un.toString();
-                    String urlPath = UrlHead+"/running/record";
+                    String urlPath = UrlHead+"/record/running/record";
                     URL url = new URL(urlPath);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
@@ -421,7 +424,7 @@ public class HttpHandler {
                 Log.d("haha","go1");
                 HttpURLConnection conn=null;
                 BufferedReader br=null;
-                String recordUrl=UrlHead+"/running/record/user/"+UserData.getUserName()+"/page/0";
+                String recordUrl=UrlHead+"/record/running/record/user/"+UserData.getUserName()+"/page/0";
                 //https://6ed30734.ngrok.io/user/register/username/macoredroid/password/c7o2r1e4/email/coredroid0401@gmail.com
                 try {
                     //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
