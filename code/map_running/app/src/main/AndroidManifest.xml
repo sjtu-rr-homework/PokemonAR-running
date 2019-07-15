@@ -35,7 +35,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="false"
+        android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
         <!-- This tag indicates that this application requires ARCore. This results in the
             application only being visible in the Google Play Store on devices that support
@@ -49,10 +49,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity">
-<<<<<<< HEAD
-
-=======
->>>>>>> ec2b1546e4c00448c4fcfcdafcdc342c7b3c6c6a
         </activity>
 
         <activity android:name=".ElfDetailsActivity">

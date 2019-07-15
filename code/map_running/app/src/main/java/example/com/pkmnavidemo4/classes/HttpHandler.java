@@ -5,20 +5,12 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Looper;
-<<<<<<< HEAD
 import android.text.TextUtils;
-=======
 import android.support.annotation.Nullable;
->>>>>>> ec2b1546e4c00448c4fcfcdafcdc342c7b3c6c6a
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
-
-<<<<<<< HEAD
 import com.amap.api.maps.model.LatLng;
-
-=======
->>>>>>> ec2b1546e4c00448c4fcfcdafcdc342c7b3c6c6a
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -31,23 +23,17 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-=======
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
->>>>>>> ec2b1546e4c00448c4fcfcdafcdc342c7b3c6c6a
-
-import example.com.pkmnavidemo4.Fragments.ElfsFragment;
 import example.com.pkmnavidemo4.LoginActivity;
 import example.com.pkmnavidemo4.MainActivity;
-import example.com.pkmnavidemo4.RegisterActivity;
 
 public class HttpHandler {
-    private static String UrlHead="https://6ed30734.ngrok.io";
+    private static String UrlHead="http://202.120.40.8:30751";
 
     @Nullable
     public static Activity findActivity(Context context) {
@@ -286,6 +272,8 @@ public class HttpHandler {
             }
         }).start();
     }
+
+
     public static void register(Context context,String username,String password,String email) {
         new Thread(new Runnable() {
             @Override
