@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/discovery-service/discovery-service.iml" filepath="$PROJECT_DIR$/discovery-service/discovery-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/gateway-service/gateway-service.iml" filepath="$PROJECT_DIR$/gateway-service/gateway-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/pet-service/pet-service.iml" filepath="$PROJECT_DIR$/pet-service/pet-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/record-service/record-service.iml" filepath="$PROJECT_DIR$/record-service/record-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/sample-spring-microservices-new.iml" filepath="$PROJECT_DIR$/sample-spring-microservices-new.iml" />
       <module fileurl="file://$PROJECT_DIR$/user-service/user-service.iml" filepath="$PROJECT_DIR$/user-service/user-service.iml" />
     </modules>

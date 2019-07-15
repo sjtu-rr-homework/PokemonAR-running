@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.pokemonrun</groupId>
-    <artifactId>pl.piomin.services</artifactId>
+    <artifactId>pet-service</artifactId>
     <version>1.0-SNAPSHOT</version>
 
 
