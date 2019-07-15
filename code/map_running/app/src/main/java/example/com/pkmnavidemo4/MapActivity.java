@@ -42,6 +42,7 @@ import java.util.List;
 
 import example.com.pkmnavidemo4.classes.ElfPoint;
 import example.com.pkmnavidemo4.classes.ElfPointController;
+import example.com.pkmnavidemo4.classes.HttpHandler;
 import example.com.pkmnavidemo4.classes.RunningMessage;
 
 public class MapActivity extends AppCompatActivity implements LocationSource, AMapLocationListener {
@@ -342,6 +343,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                HttpHandler.postRunningRecord1(runningMessage);
                 MapActivity.super.finish();
             }
         });

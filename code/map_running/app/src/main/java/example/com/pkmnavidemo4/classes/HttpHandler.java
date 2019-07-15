@@ -1,24 +1,16 @@
 package example.com.pkmnavidemo4.classes;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
 import android.os.Looper;
-<<<<<<< HEAD
 import android.text.TextUtils;
-=======
-import android.support.annotation.Nullable;
->>>>>>> ec2b1546e4c00448c4fcfcdafcdc342c7b3c6c6a
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
-<<<<<<< HEAD
 import com.amap.api.maps.model.LatLng;
 
-=======
->>>>>>> ec2b1546e4c00448c4fcfcdafcdc342c7b3c6c6a
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -30,172 +22,25 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-=======
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
->>>>>>> ec2b1546e4c00448c4fcfcdafcdc342c7b3c6c6a
 
-import example.com.pkmnavidemo4.Fragments.ElfsFragment;
 import example.com.pkmnavidemo4.LoginActivity;
 import example.com.pkmnavidemo4.MainActivity;
 import example.com.pkmnavidemo4.RegisterActivity;
 
 public class HttpHandler {
-    private static String UrlHead="https://6ed30734.ngrok.io";
-
-    @Nullable
-    public static Activity findActivity(Context context) {
-        if (context instanceof Activity) {
-            return (Activity) context;
-        }
-        if (context instanceof ContextWrapper) {
-            ContextWrapper wrapper = (ContextWrapper) context;
-            return findActivity(wrapper.getBaseContext());
-        } else {
-            return null;
-        }
-    }
-
-
-    public static void getElfs(String username){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                List<Map> list = new ArrayList<Map>();
-                HttpURLConnection conn=null;
-                BufferedReader br=null;
-                String loginUrl=UrlHead+"/pet/user/"+username+"/getpets";
-                try {
-                    //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
-                    URL url=new URL(loginUrl);
-                    conn= (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("GET");
-                    conn.setConnectTimeout(888000);
-                    conn.setReadTimeout(888000);
-                   /* InputStream is = conn.getInputStream(); // 获取输入流
-                    byte[] data = read(is);*/
-                    InputStream in=conn.getInputStream();
-                    br=new BufferedReader(new InputStreamReader(in));
-
-                    StringBuilder sb=new StringBuilder();
-                    String s;
-                    while((s = br.readLine())!=null){
-                        sb.append(s);
-                    }
-                    Log.d("123","---"+sb.toString());
-                    JSONArray jsonArray = new JSONArray(sb.toString());
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject item = jsonArray.getJSONObject(i); // 得到每个对象
-                        int id = item.getInt("typeID"); // 获取对象对应的值
-                        int num = item.getInt("num");
-                        int exp = item.getInt("exp");
-                        Map map = null;
-                        map = new HashMap(); // 存放到MAP里面
-                        map.put("typeID", id );
-                        map.put("num",num);
-                        map.put("exp",exp);
-                        list.add(map);
-                    }
-                    List<String> elfList = new ArrayList<>();
-                    for (int i = 0; i < list.size(); i++) {
-                        elfList.add(""+ list.get(i).get("typeID"));
-                    }
-                    UserData.setElfList(elfList);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }finally {
-                    if (conn!=null){
-                        conn.disconnect();
-                    }
-                    if (br!=null){
-                        try {
-                            br.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-        }).start();
-    }
-
-    public static void getElfs(Context context,String username){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                List<Map> list = new ArrayList<Map>();
-                MainActivity mainActivity=(MainActivity)context;
-                HttpURLConnection conn=null;
-                BufferedReader br=null;
-                String loginUrl=UrlHead+"/pet/user/"+username+"/getpets";
-                try {
-                    //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
-                    URL url=new URL(loginUrl);
-                    conn= (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("GET");
-                    conn.setConnectTimeout(888000);
-                    conn.setReadTimeout(888000);
-                   /* InputStream is = conn.getInputStream(); // 获取输入流
-                    byte[] data = read(is);*/
-
-                    InputStream in=conn.getInputStream();
-                    br=new BufferedReader(new InputStreamReader(in));
-
-                    StringBuilder sb=new StringBuilder();
-                    String s;
-                    while((s = br.readLine())!=null){
-                        sb.append(s);
-                    }
-                    Log.d("123","---"+sb.toString());
-                    JSONArray jsonArray = new JSONArray(sb.toString());
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject item = jsonArray.getJSONObject(i); // 得到每个对象
-                        int id = item.getInt("typeID"); // 获取对象对应的值
-                        int num = item.getInt("num");
-                        int exp = item.getInt("exp");
-                        Map map = null;
-                        map = new HashMap(); // 存放到MAP里面
-                        map.put("typeID", id );
-                        map.put("num",num);
-                        map.put("exp",exp);
-                        list.add(map);
-                    }
-                    List<String> elfList = new ArrayList<>();
-                    for (int i = 0; i < list.size(); i++) {
-                        elfList.add(""+ list.get(i).get("typeID"));
-                    }
-                    UserData.setElfList(elfList);
-                    mainActivity.getElfsFragment().unLock();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }finally {
-                    if (conn!=null){
-                        conn.disconnect();
-                    }
-                    if (br!=null){
-                        try {
-                            br.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-        }).start();
-    }
-    public static void successCatch(Context context,String username,String typeid,String num){
+    private static String UrlHead="https://23d1c3fb.ngrok.io";
+    public static void successCatch(Context context,String username,String typeid){
         new Thread(new Runnable() {
             @Override
             public void run() {
                 HttpURLConnection conn=null;
                 BufferedReader br=null;
-                String loginUrl=UrlHead+"/pet/user/"+username+"/addnum/"+typeid+"/num/"+num;
+                String loginUrl=UrlHead+"/user/"+username+"/addnum/"+typeid;
                 try {
                     //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
                     URL url=new URL(loginUrl);
@@ -222,6 +67,7 @@ public class HttpHandler {
                             br.close();
                         } catch (IOException e) {
                             e.printStackTrace();
+
                         }
                     }
                 }
@@ -352,6 +198,8 @@ public class HttpHandler {
                 BufferedReader reader = null;
                 long Lasttime=runningMessage.getLastTime();
                 Date date=runningMessage.getStart();
+                //SimpleDateFormat formater=new SimpleDateFormat("yyyy.MM.dd HH:mm");
+                //String dateString=formater.format(date);
                 double length=runningMessage.getLength();
                 List<LatLng> course=runningMessage.getAllLatLng();
                 JSONArray array=new JSONArray();
@@ -374,7 +222,7 @@ public class HttpHandler {
                     un.put("duration",String.valueOf(Lasttime));
                     un.put("courseLength",String.valueOf(length));
                     String Json=un.toString();
-                    String urlPath = "https://6d0c9e3c.ngrok.io/running/record";
+                    String urlPath = UrlHead+"/running/record";
                     URL url = new URL(urlPath);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
@@ -400,7 +248,7 @@ public class HttpHandler {
                         Log.d("hlhupload", "doJsonPost: conn" + conn.getResponseCode());
                     }
                     if (conn.getResponseCode() == 200) {
-                        Log.d("success","shit!shit!shit!");
+                        Log.d("success","connected!!!!!");
                         reader = new BufferedReader(
                                 new InputStreamReader(conn.getInputStream()));
                         result = reader.readLine();
@@ -420,18 +268,17 @@ public class HttpHandler {
         }).start();
     }
     public static void getRun() {
-        RunningMessage record;
         new Thread(new Runnable() {
             @Override
             public void run() {
                 Log.d("haha","go1");
                 HttpURLConnection conn=null;
                 BufferedReader br=null;
-                String registerUrl=UrlHead+"/running/record/user/test1";
+                String recordUrl=UrlHead+"/running/record/user/"+UserData.getUserName()+"/page/0";
                 //https://6ed30734.ngrok.io/user/register/username/macoredroid/password/c7o2r1e4/email/coredroid0401@gmail.com
                 try {
                     //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
-                    URL url=new URL(registerUrl);
+                    URL url=new URL(recordUrl);
                     conn= (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("GET");
                     conn.setConnectTimeout(8000);
@@ -444,15 +291,125 @@ public class HttpHandler {
                     while((s = br.readLine())!=null){
                         sb.append(s);
                     }
+                    Log.d("mse",sb.toString());
+                    try{
+                        JSONArray json=new JSONArray(sb.toString());
+                        Log.d("length",""+json.length());
+                        for(int i=0;i<json.length();i++)
+                        {
+                            JSONObject jb=json.getJSONObject(i);
+                            //Log.d("AAA", jb.getString("username"));
+                            String startTime=jb.getString("startTime");
+                            String duration=jb.getString("duration");
+                            String courseLength=jb.getString("courseLength");
+
+                            DecimalFormat clformat = new DecimalFormat("#0.000");
+                            double cLength=Double.parseDouble(courseLength)/1000;
+                            String cls=clformat.format(cLength)+"公里";
+                            UserData.rocordLength.add(cls);
+                            Log.d("length",cls);
+
+                            long du=Long.parseLong(duration);
+                            Date dudate=new Date(du*1000-8*3600*1000);
+                            SimpleDateFormat duformat=new SimpleDateFormat("HH:mm:ss");
+                            String dus=duformat.format(dudate);
+                            UserData.recordLastTime.add(dus);
+                            Log.d("duration",dus);
+
+                            long st=Long.parseLong(startTime);
+                            Date stdate=new Date(st);
+                            SimpleDateFormat stformater=new SimpleDateFormat("yyyy.MM.dd HH:mm");
+                            String dateString=stformater.format(stdate);
+                            UserData.startTime.add(dateString);
+                            Log.d("startTime",dateString);
+
+                            JSONArray array=new JSONArray(jb.getString("course"));
+                            List<LatLng> runRecord=new ArrayList<LatLng>();
+                            for(int j=0;j<array.length();++j){
+                                JSONObject jjj=array.getJSONObject(j);
+                                LatLng point=new LatLng(jjj.getDouble("lat"),jjj.getDouble("lng"));
+                                runRecord.add(point);
+                                Log.d("CCC",jjj.getString("lat")+","+jjj.getString("lng"));
+                            }
+                            UserData.recordLatLngList.add(runRecord);
+                            //UserData.rocordLength.add(Double.parseDouble(courseLength));
+                            //Log.d("courseLength",""+Double.parseDouble(courseLength));
+                            //UserData.recordLastTime.add(Long.parseLong(duration));
+                            //UserData.startTime.add(startTime);
+
+                            //Log.d("AAA",String.valueOf(json.length()));
+                        }
+                        //for(int i=0;i<UserData.startTime.size();++i){
+                            //Log.d("m",UserData.startTime.get(i));
+                        //}
+                        UserData.isrecordGet=true;
+                    }
+                    catch (Exception e){
+
+                    }
+                    //setContent(sb.toString());
+                    //iLog.d("123","---"+sb.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.d("haha",e.getMessage());
+                }finally {
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+
+                        }
+                    }
+                }
+            }
+        }).start();
+
+    }
+    public static void test() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("haha","go1");
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String recordUrl=UrlHead+"/running/record/user/wzr/page/0";
+                //https://6ed30734.ngrok.io/user/register/username/macoredroid/password/c7o2r1e4/email/coredroid0401@gmail.com
+                try {
+                    //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
+                    URL url=new URL(recordUrl);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(8000);
+                    InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                    //Log.d("sb",sb.toString());
                     try{
                         JSONArray json=new JSONArray(sb.toString());
                         for(int i=0;i<json.length();i++)
                         {
                             JSONObject jb=json.getJSONObject(i);
                             //Log.d("AAA", jb.getString("username"));
+                            String startTime=jb.getString("startTime");
+                            String duration=jb.getString("duration");
+                            String courseLength=jb.getString("courseLength");
                             JSONArray array=new JSONArray(jb.getString("course"));
+                            //UserData.rocordLength.add(Double.valueOf(courseLength));
+                            //UserData.recordLastTime.add(Long.valueOf(duration));
+                            UserData.startTime.add(startTime);
                             for(int j=0;j<array.length();++j){
                                 JSONObject jjj=array.getJSONObject(i);
+
                                 Log.d("CCC",jjj.getString("lat")+","+jjj.getString("lng"));
                             }
                             //Log.d("AAA",String.valueOf(json.length()));

@@ -1,14 +1,20 @@
 package example.com.pkmnavidemo4;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.Polyline;
+import com.amap.api.maps.model.PolylineOptions;
+
+import example.com.pkmnavidemo4.classes.UserData;
 
 public class RecordOnMapActivity extends AppCompatActivity {
 
@@ -25,6 +31,11 @@ public class RecordOnMapActivity extends AppCompatActivity {
         }
         LatLng latLng = new LatLng(31.02228,121.442316);//构造一个位置
         aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,17));
+        Intent intent=getIntent();
+        int id=(int)Long.parseLong(intent.getStringExtra("id"));
+        Log.d("id",""+id);
+        Polyline polyline =aMap.addPolyline(new PolylineOptions().
+                addAll(UserData.recordLatLngList.get(id)).width(10).color(Color.argb(255, 1, 1, 1)));
     }
     @Override
     protected void onDestroy() {
