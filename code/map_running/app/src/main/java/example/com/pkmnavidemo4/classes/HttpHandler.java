@@ -442,6 +442,16 @@ public class HttpHandler {
                     }
                     Log.d("mse",sb.toString());
                     try{
+                        if(UserData.isrecordGet) {
+                            UserData.recordLastTime.clear();
+                            for (int i = 0; i < UserData.recordLatLngList.size(); ++i) {
+                                UserData.recordLatLngList.get(i).clear();
+                            }
+                            UserData.recordLatLngList.clear();
+                            UserData.startTime.clear();
+                            UserData.rocordLength.clear();
+                            UserData.isrecordGet=false;
+                        }
                         JSONArray json=new JSONArray(sb.toString());
                         Log.d("length",""+json.length());
                         for(int i=0;i<json.length();i++)
