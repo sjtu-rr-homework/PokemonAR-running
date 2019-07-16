@@ -435,81 +435,85 @@ public class HttpHandler {
                     InputStream in=conn.getInputStream();
                     br=new BufferedReader(new InputStreamReader(in));
 
-                    StringBuilder sb=new StringBuilder();
-                    String s;
-                    while((s = br.readLine())!=null){
-                        sb.append(s);
-                    }
-                    Log.d("mse",sb.toString());
-                    try{
-                        if(UserData.isrecordGet) {
-                            UserData.recordLastTime.clear();
-                            for (int i = 0; i < UserData.recordLatLngList.size(); ++i) {
-                                UserData.recordLatLngList.get(i).clear();
-                            }
-                            UserData.recordLatLngList.clear();
-                            UserData.startTime.clear();
-                            UserData.rocordLength.clear();
-                            UserData.isrecordGet=false;
+                    if(conn.getResponseCode()==200) {
+                        StringBuilder sb = new StringBuilder();
+                        String s;
+                        while ((s = br.readLine()) != null) {
+                            sb.append(s);
                         }
-                        JSONArray json=new JSONArray(sb.toString());
-                        Log.d("length",""+json.length());
-                        for(int i=0;i<json.length();i++)
-                        {
-                            JSONObject jb=json.getJSONObject(i);
-                            //Log.d("AAA", jb.getString("username"));
-                            String startTime=jb.getString("startTime");
-                            String duration=jb.getString("duration");
-                            String courseLength=jb.getString("courseLength");
-
-                            DecimalFormat clformat = new DecimalFormat("#0.000");
-                            double cLength=Double.parseDouble(courseLength)/1000;
-                            String cls=clformat.format(cLength)+"公里";
-                            UserData.rocordLength.add(cls);
-                            Log.d("length",cls);
-
-                            long du=Long.parseLong(duration);
-                            Date dudate=new Date(du*1000-8*3600*1000);
-                            SimpleDateFormat duformat=new SimpleDateFormat("HH:mm:ss");
-                            String dus=duformat.format(dudate);
-                            UserData.recordLastTime.add(dus);
-                            Log.d("duration",dus);
-
-                            long st=Long.parseLong(startTime);
-                            Date stdate=new Date(st);
-                            SimpleDateFormat stformater=new SimpleDateFormat("yyyy.MM.dd HH:mm");
-                            String dateString=stformater.format(stdate);
-                            UserData.startTime.add(dateString);
-                            Log.d("startTime",dateString);
-
-                            JSONArray array=new JSONArray(jb.getString("course"));
-                            List<LatLng> runRecord=new ArrayList<LatLng>();
-                            for(int j=0;j<array.length();++j){
-                                JSONObject jjj=array.getJSONObject(j);
-                                LatLng point=new LatLng(jjj.getDouble("lat"),jjj.getDouble("lng"));
-                                runRecord.add(point);
-                                Log.d("CCC",jjj.getString("lat")+","+jjj.getString("lng"));
+                        Log.d("mse", sb.toString());
+                        try {
+                            if (UserData.isrecordGet) {
+                                UserData.recordLastTime.clear();
+                                for (int i = 0; i < UserData.recordLatLngList.size(); ++i) {
+                                    UserData.recordLatLngList.get(i).clear();
+                                }
+                                UserData.recordLatLngList.clear();
+                                UserData.startTime.clear();
+                                UserData.rocordLength.clear();
+                                UserData.isrecordGet = false;
                             }
-                            UserData.recordLatLngList.add(runRecord);
-                            //UserData.rocordLength.add(Double.parseDouble(courseLength));
-                            //Log.d("courseLength",""+Double.parseDouble(courseLength));
-                            //UserData.recordLastTime.add(Long.parseLong(duration));
-                            //UserData.startTime.add(startTime);
+                            JSONArray json = new JSONArray(sb.toString());
+                            Log.d("length", "" + json.length());
+                            for (int i = 0; i < json.length(); i++) {
+                                JSONObject jb = json.getJSONObject(i);
+                                //Log.d("AAA", jb.getString("username"));
+                                String startTime = jb.getString("startTime");
+                                String duration = jb.getString("duration");
+                                String courseLength = jb.getString("courseLength");
 
-                            //Log.d("AAA",String.valueOf(json.length()));
-                        }
-                        //for(int i=0;i<UserData.startTime.size();++i){
+                                DecimalFormat clformat = new DecimalFormat("#0.000");
+                                double cLength = Double.parseDouble(courseLength) / 1000;
+                                String cls = clformat.format(cLength) + "公里";
+                                UserData.rocordLength.add(cls);
+                                Log.d("length", cls);
+
+                                long du = Long.parseLong(duration);
+                                Date dudate = new Date(du * 1000 - 8 * 3600 * 1000);
+                                SimpleDateFormat duformat = new SimpleDateFormat("HH:mm:ss");
+                                String dus = duformat.format(dudate);
+                                UserData.recordLastTime.add(dus);
+                                Log.d("duration", dus);
+
+                                long st = Long.parseLong(startTime);
+                                Date stdate = new Date(st);
+                                SimpleDateFormat stformater = new SimpleDateFormat("yyyy.MM.dd HH:mm");
+                                String dateString = stformater.format(stdate);
+                                UserData.startTime.add(dateString);
+                                Log.d("startTime", dateString);
+
+                                JSONArray array = new JSONArray(jb.getString("course"));
+                                List<LatLng> runRecord = new ArrayList<LatLng>();
+                                for (int j = 0; j < array.length(); ++j) {
+                                    JSONObject jjj = array.getJSONObject(j);
+                                    LatLng point = new LatLng(jjj.getDouble("lat"), jjj.getDouble("lng"));
+                                    runRecord.add(point);
+                                    Log.d("CCC", jjj.getString("lat") + "," + jjj.getString("lng"));
+                                }
+                                UserData.recordLatLngList.add(runRecord);
+                                //UserData.rocordLength.add(Double.parseDouble(courseLength));
+                                //Log.d("courseLength",""+Double.parseDouble(courseLength));
+                                //UserData.recordLastTime.add(Long.parseLong(duration));
+                                //UserData.startTime.add(startTime);
+
+                                //Log.d("AAA",String.valueOf(json.length()));
+                            }
+                            UserData.isrecordGet = true;
+                            //for(int i=0;i<UserData.startTime.size();++i){
                             //Log.d("m",UserData.startTime.get(i));
-                        //}
-                        UserData.isrecordGet=true;
-                    }
-                    catch (Exception e){
+                            //}
+                        } catch (Exception e) {
 
+                        }
+                    }
+                    else{
+                        UserData.isrecordGet = true;
                     }
                     //setContent(sb.toString());
                     //iLog.d("123","---"+sb.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
+                    UserData.isrecordGet = true;
                     Log.d("haha",e.getMessage());
                 }finally {
                     if (conn!=null){
