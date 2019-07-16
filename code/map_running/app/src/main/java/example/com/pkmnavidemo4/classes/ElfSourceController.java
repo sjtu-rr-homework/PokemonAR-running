@@ -26,13 +26,13 @@ public class ElfSourceController {
     public static int getModel(int id){
         switch (id){
             case 1:
-                return R.raw.lvysaur;
+                return R.raw.bulbasaur;
             case 2:
-                return R.raw.charmeleon;
+                return R.raw.charizard;
             case 3:
                 return R.raw.squirtle;
             case 4:
-                return R.raw.raichu;
+                return R.raw.pikachu ;
             case 5:
                 return R.raw.psyduck;
             default:
