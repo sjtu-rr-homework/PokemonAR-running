@@ -36,9 +36,9 @@ public class TestRecycleViewAdapter extends RecyclerView.Adapter<TestRecycleView
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, ElfDetailsActivity.class);
-                /*Bundle bundle = new Bundle();
+                Bundle bundle = new Bundle();
                 bundle.putInt("variety", position+1);
-                intent.putExtras(bundle);*/
+                intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }
         });

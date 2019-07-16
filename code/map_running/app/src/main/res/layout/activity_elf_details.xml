@@ -47,7 +47,7 @@
             android:layout_marginStart="22dp"
             android:layout_marginTop="325dp"
             android:layout_marginEnd="10dp"
-            android:background="@drawable/catchball" />
+            android:background="@color/bg_topbar" />
     </RelativeLayout>
 
     <RelativeLayout
