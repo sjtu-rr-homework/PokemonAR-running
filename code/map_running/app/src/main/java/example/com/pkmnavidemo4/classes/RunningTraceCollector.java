@@ -29,6 +29,9 @@ public class RunningTraceCollector {
     public List<LatLng> getAllLatLng(){
         return allLatLng;
     }
+    public void setAllLatLng(List<LatLng> latLngList){
+        this.allLatLng=latLngList;
+    }
     public List<LatLng> getPresentLatLng(){
         return presentLatLng;
     }
