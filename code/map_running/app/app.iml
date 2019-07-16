@@ -84,17 +84,12 @@
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/shaders" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/build/.sfa4610557248958091972" />
-      <excludeFolder url="file://$MODULE_DIR$/build/.sfa5164839669828771758" />
       <excludeFolder url="file://$MODULE_DIR$/build/.sfa5249541448277930976" />
       <excludeFolder url="file://$MODULE_DIR$/build/.sfa5260033722844579371" />
       <excludeFolder url="file://$MODULE_DIR$/build/.sfa6270317258250745982" />
       <excludeFolder url="file://$MODULE_DIR$/build/.sfa6494314609361482106" />
       <excludeFolder url="file://$MODULE_DIR$/build/.sfa7405023286447392200" />
-      <excludeFolder url="file://$MODULE_DIR$/build/.sfa7775134847114160334" />
       <excludeFolder url="file://$MODULE_DIR$/build/.sfa8190452640527386719" />
-      <excludeFolder url="file://$MODULE_DIR$/build/.sfa8787763637565462405" />
-      <excludeFolder url="file://$MODULE_DIR$/build/.sfa8906646145070736077" />
-      <excludeFolder url="file://$MODULE_DIR$/build/.sfa9072261658373712013" />
       <excludeFolder url="file://$MODULE_DIR$/build/generated/not_namespaced_r_class_sources" />
       <excludeFolder url="file://$MODULE_DIR$/build/generated/source/r" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/annotation_processor_list" />
@@ -117,7 +112,6 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant_run_merged_manifests" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant_run_split_apk_resources" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/javac" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/lint-cache" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifest-checker" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/merged_assets" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/merged_jni_libs" />
@@ -137,7 +131,6 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/transforms" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/validate_signing_config" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
-      <excludeFolder url="file://$MODULE_DIR$/build/reports" />
       <excludeFolder url="file://$MODULE_DIR$/build/sceneform_sdk" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>

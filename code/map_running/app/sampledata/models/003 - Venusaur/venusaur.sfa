@@ -93,17 +93,17 @@
   },
   samplers: [
     {
-      file: 'sampledata/models/003 - Venusaur\\Textures\\FushigibanaLeafDh.png',
+      file: 'sampledata/models/003 - Venusaur\\Textures\\FushigibanaLeafDh.tga',
       name: 'FushigibanaLeafDh',
       pipeline_name: 'Textures\\FushigibanaLeafDh.tga',
     },
     {
-      file: 'sampledata/models/003 - Venusaur\\Textures\\FushigibanaDh.png',
+      file: 'sampledata/models/003 - Venusaur\\Textures\\FushigibanaDh.tga',
       name: 'FushigibanaDh',
       pipeline_name: 'Textures\\FushigibanaDh.tga',
     },
     {
-      file: 'sampledata/models/003 - Venusaur\\Textures\\FushigibanaEyeDh.png',
+      file: 'sampledata/models/003 - Venusaur\\Textures\\FushigibanaEyeDh.tga',
       name: 'FushigibanaEyeDh',
       pipeline_name: 'Textures\\FushigibanaEyeDh.tga',
     },
