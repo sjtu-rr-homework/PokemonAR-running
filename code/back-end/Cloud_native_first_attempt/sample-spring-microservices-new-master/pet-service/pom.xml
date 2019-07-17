@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.pokemonrun</groupId>
-    <artifactId>pet-service</artifactId>
+    <artifactId>location-service</artifactId>
     <version>1.0-SNAPSHOT</version>
 
 

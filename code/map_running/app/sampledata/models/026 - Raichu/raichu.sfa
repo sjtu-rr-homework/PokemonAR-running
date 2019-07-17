@@ -1,0 +1,112 @@
+{
+  materials: [
+    {
+      name: 'mat1',
+      parameters: [
+        {
+          baseColor: 'RaichuDh',
+        },
+        {
+          baseColorTint: [
+            0.90000000000000002,
+            0.90000000000000002,
+            0.90000000000000002,
+            1,
+          ],
+        },
+        {
+          metallic: 1,
+        },
+        {
+          roughness: 0.408248,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/obj_material.sfm',
+    },
+    {
+      name: 'mat2',
+      parameters: [
+        {
+          baseColor: 'RaichuEyeDh',
+        },
+        {
+          baseColorTint: [
+            0.90000000000000002,
+            0.90000000000000002,
+            0.90000000000000002,
+            1,
+          ],
+        },
+        {
+          metallic: 1,
+        },
+        {
+          roughness: 0.408248,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/obj_material.sfm',
+    },
+    {
+      name: 'mat3',
+      parameters: [
+        {
+          baseColor: 'RaichuMouthDh',
+        },
+        {
+          baseColorTint: [
+            0.90000000000000002,
+            0.90000000000000002,
+            0.90000000000000002,
+            1,
+          ],
+        },
+        {
+          metallic: 1,
+        },
+        {
+          roughness: 0.408248,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/obj_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+    ],
+    collision: {},
+    file: 'sampledata/models/026 - Raichu/Raichu.obj',
+    name: 'Raichu',
+    recenter: 'root',
+    scale: 0.18771099999999999,
+  },
+  samplers: [
+    {
+      file: 'sampledata/models/026 - Raichu\\Textures\\RaichuDh.png',
+      name: 'RaichuDh',
+      pipeline_name: 'Textures\\RaichuDh.tga',
+    },
+    {
+      file: 'sampledata/models/026 - Raichu\\Textures\\RaichuEyeDh.png',
+      name: 'RaichuEyeDh',
+      pipeline_name: 'Textures\\RaichuEyeDh.tga',
+    },
+    {
+      file: 'sampledata/models/026 - Raichu\\Textures\\RaichuMouthDh.png',
+      name: 'RaichuMouthDh',
+      pipeline_name: 'Textures\\RaichuMouthDh.tga',
+    },
+  ],
+  version: '0.54:2',
+}

@@ -19,7 +19,7 @@ public class User implements Serializable {
     private String password;
     private String email;
     private int star;
-    private static final long serialVersionUID = 4L;
+    private int exp;
 
     @Id
     @Column(name = "userID")
@@ -61,54 +61,29 @@ public class User implements Serializable {
 
     @Basic
     @Column(name = "star")
-    public int getStar() {
-        return star;
-    }
+    public int getStar() { return star; }
 
-    public void setStar(int star) {
-        this.star =star;
-    }
+    public void setStar(int star) { this.star =star; }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        User that = (User) o;
-
-        if (userID != that.userID) return false;
-        if (!Objects.equals(username, that.username)) return false;
-        if (!Objects.equals(password, that.password)) return false;
-        if (!Objects.equals(email, that.email)) return false;
-        if (!Objects.equals(star, that.star)) return false;
+    @Basic
+    @Column(name = "exp")
+    public int getExp() {return exp;}
+    public void setExp(int exp) { this.exp=exp; }
 
 
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = userID;
-        result = 31 * result + (username != null ? username.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + star;
-        return result;
-    }
 
     private User()
     {
 
     }
 
-    public User(String username,String password,String email,int star)
+    public User(String username,String password,String email,int star,int exp)
     {
         this.username=username;
         this.password=password;
         this.email=email;
         this.star=star;
+        this.exp=exp;
 
 
     }

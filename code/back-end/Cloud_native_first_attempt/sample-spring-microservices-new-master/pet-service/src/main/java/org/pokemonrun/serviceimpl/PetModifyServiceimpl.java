@@ -20,7 +20,7 @@ public class PetModifyServiceimpl implements PetModifyService {
         }
         else
         {
-            Pet tempPet1=new Pet(username,typeID,0,1);
+            Pet tempPet1=new Pet(username,typeID,0,1,1);
             petDao.save(tempPet1);
             return true;
         }
@@ -48,9 +48,24 @@ public class PetModifyServiceimpl implements PetModifyService {
 
     @Override
     public boolean addNum(String username, int typeID, int num) {
-        if(num < 0){
-            return false;
+        Pet tempPet = petDao.GetOnePet(username, typeID);
+        if(tempPet==null)
+        {
+           return false;
         }
+        else
+        {
+            int oldnum=tempPet.getNum();
+            int newnum=oldnum+num;
+            tempPet.setNum(newnum);
+            petDao.save(tempPet);
+            return true;
+        }
+
+    }
+
+    @Override
+    public boolean addGrade(String username, int typeID, int grade) {
         Pet tempPet = petDao.GetOnePet(username, typeID);
         if(tempPet==null)
         {
@@ -58,9 +73,9 @@ public class PetModifyServiceimpl implements PetModifyService {
         }
         else
         {
-            int oldnum=tempPet.getNum();
-            int newnum=oldnum+num;
-            tempPet.setNum(newnum);
+            int oldgrade=tempPet.getGrade();
+            int newgrade=oldgrade+grade;
+            tempPet.setGrade(newgrade);
             petDao.save(tempPet);
             return true;
         }

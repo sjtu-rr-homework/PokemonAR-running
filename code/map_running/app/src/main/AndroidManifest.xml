@@ -71,6 +71,7 @@
         <activity android:name=".MapActivity"></activity>
         <activity android:name=".RecordOnMapActivity"></activity>
         <activity android:name=".RecordActivity"></activity>
+        <activity android:name=".CheckNeighbour"></activity>
     </application>
 
 </manifest>
