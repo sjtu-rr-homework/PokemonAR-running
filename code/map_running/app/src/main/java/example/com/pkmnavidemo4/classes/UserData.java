@@ -37,6 +37,9 @@ public class UserData {
     public static void reverse(){
         onlyHave=!onlyHave;
     }
+    public static void initonlyHave(){
+        onlyHave=false;
+    }
     public static boolean getOnlyHave(){
         return onlyHave;
     }
