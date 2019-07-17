@@ -1,0 +1,53 @@
+{
+  materials: [
+    {
+      name: 'mat_0',
+      parameters: [
+        {
+          baseColor: 'fushigisou_0_0',
+        },
+        {
+          baseColorTint: [
+            0.80000000000000004,
+            0.80000000000000004,
+            0.80000000000000004,
+            1,
+          ],
+        },
+        {
+          metallic: 1,
+        },
+        {
+          roughness: 0.14280000000000001,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/obj_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+    ],
+    collision: {},
+    file: 'sampledata/models/002 - Ivysaur/lvysaur.obj',
+    name: 'lvysaur',
+    recenter: 'root',
+    scale: 0.097430000000000003,
+  },
+  samplers: [
+    {
+      file: 'sampledata/models/002 - Ivysaur\\Textures\\fushigisou_0_0.png',
+      name: 'fushigisou_0_0',
+      params: {
+        usage_type: 'Data',
+      },
+      pipeline_name: 'Textures\\fushigisou_0_0.tga',
+    },
+  ],
+  version: '0.54:2',
+}

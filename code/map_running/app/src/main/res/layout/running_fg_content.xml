@@ -13,6 +13,14 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent">
 
+        <ImageView
+            android:id="@+id/fg_running_checkneighbour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/elf_4"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"/>
+
         <Button
             android:id="@+id/button3"
             android:layout_width="100dp"

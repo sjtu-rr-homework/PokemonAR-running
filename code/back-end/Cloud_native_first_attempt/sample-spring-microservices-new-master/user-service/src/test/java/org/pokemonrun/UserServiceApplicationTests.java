@@ -28,65 +28,34 @@ public class UserServiceApplicationTests {
     public void contextLoads() {
     }
 
-    @Test
     @Before
-    public void testAddNum() throws Exception {
-        mockMvc.perform(get("/user/wzr/addnum/1/num/1"))
+    public void testRegister() throws Exception {
+        mockMvc.perform(get("/register/username/wzr/password/rzw/email/w@w.w"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
-        mockMvc.perform(get("/user/wzr/addnum/1/num/3"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("true"));
-        mockMvc.perform(get("/user/wzr/addnum/2/num/2")) // vulnerable
-                .andExpect(status().isOk())
-                .andExpect(content().string("true"));
-        mockMvc.perform(get("/user/wzr/addnum/2/num/1"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("true"));
-    }
-
-    @Test
-    @Before
-    public void testAddExp() throws Exception {
-        mockMvc.perform(get("/user/wzr/addexp/1/exp/100"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("true"));
-        mockMvc.perform(get("/user/wzr/addexp/2/exp/-1")) // vulnerable
+        mockMvc.perform(get("/register/username//password/rzw/email/w@w.w"))
+                .andExpect(status().isNotFound());
+        mockMvc.perform(get("/register/username/wzr2/password//email/w@w.w"))
+                .andExpect(status().isNotFound());
+        mockMvc.perform(get("/register/username/wzr/password/rzw/email/w@w.w"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("false"));
     }
 
     @Test
-    public void testQuery() throws Exception {
-        mockMvc.perform(get("/user/wzr/own/1"))
+    public void testLogin() throws Exception {
+        mockMvc.perform(get("/login/username/wzr/password/123"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("false"));
+        mockMvc.perform(get("/login/username//password/123"))
+                .andExpect(status().isNotFound());
+        mockMvc.perform(get("/login/username/wzr/password/rzw"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
-        mockMvc.perform(get("/user/wzr/own/3"))
+        mockMvc.perform(get("/login/username/wzr2/password/123"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("false"));
     }
 
-    @Test
-    public void testGetpets() throws Exception {
-        mockMvc.perform(get("/user/wzr/getpets"))
-                .andExpect(status().isOk())
-                .andExpect(content().string(""));
-        mockMvc.perform(get("/user/nonexistuser/getpets"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("[]"));
-    }
-
-    @Test
-    public void testGetinfo() throws Exception {
-        mockMvc.perform(get("/user/wzr/getinfo/1"))
-                .andExpect(status().isOk())
-                .andExpect(content().string(""));
-        mockMvc.perform(get("/user/wzr/getinfo/-1"))
-                .andExpect(status().isOk())
-                .andExpect(content().string(""));
-        mockMvc.perform(get("/user/wzr/getinfo/3"))
-                .andExpect(status().isOk())
-                .andExpect(content().string(""));
-    }
 
 }

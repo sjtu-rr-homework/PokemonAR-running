@@ -23,7 +23,7 @@ public class PetController {
         return PetInfoService.GetPets(username);
     }
 
-    @GetMapping("/user/{username/own/{typeID}")//findout whether the user has this kind of pet
+    @GetMapping("/user/{username}/own/{typeID}")//findout whether the user has this kind of pet
     public boolean query(@PathVariable("username") String username, @PathVariable("typeID") String typeID)
     {
         return PetInfoService.OwnOrNot(username, Integer.parseInt(typeID));
@@ -39,13 +39,31 @@ public class PetController {
     @GetMapping("/user/{username}/addnum/{typeID}/num/{num}")//add num to a pet
     public boolean addNum(@PathVariable("username") String username, @PathVariable("typeID") String typeID,@PathVariable("num") String num)
     {
-        if(!PetInfoService.OwnOrNot(username, Integer.parseInt(typeID)))
+        int id = Integer.parseInt(typeID), nm = Integer.parseInt(num);
+        if(!PetInfoService.OwnOrNot(username, id))
         {
-            return PetModifyService.addPet(username, Integer.parseInt(typeID));
+            if(!PetModifyService.addPet(username, id)){
+                return false;
+            }
+            return PetModifyService.addNum(username, id, nm - 1);
         }
         else
         {
-            return PetModifyService.addNum(username, Integer.parseInt(typeID), Integer.parseInt(num));
+            return PetModifyService.addNum(username, id, nm);
+        }
+    }
+
+    @GetMapping("/user/{username}/addgrade/{typeID}/grade/{grade}")//add grade to a pet
+    public boolean addGrade(@PathVariable("username") String username, @PathVariable("typeID") String typeID,@PathVariable("grade") String grade)
+    {
+        int id = Integer.parseInt(typeID), grade1 = Integer.parseInt(grade);
+        if(!PetInfoService.OwnOrNot(username, id))
+        {
+            return false;
+        }
+        else
+        {
+            return PetModifyService.addGrade(username,id,grade1);
         }
     }
 

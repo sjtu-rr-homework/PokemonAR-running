@@ -23,16 +23,89 @@ public class ElfSourceController {
                 return R.drawable.charizard;
         }
     }
+
+    public static int getMaxLevel(int id){
+        switch (id){
+            case 1:
+                return 2;
+            case 2:
+                return 3;
+            case 3:
+                return 3;
+            case 4:
+                return 2;
+            case 5:
+                return 2;
+            default:
+                return 2;
+        }
+    }
+    public static int getBackgroundWithLevel(int id, int level){
+        switch (id){
+            case 1:
+                switch (level) {
+                    case 1:
+                        return R.drawable.bulbasaur;
+                    case 2:
+                        return R.drawable.bulbasaur2;
+                    default:
+                        return R.drawable.bulbasaur;
+                }
+            case 2:
+                switch (level) {
+                    case 1:
+                        return R.drawable.charmander;
+                    case 2:
+                        return R.drawable.charmander2;
+                    case 3:
+                        return R.drawable.charmander3;
+                    default:
+                        return R.drawable.charmander;
+                }
+            case 3:
+                switch (level) {
+                    case 1:
+                        return R.drawable.squirtle;
+                    case 2:
+                        return R.drawable.squirtle2;
+                    case 3:
+                        return R.drawable.squirtle3;
+                    default:
+                        return R.drawable.squirtle;
+                }
+            case 4:
+                switch (level) {
+                    case 1:
+                        return R.drawable.pikachu;
+                    case 2:
+                        return R.drawable.pikachu2;
+                    default:
+                        return R.drawable.pikachu;
+                }
+            case 5:
+                switch (level) {
+                    case 1:
+                        return R.drawable.psyduck;
+                    case 2:
+                        return R.drawable.psyduck2;
+                    default:
+                        return R.drawable.psyduck;
+                }
+            default:
+                return R.drawable.charizard;
+        }
+    }
+
     public static int getModel(int id){
         switch (id){
             case 1:
                 return R.raw.bulbasaur;
             case 2:
-                return R.raw.charmander;
+                return R.raw.charizard;
             case 3:
                 return R.raw.squirtle;
             case 4:
-                return R.raw.pikachu;
+                return R.raw.pikachu ;
             case 5:
                 return R.raw.psyduck;
             default:

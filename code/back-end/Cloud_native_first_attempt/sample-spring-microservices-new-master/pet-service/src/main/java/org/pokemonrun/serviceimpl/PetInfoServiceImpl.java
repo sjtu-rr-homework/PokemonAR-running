@@ -22,7 +22,7 @@ public class PetInfoServiceImpl implements PetInfoService {
         List<Petinfo> tempinfolist=new ArrayList<>();
         for(Pet tempPet:templist)
         {
-            Petinfo tempInfo=new Petinfo(tempPet.getPetID(),tempPet.getUsername(),tempPet.getTypeID(),tempPet.getExp(),tempPet.getNum());
+            Petinfo tempInfo=new Petinfo(tempPet.getPetID(),tempPet.getUsername(),tempPet.getTypeID(),tempPet.getExp(),tempPet.getNum(),tempPet.getGrade());
             tempinfolist.add(tempInfo);
         }
         return tempinfolist;
@@ -33,7 +33,7 @@ public class PetInfoServiceImpl implements PetInfoService {
         Pet tempPet = petDao.GetOnePet(username, typeID);
         if(tempPet!=null)
         {
-            Petinfo tempInfo=new Petinfo(tempPet.getPetID(),tempPet.getUsername(),tempPet.getTypeID(),tempPet.getExp(),tempPet.getNum());
+            Petinfo tempInfo=new Petinfo(tempPet.getPetID(),tempPet.getUsername(),tempPet.getTypeID(),tempPet.getExp(),tempPet.getNum(),tempPet.getGrade());
             return tempInfo;
         }
         else
