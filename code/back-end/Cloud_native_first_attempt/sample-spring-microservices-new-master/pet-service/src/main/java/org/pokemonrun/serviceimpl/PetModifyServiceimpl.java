@@ -48,9 +48,6 @@ public class PetModifyServiceimpl implements PetModifyService {
 
     @Override
     public boolean addNum(String username, int typeID, int num) {
-        if(num < 0){
-            return false;
-        }
         Pet tempPet = petDao.GetOnePet(username, typeID);
         if(tempPet==null)
         {

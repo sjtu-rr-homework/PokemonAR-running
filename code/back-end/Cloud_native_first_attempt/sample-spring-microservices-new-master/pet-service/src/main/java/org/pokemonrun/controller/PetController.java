@@ -40,9 +40,6 @@ public class PetController {
     public boolean addNum(@PathVariable("username") String username, @PathVariable("typeID") String typeID,@PathVariable("num") String num)
     {
         int id = Integer.parseInt(typeID), nm = Integer.parseInt(num);
-        if(nm <= 0){
-            return nm == 0;
-        }
         if(!PetInfoService.OwnOrNot(username, id))
         {
             if(!PetModifyService.addPet(username, id)){
