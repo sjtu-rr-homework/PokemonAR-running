@@ -13,6 +13,7 @@
 		<module>gateway-service</module>
 		<module>location-service</module>
 		<module>record-service</module>
+		<module>pet-service</module>
 	</modules>
 
 </project>
