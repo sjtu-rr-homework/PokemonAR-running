@@ -53,6 +53,20 @@ public class PetController {
         }
     }
 
+    @GetMapping("/user/{username}/addgrade/{typeID}/grade/{grade}")//add grade to a pet
+    public boolean addGrade(@PathVariable("username") String username, @PathVariable("typeID") String typeID,@PathVariable("grade") String grade)
+    {
+        int id = Integer.parseInt(typeID), grade1 = Integer.parseInt(grade);
+        if(!PetInfoService.OwnOrNot(username, id))
+        {
+            return false;
+        }
+        else
+        {
+            return PetModifyService.addNum(username, id, grade1);
+        }
+    }
+
 
 
 }

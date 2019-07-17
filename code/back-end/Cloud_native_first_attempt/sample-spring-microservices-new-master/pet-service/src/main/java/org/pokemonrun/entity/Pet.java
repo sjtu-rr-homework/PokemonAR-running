@@ -74,6 +74,7 @@ public class Pet {
         this.typeID=typeID;
         this.exp=exp;
         this.num=num;
+        this.grade=grade;
     }
 
 
