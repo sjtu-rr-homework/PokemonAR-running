@@ -10,14 +10,22 @@ import javax.persistence.*;
 @JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "username")
-public class location {
+        property = "locationID")
+public class Location {
+    public int locationID;
     private String username;
     private double longitude;
     private double latitude;
 
 
+
     @Id
+    @Column(name = "locationID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public int getLocationID() {return locationID; }
+    public void setLocationID(int locationID){this.locationID=locationID; }
+
+
     @Basic
     @Column(name = "username")
     public String getUsername() {return username; }
@@ -35,14 +43,15 @@ public class location {
     public void setLatitude(double latitude) {this.latitude=latitude; }
 
 
-    public location(){
+    public Location(){
         // empty
     }
 
-    public location(String username)
+    public Location(String username, double longitude, double latitude)
     {
         this.username=username;
-
+        this.longitude=longitude;
+        this.latitude=latitude;
     }
 
 
