@@ -30,11 +30,12 @@ public class LocationServiceimpl implements LocationService {
         double minlng = longitude -dlng;
         double maxlng = longitude + dlng;
         List<Location> res = new ArrayList<>();
+        String tempName=Locationinfo.username;
         for(int i=0;i<templist.size();i++)
         {
             double tempLong=templist.get(i).getLongitude();
             double tempLati=templist.get(i).getLatitude();
-            if(tempLong>minlng&&tempLong<maxlng&&tempLati>minlat&&tempLati<maxlat)
+            if(tempLong>minlng&&tempLong<maxlng&&tempLati>minlat&&tempLati<maxlat&&!(templist.get(i).getUsername().equals(tempName)))
             {
                 res.add(templist.get(i));
             }
