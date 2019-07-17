@@ -48,7 +48,7 @@ public class PetServiceApplicationTests {
                 .andExpect(content().string("true"));
         mockMvc.perform(get("/user/wzr/addnum/3/num/0"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("true"));
+                .andExpect(content().string("false"));
         mockMvc.perform(get("/user/wzr/addnum/3/num/-1"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("false"));

@@ -42,7 +42,12 @@ public class PetController {
         int id = Integer.parseInt(typeID), nm = Integer.parseInt(num);
         if(!PetInfoService.OwnOrNot(username, id))
         {
-            if(!PetModifyService.addPet(username, id)){
+            if(nm<=0)
+            {
+                return false;
+            }
+            if(!PetModifyService.addPet(username, id))
+            {
                 return false;
             }
             return PetModifyService.addNum(username, id, nm - 1);
