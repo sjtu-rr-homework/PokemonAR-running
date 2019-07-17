@@ -1,7 +1,10 @@
 <template>
     <div>
         <div v-if="modifierOn">
-            <button class="btn btn-block btn-outline-success" v-on:click="closeModifier()">完成配置</button>
+            <div class="row col-10 offset-1">
+                <button class="btn btn-block btn-outline-success col-5" v-on:click="submitModification()">提交修改</button>
+                <button class="btn btn-block btn-outline-secondary col-5 offset-2" v-on:click="cancelModification()">放弃修改</button>
+            </div>
             <div class="h5 p-3">基本配置</div>
             <div class="row bg-light">
                 <div class="col-4 p-2 input-group row">
@@ -40,11 +43,8 @@
                 </div>
             </div>
             <hr/>
-            <!-- TODO: Should be displayed on a map -->
-            <div class="h5 p-3">必经点配置</div>
-            <div v-for="(cp, index) in checkPoints" v-bind:key="index">
-                <span>{{index+1}}：经度={{cp.longitude}}，纬度={{cp.latitude}}</span>
-            </div>
+            <div class="h5 p-3">必经点预设</div>
+            <div v-if="markers.length<=0">（暂无预设必经点）</div>
         </div>
         <div v-else>
             <button class="btn btn-block btn-outline-primary" v-on:click="openModifier()">修改规则</button>
@@ -59,33 +59,60 @@
                 <div class="col-4 p-2">纬度：{{minLatitude}} - {{maxLatitude}}</div>
             </div>
             <hr/>
-            <!-- TODO: Should be displayed on a map -->
-            <div class="h5 p-3">必经点配置</div>
-            <div v-for="(cp, index) in checkPoints" v-bind:key="index">
-                <span>{{index+1}}：经度={{cp.longitude}}，纬度={{cp.latitude}}</span>
-            </div>
+            <div class="h5 p-3">必经点预设</div>
+            <div v-if="markers.length<=0">（暂无预设必经点）</div>
+        </div>
+        <div v-if="modifierOn">右键新建标记，左键拖动标记，左键双击删除标记</div>
+        <div v-else>可以点击上方“修改规则”按钮进行设置</div>
+        <div class="amap-wrapper m-auto pt-3">
+            <el-amap class="amap-box" :vid="'amap-vue'" :amap-manager="amapManager" :zoom="zoom" :center="center"
+                     :events="mapEvents">
+                <div v-if="modifierOn">
+                    <el-amap-marker v-for="(marker, index) in modifier.markers" :position="marker.position"
+                                    :events="marker.events" :visible="marker.visible" :draggable="marker.draggable"
+                                    :vid="index" :key="index"></el-amap-marker>
+                </div>
+                <div v-else>
+                    <el-amap-marker v-for="(marker, index) in markers" :position="marker.position"
+                                    :events="marker.events" :visible="marker.visible" :draggable="marker.draggable"
+                                    :vid="index" :key="index"></el-amap-marker>
+                </div>
+            </el-amap>
         </div>
     </div>
 </template>
 
 <script>
+    import * as VueAMap from "vue-amap";
+
     export default {
         name: 'RuleManager',
+        created: function () {
+            this.amapManager = new VueAMap.AMapManager();
+        },
+        mounted: function () {
+            this.requestFlags();
+        },
         data: function () {
             return {
+                amapManager: null,
+                zoom: 15,
+                center: [121.439054, 31.025713],
+                mapEvents: {
+                    rightclick: (e) => {
+                        if(this.modifierOn){
+                            this.addFlag(e.lnglat.lng, e.lnglat.lat);
+                        }
+                    }
+                },
+                markers: [],
+                nextFlagID: 0,
                 modifierOn: false,
                 modifier: {
                     mileageGoal: 80000,
                     minSpeed: 1.8,
                     maxSpeed: 6,
-                    checkPoints: [
-                        // should be displayed and modified on a map
-                        {longitude: 131.100, latitude: 32.001},
-                        {longitude: 131.101, latitude: 32.010},
-                        {longitude: 131.101, latitude: 32.005},
-                        {longitude: 131.085, latitude: 31.999},
-                        {longitude: 131.062, latitude: 31.997}
-                    ],
+                    markers: [],
                     // should be displayed and modified on a map
                     minLongitude: 131.051,
                     maxLongitude: 131.105,
@@ -95,14 +122,6 @@
                 mileageGoal: 80000,
                 minSpeed: 1.8,
                 maxSpeed: 6,
-                checkPoints: [
-                    // should be displayed and modified on a map
-                    {longitude: 131.100, latitude: 32.001},
-                    {longitude: 131.101, latitude: 32.010},
-                    {longitude: 131.101, latitude: 32.005},
-                    {longitude: 131.085, latitude: 31.999},
-                    {longitude: 131.062, latitude: 31.997}
-                ],
                 // should be displayed and modified on a map
                 minLongitude: 131.051,
                 maxLongitude: 131.105,
@@ -112,15 +131,82 @@
         },
         methods: {
             openModifier: function () {
+                this.modifier.markers = JSON.parse(JSON.stringify(this.markers));
+                for(let i = 0; i < this.modifier.markers.length; i++){
+                    this.modifier.markers[i].draggable = true;
+                }
                 this.modifierOn = true;
             },
             closeModifier: function () {
                 this.modifierOn = false;
+            },
+            getMapCenter: function () {
+                return this.amapManager.getMap().getCenter();
+            },
+            addFlag: function (lng, lat) {
+                let flag = {
+                    id: this.nextFlagID++,
+                    position: [lng, lat],
+                    events: {
+                        dblclick: (e) => {
+                            if(!this.modifierOn){
+                                return;
+                            }
+                            let del = confirm('是否删除此标记点？');
+                            if(del){
+                                this.removeFlag(flag.id);
+                            }
+                        },
+                        dragend: (e) => {
+                            // update lnglat in vue model
+                            flag.position[0] = e.target.getPosition().getLng();
+                            flag.position[1] = e.target.getPosition().getLat();
+                        }
+                    },
+                    visible: true,
+                    draggable: true
+                };
+                this.modifier.markers.push(flag);
+            },
+            removeFlag: function (flagID) {
+                for(let i = 0; i < this.markers.length; i++){
+                    if(this.markers[i].id === flagID){
+                        this.markers.splice(i, 1);
+                        break;
+                    }
+                }
+            },
+            requestFlags: function () {
+                // default not draggable
+                this.$http.get('admin/rule/flags')
+                    .then((resp) => {
+                        this.markers = resp.data.markers;
+                    }, () => {
+                        alert('获取预设点位失败');
+                    });
+            },
+            modifyFlags: function () {
+                this.$http.put('admin/rule/flags')
+                    .then((resp) => {
+                        this.closeModifier();
+                        this.requestFlags();
+                    }, () => {
+                        alert('提交预设点位失败，请检查网络并重试，或联系服务器管理员');
+                    });
+            },
+            submitModification: function () {
+                this.modifyFlags();
+            },
+            cancelModification: function () {
+                this.closeModifier();
             }
         }
     }
 </script>
 
 <style scoped>
-
+    .amap-wrapper {
+        width: 1200px;
+        height: 800px;
+    }
 </style>

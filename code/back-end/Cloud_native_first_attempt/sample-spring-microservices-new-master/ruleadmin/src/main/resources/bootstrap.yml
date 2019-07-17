@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: ruleadmin-service
+  datasource:
+    url: jdbc:mysql://localhost/ruleadmin_service?serverTimezone=UTC
+    username: root
+    password: w8043ZRR
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+feign.hystrix.enabled: true
+
+
