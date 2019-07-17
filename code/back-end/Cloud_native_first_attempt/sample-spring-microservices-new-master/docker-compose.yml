@@ -2,7 +2,7 @@ version: "3.7"
 services:
   config-service:
     hostname: config-service
-    image: macoredroid/config-service:1.0
+    image: macoredroid/config-service:latest
     ports:
       - "8088:8088"
     networks:
@@ -57,7 +57,7 @@ services:
 
   discovery-service:
     hostname: discovery-service
-    image: macoredroid/discovery-service:1.0
+    image: macoredroid/discovery-service:latest
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     ports:
@@ -67,7 +67,7 @@ services:
   
   pet-service:
     hostname: pet-service
-    image: macoredroid/pet-service:1.0
+    image: macoredroid/pet-service:latest
     depends_on:
       - mysql-pet
     environment:
@@ -79,7 +79,7 @@ services:
 
   user-service:
     hostname: user-service
-    image: macoredroid/user-service:1.0
+    image: macoredroid/user-service:latest
     depends_on:
       - mysql-user
     environment:
@@ -91,7 +91,7 @@ services:
 
   record-service:
     hostname: record-service
-    image: macoredroid/record-service:1.0
+    image: macoredroid/record-service:latest
     depends_on:
       - mysql-record
     environment:
@@ -103,7 +103,7 @@ services:
 
   gateway-service:
     hostname: gateway-service
-    image: macoredroid/gateway-service:1.0
+    image: macoredroid/gateway-service:latest
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     ports:
