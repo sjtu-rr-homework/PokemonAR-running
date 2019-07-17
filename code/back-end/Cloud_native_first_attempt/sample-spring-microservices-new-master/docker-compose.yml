@@ -3,6 +3,8 @@ services:
   config-service:
     hostname: config-service
     image: macoredroid/config-service:latest
+    build:
+      context: ./config-service
     ports:
       - "8088:8088"
     networks:
@@ -55,9 +57,26 @@ services:
     networks:
       - spring-cloud-network
 
+  mysql-location:
+    hostname: mysql-location
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=c7o2r1e4
+      - MYSQL_DATABASE=pet
+      - MYSQL_USER=coredroid
+      - MYSQL_PASSWORD=c7o2r1e4
+    volumes:
+      - /data/mysql/location
+    ports:
+      - "3308:3306"
+    networks:
+      - spring-cloud-network
+
   discovery-service:
     hostname: discovery-service
     image: macoredroid/discovery-service:latest
+    build:
+      context: ./discovery-service
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     ports:
@@ -68,6 +87,8 @@ services:
   pet-service:
     hostname: pet-service
     image: macoredroid/pet-service:latest
+    build:
+      context: ./pet-service
     depends_on:
       - mysql-pet
     environment:
@@ -80,6 +101,8 @@ services:
   user-service:
     hostname: user-service
     image: macoredroid/user-service:latest
+    build:
+      context: ./user-service
     depends_on:
       - mysql-user
     environment:
@@ -92,6 +115,8 @@ services:
   record-service:
     hostname: record-service
     image: macoredroid/record-service:latest
+    build:
+      context: ./record-service
     depends_on:
       - mysql-record
     environment:
@@ -101,9 +126,25 @@ services:
     networks:
       - spring-cloud-network
 
+  location-service:
+    hostname: location-service
+    image: macoredroid/location-service:latest
+    build:
+      context: ./location-service
+    depends_on:
+      - mysql-location
+    environment:
+      SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
+    ports:
+      - "8094:8094"
+    networks:
+      - spring-cloud-network
+
   gateway-service:
     hostname: gateway-service
     image: macoredroid/gateway-service:latest
+    build:
+      context: ./gateway-service
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     ports:

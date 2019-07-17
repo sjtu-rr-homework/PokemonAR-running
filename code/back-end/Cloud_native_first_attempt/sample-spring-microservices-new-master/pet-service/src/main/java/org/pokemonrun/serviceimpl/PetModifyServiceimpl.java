@@ -57,6 +57,10 @@ public class PetModifyServiceimpl implements PetModifyService {
         {
             int oldnum=tempPet.getNum();
             int newnum=oldnum+num;
+            if(newnum<0)
+            {
+                return false;
+            }
             tempPet.setNum(newnum);
             petDao.save(tempPet);
             return true;
