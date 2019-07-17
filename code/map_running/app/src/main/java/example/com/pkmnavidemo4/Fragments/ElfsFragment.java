@@ -32,6 +32,7 @@ public class ElfsFragment extends Fragment {
     private Button refresh;
     private TextView refreshText;
     private List<String> list;
+    RecyclerView mRecyclerView;
     private boolean lock;
     public ElfsFragment() {
 
@@ -41,7 +42,7 @@ public class ElfsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.elfs_fg_content,container,false);
-        RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.elf_fg_recycle_view);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.elf_fg_recycle_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL));
         initData();
@@ -78,20 +79,28 @@ public class ElfsFragment extends Fragment {
 
         return view;
     }
+
     private void refresh( RecyclerView mRecyclerView){
-        setLock();
         HttpHandler.getElfs(getActivity(),UserData.getUserName());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(100);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity(),UserData.getElfList());
         mRecyclerView.setAdapter(adapter);
     }
+
+    private void refresh(String userName){
+        HttpHandler.getElfs(UserData.getUserName());
+        TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity(),UserData.getElfList());
+        mRecyclerView.setAdapter(adapter);
+    }
+
     private void setLock(){
         lock=true;
     }
+
     public void unLock(){
         lock=false;
     }
@@ -106,7 +115,7 @@ public class ElfsFragment extends Fragment {
     public void getElfsOfUser(List<Map> elfs) {
         list = new ArrayList<>();
         for (int i = 0; i < elfs.size(); i++) {
-            list.add(""+ elfs.get(i).get("typeID"));
+            list.add("" + elfs.get(i).get("typeID"));
         }
     }
     /*private Button arButton;

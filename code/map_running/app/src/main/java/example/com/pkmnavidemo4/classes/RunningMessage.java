@@ -33,6 +33,9 @@ public class RunningMessage {
     public List<LatLng> getAllLatLng(){
         return runningTraceCollector.getAllLatLng();
     }
+    public void setAllLatLng(List<LatLng> latLngList){
+        runningTraceCollector.setAllLatLng(latLngList);
+    }
     public List<LatLng> getPresentLatLng(){
         return runningTraceCollector.getAllLatLng();
     }

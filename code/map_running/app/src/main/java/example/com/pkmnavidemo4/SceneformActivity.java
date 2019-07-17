@@ -49,6 +49,8 @@ import com.google.ar.sceneform.ux.TransformableNode;
 
 import java.util.Iterator;
 import java.util.List;
+
+import example.com.pkmnavidemo4.Fragments.ElfsFragment;
 import example.com.pkmnavidemo4.classes.ElfSourceController;
 import example.com.pkmnavidemo4.classes.HttpHandler;
 import example.com.pkmnavidemo4.classes.UserData;
@@ -76,7 +78,7 @@ public class SceneformActivity extends AppCompatActivity implements Scene.OnUpda
     }
 
     setContentView(R.layout.activity_ux);
-      //获取生成精灵模型的id
+    //获取生成精灵模型的id
       Intent intent=getIntent();
       int variety=intent.getIntExtra("variety", -1);
     arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment);

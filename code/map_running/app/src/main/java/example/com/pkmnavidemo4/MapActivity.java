@@ -3,6 +3,8 @@ package example.com.pkmnavidemo4;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -36,12 +38,16 @@ import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.maps.model.Polyline;
 import com.amap.api.maps.model.PolylineOptions;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import example.com.pkmnavidemo4.classes.ElfPoint;
 import example.com.pkmnavidemo4.classes.ElfPointController;
+import example.com.pkmnavidemo4.classes.HttpHandler;
 import example.com.pkmnavidemo4.classes.RunningMessage;
 
 public class MapActivity extends AppCompatActivity implements LocationSource, AMapLocationListener {
@@ -80,6 +86,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
+        Log.d("sha1",sHA1(MapActivity.this));
         //绑定文本控件
         positionText=(TextView)findViewById(R.id.act_map_textView);
         distText=(TextView)findViewById(R.id.act_map_textView_dist);
@@ -342,6 +349,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                HttpHandler.postRunningRecord1(runningMessage);
                 MapActivity.super.finish();
             }
         });
@@ -363,5 +371,31 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         if (null != mlocationClient) {
             mlocationClient.onDestroy();
         }
+    }
+
+    public static String sHA1(Context context) {
+        try {
+            PackageInfo info = context.getPackageManager().getPackageInfo(
+                    context.getPackageName(), PackageManager.GET_SIGNATURES);
+            byte[] cert = info.signatures[0].toByteArray();
+            MessageDigest md = MessageDigest.getInstance("SHA1");
+            byte[] publicKey = md.digest(cert);
+            StringBuffer hexString = new StringBuffer();
+            for (int i = 0; i < publicKey.length; i++) {
+                String appendString = Integer.toHexString(0xFF & publicKey[i])
+                        .toUpperCase(Locale.US);
+                if (appendString.length() == 1)
+                    hexString.append("0");
+                hexString.append(appendString);
+                hexString.append(":");
+            }
+            String result = hexString.toString();
+            return result.substring(0, result.length()-1);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

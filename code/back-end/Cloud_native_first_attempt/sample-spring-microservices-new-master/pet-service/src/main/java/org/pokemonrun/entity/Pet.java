@@ -10,7 +10,7 @@ import javax.persistence.*;
 @JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "userID")
+        property = "petID")
 public class Pet {
     private int petID;
     private String username;

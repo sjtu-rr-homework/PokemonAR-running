@@ -5,13 +5,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#F1F1F1"
         android:orientation="vertical">
-        <Button
-            android:id="@+id/act_record_showRecord"
+        <ListView
+            android:id="@+id/ListView1"
+            android:divider="@null"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="跑步记录"/>
+            android:layout_height="match_parent" />
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
