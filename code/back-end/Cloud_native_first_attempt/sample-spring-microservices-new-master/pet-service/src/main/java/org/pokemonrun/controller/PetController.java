@@ -63,7 +63,7 @@ public class PetController {
         }
         else
         {
-            return PetModifyService.addNum(username, id, grade1);
+            return PetModifyService.addGrade(username,id,grade1);
         }
     }
 

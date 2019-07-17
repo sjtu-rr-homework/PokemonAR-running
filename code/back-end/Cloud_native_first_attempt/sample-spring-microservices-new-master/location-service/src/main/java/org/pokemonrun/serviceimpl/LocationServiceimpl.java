@@ -52,8 +52,18 @@ public class LocationServiceimpl implements LocationService {
 
     @Override
     public boolean refreshLocation(Locationinfo Locationinfo) {
-        Location temp= new Location(Locationinfo.username,Double.parseDouble(Locationinfo.longitude),Double.parseDouble(Locationinfo.latitude));
-        LocationDao.save(temp);
+        Location temp= LocationDao.GetOneLocation(Locationinfo.username);
+        if(temp==null)
+        {
+            Location temp1 = new Location(Locationinfo.username, Double.parseDouble(Locationinfo.longitude), Double.parseDouble(Locationinfo.latitude));
+            LocationDao.save(temp1);
+        }
+        else
+        {
+            temp.setLatitude(Double.parseDouble(Locationinfo.latitude));
+            temp.setLongitude(Double.parseDouble(Locationinfo.longitude));
+            LocationDao.save(temp);
+        }
         return true;
     }
 }

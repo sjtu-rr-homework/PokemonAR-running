@@ -21,6 +21,7 @@ public class PetModifyServiceimpl implements PetModifyService {
         else
         {
             Pet tempPet1=new Pet(username,typeID,0,1,1);
+            petDao.save(tempPet1);
             return true;
         }
     }
@@ -50,7 +51,7 @@ public class PetModifyServiceimpl implements PetModifyService {
         Pet tempPet = petDao.GetOnePet(username, typeID);
         if(tempPet==null)
         {
-            return false;
+           return false;
         }
         else
         {
