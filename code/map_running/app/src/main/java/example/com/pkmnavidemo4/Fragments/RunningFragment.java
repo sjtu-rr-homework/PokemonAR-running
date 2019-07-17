@@ -7,9 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import example.com.pkmnavidemo4.CheckNeighbour;
 import example.com.pkmnavidemo4.MapActivity;
 import example.com.pkmnavidemo4.R;
 import example.com.pkmnavidemo4.RecordActivity;
@@ -19,6 +21,7 @@ import example.com.pkmnavidemo4.RegisterActivity;
 public class RunningFragment extends Fragment {
     private TextView toRecord;
     private Button button;
+    private ImageView checkNeighbour;
     //private String content;
 
     //public RunningFragment(String content) {
@@ -39,6 +42,7 @@ public class RunningFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         button = (Button) getActivity().findViewById(R.id.button3);
         toRecord=(TextView)getActivity().findViewById(R.id.fg_running_textView);
+        checkNeighbour=(ImageView)getActivity().findViewById(R.id.fg_running_checkneighbour);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,6 +55,13 @@ public class RunningFragment extends Fragment {
             @Override
             public void onClick(View v){
                 Intent intent=new Intent(getActivity(), RecordActivity.class);
+                startActivity(intent);
+            }
+        });
+        checkNeighbour.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent =new Intent(getActivity(), CheckNeighbour.class);
                 startActivity(intent);
             }
         });

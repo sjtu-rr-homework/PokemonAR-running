@@ -134,7 +134,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="40px"
                     android:textStyle="bold"
-                    android:text="1520" />
+                    android:text="0" />
             </RelativeLayout>
         </RelativeLayout>
 

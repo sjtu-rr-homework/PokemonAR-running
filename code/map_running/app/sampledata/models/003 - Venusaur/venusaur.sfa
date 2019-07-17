@@ -1,0 +1,112 @@
+{
+  materials: [
+    {
+      name: 'mat1',
+      parameters: [
+        {
+          baseColor: 'FushigibanaDh',
+        },
+        {
+          baseColorTint: [
+            0.90000000000000002,
+            0.90000000000000002,
+            0.90000000000000002,
+            1,
+          ],
+        },
+        {
+          metallic: 1,
+        },
+        {
+          roughness: 0.408248,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/obj_material.sfm',
+    },
+    {
+      name: 'mat2',
+      parameters: [
+        {
+          baseColor: 'FushigibanaEyeDh',
+        },
+        {
+          baseColorTint: [
+            0.90000000000000002,
+            0.90000000000000002,
+            0.90000000000000002,
+            1,
+          ],
+        },
+        {
+          metallic: 1,
+        },
+        {
+          roughness: 0.408248,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/obj_material.sfm',
+    },
+    {
+      name: 'mat3',
+      parameters: [
+        {
+          baseColor: 'FushigibanaLeafDh',
+        },
+        {
+          baseColorTint: [
+            0.90000000000000002,
+            0.90000000000000002,
+            0.90000000000000002,
+            1,
+          ],
+        },
+        {
+          metallic: 1,
+        },
+        {
+          roughness: 0.408248,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/obj_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+    ],
+    collision: {},
+    file: 'sampledata/models/003 - Venusaur/Venusaur.obj',
+    name: 'Venusaur',
+    recenter: 'root',
+    scale: 0.054813000000000001,
+  },
+  samplers: [
+    {
+      file: 'sampledata/models/003 - Venusaur\\Textures\\FushigibanaLeafDh.png',
+      name: 'FushigibanaLeafDh',
+      pipeline_name: 'Textures\\FushigibanaLeafDh.tga',
+    },
+    {
+      file: 'sampledata/models/003 - Venusaur\\Textures\\FushigibanaDh.png',
+      name: 'FushigibanaDh',
+      pipeline_name: 'Textures\\FushigibanaDh.tga',
+    },
+    {
+      file: 'sampledata/models/003 - Venusaur\\Textures\\FushigibanaEyeDh.png',
+      name: 'FushigibanaEyeDh',
+      pipeline_name: 'Textures\\FushigibanaEyeDh.tga',
+    },
+  ],
+  version: '0.54:2',
+}

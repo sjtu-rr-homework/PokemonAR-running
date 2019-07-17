@@ -11,6 +11,7 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amap.api.maps.AMap;
 import com.amap.api.maps.model.LatLng;
 
 import android.support.annotation.Nullable;
@@ -18,6 +19,9 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.Marker;
+import com.amap.api.maps.model.MarkerOptions;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -350,6 +354,7 @@ public class HttpHandler {
                 //SimpleDateFormat formater=new SimpleDateFormat("yyyy.MM.dd HH:mm");
                 //String dateString=formater.format(date);
                 double length=runningMessage.getLength();
+                int exp=runningMessage.getExp();
                 List<LatLng> course=runningMessage.getAllLatLng();
                 JSONArray array=new JSONArray();
                 for(int i=0;i<course.size();++i){
@@ -370,6 +375,7 @@ public class HttpHandler {
                     un.put("course",array.toString());
                     un.put("duration",String.valueOf(Lasttime));
                     un.put("courseLength",String.valueOf(length));
+                    un.put("exp",String.valueOf(exp));
                     String Json=un.toString();
                     String urlPath = UrlHead+"/record/running/record";
                     URL url = new URL(urlPath);
@@ -401,6 +407,145 @@ public class HttpHandler {
                         reader = new BufferedReader(
                                 new InputStreamReader(conn.getInputStream()));
                         result = reader.readLine();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (reader != null) {
+                        try {
+                            reader.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+    public static void getNearBy(LatLng latLng, AMap aMap){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String result = "";
+                BufferedReader reader = null;
+                try {
+                    JSONObject un=new JSONObject();
+                    un.put("username",UserData.getUserName());
+                    un.put("longitude",String.valueOf(latLng.longitude));
+                    un.put("latitude",String.valueOf(latLng.latitude));
+                    String Json=un.toString();
+                    //String urlPath = UrlHead+"/record/refresh/location";
+                    String urlPath = "http://d8d1f2e0.ngrok.io"+"/location/get/nearby";
+                    URL url = new URL(urlPath);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("POST");
+                    conn.setDoOutput(true);
+                    conn.setDoInput(true);
+                    conn.setUseCaches(false);
+                    conn.setRequestProperty("Connection", "Keep-Alive");
+                    conn.setRequestProperty("Charset", "UTF-8");
+                    // 设置文件类型:
+                    conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                    // 设置接收类型否则返回415错误
+                    //conn.setRequestProperty("accept","*/*")此处为暴力方法设置接受所有类型，以此来防范返回415;
+                    conn.setRequestProperty("accept", "application/json");
+                    // 往服务器里面发送数据
+                    if (Json != null && !TextUtils.isEmpty(Json)) {
+                        byte[] writebytes = Json.getBytes();
+                        // 设置文件长度
+                        conn.setRequestProperty("Content-Length", String.valueOf(writebytes.length));
+                        OutputStream outwritestream = conn.getOutputStream();
+                        outwritestream.write(Json.getBytes());
+                        outwritestream.flush();
+                        outwritestream.close();
+                        Log.d("hlhupload", "doJsonPost: conn" + conn.getResponseCode());
+                    }
+                    if (conn.getResponseCode() == 200) {
+                        Log.d("success","connected!!!!!");
+                        reader = new BufferedReader(
+                                new InputStreamReader(conn.getInputStream()));
+                        StringBuilder sb = new StringBuilder();
+                        String s;
+                        while ((s = reader.readLine()) != null) {
+                            sb.append(s);
+                        }
+                        Log.d("mess",sb.toString());
+                        JSONArray json = new JSONArray(sb.toString());
+                        for (int i = 0; i < json.length(); i++) {
+                            JSONObject jb = json.getJSONObject(i);
+                            //Log.d("AAA", jb.getString("username"));
+                            String username = jb.getString("username");
+                            String longitude = jb.getString("longitude");
+                            String latitude = jb.getString("latitude");
+
+                            double lng = Double.parseDouble(longitude);
+                            double lat=Double.parseDouble(latitude);
+                            LatLng latlng=new LatLng(lat,lng);
+                            Marker marker=aMap.addMarker(new MarkerOptions().position(latlng).title(username).snippet("DefaultMarker"));
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (reader != null) {
+                        try {
+                            reader.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+    public static void postPosition(LatLng latLng){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String result = "";
+                BufferedReader reader = null;
+                try {
+                    JSONObject un=new JSONObject();
+                    un.put("username",UserData.getUserName());
+                    un.put("longitude",String.valueOf(latLng.longitude));
+                    un.put("latitude",String.valueOf(latLng.latitude));
+                    String Json=un.toString();
+                    //String urlPath = UrlHead+"/record/refresh/location";
+                    String urlPath = "http://d8d1f2e0.ngrok.io"+"/location/refresh/location";
+                    URL url = new URL(urlPath);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("POST");
+                    conn.setDoOutput(true);
+                    conn.setDoInput(true);
+                    conn.setUseCaches(false);
+                    conn.setRequestProperty("Connection", "Keep-Alive");
+                    conn.setRequestProperty("Charset", "UTF-8");
+                    // 设置文件类型:
+                    conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                    // 设置接收类型否则返回415错误
+                    //conn.setRequestProperty("accept","*/*")此处为暴力方法设置接受所有类型，以此来防范返回415;
+                    conn.setRequestProperty("accept", "application/json");
+                    // 往服务器里面发送数据
+                    if (Json != null && !TextUtils.isEmpty(Json)) {
+                        byte[] writebytes = Json.getBytes();
+                        // 设置文件长度
+                        conn.setRequestProperty("Content-Length", String.valueOf(writebytes.length));
+                        OutputStream outwritestream = conn.getOutputStream();
+                        outwritestream.write(Json.getBytes());
+                        outwritestream.flush();
+                        outwritestream.close();
+                        Log.d("hlhupload", "doJsonPost: conn" + conn.getResponseCode());
+                    }
+                    if (conn.getResponseCode() == 200) {
+                        Log.d("success","connected!!!!!");
+                        reader = new BufferedReader(
+                                new InputStreamReader(conn.getInputStream()));
+                        StringBuilder sb = new StringBuilder();
+                        String s;
+                        while ((s = reader.readLine()) != null) {
+                            sb.append(s);
+                        }
+                        Log.d("mess",sb.toString());
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -58,6 +58,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
     private TextView distText;
     private TextView timePerKM;
     private TextView timeText;
+    private TextView exp;
     private Button endButton;
     private StringBuilder currentPosition;
     private RunningMessage runningMessage;
@@ -92,6 +93,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         distText=(TextView)findViewById(R.id.act_map_textView_dist);
         timePerKM=(TextView)findViewById(R.id.act_map_textView_speed);
         timeText=(TextView)findViewById(R.id.act_map_textView_time);
+        exp=(TextView)findViewById(R.id.act_map_textView_exp);
 
         endButton=(Button)findViewById(R.id.act_map_endButton);
 
@@ -186,6 +188,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
             Date tmpdate=new Date(runningMessage.getLastTime()*1000-8*3600*1000);
             SimpleDateFormat formater=new SimpleDateFormat("HH:mm:ss");
             timeText.setText(formater.format(tmpdate));
+            exp.setText(String.valueOf(runningMessage.getExp()));
         }
     }
 
