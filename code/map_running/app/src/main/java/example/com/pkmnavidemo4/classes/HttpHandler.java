@@ -45,7 +45,7 @@ import example.com.pkmnavidemo4.LoginActivity;
 import example.com.pkmnavidemo4.MainActivity;
 
 public class HttpHandler {
-    private static String UrlHead="http://202.120.40.8:30751";
+    private static String UrlHead="http://90faf8ee.ngrok.io";
 
     @Nullable
     public static Activity findActivity(Context context) {
@@ -435,7 +435,7 @@ public class HttpHandler {
                     un.put("latitude",String.valueOf(latLng.latitude));
                     String Json=un.toString();
                     //String urlPath = UrlHead+"/record/refresh/location";
-                    String urlPath = "http://d8d1f2e0.ngrok.io"+"/location/get/nearby";
+                    String urlPath = UrlHead+"/location/get/nearby";
                     URL url = new URL(urlPath);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
@@ -511,7 +511,7 @@ public class HttpHandler {
                     un.put("latitude",String.valueOf(latLng.latitude));
                     String Json=un.toString();
                     //String urlPath = UrlHead+"/record/refresh/location";
-                    String urlPath = "http://d8d1f2e0.ngrok.io"+"/location/refresh/location";
+                    String urlPath = UrlHead+"/location/refresh/location";
                     URL url = new URL(urlPath);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
