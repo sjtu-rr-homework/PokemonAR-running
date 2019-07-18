@@ -40,12 +40,14 @@ public class PetController {
     public boolean addNum(@PathVariable("username") String username, @PathVariable("typeID") String typeID,@PathVariable("num") String num)
     {
         int id = Integer.parseInt(typeID), nm = Integer.parseInt(num);
-        if(nm <= 0){
-            return nm == 0;
-        }
         if(!PetInfoService.OwnOrNot(username, id))
         {
-            if(!PetModifyService.addPet(username, id)){
+            if(nm<=0)
+            {
+                return false;
+            }
+            if(!PetModifyService.addPet(username, id))
+            {
                 return false;
             }
             return PetModifyService.addNum(username, id, nm - 1);
@@ -53,6 +55,20 @@ public class PetController {
         else
         {
             return PetModifyService.addNum(username, id, nm);
+        }
+    }
+
+    @GetMapping("/user/{username}/addgrade/{typeID}/grade/{grade}")//add grade to a pet
+    public boolean addGrade(@PathVariable("username") String username, @PathVariable("typeID") String typeID,@PathVariable("grade") String grade)
+    {
+        int id = Integer.parseInt(typeID), grade1 = Integer.parseInt(grade);
+        if(!PetInfoService.OwnOrNot(username, id))
+        {
+            return false;
+        }
+        else
+        {
+            return PetModifyService.addGrade(username,id,grade1);
         }
     }
 

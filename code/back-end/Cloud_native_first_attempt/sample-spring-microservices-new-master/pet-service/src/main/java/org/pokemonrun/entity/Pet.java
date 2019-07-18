@@ -14,6 +14,7 @@ import javax.persistence.*;
 public class Pet {
     private int petID;
     private String username;
+    private int grade;
     private int typeID;
     private int exp;
     private int num;
@@ -38,6 +39,10 @@ public class Pet {
     public String getUsername() {return username; }
     public void setUsername(String username) {this.username=username; }
 
+    @Basic
+    @Column(name = "grade")
+    public int getGrade() {return grade; }
+    public void setGrade(int grade) {this.grade=grade; }
 
     @Basic
     @Column(name = "exp")
@@ -63,12 +68,13 @@ public class Pet {
         // empty
     }
 
-    public Pet(String username,int typeID,int exp,int num)
+    public Pet(String username,int typeID,int exp,int num,int grade)
     {
         this.username=username;
         this.typeID=typeID;
         this.exp=exp;
         this.num=num;
+        this.grade=grade;
     }
 
 

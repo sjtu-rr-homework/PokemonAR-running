@@ -3,6 +3,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,11 +36,21 @@ public class TestRecycleViewAdapter extends RecyclerView.Adapter<TestRecycleView
         holder.mTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, ElfDetailsActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("variety", position+1);
-                intent.putExtras(bundle);
-                mContext.startActivity(intent);
+                if(UserData.getOnlyHave()) {
+                    Intent intent = new Intent(mContext, ElfDetailsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("variety", Integer.valueOf(UserData.getElfDetails().get(position).get("typeID").toString()));
+                    Log.d("wqwqwq",UserData.getElfDetails().get(position).get("typeID").toString());
+                    intent.putExtras(bundle);
+                    mContext.startActivity(intent);
+                }
+                else{
+                    Intent intent = new Intent(mContext, ElfDetailsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("variety", position+1);
+                    intent.putExtras(bundle);
+                    mContext.startActivity(intent);
+                }
             }
         });
     }
