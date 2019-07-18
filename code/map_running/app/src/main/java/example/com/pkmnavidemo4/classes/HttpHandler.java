@@ -280,7 +280,7 @@ public class HttpHandler {
             public void run() {
                 HttpURLConnection conn=null;
                 BufferedReader br=null;
-                String loginUrl=UrlHead+"/user/addexp/uesrname/"+username+"/exp/"+num;
+                String loginUrl=UrlHead+"/user/addexp/username/"+username+"/exp/"+num;
                 try {
                     //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
                     URL url=new URL(loginUrl);
