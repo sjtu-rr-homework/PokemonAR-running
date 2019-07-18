@@ -72,6 +72,7 @@
         <activity android:name=".RecordOnMapActivity"></activity>
         <activity android:name=".RecordActivity"></activity>
         <activity android:name=".CheckNeighbour"></activity>
+        <activity android:name=".FriendActivity"></activity>
     </application>
 
 </manifest>

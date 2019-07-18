@@ -1,5 +1,6 @@
 package example.com.pkmnavidemo4;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.location.Location;
@@ -92,6 +93,17 @@ public class CheckNeighbour extends AppCompatActivity implements LocationSource,
             @Override
             public void onMyLocationChange(Location location) {
                 //从location对象中获取经纬度信息，地址描述信息，建议拿到位置之后调用逆地理编码接口获取
+            }
+        });
+
+        aMap.setOnMarkerClickListener(new AMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                Intent intent=new Intent(CheckNeighbour.this,FriendActivity.class);
+                String username=marker.getTitle();
+                intent.putExtra("username",username);
+                CheckNeighbour.this.startActivity(intent);
+                return true;
             }
         });
     }

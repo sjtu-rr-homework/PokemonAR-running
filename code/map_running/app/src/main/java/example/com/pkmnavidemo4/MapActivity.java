@@ -293,6 +293,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                         @Override
                         public void run() {
                             LatLng start=new LatLng(aMapLocation.getLatitude(),aMapLocation.getLongitude());
+                            HttpHandler.postPosition(start);
                             elfPointController.generateElfPoing(getApplicationContext(),aMap,start);
                             presentElfPoint=elfPointController.getPresentElfPoint();
                             //elfPoint.showAllPoints(aMap);
@@ -353,6 +354,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 HttpHandler.postRunningRecord1(runningMessage);
+                HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size()-1));
                 MapActivity.super.finish();
             }
         });
