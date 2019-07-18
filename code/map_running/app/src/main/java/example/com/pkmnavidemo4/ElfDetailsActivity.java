@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Objects;
 
@@ -30,6 +31,7 @@ public class ElfDetailsActivity extends AppCompatActivity {
     private TextView  needExpText;
     private TextView  numOfExp;
     private TextView  nowLevel;
+    private TextView  power;
     private Button back;
     private Button AR;
     private Button addExp;
@@ -65,7 +67,7 @@ public class ElfDetailsActivity extends AppCompatActivity {
                 Intent intent = new Intent(ElfDetailsActivity.this, SceneformActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("variety", variety);
-                bundle.putInt("grade",nowGrade);
+                bundle.putInt("grade",grade);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -88,9 +90,13 @@ public class ElfDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int exp=Integer.valueOf(numOfExp.getText().toString());
+                if((nowExp+exp)>9800) {
+                    Toast.makeText(getApplicationContext(), "经验溢出", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 nowExp+=exp;
                 HttpHandler.addExp(UserData.getUserName(),variety,exp);
-                numOfExp.clearComposingText();
+                numOfExp.setText("");
                 nowLevel.setText("等级 "+(nowExp/100+1));
                 nowExpText.setText("当前经验 "+ nowExp);
                 for (int i = 0; i < UserData.getElfDetails().size(); i++) {
@@ -99,11 +105,14 @@ public class ElfDetailsActivity extends AppCompatActivity {
                         break;
                     }
                 }
+                power.setText("战斗力 "+ ElfSourceController.getPower(variety,(nowExp/100+1),nowGrade));
             }
         });
 
 
         //控制用户该精灵的各种信息
+        power=findViewById(R.id.act_elf_details_elf_power);
+        power.setText("战斗力 "+ ElfSourceController.getPower(variety,(nowExp/100+1),nowGrade));
         needNumText=findViewById(R.id.act_elf_details_elf_need_num);
         nowNumText=findViewById(R.id.act_elf_details_elf_num);
         nowNumText.setText("已有数量 "+ nowNum);
@@ -123,6 +132,10 @@ public class ElfDetailsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 switch(nowGrade){
                     case 1:
+                       /* if(nowExp<2000||nowNum<5){
+                            Toast.makeText(getApplicationContext(), "尚未满足条件", Toast.LENGTH_SHORT).show();
+                            break;
+                        }*/
                         nowGrade+=1;
                         HttpHandler.addGrade(UserData.getUserName(),variety,1);
                         name.setText("精灵名 "+ElfSourceController.getName(variety,nowGrade));
@@ -133,8 +146,15 @@ public class ElfDetailsActivity extends AppCompatActivity {
                                 break;
                             }
                         }
+                        Toast.makeText(getApplicationContext(), "进化成功", Toast.LENGTH_SHORT).show();
+                        power.setText("战斗力 "+ ElfSourceController.getPower(variety,(nowExp/100+1),nowGrade));
+                        break;
                     case 2:
                         if(ElfSourceController.getMaxLevel(variety)==3) {
+                            /*if(nowExp<6000||nowNum<10){
+                                Toast.makeText(getApplicationContext(), "尚未满足条件", Toast.LENGTH_SHORT).show();
+                                break;
+                            }*/
                             nowGrade += 1;
                             HttpHandler.addGrade(UserData.getUserName(),variety,1);
                             name.setText("精灵名 " + ElfSourceController.getName(variety, nowGrade));
@@ -145,6 +165,9 @@ public class ElfDetailsActivity extends AppCompatActivity {
                                     break;
                                 }
                             }
+                            Toast.makeText(getApplicationContext(), "进化成功", Toast.LENGTH_SHORT).show();
+                            power.setText("战斗力 "+ ElfSourceController.getPower(variety,(nowExp/100+1),nowGrade));
+                            break;
                         }
                      default:
 

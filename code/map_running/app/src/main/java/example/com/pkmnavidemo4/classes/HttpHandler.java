@@ -45,7 +45,7 @@ import example.com.pkmnavidemo4.LoginActivity;
 import example.com.pkmnavidemo4.MainActivity;
 
 public class HttpHandler {
-    private static String UrlHead="http://d8d1f2e0.ngrok.io";
+    private static String UrlHead="http://202.120.40.8:30751";
 
     @Nullable
     public static Activity findActivity(Context context) {
@@ -274,6 +274,46 @@ public class HttpHandler {
         }).start();
     }
 
+    public static void changeExp(String username,int num){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String loginUrl=UrlHead+"/user/addexp/uesrname/"+username+"/exp/"+num;
+                try {
+                    //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
+                    URL url=new URL(loginUrl);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(8000);
+                    InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }finally {
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+
     public static void addGrade(String username,int variety,int num){
         new Thread(new Runnable() {
             @Override
@@ -444,6 +484,7 @@ public class HttpHandler {
                 //String dateString=formater.format(date);
                 double length=runningMessage.getLength();
                 int exp=runningMessage.getExp();
+                HttpHandler.changeExp(UserData.getUserName(),exp);
                 List<LatLng> course=runningMessage.getAllLatLng();
                 JSONArray array=new JSONArray();
                 for(int i=0;i<course.size();++i){
@@ -524,7 +565,7 @@ public class HttpHandler {
                     un.put("latitude",String.valueOf(latLng.latitude));
                     String Json=un.toString();
                     //String urlPath = UrlHead+"/record/refresh/location";
-                    String urlPath = "http://d8d1f2e0.ngrok.io"+"/location/get/nearby";
+                    String urlPath = UrlHead+"/location/get/nearby";
                     URL url = new URL(urlPath);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
@@ -600,7 +641,7 @@ public class HttpHandler {
                     un.put("latitude",String.valueOf(latLng.latitude));
                     String Json=un.toString();
                     //String urlPath = UrlHead+"/record/refresh/location";
-                    String urlPath = "http://d8d1f2e0.ngrok.io"+"/location/refresh/location";
+                    String urlPath = UrlHead+"/location/refresh/location";
                     URL url = new URL(urlPath);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");

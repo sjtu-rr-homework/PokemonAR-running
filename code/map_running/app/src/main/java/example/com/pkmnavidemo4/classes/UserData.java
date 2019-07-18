@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class UserData {
+    private static int exp;
     private static String userName;
     private static List<String> elfList;
     private static  List<Map> elfDetailsList;
@@ -42,5 +43,17 @@ public class UserData {
     }
     public static boolean getOnlyHave(){
         return onlyHave;
+    }
+    public static boolean consumeExp(int num){
+        if(exp>num){
+            exp-=num;
+            HttpHandler.changeExp(userName,0-num);
+            return true;
+        }
+        else
+            return false;
+    }
+    public static int getExp(){
+       return exp;
     }
 }
