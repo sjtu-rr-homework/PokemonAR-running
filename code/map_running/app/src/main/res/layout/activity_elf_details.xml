@@ -81,7 +81,7 @@
             android:layout_height="30dp"
             android:layout_marginStart="150dp"
             android:layout_marginTop="18dp"
-            android:text="编号"
+            android:text="等级 1"
             android:textSize="20dp" />
 
         <TextView
@@ -99,7 +99,7 @@
             android:layout_height="30dp"
             android:layout_marginStart="150dp"
             android:layout_marginTop="98dp"
-            android:text="形态"
+            android:text="战斗力  9999"
             android:textSize="20dp" />
 
     </RelativeLayout>
@@ -124,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="5dp"
-            android:text="已有数量"
+            android:text="已有数量 0"
             android:textSize="16dp" />
 
         <TextView
@@ -133,7 +133,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="50dp"
-            android:text="当前经验"
+            android:text="当前经验 0"
             android:textSize="16dp" />
 
         <EditText
@@ -171,13 +171,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <Button
+            android:id="@+id/act_elf_details_elf_button_grow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="90dp"
+            android:text="进化" />
+
+        <Button
+            android:id="@+id/act_elf_details_elf_button_ar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="150dp"
+            android:text="查看AR形象" />
+
         <TextView
             android:id="@+id/act_elf_details_elf_need_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="5dp"
-            android:text="需要数量"
+            android:text="需要数量 1"
             android:textSize="16dp" />
 
         <TextView
@@ -186,7 +202,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="50dp"
-            android:text="需要经验"
+            android:text="需要等级 0"
             android:textSize="16dp" />
 
     </RelativeLayout>
@@ -199,7 +215,22 @@
         android:text="返回"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.938"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout3" />
+
+    <Button
+        android:id="@+id/act_elf_details_elf_button_set"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="7dp"
+        android:text="设为出战精灵"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.013"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3"
+        app:layout_constraintVertical_bias="1.0" />
 
 </android.support.constraint.ConstraintLayout>

@@ -7,6 +7,10 @@ import org.pokemonrun.service.GetUserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 @Service
 public class GetUserInfoimpl implements GetUserInfo {
     @Autowired
@@ -20,8 +24,28 @@ public class GetUserInfoimpl implements GetUserInfo {
         }
         else
         {
-            Userinfo tempinfo=new Userinfo(temp.getUsername(),temp.getStar(),temp.getEmail(),temp.getExp());
+            List<String> friends = new ArrayList<>();
+            Set<User> friendsset= temp.getFollowers();
+            for(User tempUser:friendsset)
+            {
+                friends.add(tempUser.getUsername());
+            }
+            Userinfo tempinfo=new Userinfo(temp.getUsername(),temp.getStar(),temp.getEmail(),temp.getExp(),friends);
             return tempinfo;
         }
+    }
+
+    @Override
+    public Integer getExp(String username) {
+        User temp=UserDao.findOne(username);
+        if(temp==null)
+        {
+            return null;
+        }
+        else
+        {
+            return temp.getExp();
+        }
+
     }
 }
