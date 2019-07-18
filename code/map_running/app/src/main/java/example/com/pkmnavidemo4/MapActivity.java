@@ -49,6 +49,7 @@ import example.com.pkmnavidemo4.classes.ElfPoint;
 import example.com.pkmnavidemo4.classes.ElfPointController;
 import example.com.pkmnavidemo4.classes.HttpHandler;
 import example.com.pkmnavidemo4.classes.RunningMessage;
+import example.com.pkmnavidemo4.classes.UserData;
 
 public class MapActivity extends AppCompatActivity implements LocationSource, AMapLocationListener {
 
@@ -353,6 +354,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 HttpHandler.postRunningRecord1(runningMessage);
+                HttpHandler.changeExp(UserData.getUserName(),runningMessage.getExp());
                 MapActivity.super.finish();
             }
         });

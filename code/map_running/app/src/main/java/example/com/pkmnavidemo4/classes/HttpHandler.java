@@ -45,7 +45,7 @@ import example.com.pkmnavidemo4.LoginActivity;
 import example.com.pkmnavidemo4.MainActivity;
 
 public class HttpHandler {
-    private static String UrlHead="http://202.120.40.8:30751";
+    private static String UrlHead="http://90faf8ee.ngrok.io";
 
     @Nullable
     public static Activity findActivity(Context context) {
@@ -413,6 +413,50 @@ public class HttpHandler {
         }).start();
     }
 
+    public static void getExp(String username) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String loginUrl=UrlHead+"/user/getexp/username/"+username;
+                try {
+                    //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
+                    URL url=new URL(loginUrl);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(8000);
+                    InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                    UserData.setExp(Integer.valueOf(s));
+                    //setContent(sb.toString());
+                    Log.d("123","---"+sb.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.d("haha",e.getMessage());
+                }finally {
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
 
     public static void register(Context context,String username,String password,String email) {
         new Thread(new Runnable() {
@@ -484,7 +528,6 @@ public class HttpHandler {
                 //String dateString=formater.format(date);
                 double length=runningMessage.getLength();
                 int exp=runningMessage.getExp();
-                HttpHandler.changeExp(UserData.getUserName(),exp);
                 List<LatLng> course=runningMessage.getAllLatLng();
                 JSONArray array=new JSONArray();
                 for(int i=0;i<course.size();++i){

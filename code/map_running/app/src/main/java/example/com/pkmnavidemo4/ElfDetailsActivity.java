@@ -32,6 +32,7 @@ public class ElfDetailsActivity extends AppCompatActivity {
     private TextView  numOfExp;
     private TextView  nowLevel;
     private TextView  power;
+    private TextView  userExp;
     private Button back;
     private Button AR;
     private Button addExp;
@@ -124,6 +125,8 @@ public class ElfDetailsActivity extends AppCompatActivity {
         name.setText("精灵名 "+ElfSourceController.getName(variety,nowGrade));
         main=findViewById(R.id.act_elf_details_elf_nowimage);
         main.setBackgroundResource(ElfSourceController.getBackgroundWithLevel(variety,nowGrade));
+        userExp=findViewById(R.id.act_elf_details_elf_user_exp);
+        userExp.setText(UserData.getExp()+"");
 
         //进化
         addGrade=findViewById(R.id.act_elf_details_elf_button_grow);

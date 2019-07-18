@@ -56,4 +56,6 @@ public class UserData {
     public static int getExp(){
        return exp;
     }
+    public static void setExp(int num){
+        exp=num; }
 }
