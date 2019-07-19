@@ -66,7 +66,7 @@ public class ModifyUserInfoimpl implements ModifyUserInfo {
             temp2.setFollowing(following2);
 
             UserDao.save(temp2);
+            return true;
         }
-        return false;
     }
 }
