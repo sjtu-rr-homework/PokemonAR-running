@@ -44,9 +44,12 @@ public class ModifyUserInfoimpl implements ModifyUserInfo {
         else
         {
             Set<User> follower1=temp1.getFollowers();
+            if(follower1.contains(temp2))
+            {
+                return false;
+            }
             follower1.add(temp2);
             temp1.setFollowers(follower1);
-
             Set<User> following1=temp1.getFollowing();
             following1.add(temp2);
             temp1.setFollowing(following1);
