@@ -45,7 +45,7 @@ import example.com.pkmnavidemo4.LoginActivity;
 import example.com.pkmnavidemo4.MainActivity;
 
 public class HttpHandler {
-    private static String UrlHead="http://90faf8ee.ngrok.io";
+    private static String UrlHead="http://202.120.40.8:30751";
 
     @Nullable
     public static Activity findActivity(Context context) {
@@ -93,13 +93,16 @@ public class HttpHandler {
                         int id = item.getInt("typeID"); // 获取对象对应的值
                         int num = item.getInt("num");
                         int exp = item.getInt("exp");
+                        int grade = item.getInt("grade");
                         Map map = null;
                         map = new HashMap(); // 存放到MAP里面
                         map.put("typeID", id );
                         map.put("num",num);
                         map.put("exp",exp);
+                        map.put("grade",grade);
                         list.add(map);
                     }
+                    UserData.setElfDetails(list);
                     List<String> elfList = new ArrayList<>();
                     for (int i = 0; i < list.size(); i++) {
                         elfList.add(""+ list.get(i).get("typeID"));
@@ -157,13 +160,16 @@ public class HttpHandler {
                         int id = item.getInt("typeID"); // 获取对象对应的值
                         int num = item.getInt("num");
                         int exp = item.getInt("exp");
+                        int grade = item.getInt("grade");
                         Map map = null;
                         map = new HashMap(); // 存放到MAP里面
                         map.put("typeID", id );
                         map.put("num",num);
                         map.put("exp",exp);
+                        map.put("grade",grade);
                         list.add(map);
                     }
+                    UserData.setElfDetails(list);
                     List<String> elfList = new ArrayList<>();
                     for (int i = 0; i < list.size(); i++) {
                         elfList.add(""+ list.get(i).get("typeID"));
