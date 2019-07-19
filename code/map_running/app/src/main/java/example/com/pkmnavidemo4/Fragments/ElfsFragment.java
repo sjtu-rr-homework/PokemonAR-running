@@ -84,6 +84,8 @@ public class ElfsFragment extends Fragment {
 
     private void refresh( RecyclerView mRecyclerView){
         HttpHandler.getElfs(getActivity(),UserData.getUserName());
+        if(!UserData.getOnlyHave())
+            return;
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
