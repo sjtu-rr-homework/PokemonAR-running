@@ -42,7 +42,6 @@ public class LoginActivity  extends AppCompatActivity {
                 String password=passwordText.getText().toString();
                 HttpHandler.login(LoginActivity.this,username,password);
                 HttpHandler.getElfs(username);
-
                 HttpHandler.getExp(username);
                 UserData.initonlyHave();
             }
