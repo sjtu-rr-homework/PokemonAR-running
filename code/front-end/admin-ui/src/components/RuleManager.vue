@@ -3,7 +3,9 @@
         <div v-if="modifierOn">
             <div class="row col-10 offset-1">
                 <button class="btn btn-block btn-outline-success col-5" v-on:click="submitModification()">提交修改</button>
-                <button class="btn btn-block btn-outline-secondary col-5 offset-2" v-on:click="cancelModification()">放弃修改</button>
+                <button class="btn btn-block btn-outline-secondary col-5 offset-2" v-on:click="cancelModification()">
+                    {{ modificationFail ? '放弃未成功提交的修改' : '放弃修改' }}
+                </button>
             </div>
             <div class="h5 p-3">基本配置</div>
             <div class="row bg-light">
@@ -20,31 +22,14 @@
                     <input class="form-control col-4" type="number" v-model.number="modifier.maxSpeed"/>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-4 p-2">路线范围（经度）：</div>
-                <div class="col-4 p-2 input-group row">
-                    <span class="input-group-prepend col-4">最小经度：</span>
-                    <input class="form-control col-4" type="number" v-model.number="modifier.minLongitude"/>
-                </div>
-                <div class="col-4 p-2 input-group row">
-                    <span class="input-group-prepend col-4">最大经度：</span>
-                    <input class="form-control col-4" type="number" v-model.number="modifier.maxLongitude"/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-4 p-2">路线范围（纬度）：</div>
-                <div class="col-4 p-2 input-group row">
-                    <span class="input-group-prepend col-4">最小纬度：</span>
-                    <input class="form-control col-4" type="number" v-model.number="modifier.minLatitude"/>
-                </div>
-                <div class="col-4 p-2 input-group row">
-                    <span class="input-group-prepend col-4">最大纬度：</span>
-                    <input class="form-control col-4" type="number" v-model.number="modifier.maxLatitude"/>
-                </div>
-            </div>
             <hr/>
-            <div class="h5 p-3">必经点预设</div>
-            <div v-if="markers.length<=0">（暂无预设必经点）</div>
+            <div class="h5 p-3">跑步范围、必经点预设</div>
+            <div v-if="basicRuleModifySubmitting" class="text-info">提交基本规则信息……</div>
+            <div v-else-if="basicRuleModifyFail" class="text-danger">提交基本规则信息失败</div>
+            <div v-if="borderModifySubmitting" class="text-info">提交跑步范围信息……</div>
+            <div v-else-if="borderModifyFail" class="text-danger">提交跑步范围信息失败</div>
+            <div v-if="flagModifySubmitting" class="text-info">提交必经点信息……</div>
+            <div v-else-if="flagModifyFail" class="text-danger">提交必经点信息失败</div>
         </div>
         <div v-else>
             <button class="btn btn-block btn-outline-primary" v-on:click="openModifier()">修改规则</button>
@@ -53,14 +38,17 @@
                 <div class="col-4 p-2">总里程数（m）：{{mileageGoal}}</div>
                 <div class="col-4 p-2">合法配速（m/s）：({{minSpeed}}, {{maxSpeed}})</div>
             </div>
-            <div class="row">
-                <div class="col-4 p-2">路线范围：</div>
-                <div class="col-4 p-2">经度：{{minLongitude}} - {{maxLongitude}}</div>
-                <div class="col-4 p-2">纬度：{{minLatitude}} - {{maxLatitude}}</div>
-            </div>
             <hr/>
-            <div class="h5 p-3">必经点预设</div>
-            <div v-if="markers.length<=0">（暂无预设必经点）</div>
+            <div class="h5 p-3">跑步范围、必经点预设</div>
+            <div v-if="gettingBasicRule" class="text-info">获取基本规则信息……</div>
+            <div v-else-if="getBasicRuleFail" class="text-danger">获取基本规则信息失败</div>
+            <div v-if="gettingBorder" class="text-info">获取跑步范围信息……</div>
+            <div v-else-if="getBorderFail" class="text-danger">获取跑步范围信息失败</div>
+            <div v-if="gettingFlags" class="text-info">获取必经点信息……</div>
+            <div v-else-if="getFlagsFail" class="text-danger">获取必经点信息失败</div>
+            <div v-else>
+                <div v-if="markers.length<=0">（暂未预设必经点）</div>
+            </div>
         </div>
         <div v-if="modifierOn">右键新建标记，左键拖动标记，左键双击删除标记</div>
         <div v-else>可以点击上方“修改规则”按钮进行设置</div>
@@ -69,13 +57,17 @@
                      :events="mapEvents">
                 <div v-if="modifierOn">
                     <el-amap-marker v-for="(marker, index) in modifier.markers" :position="marker.position"
-                                    :events="marker.events" :visible="marker.visible" :draggable="marker.draggable"
+                                    :events="marker.events" :visible="marker.visible" :draggable="true"
                                     :vid="index" :key="index"></el-amap-marker>
+                    <el-amap-polygon :vid="1001" :path="modifier.border.path" :events="modifier.border.events"
+                                     :draggable="true" :editable="true"></el-amap-polygon>
                 </div>
                 <div v-else>
                     <el-amap-marker v-for="(marker, index) in markers" :position="marker.position"
-                                    :events="marker.events" :visible="marker.visible" :draggable="marker.draggable"
+                                    :events="marker.events" :visible="marker.visible" :draggable="false"
                                     :vid="index" :key="index"></el-amap-marker>
+                    <el-amap-polygon :vid="1001" :path="border.path" :events="border.events"
+                                     :draggable="false" :editable="false"></el-amap-polygon>
                 </div>
             </el-amap>
         </div>
@@ -91,7 +83,20 @@
             this.amapManager = new VueAMap.AMapManager();
         },
         mounted: function () {
+            this.requestBasicRule();
+            this.requestBorder();
             this.requestFlags();
+        },
+        computed: {
+            modifierOn: function () {
+                return this.flagModifying || this.basicRuleModifying;
+            },
+            modificationFail: function () {
+                return this.flagModifyFail || this.basicRuleModifyFail || this.borderModifyFail;
+            },
+            getInfoFail: function () {
+                return this.getFlagsFail || this.getBasicRuleFail || this.getBorderFail;
+            }
         },
         data: function () {
             return {
@@ -107,26 +112,37 @@
                 },
                 markers: [],
                 nextFlagID: 0,
-                modifierOn: false,
+                // getting
+                gettingFlags: false,
+                gettingBasicRule: false,
+                gettingBorder: false,
+                // get fail
+                getFlagsFail: false,
+                getBasicRuleFail: false,
+                getBorderFail: false,
+                // modifying
+                flagModifying: false,
+                basicRuleModifying: false,
+                borderModifying: false,
+                // modify submitting
+                flagModifySubmitting: false,
+                basicRuleModifySubmitting: false,
+                borderModifySubmitting: false,
+                // modify submit fail
+                flagModifyFail: false,
+                basicRuleModifyFail: false,
+                borderModifyFail: false,
                 modifier: {
-                    mileageGoal: 80000,
-                    minSpeed: 1.8,
-                    maxSpeed: 6,
+                    mileageGoal: 0,
+                    minSpeed: 0,
+                    maxSpeed: 0,
                     markers: [],
-                    // should be displayed and modified on a map
-                    minLongitude: 131.051,
-                    maxLongitude: 131.105,
-                    minLatitude: 31.996,
-                    maxLatitude: 32.011
+                    border: null
                 },
-                mileageGoal: 80000,
-                minSpeed: 1.8,
-                maxSpeed: 6,
-                // should be displayed and modified on a map
-                minLongitude: 131.051,
-                maxLongitude: 131.105,
-                minLatitude: 31.996,
-                maxLatitude: 32.011
+                mileageGoal: 0,
+                minSpeed: 0,
+                maxSpeed: 0,
+                border: null
             };
         },
         methods: {
@@ -134,10 +150,11 @@
                 if (o instanceof Array) {  //先判断Array
                     let n = [];
                     for (let i = 0; i < o.length; ++i) {
-                        n[i] = this.deepCopy(o[i]);
+                        n.push(this.deepCopy(o[i]));
                     }
                     return n;
-
+                } else if (o instanceof Function) {
+                    return o;
                 } else if (o instanceof Object) {
                     let n = {};
                     for (let i in o) {
@@ -150,21 +167,25 @@
             },
             openModifier: function () {
                 // deep copy
-                console.log(this.markers);
                 this.modifier.markers = this.deepCopy(this.markers);
-                console.log(this.modifier.markers);
-                for(let i = 0; i < this.modifier.markers.length; i++){
-                    this.modifier.markers[i].draggable = true;
-                }
-                this.modifierOn = true;
+                this.modifier.mileageGoal = this.mileageGoal;
+                this.modifier.minSpeed = this.minSpeed;
+                this.modifier.maxSpeed = this.maxSpeed;
+                this.modifier.border = this.deepCopy(this.border);
+                // modifying flags
+                this.flagModifying = true;
+                this.basicRuleModifying = true;
+                this.borderModifying = true;
             },
             closeModifier: function () {
-                this.modifierOn = false;
+                this.flagModifying = false;
+                this.basicRuleModifying = false;
+                this.borderModifying = false;
             },
             getMapCenter: function () {
                 return this.amapManager.getMap().getCenter();
             },
-            addFlag: function (lng, lat) {
+            newFlag: function (lng, lat) {
                 let flag = {
                     id: this.nextFlagID++,
                     position: [lng, lat],
@@ -177,27 +198,37 @@
                             if(del){
                                 this.removeFlag(flag.id);
                             }
-                        }/*,
+                        },
                         dragend: (e) => {
                             // update lnglat in vue model
-                            flag.position[0] = e.target.getPosition().getLng();
-                            flag.position[1] = e.target.getPosition().getLat();
-                        }*/
+                            this.modifyFlagPos(flag.id, e.target.getPosition().lng, e.target.getPosition().lat);
+                        }
                     },
-                    visible: true,
-                    draggable: true
+                    visible: true
                 };
-                this.modifier.markers.push(flag);
+                return flag;
+            },
+            addFlag: function (lng, lat) {
+                this.modifier.markers.push(this.newFlag(lng, lat));
             },
             removeFlag: function (flagID) {
-                for(let i = 0; i < this.markers.length; i++){
-                    if(this.markers[i].id === flagID){
-                        this.markers.splice(i, 1);
+                for(let i = 0; i < this.modifier.markers.length; i++){
+                    if(this.modifier.markers[i].id === flagID){
+                        this.modifier.markers.splice(i, 1);
+                        break;
+                    }
+                }
+            },
+            modifyFlagPos: function (flagID, lng, lat) {
+                for(let i = 0; i < this.modifier.markers.length; i++){
+                    if(this.modifier.markers[i].id === flagID){
+                        this.modifier.markers[i].position = [lng, lat];
                         break;
                     }
                 }
             },
             getModifiedFlags: function () {
+                console.log(this.modifier.markers);
                 let flags = [];
                 for(let i = 0; i < this.modifier.markers.length; i++){
                     flags.push({
@@ -205,9 +236,12 @@
                         lat: this.modifier.markers[i].position[1]
                     });
                 }
+                console.log(flags);
                 return flags;
             },
             requestFlags: function () {
+                this.gettingFlags = true;
+                this.getFlagsFail = false;
                 this.$http.get('api/admin/rule/flags')
                     .then((resp) => {
                         this.markers = [];
@@ -215,46 +249,84 @@
                         for(let i = 0; i < resp.data.length; i++){
                             let lng = resp.data[i].lng;
                             let lat = resp.data[i].lat;
-                            let flag = {
-                                id: this.nextFlagID++,
-                                position: [lng, lat],
-                                events: {
-                                    dblclick: (e) => {
-                                        if(!this.modifierOn){
-                                            return;
-                                        }
-                                        let del = confirm('是否删除此标记点？');
-                                        if(del){
-                                            this.removeFlag(flag.id);
-                                        }
-                                    }/*,
-                                    dragend: (e) => {
-                                        // update lnglat in vue model
-                                        flag.position[0] = e.target.getPosition().getLng();
-                                        flag.position[1] = e.target.getPosition().getLat();
-                                    }*/
-                                },
-                                visible: true,
-                                // default not draggable
-                                draggable: false
-                            };
-                            this.markers.push(flag);
+                            this.markers.push(this.newFlag(lng, lat));
                         }
+                        this.gettingFlags = false;
                     }, () => {
-                        alert('获取预设点位失败');
+                        this.getFlagsFail = true;
+                        this.gettingFlags = false;
                     });
             },
             modifyFlags: function () {
+                this.flagModifyFail = false;
                 this.$http.put('api/admin/rule/flags', this.getModifiedFlags())
                     .then((resp) => {
-                        this.closeModifier();
+                        this.flagModifying = false;
                         this.requestFlags();
                     }, () => {
-                        alert('提交预设点位失败，请检查网络并重试，或联系服务器管理员');
+                        this.flagModifyFail = true;
                     });
+            },
+            requestBasicRule: function () {
+                this.gettingBasicRule = true;
+                this.getBasicRuleFail = false;
+                this.$http.get('api/admin/rule/basic')
+                    .then((resp) => {
+                        this.mileageGoal = resp.data.mileageRequirement;
+                        this.minSpeed = resp.data.minSpeed;
+                        this.maxSpeed = resp.data.maxSpeed;
+                        this.gettingBasicRule = false;
+                    }, () => {
+                        this.getBasicRuleFail = true;
+                        this.gettingBasicRule = false;
+                    });
+            },
+            modifyBasicRule: function () {
+                this.basicRuleModifyFail = false;
+                this.$http.put('api/admin/rule/basic', {
+                    mileageRequirement: this.modifier.mileageGoal,
+                    minSpeed: this.modifier.minSpeed,
+                    maxSpeed: this.modifier.maxSpeed
+                }).then((resp) => {
+                    this.basicRuleModifying = false;
+                    this.requestBasicRule();
+                }, () => {
+                    this.basicRuleModifyFail = true;
+                });
+            },
+            addInitialBorder: function () {
+                // TODO: add initial border
+                this.border = {
+                    path: [[], [], []],
+                    isNew: true // will not be displayed when the modifier is off
+                };
+            },
+            requestBorder: function () {
+                this.gettingBorder = true;
+                this.getBorderFail = false;
+                this.$http.get('api/admin/rule/border')
+                    .then((resp) => {
+                        if(resp.data.path.length < 3){
+                            this.addInitialBorder();
+                        }
+                    }, () => {
+                        this.addInitialBorder();
+                        this.getBorderFail = true;
+                        this.gettingBorder = false;
+                    });
+            },
+            modifyBorder: function () {
+                this.borderModifyFail = false;
+                this.$http.put('api/admin/rule/border', {}).then((resp) => {
+                    this.borderModifying = false;
+                    this.requestBasicRule();
+                }, () => {
+                    this.borderModifyFail = true;
+                });
             },
             submitModification: function () {
                 this.modifyFlags();
+                this.modifyBasicRule();
             },
             cancelModification: function () {
                 this.closeModifier();
