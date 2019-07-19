@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserData {
+    private static int exp;
     private static String userName;
     private static List<String> elfList;
     public static String getUserName(){
@@ -26,4 +27,33 @@ public class UserData {
         elfList=list;
     }
     public static List<String> friend=new ArrayList<String>();
+    public static List <Map> getElfDetails(){
+        return elfDetailsList;
+    }
+    public static void setElfDetails( List<Map> list){
+        elfDetailsList=list;
+    }
+    public static void reverse(){
+        onlyHave=!onlyHave;
+    }
+    public static void initonlyHave(){
+        onlyHave=false;
+    }
+    public static boolean getOnlyHave(){
+        return onlyHave;
+    }
+    public static boolean consumeExp(int num){
+        if(exp>num){
+            exp-=num;
+            HttpHandler.changeExp(userName,0-num);
+            return true;
+        }
+        else
+            return false;
+    }
+    public static int getExp(){
+       return exp;
+    }
+    public static void setExp(int num){
+        exp=num; }
 }

@@ -4,4 +4,5 @@ import org.pokemonrun.info.Userinfo;
 
 public interface GetUserInfo {
     public Userinfo getUserInfo(String username);
+    public Integer getExp(String username);
 }

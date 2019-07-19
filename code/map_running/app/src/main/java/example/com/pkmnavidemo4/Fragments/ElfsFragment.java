@@ -82,28 +82,25 @@ public class ElfsFragment extends Fragment {
 
     private void refresh( RecyclerView mRecyclerView){
         HttpHandler.getElfs(getActivity(),UserData.getUserName());
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        if(UserData.getOnlyHave()) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity(), UserData.getElfList());
+            mRecyclerView.setAdapter(adapter);
         }
-        TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity(),UserData.getElfList());
-        mRecyclerView.setAdapter(adapter);
     }
 
     private void refresh(String userName){
         HttpHandler.getElfs(UserData.getUserName());
-        TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity(),UserData.getElfList());
-        mRecyclerView.setAdapter(adapter);
+        if(UserData.getOnlyHave()) {
+            TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity(), UserData.getElfList());
+            mRecyclerView.setAdapter(adapter);
+        }
     }
 
-    private void setLock(){
-        lock=true;
-    }
-
-    public void unLock(){
-        lock=false;
-    }
     //得到所有精灵
     private void initData() {
         list = new ArrayList<>();

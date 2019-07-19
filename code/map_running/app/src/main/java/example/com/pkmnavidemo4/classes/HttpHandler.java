@@ -48,7 +48,9 @@ import example.com.pkmnavidemo4.MainActivity;
 import example.com.pkmnavidemo4.R;
 
 public class HttpHandler {
+	
     private static String UrlHead="http://6c742b9d.ngrok.io";
+
 
     @Nullable
     public static Activity findActivity(Context context) {
@@ -96,13 +98,16 @@ public class HttpHandler {
                         int id = item.getInt("typeID"); // 获取对象对应的值
                         int num = item.getInt("num");
                         int exp = item.getInt("exp");
+                        int grade = item.getInt("grade");
                         Map map = null;
                         map = new HashMap(); // 存放到MAP里面
                         map.put("typeID", id );
                         map.put("num",num);
                         map.put("exp",exp);
+                        map.put("grade",grade);
                         list.add(map);
                     }
+                    UserData.setElfDetails(list);
                     List<String> elfList = new ArrayList<>();
                     for (int i = 0; i < list.size(); i++) {
                         elfList.add(""+ list.get(i).get("typeID"));
@@ -160,13 +165,16 @@ public class HttpHandler {
                         int id = item.getInt("typeID"); // 获取对象对应的值
                         int num = item.getInt("num");
                         int exp = item.getInt("exp");
+                        int grade = item.getInt("grade");
                         Map map = null;
                         map = new HashMap(); // 存放到MAP里面
                         map.put("typeID", id );
                         map.put("num",num);
                         map.put("exp",exp);
+                        map.put("grade",grade);
                         list.add(map);
                     }
+                    UserData.setElfDetails(list);
                     List<String> elfList = new ArrayList<>();
                     for (int i = 0; i < list.size(); i++) {
                         elfList.add(""+ list.get(i).get("typeID"));
@@ -228,6 +236,127 @@ public class HttpHandler {
             }
         }).start();
     }
+
+    public static void addExp(String username,int variety,int num){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String loginUrl=UrlHead+"/pet/user/"+username+"/addexp/"+variety+"/exp/"+num;
+                try {
+                    //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
+                    URL url=new URL(loginUrl);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(8000);
+                    InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }finally {
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+
+    public static void changeExp(String username,int num){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String loginUrl=UrlHead+"/user/addexp/username/"+username+"/exp/"+num;
+                try {
+                    //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
+                    URL url=new URL(loginUrl);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(8000);
+                    InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }finally {
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+
+    public static void addGrade(String username,int variety,int num){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String loginUrl=UrlHead+"/pet/user/"+username+"/addgrade/"+variety+"/grade/"+num;
+                try {
+                    //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
+                    URL url=new URL(loginUrl);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(8000);
+                    InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }finally {
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+
     public static void login(Context context,String username, String password) {
         new Thread(new Runnable() {
             @Override
@@ -287,6 +416,50 @@ public class HttpHandler {
         }).start();
     }
 
+    public static void getExp(String username) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String loginUrl=UrlHead+"/user/getexp/username/"+username;
+                try {
+                    //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
+                    URL url=new URL(loginUrl);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(8000);
+                    InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                    UserData.setExp(Integer.valueOf(s));
+                    //setContent(sb.toString());
+                    Log.d("123","---"+sb.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.d("haha",e.getMessage());
+                }finally {
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
 
     public static void register(Context context,String username,String password,String email) {
         new Thread(new Runnable() {
