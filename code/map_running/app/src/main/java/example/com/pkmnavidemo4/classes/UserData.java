@@ -12,6 +12,7 @@ public class UserData {
     private static List<String> elfList;
     private static  List<Map> elfDetailsList;
     private static  boolean onlyHave=false;
+    public static boolean isFriendGet=false;
     public static String getUserName(){
         return userName;
     }
@@ -29,6 +30,7 @@ public class UserData {
     public static void setElfList( List<String> list){
         elfList=list;
     }
+    public static List<String> friend=new ArrayList<String>();
     public static List <Map> getElfDetails(){
         return elfDetailsList;
     }
@@ -54,7 +56,7 @@ public class UserData {
             return false;
     }
     public static int getExp(){
-       return exp;
+        return exp;
     }
     public static void setExp(int num){
         exp=num; }
