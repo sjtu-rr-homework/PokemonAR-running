@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setSelected();
                 txt_better.setSelected(true);
                 if(fg3 == null){
-                    fg3 = new MyFragment();
+                    fg3 = new MyFragment("第三个Fragment");
                     fTransaction.add(R.id.ly_content,fg3);
                 }else{
                     fTransaction.show(fg3);
