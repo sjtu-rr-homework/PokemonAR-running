@@ -73,6 +73,9 @@
         <activity android:name=".RecordActivity"></activity>
         <activity android:name=".CheckNeighbour"></activity>
         <activity android:name=".FriendActivity"></activity>
+        <activity android:name=".FriendPageActivity">
+
+        </activity>
     </application>
 
 </manifest>
