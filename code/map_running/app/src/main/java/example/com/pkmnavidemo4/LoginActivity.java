@@ -19,7 +19,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import example.com.pkmnavidemo4.classes.HttpHandler;
-import example.com.pkmnavidemo4.classes.UserData;
 
 public class LoginActivity  extends AppCompatActivity {
     private Button login;
@@ -42,7 +41,6 @@ public class LoginActivity  extends AppCompatActivity {
                 String password=passwordText.getText().toString();
                 HttpHandler.login(LoginActivity.this,username,password);
                 HttpHandler.getElfs(username);
-                UserData.initonlyHave();
             }
         });
         toRegister=findViewById(R.id.act_login_text_new);

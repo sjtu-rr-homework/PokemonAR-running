@@ -65,11 +65,9 @@ public class ElfsFragment extends Fragment {
                     //选择只查看已有精灵
                     /*HttpHandler.getElfs(getActivity(), UserData.getUserName());
                     while(lock){};*/
-                    UserData.reverse();
                     TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity(),UserData.getElfList());
                     mRecyclerView.setAdapter(adapter);
                 }else {
-                    UserData.reverse();
                     //查看所有精灵
                     initData();
                     //实例化并传输数据给adapter

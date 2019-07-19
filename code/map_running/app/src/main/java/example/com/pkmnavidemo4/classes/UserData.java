@@ -4,13 +4,10 @@ import com.amap.api.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class UserData {
     private static String userName;
     private static List<String> elfList;
-    private static  List<Map> elfDetailsList;
-    private static  boolean onlyHave=false;
     public static String getUserName(){
         return userName;
     }
@@ -28,19 +25,5 @@ public class UserData {
     public static void setElfList( List<String> list){
         elfList=list;
     }
-    public static List <Map> getElfDetails(){
-        return elfDetailsList;
-    }
-    public static void setElfDetails( List<Map> list){
-        elfDetailsList=list;
-    }
-    public static void reverse(){
-        onlyHave=!onlyHave;
-    }
-    public static void initonlyHave(){
-        onlyHave=false;
-    }
-    public static boolean getOnlyHave(){
-        return onlyHave;
-    }
+    public static List<String> friend=new ArrayList<String>();
 }

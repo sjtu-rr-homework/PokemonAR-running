@@ -81,7 +81,6 @@ public class SceneformActivity extends AppCompatActivity implements Scene.OnUpda
     //获取生成精灵模型的id
       Intent intent=getIntent();
       int variety=intent.getIntExtra("variety", -1);
-      int level=intent.getIntExtra("grade", 1);
     arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment);
     returnButton=findViewById(R.id.act_ux_button_return);
     returnButton.setOnClickListener(new View.OnClickListener() {
@@ -121,7 +120,7 @@ public class SceneformActivity extends AppCompatActivity implements Scene.OnUpda
     // When you build a Renderable, Sceneform loads its resources in the background while returning
     // a CompletableFuture. Call thenAccept(), handle(), or check isDone() before calling get().
       ModelRenderable.builder()
-              .setSource(this, ElfSourceController.getModel(variety,level))
+              .setSource(this, ElfSourceController.getModel(variety))
               .build()
               .thenAccept(renderable -> andyRenderable = renderable)
               .exceptionally(
