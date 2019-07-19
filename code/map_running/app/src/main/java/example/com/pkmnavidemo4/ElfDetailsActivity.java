@@ -4,19 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Layout;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Objects;
 
 import example.com.pkmnavidemo4.classes.ElfSourceController;
-import example.com.pkmnavidemo4.classes.HttpHandler;
-import example.com.pkmnavidemo4.classes.UserData;
 
 
 public class ElfDetailsActivity extends AppCompatActivity {
@@ -24,6 +22,7 @@ public class ElfDetailsActivity extends AppCompatActivity {
     private ImageView image1;
     private ImageView image2;
     private ImageView image3;
+
     private TextView  nowNumText;
     private TextView  nowExpText;
     private TextView  name;
@@ -34,20 +33,13 @@ public class ElfDetailsActivity extends AppCompatActivity {
     private TextView  power;
     private TextView  userExp;
     private Button back;
-    private Button AR;
-    private Button addExp;
-    private Button addGrade;
-    private int nowExp=0;
-    private int level=1;
-    private int nowNum=0;
-    private int grade=1;
-    private int nowGrade=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_elf_details);
         Intent intent=getIntent();
         int variety=intent.getIntExtra("variety", -1);
+
 
         //找到当前精灵的详细信息
         for (int i = 0; i < UserData.getElfDetails().size(); i++) {
@@ -82,6 +74,8 @@ public class ElfDetailsActivity extends AppCompatActivity {
                 finish();
             }
         });
+        main=findViewById(R.id.act_elf_details_elf_nowimage);
+        main.setBackgroundResource(ElfSourceController.getBackground(variety));
 
         //增加经验
         numOfExp=findViewById(R.id.act_elf_details_elf_add);
@@ -91,19 +85,10 @@ public class ElfDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int exp=Integer.valueOf(numOfExp.getText().toString());
-                if(nowNum<1){
-                    Toast.makeText(getApplicationContext(), "你尚未拥有该精灵", Toast.LENGTH_SHORT).show();
-                    return;
-                }
                 if((nowExp+exp)>9800) {
                     Toast.makeText(getApplicationContext(), "经验溢出", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(!UserData.consumeExp(exp)){
-                    Toast.makeText(getApplicationContext(), "经验不足", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                userExp.setText(UserData.getExp()+"");
                 nowExp+=exp;
                 HttpHandler.addExp(UserData.getUserName(),variety,exp);
                 numOfExp.setText("");
@@ -144,10 +129,10 @@ public class ElfDetailsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 switch(nowGrade){
                     case 1:
-                       if(nowExp<2000||nowNum<5){
+                       /* if(nowExp<2000||nowNum<5){
                             Toast.makeText(getApplicationContext(), "尚未满足条件", Toast.LENGTH_SHORT).show();
                             break;
-                        }
+                        }*/
                         nowGrade+=1;
                         HttpHandler.addGrade(UserData.getUserName(),variety,1);
                         name.setText("精灵名 "+ElfSourceController.getName(variety,nowGrade));
@@ -163,10 +148,10 @@ public class ElfDetailsActivity extends AppCompatActivity {
                         break;
                     case 2:
                         if(ElfSourceController.getMaxLevel(variety)==3) {
-                            if(nowExp<6000||nowNum<10){
+                            /*if(nowExp<6000||nowNum<10){
                                 Toast.makeText(getApplicationContext(), "尚未满足条件", Toast.LENGTH_SHORT).show();
                                 break;
-                            }
+                            }*/
                             nowGrade += 1;
                             HttpHandler.addGrade(UserData.getUserName(),variety,1);
                             name.setText("精灵名 " + ElfSourceController.getName(variety, nowGrade));
@@ -190,39 +175,11 @@ public class ElfDetailsActivity extends AppCompatActivity {
         //控制第一阶段精灵的图像以及数据
         image1=findViewById(R.id.act_elf_details_elf_image1);
         image1.setBackgroundResource(ElfSourceController.getBackgroundWithLevel(variety,1));
-        image1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                needNumText.setText("需要数量 "+1);
-                needExpText.setText("需要经验 "+0);
-                grade=1;
-            }
-        });
-
-        //控制第二阶段精灵的图像以及数据
         image2=findViewById(R.id.act_elf_details_elf_image2);
         image2.setBackgroundResource(ElfSourceController.getBackgroundWithLevel(variety,2));
-        image2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                needNumText.setText("需要数量 "+4);
-                needExpText.setText("需要等级 "+20);
-                grade=2;
-            }
-        });
-
-        //检验精灵是否有第三阶段并控制第三阶段精灵的图像以及数据
         if(ElfSourceController.getMaxLevel(variety)==3){
             image3=findViewById(R.id.act_elf_details_elf_image_3);
             image3.setBackgroundResource(ElfSourceController.getBackgroundWithLevel(variety,3));
-            image3.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    needNumText.setText("需要数量 "+9);
-                    needExpText.setText("需要等级 "+60);
-                    grade=3;
-                }
-            });
         }
     }
 }
