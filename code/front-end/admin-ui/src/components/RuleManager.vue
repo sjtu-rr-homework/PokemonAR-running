@@ -130,8 +130,29 @@
             };
         },
         methods: {
+            deepCopy: function (o) {
+                if (o instanceof Array) {  //先判断Array
+                    let n = [];
+                    for (let i = 0; i < o.length; ++i) {
+                        n[i] = this.deepCopy(o[i]);
+                    }
+                    return n;
+
+                } else if (o instanceof Object) {
+                    let n = {};
+                    for (let i in o) {
+                        n[i] = this.deepCopy(o[i]);
+                    }
+                    return n;
+                } else {
+                    return o;
+                }
+            },
             openModifier: function () {
-                this.modifier.markers = JSON.parse(JSON.stringify(this.markers));
+                // deep copy
+                console.log(this.markers);
+                this.modifier.markers = this.deepCopy(this.markers);
+                console.log(this.modifier.markers);
                 for(let i = 0; i < this.modifier.markers.length; i++){
                     this.modifier.markers[i].draggable = true;
                 }
@@ -156,12 +177,12 @@
                             if(del){
                                 this.removeFlag(flag.id);
                             }
-                        },
+                        }/*,
                         dragend: (e) => {
                             // update lnglat in vue model
                             flag.position[0] = e.target.getPosition().getLng();
                             flag.position[1] = e.target.getPosition().getLat();
-                        }
+                        }*/
                     },
                     visible: true,
                     draggable: true
@@ -176,17 +197,55 @@
                     }
                 }
             },
+            getModifiedFlags: function () {
+                let flags = [];
+                for(let i = 0; i < this.modifier.markers.length; i++){
+                    flags.push({
+                        lng: this.modifier.markers[i].position[0],
+                        lat: this.modifier.markers[i].position[1]
+                    });
+                }
+                return flags;
+            },
             requestFlags: function () {
-                // default not draggable
-                this.$http.get('admin/rule/flags')
+                this.$http.get('api/admin/rule/flags')
                     .then((resp) => {
-                        this.markers = resp.data.markers;
+                        this.markers = [];
+                        this.nextFlagID = 0;
+                        for(let i = 0; i < resp.data.length; i++){
+                            let lng = resp.data[i].lng;
+                            let lat = resp.data[i].lat;
+                            let flag = {
+                                id: this.nextFlagID++,
+                                position: [lng, lat],
+                                events: {
+                                    dblclick: (e) => {
+                                        if(!this.modifierOn){
+                                            return;
+                                        }
+                                        let del = confirm('是否删除此标记点？');
+                                        if(del){
+                                            this.removeFlag(flag.id);
+                                        }
+                                    }/*,
+                                    dragend: (e) => {
+                                        // update lnglat in vue model
+                                        flag.position[0] = e.target.getPosition().getLng();
+                                        flag.position[1] = e.target.getPosition().getLat();
+                                    }*/
+                                },
+                                visible: true,
+                                // default not draggable
+                                draggable: false
+                            };
+                            this.markers.push(flag);
+                        }
                     }, () => {
                         alert('获取预设点位失败');
                     });
             },
             modifyFlags: function () {
-                this.$http.put('admin/rule/flags')
+                this.$http.put('api/admin/rule/flags', this.getModifiedFlags())
                     .then((resp) => {
                         this.closeModifier();
                         this.requestFlags();
