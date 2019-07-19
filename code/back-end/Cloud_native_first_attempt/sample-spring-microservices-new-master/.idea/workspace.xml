@@ -1,23 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9e081181-8299-493f-963e-ccbac1105606" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/info/Friendinfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../map_running/app/src/main/res/layout/activity_fight.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/info/Userinfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/info/Userinfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/serviceimpl/GetUserInfoimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/serviceimpl/GetUserInfoimpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../map_running/app/app_REMOTE_1668.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../map_running/app/app_REMOTE_1668.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/ElfDetailsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/ElfDetailsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/Fragments/ElfsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/Fragments/ElfsFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/MapActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/MapActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/classes/ElfSourceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/classes/ElfSourceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/classes/HttpHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/classes/HttpHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/classes/UserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/classes/UserData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../map_running/app/src/main/res/layout/activity_elf_details.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../map_running/app/src/main/res/layout/activity_elf_details.xml" afterDir="false" />
-    </list>
+    <list default="true" id="9e081181-8299-493f-963e-ccbac1105606" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/config-service/target/" />
     <ignored path="$PROJECT_DIR$/employee-service/target/" />
@@ -45,8 +29,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/controller/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="362">
-              <caret line="46" column="5" lean-forward="true" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
+            <state relative-caret-position="286">
+              <caret line="42" column="47" selection-start-line="42" selection-start-column="47" selection-end-line="42" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1613#1614#0" expanded="true" />
@@ -112,7 +96,7 @@
         <entry file="file://$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/serviceimpl/GetUserInfoimpl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="229">
-              <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
+              <caret line="38" selection-start-line="38" selection-end-line="38" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -243,111 +227,6 @@
             <path>
               <item name="sample-spring-microservices-new" type="b2602c69:ProjectViewProjectNode" />
               <item name="sample-spring-microservices-new-master" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sample-spring-microservices-new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sample-spring-microservices-new-master" type="462c0819:PsiDirectoryNode" />
-              <item name="user-service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sample-spring-microservices-new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sample-spring-microservices-new-master" type="462c0819:PsiDirectoryNode" />
-              <item name="user-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sample-spring-microservices-new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sample-spring-microservices-new-master" type="462c0819:PsiDirectoryNode" />
-              <item name="user-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sample-spring-microservices-new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sample-spring-microservices-new-master" type="462c0819:PsiDirectoryNode" />
-              <item name="user-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sample-spring-microservices-new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sample-spring-microservices-new-master" type="462c0819:PsiDirectoryNode" />
-              <item name="user-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="pokemonrun" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sample-spring-microservices-new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sample-spring-microservices-new-master" type="462c0819:PsiDirectoryNode" />
-              <item name="user-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="pokemonrun" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sample-spring-microservices-new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sample-spring-microservices-new-master" type="462c0819:PsiDirectoryNode" />
-              <item name="user-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="pokemonrun" type="462c0819:PsiDirectoryNode" />
-              <item name="daoimpl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sample-spring-microservices-new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sample-spring-microservices-new-master" type="462c0819:PsiDirectoryNode" />
-              <item name="user-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="pokemonrun" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sample-spring-microservices-new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sample-spring-microservices-new-master" type="462c0819:PsiDirectoryNode" />
-              <item name="user-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="pokemonrun" type="462c0819:PsiDirectoryNode" />
-              <item name="info" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sample-spring-microservices-new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sample-spring-microservices-new-master" type="462c0819:PsiDirectoryNode" />
-              <item name="user-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="pokemonrun" type="462c0819:PsiDirectoryNode" />
-              <item name="repository" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sample-spring-microservices-new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sample-spring-microservices-new-master" type="462c0819:PsiDirectoryNode" />
-              <item name="user-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="pokemonrun" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sample-spring-microservices-new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sample-spring-microservices-new-master" type="462c0819:PsiDirectoryNode" />
-              <item name="user-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="pokemonrun" type="462c0819:PsiDirectoryNode" />
-              <item name="serviceimpl" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -495,16 +374,15 @@
       <workItem from="1563170916253" duration="605000" />
       <workItem from="1563323397038" duration="25136000" />
       <workItem from="1563410458476" duration="8341000" />
-      <workItem from="1563496457901" duration="3541000" />
+      <workItem from="1563496457901" duration="5395000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="110289000" />
+    <option name="totallyTimeSpent" value="112143000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30134228" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -954,7 +832,7 @@
     <entry file="file://$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/serviceimpl/GetUserInfoimpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="229">
-          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -963,8 +841,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/controller/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="46" column="5" lean-forward="true" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
+        <state relative-caret-position="286">
+          <caret line="42" column="47" selection-start-line="42" selection-start-column="47" selection-end-line="42" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1613#1614#0" expanded="true" />
