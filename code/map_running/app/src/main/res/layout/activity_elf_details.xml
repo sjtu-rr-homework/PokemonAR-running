@@ -219,6 +219,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout3" />
 
+    <TextView
+        android:id="@+id/act_elf_details_elf_user_exp"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginBottom="16dp"
+        android:text="经验"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3" />
+
     <Button
         android:id="@+id/act_elf_details_elf_button_set"
         android:layout_width="wrap_content"

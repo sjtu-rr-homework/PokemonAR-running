@@ -88,6 +88,19 @@ public class ElfDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int exp=Integer.valueOf(numOfExp.getText().toString());
+                if(nowNum<1){
+                    Toast.makeText(getApplicationContext(), "你尚未拥有该精灵", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if((nowExp+exp)>9800) {
+                    Toast.makeText(getApplicationContext(), "经验溢出", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(!UserData.consumeExp(exp)){
+                    Toast.makeText(getApplicationContext(), "经验不足", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                userExp.setText(UserData.getExp()+"");
                 nowExp+=exp;
                 HttpHandler.addExp(UserData.getUserName(),variety,exp);
                 numOfExp.clearComposingText();
@@ -123,6 +136,11 @@ public class ElfDetailsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 switch(nowGrade){
                     case 1:
+
+                       if(nowExp<2000||nowNum<5){
+                            Toast.makeText(getApplicationContext(), "尚未满足条件", Toast.LENGTH_SHORT).show();
+                            break;
+                        }
                         nowGrade+=1;
                         HttpHandler.addGrade(UserData.getUserName(),variety,1);
                         name.setText("精灵名 "+ElfSourceController.getName(variety,nowGrade));
@@ -135,6 +153,10 @@ public class ElfDetailsActivity extends AppCompatActivity {
                         }
                     case 2:
                         if(ElfSourceController.getMaxLevel(variety)==3) {
+                            if(nowExp<6000||nowNum<10){
+                                Toast.makeText(getApplicationContext(), "尚未满足条件", Toast.LENGTH_SHORT).show();
+                                break;
+                            }
                             nowGrade += 1;
                             HttpHandler.addGrade(UserData.getUserName(),variety,1);
                             name.setText("精灵名 " + ElfSourceController.getName(variety, nowGrade));
