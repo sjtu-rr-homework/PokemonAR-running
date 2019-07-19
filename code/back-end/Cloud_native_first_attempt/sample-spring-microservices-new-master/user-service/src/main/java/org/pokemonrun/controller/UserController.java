@@ -53,7 +53,7 @@ public class UserController {
 	}
 
 	@GetMapping("/addfriend/username/{username}/friendname/{friendname}")
-	public boolean getInfo(@PathVariable("username") String username,@PathVariable("friendname") String friendname)
+	public boolean addFriend(@PathVariable("username") String username,@PathVariable("friendname") String friendname)
 	{
 		return ModifyUserInfo.addFriend(username, friendname);
 	}

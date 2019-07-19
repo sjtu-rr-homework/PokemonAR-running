@@ -2,6 +2,7 @@ package org.pokemonrun.serviceimpl;
 
 import org.pokemonrun.dao.UserDao;
 import org.pokemonrun.entity.User;
+import org.pokemonrun.info.Friendinfo;
 import org.pokemonrun.info.Userinfo;
 import org.pokemonrun.service.GetUserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +25,12 @@ public class GetUserInfoimpl implements GetUserInfo {
         }
         else
         {
-            List<String> friends = new ArrayList<>();
+            List<Friendinfo> friends = new ArrayList<>();
             Set<User> friendsset= temp.getFollowers();
             for(User tempUser:friendsset)
             {
-                friends.add(tempUser.getUsername());
+                Friendinfo tempInfo=new Friendinfo(tempUser.getUsername());
+                friends.add(tempInfo);
             }
             Userinfo tempinfo=new Userinfo(temp.getUsername(),temp.getStar(),temp.getEmail(),temp.getExp(),friends);
             return tempinfo;

@@ -7,8 +7,8 @@ public class Userinfo {
     public int star;
     public String email;
     public int exp;
-    public List<String> friends;
-    public Userinfo(String username,int star,String email,int exp,List<String> friends)
+    public List<Friendinfo> friends;
+    public Userinfo(String username,int star,String email,int exp,List<Friendinfo> friends)
     {
         this.username=username;
         this.email=email;
