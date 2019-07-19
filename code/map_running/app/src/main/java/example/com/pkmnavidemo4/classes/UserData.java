@@ -4,11 +4,14 @@ import com.amap.api.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class UserData {
     private static int exp;
     private static String userName;
     private static List<String> elfList;
+    private static  List<Map> elfDetailsList;
+    private static  boolean onlyHave=false;
     public static String getUserName(){
         return userName;
     }
@@ -52,7 +55,7 @@ public class UserData {
             return false;
     }
     public static int getExp(){
-       return exp;
+        return exp;
     }
     public static void setExp(int num){
         exp=num; }
