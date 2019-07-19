@@ -2,8 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9e081181-8299-493f-963e-ccbac1105606" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/info/Friendinfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../map_running/app/src/main/res/layout/activity_fight.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/serviceimpl/ModifyUserInfoimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/serviceimpl/ModifyUserInfoimpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/info/Userinfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/info/Userinfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/serviceimpl/GetUserInfoimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/serviceimpl/GetUserInfoimpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../map_running/app/app_REMOTE_1668.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../map_running/app/app_REMOTE_1668.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/ElfDetailsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/ElfDetailsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/Fragments/ElfsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/Fragments/ElfsFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/LoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/MapActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/MapActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/classes/ElfSourceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/classes/ElfSourceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/classes/HttpHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/classes/HttpHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/classes/UserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../map_running/app/src/main/java/example/com/pkmnavidemo4/classes/UserData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../map_running/app/src/main/res/layout/activity_elf_details.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../map_running/app/src/main/res/layout/activity_elf_details.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/config-service/target/" />
@@ -29,25 +42,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/controller/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="49" column="19" selection-start-line="49" selection-start-column="19" selection-end-line="49" selection-end-column="19" />
+            <state relative-caret-position="362">
+              <caret line="46" column="5" lean-forward="true" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1613#1614#0" expanded="true" />
                 <element signature="e#1660#1661#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/service/ModifyUserInfo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="4" column="64" selection-start-line="4" selection-start-column="64" selection-end-line="4" selection-end-column="64" />
             </state>
           </provider>
         </entry>
@@ -61,7 +65,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/serviceimpl/ModifyUserInfoimpl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="457">
@@ -85,8 +89,21 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/info/Userinfo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+            <state relative-caret-position="190">
+              <caret line="10" column="81" selection-start-line="10" selection-start-column="81" selection-end-line="10" selection-end-column="81" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/info/Friendinfo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="6" column="35" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
+              <folding>
+                <element signature="e#131#132#0" expanded="true" />
+                <element signature="e#150#151#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -94,8 +111,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/serviceimpl/GetUserInfoimpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="703">
-              <caret line="46" column="33" selection-start-line="46" selection-start-column="33" selection-end-line="46" selection-end-column="33" />
+            <state relative-caret-position="229">
+              <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -146,7 +163,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/gateway-service/pom.xml" />
         <option value="$PROJECT_DIR$/discovery-service/pom.xml" />
         <option value="$PROJECT_DIR$/config-service/pom.xml" />
         <option value="$PROJECT_DIR$/record-service/src/main/java/org.pokemonrun/RunningRecordServiceApplication.java" />
@@ -191,12 +207,13 @@
         <option value="$PROJECT_DIR$/pet-service/src/test/java/org/pokemonrun/PetServiceApplicationTests.java" />
         <option value="$PROJECT_DIR$/location-service/src/main/java/org/pokemonrun/serviceimpl/LocationServiceimpl.java" />
         <option value="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/service/ModifyUserInfo.java" />
-        <option value="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/info/Userinfo.java" />
         <option value="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/entity/User.java" />
         <option value="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/service/GetUserInfo.java" />
-        <option value="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/serviceimpl/GetUserInfoimpl.java" />
-        <option value="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/controller/UserController.java" />
         <option value="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/serviceimpl/ModifyUserInfoimpl.java" />
+        <option value="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/controller/UserController.java" />
+        <option value="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/info/Userinfo.java" />
+        <option value="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/info/Friendinfo.java" />
+        <option value="$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/serviceimpl/GetUserInfoimpl.java" />
       </list>
     </option>
   </component>
@@ -478,17 +495,18 @@
       <workItem from="1563170916253" duration="605000" />
       <workItem from="1563323397038" duration="25136000" />
       <workItem from="1563410458476" duration="8341000" />
-      <workItem from="1563496457901" duration="1881000" />
+      <workItem from="1563496457901" duration="3541000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="108629000" />
+    <option name="totallyTimeSpent" value="110289000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.30134228" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30134228" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -510,7 +528,7 @@
       <window_info anchor="bottom" id="Java Enterprise" order="11" weight="0.3286119" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
       <window_info anchor="bottom" id="Version Control" order="13" />
-      <window_info active="true" anchor="bottom" x="23" y="178" width="1490" height="468" id="Run Dashboard" order="14" visible="true" weight="0.42634562" />
+      <window_info anchor="bottom" x="23" y="178" width="1490" height="468" id="Run Dashboard" order="14" visible="true" weight="0.04249292" />
       <window_info anchor="bottom" id="Messages" order="15" weight="0.5042493" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -529,16 +547,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/record-service/src/main/java/org.pokemonrun/serviceimpl/RecordServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="27" column="14" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/record-service/src/main/java/org.pokemonrun/dao/RunningRecordDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
@@ -873,18 +881,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/controller/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="49" column="19" selection-start-line="49" selection-start-column="19" selection-end-line="49" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1613#1614#0" expanded="true" />
-            <element signature="e#1660#1661#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/service/ModifyUserInfo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
@@ -903,23 +899,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="6" column="43" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/info/Userinfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/serviceimpl/GetUserInfoimpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="703">
-          <caret line="46" column="33" selection-start-line="46" selection-start-column="33" selection-end-line="46" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -950,6 +929,46 @@
           <caret line="69" column="9" selection-start-line="69" selection-start-column="9" selection-end-line="69" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/info/Userinfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="81" selection-start-line="10" selection-start-column="81" selection-end-line="10" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/info/Friendinfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="35" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
+          <folding>
+            <element signature="e#131#132#0" expanded="true" />
+            <element signature="e#150#151#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/serviceimpl/GetUserInfoimpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user-service/src/main/java/org/pokemonrun/controller/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="46" column="5" lean-forward="true" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1613#1614#0" expanded="true" />
+            <element signature="e#1660#1661#0" expanded="true" />
           </folding>
         </state>
       </provider>
