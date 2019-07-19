@@ -6,22 +6,7 @@ import example.com.pkmnavidemo4.R;
 
 public class ElfSourceController {
     //private Context mContext;
-    public static int getPower(int id,int level,int grade) {
-        switch (id) {
-            case 1:
-                return (int) (1.35 * level * level * (1 + grade * 0.4));
-            case 2:
-                return (int) (1.25 * level * level * (1 + grade * 0.35));
-            case 3:
-                return (int) (1.30 * level * level * (1 + grade * 0.28));
-            case 4:
-                return (int) (1.30 * level * level * (1 + grade * 0.55));
-            case 5:
-                return (int) (1.10*level*level*(1+grade*0.5));
-            default:
-                return 99999;
-        }
-    }
+
     public static int getBackground(int id){
         switch (id){
             case 1:

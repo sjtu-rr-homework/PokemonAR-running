@@ -46,17 +46,6 @@ public class UserController {
 		return GetUserInfo.getUserInfo(username);
 	}
 
-	@GetMapping("/getexp/username/{username}")
-	public Integer getExp(@PathVariable("username") String username)
-	{
-		return GetUserInfo.getExp(username);
-	}
-
-	@GetMapping("/addfriend/username/{username}/friendname/{friendname}")
-	public boolean addFriend(@PathVariable("username") String username,@PathVariable("friendname") String friendname)
-	{
-		return ModifyUserInfo.addFriend(username, friendname);
-	}
 
 
 

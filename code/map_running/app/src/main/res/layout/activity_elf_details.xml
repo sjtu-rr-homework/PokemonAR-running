@@ -76,7 +76,7 @@
             android:background="@drawable/catchball" />
 
         <TextView
-            android:id="@+id/act_elf_details_elf_level"
+            android:id="@+id/act_elf_details_elf_id"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_marginStart="150dp"
@@ -94,7 +94,7 @@
             android:textSize="20dp" />
 
         <TextView
-            android:id="@+id/act_elf_details_elf_power"
+            android:id="@+id/act_elf_details_elf_level"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_marginStart="150dp"
@@ -144,7 +144,7 @@
             android:layout_marginTop="90dp"
             android:ems="10"
             android:hint="输入要增加的经验"
-            android:inputType="number"
+            android:inputType="textPersonName"
             android:textSize="16dp" />
 
         <Button
@@ -201,32 +201,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout3" />
-
-
-    <TextView
-        android:id="@+id/act_elf_details_elf_user_exp"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginBottom="16dp"
-        android:text="经验"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3" />
-
-    <Button
-        android:id="@+id/act_elf_details_elf_button_set"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="7dp"
-        android:text="设为出战精灵"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.013"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3"
-        app:layout_constraintVertical_bias="1.0" />
 
 </android.support.constraint.ConstraintLayout>
