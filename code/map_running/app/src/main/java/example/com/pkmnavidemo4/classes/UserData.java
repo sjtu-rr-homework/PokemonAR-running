@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class UserData {
-    private int exp;
+    private static int exp;
     private static String userName;
     private static List<String> elfList;
     private static  List<Map> elfDetailsList;
