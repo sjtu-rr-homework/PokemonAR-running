@@ -19,7 +19,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import example.com.pkmnavidemo4.classes.HttpHandler;
-import example.com.pkmnavidemo4.classes.UserData;
 
 public class LoginActivity  extends AppCompatActivity {
     private Button login;
