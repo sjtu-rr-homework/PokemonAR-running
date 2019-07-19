@@ -45,7 +45,7 @@ import example.com.pkmnavidemo4.LoginActivity;
 import example.com.pkmnavidemo4.MainActivity;
 
 public class HttpHandler {
-    private static String UrlHead="http://202.120.40.8:30751";
+    private static String UrlHead="http://6c742b9d.ngrok.io";
 
     @Nullable
     public static Activity findActivity(Context context) {
@@ -433,9 +433,7 @@ public class HttpHandler {
                     while((s = br.readLine())!=null){
                         sb.append(s);
                     }
-                    UserData.setExp(Integer.valueOf(s));
-                    //setContent(sb.toString());
-                    Log.d("123","---"+sb.toString());
+                    UserData.setExp(Integer.valueOf(sb.toString()));
                 } catch (Exception e) {
                     e.printStackTrace();
                     Log.d("haha",e.getMessage());
