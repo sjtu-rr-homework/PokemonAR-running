@@ -8,6 +8,8 @@ import android.icu.text.SimpleDateFormat;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,9 +45,11 @@ import java.util.List;
 import java.util.Map;
 import example.com.pkmnavidemo4.LoginActivity;
 import example.com.pkmnavidemo4.MainActivity;
+import example.com.pkmnavidemo4.R;
 
 public class HttpHandler {
-    private static String UrlHead="http://202.120.40.8:30751";
+
+    private static String UrlHead="http://6c742b9d.ngrok.io";
 
     @Nullable
     public static Activity findActivity(Context context) {
@@ -433,7 +437,8 @@ public class HttpHandler {
                     while((s = br.readLine())!=null){
                         sb.append(s);
                     }
-                    UserData.setExp(Integer.valueOf(s));
+
+                    UserData.setExp(Integer.valueOf(sb.toString()));
                     //setContent(sb.toString());
                     Log.d("123","---"+sb.toString());
                 } catch (Exception e) {
@@ -901,6 +906,139 @@ public class HttpHandler {
                     //iLog.d("123","---"+sb.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
+                    Log.d("haha",e.getMessage());
+                }finally {
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+
+                        }
+                    }
+                }
+            }
+        }).start();
+
+    }
+
+    public static void addFriend(Context context,String username,String friendname) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("haha","go1");
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String Url=UrlHead+"/user/addfriend/username/"+username+"/friendname/"+friendname;
+                //https://6ed30734.ngrok.io/user/register/username/macoredroid/password/c7o2r1e4/email/coredroid0401@gmail.com
+                try {
+                    //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
+                    URL url=new URL(Url);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(8000);
+                    InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                    Button addfriend=(Button)findActivity(context).findViewById(R.id.act_friend_add);
+                    if(sb.toString().equals("true")){
+                        Looper.prepare();
+                        Toast.makeText(context,"添加好友成功",Toast.LENGTH_SHORT).show();
+                        addfriend.setVisibility(View.INVISIBLE);
+                        Looper.loop();
+
+                    }
+                    else{
+                        Looper.prepare();
+                        Toast.makeText(context,"添加失败，你们已经是好友",Toast.LENGTH_SHORT).show();
+                        addfriend.setVisibility(View.INVISIBLE);
+                        Looper.loop();
+                    }
+                    //setContent(sb.toString());
+                    Log.d("123","---"+sb.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.d("haha",e.getMessage());
+                }finally {
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+
+    public static void getFriend() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("haha","go1");
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String Url=UrlHead+"/user/getinfo/username/"+UserData.getUserName();
+                UserData.isFriendGet=false;
+                //https://6ed30734.ngrok.io/user/register/username/macoredroid/password/c7o2r1e4/email/coredroid0401@gmail.com
+                try {
+                    //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
+                    URL url=new URL(Url);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(8000);
+                    InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+
+                    if(conn.getResponseCode()==200) {
+                        StringBuilder sb = new StringBuilder();
+                        String s;
+                        while ((s = br.readLine()) != null) {
+                            sb.append(s);
+                        }
+                        Log.d("mse", sb.toString());
+                        try {
+                            if(UserData.isFriendGet||UserData.friend.size()>0){
+                                UserData.friend.clear();
+                                UserData.isFriendGet=false;
+                            }
+                            JSONObject jb=new JSONObject(sb.toString());
+                            JSONArray array = new JSONArray(jb.getString("friends"));
+                            for (int j = 0; j < array.length(); ++j) {
+                                JSONObject jjj = array.getJSONObject(j);
+                                Log.d("check",jjj.getString("friendname"));
+                                UserData.friend.add(jjj.getString("friendname"));
+                                //LatLng point = new LatLng(jjj.getDouble("lat"), jjj.getDouble("lng"));
+                                //runRecord.add(point);
+                                //Log.d("CCC", jjj.getString("lat") + "," + jjj.getString("lng"));
+                            }
+                            UserData.isFriendGet=true;
+
+                        } catch (Exception e) {
+                        }
+                    }
+                    else{
+                        UserData.isFriendGet = true;
+                    }
+                    //setContent(sb.toString());
+                    //iLog.d("123","---"+sb.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    UserData.isFriendGet=true;
                     Log.d("haha",e.getMessage());
                 }finally {
                     if (conn!=null){
