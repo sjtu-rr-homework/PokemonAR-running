@@ -59,15 +59,15 @@
                     <el-amap-marker v-for="(marker, index) in modifier.markers" :position="marker.position"
                                     :events="marker.events" :visible="marker.visible" :draggable="true"
                                     :vid="index" :key="index"></el-amap-marker>
-                    <el-amap-polygon :vid="1001" :path="modifier.border.path" :events="modifier.border.events"
-                                     :draggable="true" :editable="true"></el-amap-polygon>
+                    <el-amap-polygon :path="modifier.border.path" :events="modifier.border.events"
+                                     :draggable="true" :editable="true" :strokeOpacity="0.5" :fillOpacity="0.1"></el-amap-polygon>
                 </div>
                 <div v-else>
                     <el-amap-marker v-for="(marker, index) in markers" :position="marker.position"
                                     :events="marker.events" :visible="marker.visible" :draggable="false"
                                     :vid="index" :key="index"></el-amap-marker>
-                    <el-amap-polygon :vid="1001" :path="border.path" :events="border.events"
-                                     :draggable="false" :editable="false"></el-amap-polygon>
+                    <el-amap-polygon :path="border.path" :events="border.events"
+                                     :draggable="false" :editable="false" :strokeOpacity="0.5" :fillOpacity="0.1"></el-amap-polygon>
                 </div>
             </el-amap>
         </div>
@@ -89,7 +89,7 @@
         },
         computed: {
             modifierOn: function () {
-                return this.flagModifying || this.basicRuleModifying;
+                return this.flagModifying || this.basicRuleModifying || this.borderModifying;
             },
             modificationFail: function () {
                 return this.flagModifyFail || this.basicRuleModifyFail || this.borderModifyFail;
@@ -137,17 +137,25 @@
                     minSpeed: 0,
                     maxSpeed: 0,
                     markers: [],
-                    border: null
+                    border: {
+                        path: [],
+                        hideOutsideModifier: true,
+                        events: {}
+                    }
                 },
                 mileageGoal: 0,
                 minSpeed: 0,
                 maxSpeed: 0,
-                border: null
+                border: {
+                    path: [],
+                    hideOutsideModifier: true,
+                    events: {}
+                }
             };
         },
         methods: {
             deepCopy: function (o) {
-                if (o instanceof Array) {  //先判断Array
+                if (o instanceof Array) {
                     let n = [];
                     for (let i = 0; i < o.length; ++i) {
                         n.push(this.deepCopy(o[i]));
@@ -171,7 +179,10 @@
                 this.modifier.mileageGoal = this.mileageGoal;
                 this.modifier.minSpeed = this.minSpeed;
                 this.modifier.maxSpeed = this.maxSpeed;
+                console.log(this.border);
                 this.modifier.border = this.deepCopy(this.border);
+                this.modifier.border.hideOutsideModifier = false;
+                console.log(this.modifier.border);
                 // modifying flags
                 this.flagModifying = true;
                 this.basicRuleModifying = true;
@@ -258,13 +269,16 @@
                     });
             },
             modifyFlags: function () {
+                this.flagModifySubmitting = true;
                 this.flagModifyFail = false;
                 this.$http.put('api/admin/rule/flags', this.getModifiedFlags())
                     .then((resp) => {
                         this.flagModifying = false;
+                        this.flagModifySubmitting = false;
                         this.requestFlags();
                     }, () => {
                         this.flagModifyFail = true;
+                        this.flagModifySubmitting = false;
                     });
             },
             requestBasicRule: function () {
@@ -282,6 +296,7 @@
                     });
             },
             modifyBasicRule: function () {
+                this.basicRuleModifySubmitting = true;
                 this.basicRuleModifyFail = false;
                 this.$http.put('api/admin/rule/basic', {
                     mileageRequirement: this.modifier.mileageGoal,
@@ -289,17 +304,22 @@
                     maxSpeed: this.modifier.maxSpeed
                 }).then((resp) => {
                     this.basicRuleModifying = false;
+                    this.basicRuleModifySubmitting = false;
                     this.requestBasicRule();
                 }, () => {
                     this.basicRuleModifyFail = true;
+                    this.basicRuleModifySubmitting = false;
                 });
             },
             addInitialBorder: function () {
                 // TODO: add initial border
                 this.border = {
-                    path: [[], [], []],
-                    isNew: true // will not be displayed when the modifier is off
+                    path: [[121.455746, 31.037906], [121.460161, 31.026424],
+                        [121.427936, 31.016467], [121.42311, 31.027518]],
+                    events: {},
+                    hideOutsideModifier: true // will not be displayed when the modifier is off
                 };
+                console.log(this.border);
             },
             requestBorder: function () {
                 this.gettingBorder = true;
@@ -308,6 +328,12 @@
                     .then((resp) => {
                         if(resp.data.path.length < 3){
                             this.addInitialBorder();
+                        }else{
+                            this.border = {
+                                path: resp.data,
+                                events: {},
+                                hideOutsideModifier: false
+                            };
                         }
                     }, () => {
                         this.addInitialBorder();
@@ -316,12 +342,15 @@
                     });
             },
             modifyBorder: function () {
+                this.borderModifySubmitting = true;
                 this.borderModifyFail = false;
                 this.$http.put('api/admin/rule/border', {}).then((resp) => {
                     this.borderModifying = false;
-                    this.requestBasicRule();
+                    this.borderModifySubmitting = false;
+                    this.requestBorder();
                 }, () => {
                     this.borderModifyFail = true;
+                    this.borderModifySubmitting = false;
                 });
             },
             submitModification: function () {
