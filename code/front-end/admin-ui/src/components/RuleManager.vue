@@ -238,7 +238,7 @@
             requestFlags: function () {
                 this.gettingFlags = true;
                 this.getFlagsFail = false;
-                this.$http.get('api/admin/rule/flags')
+                this.$http.get('ruleadmin_api/admin/rule/flags')
                     .then((resp) => {
                         this.markers = [];
                         this.nextFlagID = 0;
@@ -256,7 +256,7 @@
             modifyFlags: function () {
                 this.flagModifySubmitting = true;
                 this.flagModifyFail = false;
-                this.$http.put('api/admin/rule/flags', this.getModifiedFlags())
+                this.$http.put('ruleadmin_api/admin/rule/flags', this.getModifiedFlags())
                     .then((resp) => {
                         this.flagModifying = false;
                         this.flagModifySubmitting = false;
@@ -269,7 +269,7 @@
             requestBasicRule: function () {
                 this.gettingBasicRule = true;
                 this.getBasicRuleFail = false;
-                this.$http.get('api/admin/rule/basic')
+                this.$http.get('ruleadmin_api/admin/rule/basic')
                     .then((resp) => {
                         this.mileageGoal = resp.data.mileageRequirement;
                         this.minSpeed = resp.data.minSpeed;
@@ -283,7 +283,7 @@
             modifyBasicRule: function () {
                 this.basicRuleModifySubmitting = true;
                 this.basicRuleModifyFail = false;
-                this.$http.put('api/admin/rule/basic', {
+                this.$http.put('ruleadmin_api/admin/rule/basic', {
                     mileageRequirement: this.modifier.mileageGoal,
                     minSpeed: this.modifier.minSpeed,
                     maxSpeed: this.modifier.maxSpeed
@@ -325,7 +325,7 @@
                 this.gettingBorder = true;
                 this.getBorderFail = false;
                 this.borderInfoError = false;
-                this.$http.get('api/admin/rule/border')
+                this.$http.get('ruleadmin_api/admin/rule/border')
                     .then((resp) => {
                         if(resp.data.length < 3){
                             this.addInitialBorder();
@@ -356,7 +356,7 @@
                 }
                 console.log('path');
                 console.log(path);
-                this.$http.put('api/admin/rule/border',
+                this.$http.put('ruleadmin_api/admin/rule/border',
                     path
                 ).then((resp) => {
                     this.borderModifying = false;
