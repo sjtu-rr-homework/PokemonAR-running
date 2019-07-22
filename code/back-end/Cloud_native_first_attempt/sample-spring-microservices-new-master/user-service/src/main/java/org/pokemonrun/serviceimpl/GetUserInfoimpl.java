@@ -21,7 +21,7 @@ public class GetUserInfoimpl implements GetUserInfo {
         }
         else
         {
-            Userinfo tempinfo=new Userinfo(temp.getUsername(),temp.getStar(),temp.getEmail(),temp.getExp(),temp.getPet());
+            Userinfo tempinfo=new Userinfo(temp.getUsername(),temp.getStar(),temp.getEmail(),temp.getExp(),temp.getPet(),temp.getDistance());
             return tempinfo;
         }
     }
@@ -35,7 +35,7 @@ public class GetUserInfoimpl implements GetUserInfo {
         }
         else
         {
-            UserInfoForAdmin tempinfo=new UserInfoForAdmin(temp.getUsername(),temp.getStar(),temp.getEmail(),temp.getExp(),temp.getUserID());
+            UserInfoForAdmin tempinfo=new UserInfoForAdmin(temp.getUsername(),temp.getStar(),temp.getEmail(),temp.getExp(),temp.getUserID(),temp.getPet(),temp.getDistance());
             return tempinfo;
         }
     }

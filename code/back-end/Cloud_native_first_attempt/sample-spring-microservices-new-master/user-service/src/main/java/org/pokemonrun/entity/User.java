@@ -20,7 +20,8 @@ public class User implements Serializable {
     private String email;
     private int star;
     private int exp;
-    private int pet=-1;
+    private int pet;
+    private double distance;
 
     @Id
     @Column(name = "userID")
@@ -76,6 +77,12 @@ public class User implements Serializable {
     public int getPet() {return pet; }
     public void setPet(int pet) { this.pet=pet; }
 
+    @Basic
+    @Column(name="distance")
+    public double getDistance() {return distance; }
+    public void setDistance(double distance) {this.distance=distance; }
+
+
     private User()
     {
 
@@ -89,6 +96,7 @@ public class User implements Serializable {
         this.star=star;
         this.exp=exp;
         this.pet=pet;
+        this.distance=0;
 
 
     }

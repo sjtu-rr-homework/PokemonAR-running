@@ -69,5 +69,29 @@ public class ModifyUserInfoimpl implements ModifyUserInfo {
         }
     }
 
+    @Override
+    public boolean AddDistance(String username, double distance) {
+        User temp=UserDao.findOne(username);
+        if(temp==null)
+        {
+            return false;
+        }
+        else
+        {
+            if(distance<=0)
+            {
+                return false;
+            }
+            else
+            {
+                double tempDistance=temp.getDistance();
+                tempDistance+=distance;
+                temp.setDistance(tempDistance);
+                UserDao.save(temp);
+                return true;
+            }
+        }
+    }
+
 
 }

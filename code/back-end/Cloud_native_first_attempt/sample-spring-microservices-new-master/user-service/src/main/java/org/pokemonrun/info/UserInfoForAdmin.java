@@ -6,12 +6,16 @@ public class UserInfoForAdmin {
     public int star;
     public String email;
     public int exp;
-    public UserInfoForAdmin(String username,int star,String email,int exp, int userID)
+    public int pet;
+    public double distance;
+    public UserInfoForAdmin(String username,int star,String email,int exp, int userID,int pet, double distance)
     {
         this.username=username;
         this.email=email;
         this.star=star;
         this.exp=exp;
         this.userID=userID;
+        this.pet=pet;
+        this.distance=distance;
     }
 }
