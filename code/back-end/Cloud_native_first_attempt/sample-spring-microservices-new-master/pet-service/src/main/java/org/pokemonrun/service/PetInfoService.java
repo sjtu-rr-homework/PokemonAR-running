@@ -1,6 +1,5 @@
 package org.pokemonrun.service;
 
-import org.pokemonrun.info.AdminGetPetInfo;
 import org.pokemonrun.info.Petinfo;
 
 import java.util.List;
