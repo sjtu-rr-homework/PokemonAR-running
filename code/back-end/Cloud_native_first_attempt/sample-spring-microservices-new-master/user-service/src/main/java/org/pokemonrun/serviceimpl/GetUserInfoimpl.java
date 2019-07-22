@@ -35,7 +35,7 @@ public class GetUserInfoimpl implements GetUserInfo {
         }
         else
         {
-            UserInfoForAdmin tempinfo=new UserInfoForAdmin(temp.getUsername(),temp.getStar(),temp.getEmail(),temp.getExp(),temp.getUserID());
+            UserInfoForAdmin tempinfo=new UserInfoForAdmin(temp.getUsername(),temp.getStar(),temp.getEmail(),temp.getExp(),temp.getUserID(),temp.getPet());
             return tempinfo;
         }
     }
