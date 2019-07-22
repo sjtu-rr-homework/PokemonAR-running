@@ -1,5 +1,6 @@
 package org.pokemonrun.controller;
 
+import org.pokemonrun.info.UserInfoForAdmin;
 import org.pokemonrun.info.Userinfo;
 import org.pokemonrun.service.GetUserInfo;
 import org.pokemonrun.service.ModifyUserInfo;
@@ -46,7 +47,11 @@ public class UserController {
 		return GetUserInfo.getUserInfo(username);
 	}
 
-
+	@GetMapping("/admingetuserinfo/username/{username}")
+	public UserInfoForAdmin AdminGetUserInfo(@PathVariable("username") String username)
+	{
+		return  GetUserInfo.AdminGetUserInfo(username);
+	}
 
 
 }
