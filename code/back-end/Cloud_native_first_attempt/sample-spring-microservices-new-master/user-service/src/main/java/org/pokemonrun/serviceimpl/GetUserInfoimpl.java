@@ -39,4 +39,18 @@ public class GetUserInfoimpl implements GetUserInfo {
             return tempinfo;
         }
     }
+
+    @Override
+    public int GetPet(String username) {
+        User temp=UserDao.findOne(username);
+        if(temp==null)
+        {
+            return -1;
+        }
+        else
+        {
+            int temppet=temp.getPet();
+            return temppet;
+        }
+    }
 }

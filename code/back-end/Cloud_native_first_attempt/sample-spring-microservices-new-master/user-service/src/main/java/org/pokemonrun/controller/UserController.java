@@ -69,4 +69,9 @@ public class UserController {
 	{
 		return ModifyUserInfo.AddDistance(username,Double.parseDouble(distance));
 	}
+	@GetMapping("/getpet/username/{username}")
+	public int getPet(@PathVariable("username") String username)
+	{
+		return GetUserInfo.GetPet(username);
+	}
 }

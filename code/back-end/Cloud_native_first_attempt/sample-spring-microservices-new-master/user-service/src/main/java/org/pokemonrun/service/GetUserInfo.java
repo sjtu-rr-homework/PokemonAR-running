@@ -6,4 +6,5 @@ import org.pokemonrun.info.Userinfo;
 public interface GetUserInfo {
     public Userinfo getUserInfo(String username);
     public UserInfoForAdmin AdminGetUserInfo(String username);
+    public int GetPet(String username);
 }
