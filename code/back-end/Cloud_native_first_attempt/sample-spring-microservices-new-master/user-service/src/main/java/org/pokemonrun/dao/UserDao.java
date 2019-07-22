@@ -12,4 +12,5 @@ public interface UserDao {
     void save(User user);
     List<User> findAll();
     void remove(Integer id);
+    List<User> getAllUser();
 }
