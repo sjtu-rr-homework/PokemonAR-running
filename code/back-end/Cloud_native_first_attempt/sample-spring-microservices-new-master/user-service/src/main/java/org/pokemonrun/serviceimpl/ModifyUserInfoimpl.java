@@ -30,4 +30,44 @@ public class ModifyUserInfoimpl implements ModifyUserInfo {
         }
         return true;
     }
+
+    @Override
+    public boolean blockUser(String username) {
+        User temp=UserDao.findOne(username);
+        if(temp==null)
+        {
+            return false;
+        }
+        else
+        {
+            int star=temp.getStar();
+            if(star==-1)
+            {
+                temp.setStar(0);
+            }
+            else
+            {
+                temp.setStar(-1);
+            }
+            UserDao.save(temp);
+            return true;
+        }
+    }
+
+    @Override
+    public boolean SetPet(String username, int pet) {
+        User temp=UserDao.findOne(username);
+        if(temp==null)
+        {
+            return false;
+        }
+        else
+        {
+            temp.setPet(pet);
+            UserDao.save(temp);
+            return true;
+        }
+    }
+
+
 }
