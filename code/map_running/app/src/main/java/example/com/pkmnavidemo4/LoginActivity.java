@@ -43,6 +43,7 @@ public class LoginActivity  extends AppCompatActivity {
                 HttpHandler.login(LoginActivity.this,username,password);
                 HttpHandler.getElfs(username);
                 HttpHandler.getExp(username);
+                UserData.setUserInfo(username,1);
                 UserData.initonlyHave();
             }
         });

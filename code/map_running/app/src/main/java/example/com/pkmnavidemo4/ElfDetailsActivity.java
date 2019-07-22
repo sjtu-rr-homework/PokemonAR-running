@@ -143,7 +143,7 @@ public class ElfDetailsActivity extends AppCompatActivity {
         setMainElf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                UserData.setPet(variety);
             }
         });
 

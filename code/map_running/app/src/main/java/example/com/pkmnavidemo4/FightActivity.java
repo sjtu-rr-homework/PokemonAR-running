@@ -38,6 +38,7 @@ public class FightActivity extends AppCompatActivity {
     private ImageView image2;
     private List<String> list;
     private Button start;
+    private Button finish;
     RecyclerView mRecyclerView;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +58,13 @@ public class FightActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startFight();
+            }
+        });
+        finish=findViewById(R.id.act_fight_button_finish);
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               finish();
             }
         });
         image1=findViewById(R.id.act_fight_elf_player1);
