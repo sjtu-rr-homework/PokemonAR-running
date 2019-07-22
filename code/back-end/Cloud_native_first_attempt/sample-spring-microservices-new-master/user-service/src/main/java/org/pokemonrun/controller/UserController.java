@@ -64,4 +64,9 @@ public class UserController {
 	{
 		return ModifyUserInfo.blockUser(username);
 	}
+	@GetMapping("/addDistance/username/{username}/distance/{distance}")
+	public boolean addDistance(@PathVariable("username") String username, @PathVariable("distance") String distance)
+	{
+		return ModifyUserInfo.AddDistance(username,Double.parseDouble(distance));
+	}
 }
