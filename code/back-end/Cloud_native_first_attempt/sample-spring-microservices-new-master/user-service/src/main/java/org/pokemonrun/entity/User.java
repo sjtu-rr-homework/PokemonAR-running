@@ -1,12 +1,15 @@
 package org.pokemonrun.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
@@ -20,6 +23,10 @@ public class User implements Serializable {
     private String email;
     private int star;
     private int exp;
+    private int pet;
+    private double distance;
+    private Set<User> following = new HashSet<User>();
+    private Set<User> followers = new HashSet<User>();
 
     @Id
     @Column(name = "userID")
@@ -70,21 +77,49 @@ public class User implements Serializable {
     public int getExp() {return exp;}
     public void setExp(int exp) { this.exp=exp; }
 
+    @Basic
+    @Column(name="pet")
+    public int getPet() {return pet; }
+    public void setPet(int pet) { this.pet=pet; }
 
+    @Basic
+    @Column(name="distance")
+    public double getDistance() {return distance; }
+    public void setDistance(double distance) {this.distance=distance; }
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name="UserRel",
+            joinColumns={@JoinColumn(name="ParentId")},
+            inverseJoinColumns={@JoinColumn(name="UserId")})
+    @JsonBackReference
+    public Set<User> getFollowers() {return followers;}
+    public void setFollowers(Set<User> followers) {this.followers=followers; }
+
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name="UserRel",
+            joinColumns={@JoinColumn(name="UserId")},
+            inverseJoinColumns={@JoinColumn(name="ParentId")})
+    @JsonBackReference
+    public Set<User> getFollowing(){return following; }
+    public void setFollowing(Set<User> following) {this.following= following; }
 
     private User()
     {
 
     }
 
-    public User(String username,String password,String email,int star,int exp)
+    public User(String username,String password,String email,int star,int exp,int pet)
     {
         this.username=username;
         this.password=password;
         this.email=email;
         this.star=star;
         this.exp=exp;
-
+        this.pet=pet;
+        this.distance=0;
+        this.followers=new HashSet<User>();
+        this.following=new HashSet<User>();
 
     }
 }

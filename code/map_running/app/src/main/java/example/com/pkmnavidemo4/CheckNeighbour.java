@@ -102,6 +102,7 @@ public class CheckNeighbour extends AppCompatActivity implements LocationSource,
                 Intent intent=new Intent(CheckNeighbour.this,FriendActivity.class);
                 String username=marker.getTitle();
                 intent.putExtra("username",username);
+                intent.putExtra("type",1);
                 CheckNeighbour.this.startActivity(intent);
                 return true;
             }

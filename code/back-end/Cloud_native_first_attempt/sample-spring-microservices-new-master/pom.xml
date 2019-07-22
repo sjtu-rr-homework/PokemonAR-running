@@ -14,6 +14,7 @@
 		<module>location-service</module>
 		<module>record-service</module>
 		<module>pet-service</module>
+		<module>proxy-service</module>
 	</modules>
 
 </project>
