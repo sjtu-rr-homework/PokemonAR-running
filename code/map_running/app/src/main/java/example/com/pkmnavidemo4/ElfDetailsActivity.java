@@ -37,6 +37,7 @@ public class ElfDetailsActivity extends AppCompatActivity {
     private Button AR;
     private Button addExp;
     private Button addGrade;
+    private Button setMainElf;
     private int nowExp=0;
     private int level=1;
     private int nowNum=0;
@@ -136,6 +137,15 @@ public class ElfDetailsActivity extends AppCompatActivity {
         main.setBackgroundResource(ElfSourceController.getBackgroundWithLevel(variety,nowGrade));
         userExp=findViewById(R.id.act_elf_details_elf_user_exp);
         userExp.setText(UserData.getExp()+"");
+
+        //设置出战精灵
+        setMainElf=findViewById(R.id.act_elf_details_elf_button_set);
+        setMainElf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserData.setPet(variety);
+            }
+        });
 
         //进化
         addGrade=findViewById(R.id.act_elf_details_elf_button_grow);

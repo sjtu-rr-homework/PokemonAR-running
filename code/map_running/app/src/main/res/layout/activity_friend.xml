@@ -48,10 +48,12 @@
                     android:textColor="#FFC107"
                     android:textSize="30sp"
                     android:textStyle="bold"/>
+
                 <ImageView
+                    android:id="@+id/act_friend_elf"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
-                    android:background="@drawable/charmander"/>
+                    android:background="@drawable/charmander" />
                 <TextView
                     android:id="@+id/act_friend_elfname"
                     android:layout_width="match_parent"

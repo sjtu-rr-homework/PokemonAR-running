@@ -30,7 +30,11 @@ public class RecordActivity extends AppCompatActivity {
         ListView listview=(ListView)findViewById(R.id.ListView1);
         //创建一个List集合，List集合的元素是map
         while(!UserData.isrecordGet){
+            try{
+                Thread.sleep(10);
+            }catch (Exception e){
 
+            }
         }
         List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
         {

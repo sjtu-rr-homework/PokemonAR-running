@@ -65,4 +65,15 @@ public class GetUserInfoimpl implements GetUserInfo {
             return temppet;
         }
     }
+
+    @Override
+    public List<String> GetAllUser() {
+        List<User> tempList=UserDao.findAll();
+        List<String> usernamelist=new ArrayList<>();
+        for(User tempUser:tempList)
+        {
+            usernamelist.add(tempUser.getUsername());
+        }
+        return usernamelist;
+    }
 }
