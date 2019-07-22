@@ -5,7 +5,11 @@ import android.content.Context;
 import example.com.pkmnavidemo4.R;
 
 public class ElfSourceController {
-    //private Context mContext;
+    //得到精灵之间互相的伤害值
+    public static int getAttack(int leftPower,int rightPower){
+        return 40*(leftPower*leftPower)/(leftPower*leftPower+rightPower*rightPower);
+    }
+    //精灵战斗力计算;
     public static int getPower(int id,int level,int grade) {
         switch (id) {
             case 1:
@@ -22,6 +26,7 @@ public class ElfSourceController {
                 return 99999;
         }
     }
+    //精灵图鉴中背景图片
     public static int getBackground(int id){
         switch (id){
             case 1:
@@ -38,7 +43,7 @@ public class ElfSourceController {
                 return R.drawable.charizard;
         }
     }
-
+    //精灵的最高形态
     public static int getMaxLevel(int id){
         switch (id){
             case 1:
@@ -55,6 +60,7 @@ public class ElfSourceController {
                 return 2;
         }
     }
+    //根据精灵种类精灵形态得到背景图片
     public static int getBackgroundWithLevel(int id, int level){
         switch (id){
             case 1:
@@ -110,7 +116,7 @@ public class ElfSourceController {
                 return R.drawable.charizard;
         }
     }
-
+    //得到精灵名字
     public static String getName(int id, int level){
         switch (id){
             case 1:
@@ -168,7 +174,7 @@ public class ElfSourceController {
     }
 
 
-
+   //得到精灵模型
     public static int getModel(int id, int level) {
         switch (id){
             case 1:
@@ -224,6 +230,7 @@ public class ElfSourceController {
                 return R.raw.pikachu;
         }
     }
+    //得到精灵模型
     public static int getModel(int id){
         switch (id){
             case 1:
@@ -240,6 +247,7 @@ public class ElfSourceController {
                 return R.raw.charizard;
         }
     }
+    //得到精灵在地图上的头像
     public static int getMapPic(int id){
         switch (id){
             case 1:

@@ -37,8 +37,10 @@ import com.amap.api.services.geocoder.RegeocodeResult;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import example.com.pkmnavidemo4.classes.HttpHandler;
+import example.com.pkmnavidemo4.classes.UserData;
 
 public class CheckNeighbour extends AppCompatActivity implements LocationSource, AMapLocationListener{
 
@@ -101,9 +103,15 @@ public class CheckNeighbour extends AppCompatActivity implements LocationSource,
             public boolean onMarkerClick(Marker marker) {
                 Intent intent=new Intent(CheckNeighbour.this,FriendActivity.class);
                 String username=marker.getTitle();
+                Map petMap= UserData.getFriendInfo(username);
                 intent.putExtra("username",username);
-                intent.putExtra("type",1);
+                intent.putExtra("type",2);
+                intent.putExtra("petType",(int)petMap.get("typeID"));
+                intent.putExtra("exp",(int)petMap.get("exp"));
+                intent.putExtra("grade",(int)petMap.get("grade"));
+                startActivity(intent);
                 CheckNeighbour.this.startActivity(intent);
+
                 return true;
             }
         });

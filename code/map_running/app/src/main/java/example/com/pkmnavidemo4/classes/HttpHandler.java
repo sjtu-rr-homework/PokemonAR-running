@@ -51,6 +51,7 @@ public class HttpHandler {
 
     private static String UrlHead="http://d06b88e6.ngrok.io";
     //private static String UrlHead="http://202.120.40.8:30751";
+    
 
     @Nullable
     public static Activity findActivity(Context context) {
@@ -212,6 +213,47 @@ public class HttpHandler {
                     conn.setConnectTimeout(8000);
                     conn.setReadTimeout(8000);
                     InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }finally {
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+
+    public static void setPet(String username,int typeid){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String loginUrl=UrlHead+"/user/setpet/username/"+username+"/setpet/"+typeid;
+                try {
+                    //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
+                    URL url=new URL(loginUrl);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(8000);
+                    InputStream in=conn.getInputStream();
+
                     br=new BufferedReader(new InputStreamReader(in));
 
                     StringBuilder sb=new StringBuilder();
@@ -502,13 +544,13 @@ public class HttpHandler {
         }).start();
     }
 
-    public static void getDistance(String username) {
+    public static void getPetInfo(String username,int variety) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 HttpURLConnection conn=null;
                 BufferedReader br=null;
-                String loginUrl=UrlHead+"/user/getexp/username/"+username;
+                String loginUrl=UrlHead+"/pet/user/"+username+"/getinfo/"+variety;
                 try {
                     //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
                     URL url=new URL(loginUrl);
@@ -524,9 +566,77 @@ public class HttpHandler {
                     while((s = br.readLine())!=null){
                         sb.append(s);
                     }
-                    UserData.setDistance(Double.valueOf(sb.toString()));
+                    Log.d("123","---"+sb.toString());
+                    JSONObject jsonobject = new JSONObject(sb.toString());
+                    int exp = jsonobject.getInt("exp"); // 获取对象对应的值
+                    int grade =jsonobject.getInt("grade");
+                    Map map = null;
+                    map = new HashMap(); // 存放到MAP里面
+                    map.put("exp", exp);
+                    map.put("grade",grade);
+                    map.put("typeID",variety);
+                    UserData.isFriendInfoGet=false;
+                    UserData.setFriengPetInfoMap(map);
                     //setContent(sb.toString());
                     Log.d("123","---"+sb.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.d("haha",e.getMessage());
+                }finally {
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+
+    public static void getUserInfo(String username,int variety) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String loginUrl=UrlHead+"/user/getinfo/username/"+username;
+                try {
+                    //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
+                    URL url=new URL(loginUrl);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(8000);
+                    InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                    Log.d("133","---"+sb.toString());
+                    JSONObject jsonobject = new JSONObject(sb.toString());
+                    double distance = jsonobject.getDouble("distance"); // 获取对象对应的值
+                    int pet =jsonobject.getInt("pet");
+                    String username=jsonobject.getString("username");
+                    Map map = null;
+                    map = new HashMap(); // 存放到MAP里面
+                    Log.d("133","-3333--"+pet);
+                    map.put("distance", distance );
+                    map.put("pet",pet);
+                    map.put("username",username);
+                    if(variety==2)
+                    UserData.isFriendInfoGet=false;
+
+                    UserData.setUserInfoMap(map,variety);
+                    //setContent(sb.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
                     Log.d("haha",e.getMessage());

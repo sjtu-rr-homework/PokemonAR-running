@@ -1,19 +1,65 @@
 package example.com.pkmnavidemo4.classes;
 
+import android.util.Log;
+
 import com.amap.api.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class UserData {
-    private static double distance=0;
+    public static boolean isFriendInfoGet=false;
+    private static Map userInfo;
+    private static Map friendUserInfo;
+    private static Map friendPetInfo;
     private static int exp;
     private static String userName;
     private static List<String> elfList;
     private static  List<Map> elfDetailsList;
     private static  boolean onlyHave=false;
     public static boolean isFriendGet=false;
+    public static Map getUserInfo(){return userInfo;}
+    public static Map getFriendInfo(String username){
+        isFriendInfoGet=true;
+        HttpHandler.getUserInfo(userName,2);
+        while(isFriendInfoGet){
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        isFriendInfoGet=true;
+        HttpHandler.getPetInfo(username,(int)friendUserInfo.get("pet"));
+        while(isFriendInfoGet){
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return friendPetInfo;
+
+    }
+    public static void setPet(int variety){
+        HttpHandler.setPet(userName,variety);
+        userInfo.replace("pet",variety);
+    }
+    public static void setFriengPetInfoMap(Map map){
+        friendPetInfo=map;
+    }
+    public static void setUserInfoMap(Map map,int variety){
+        if(variety==1)
+            userInfo=map;
+        if(variety==2)
+            friendUserInfo=map;
+    }
+    public static void setUserInfo(String userName,int variety){
+        HttpHandler.getUserInfo(userName,variety);
+    }
     public static String getUserName(){
         return userName;
     }
@@ -62,10 +108,5 @@ public class UserData {
     public static void setExp(int num){
         exp=num;
     }
-    public static double getDistance(){
-        return distance;
-    }
-    public static void setDistance(double dist){
-        distance=dist;
-    }
+
 }
