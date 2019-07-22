@@ -9,6 +9,7 @@
         <module name="discovery-service" />
         <module name="gateway-service" />
         <module name="location-service" />
+        <module name="proxy-service" />
         <module name="record-service" />
         <module name="config-service" />
         <module name="user-service" />

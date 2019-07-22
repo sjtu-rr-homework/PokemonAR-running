@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.pokemonrun.service.LoginService;
 import org.pokemonrun.service.RegisterService;
 
+import java.util.List;
+
 @RestController
 public class UserController {
 	@Autowired
@@ -69,4 +71,20 @@ public class UserController {
 	{
 		return ModifyUserInfo.AddDistance(username,Double.parseDouble(distance));
 	}
+	@GetMapping("/getpet/username/{username}")
+	public int getPet(@PathVariable("username") String username)
+	{
+		return GetUserInfo.GetPet(username);
+	}
+	@GetMapping("/addfriend/username/{username}/friendname/{friendname}")
+	public boolean addFriend(@PathVariable("username") String username,@PathVariable("friendname") String friendname)
+	{
+		return ModifyUserInfo.addFriend(username, friendname);
+	}
+	@GetMapping("/getallusername")
+	public List<String> getAllUsername()
+	{
+		return GetUserInfo.GetAllUser();
+	}
+
 }
