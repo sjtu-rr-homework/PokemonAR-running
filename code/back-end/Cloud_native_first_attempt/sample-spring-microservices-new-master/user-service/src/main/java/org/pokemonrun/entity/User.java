@@ -20,6 +20,8 @@ public class User implements Serializable {
     private String email;
     private int star;
     private int exp;
+    private int pet;
+    private double distance;
 
     @Id
     @Column(name = "userID")
@@ -70,6 +72,15 @@ public class User implements Serializable {
     public int getExp() {return exp;}
     public void setExp(int exp) { this.exp=exp; }
 
+    @Basic
+    @Column(name="pet")
+    public int getPet() {return pet; }
+    public void setPet(int pet) { this.pet=pet; }
+
+    @Basic
+    @Column(name="distance")
+    public double getDistance() {return distance; }
+    public void setDistance(double distance) {this.distance=distance; }
 
 
     private User()
@@ -77,13 +88,15 @@ public class User implements Serializable {
 
     }
 
-    public User(String username,String password,String email,int star,int exp)
+    public User(String username,String password,String email,int star,int exp,int pet)
     {
         this.username=username;
         this.password=password;
         this.email=email;
         this.star=star;
         this.exp=exp;
+        this.pet=pet;
+        this.distance=0;
 
 
     }

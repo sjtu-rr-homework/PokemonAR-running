@@ -48,8 +48,9 @@ import example.com.pkmnavidemo4.MainActivity;
 import example.com.pkmnavidemo4.R;
 
 public class HttpHandler {
-
+    
     private static String UrlHead="http://d06b88e6.ngrok.io";
+
 
     @Nullable
     public static Activity findActivity(Context context) {
@@ -479,6 +480,91 @@ public class HttpHandler {
                     }
 
                     UserData.setExp(Integer.valueOf(sb.toString()));
+                    //setContent(sb.toString());
+                    Log.d("123","---"+sb.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.d("haha",e.getMessage());
+                }finally {
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+
+    public static void addDistance(String username,double distance){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String loginUrl=UrlHead+"/user/addDistance/username/"+username+"/distance/"+distance;
+                try {
+                    //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
+                    URL url=new URL(loginUrl);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(8000);
+                    InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }finally {
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+
+    public static void getDistance(String username) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String loginUrl=UrlHead+"/user/getexp/username/"+username;
+                try {
+                    //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
+                    URL url=new URL(loginUrl);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(8000);
+                    InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                    UserData.setDistance(Double.valueOf(sb.toString()));
                     //setContent(sb.toString());
                     Log.d("123","---"+sb.toString());
                 } catch (Exception e) {

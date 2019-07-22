@@ -355,6 +355,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 HttpHandler.postRunningRecord1(runningMessage);
+                HttpHandler.addDistance(UserData.getUserName(),runningMessage.getLength());
                 HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size()-1));
                 HttpHandler.changeExp(UserData.getUserName(),runningMessage.getExp());
                 MapActivity.super.finish();

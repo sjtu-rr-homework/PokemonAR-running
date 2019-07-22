@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class UserData {
+    private static double distance=0;
     private static int exp;
     private static String userName;
     private static List<String> elfList;
@@ -59,5 +60,12 @@ public class UserData {
         return exp;
     }
     public static void setExp(int num){
-        exp=num; }
+        exp=num;
+    }
+    public static double getDistance(){
+        return distance;
+    }
+    public static void setDistance(double dist){
+        distance=dist;
+    }
 }
