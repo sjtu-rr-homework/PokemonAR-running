@@ -3,9 +3,10 @@ package org.pokemonrun.controller;
 import org.pokemonrun.info.Petinfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.List;
-
+@EnableSwagger2
 @RestController
 public class PetController {
     @Autowired
