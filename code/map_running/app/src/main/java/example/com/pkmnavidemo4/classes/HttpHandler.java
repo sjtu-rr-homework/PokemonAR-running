@@ -49,7 +49,7 @@ import example.com.pkmnavidemo4.R;
 
 public class HttpHandler {
 
-    private static String UrlHead="http://6c742b9d.ngrok.io";
+    private static String UrlHead="http://d06b88e6.ngrok.io";
 
     @Nullable
     public static Activity findActivity(Context context) {
@@ -203,6 +203,46 @@ public class HttpHandler {
                 HttpURLConnection conn=null;
                 BufferedReader br=null;
                 String loginUrl=UrlHead+"/pet/user/"+username+"/addnum/"+typeid+"/num/"+num;
+                try {
+                    //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
+                    URL url=new URL(loginUrl);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(8000);
+                    InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }finally {
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+
+    public static void setPet(String username,int typeid){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String loginUrl=UrlHead+"/user/setpet/username"+username+"/setpet/"+typeid;
                 try {
                     //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
                     URL url=new URL(loginUrl);
