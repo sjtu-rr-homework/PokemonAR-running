@@ -49,7 +49,7 @@ import example.com.pkmnavidemo4.R;
 
 public class HttpHandler {
 
-    private static String UrlHead="http://6c742b9d.ngrok.io";
+    private static String UrlHead="http://202.120.40.8:30751";
 
     @Nullable
     public static Activity findActivity(Context context) {

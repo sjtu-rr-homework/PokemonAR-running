@@ -2,15 +2,17 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
         <LinearLayout
+            android:id="@+id/act_friend_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_white"
-            android:layout_margin="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
             <ImageView
                 android:layout_width="120dp"
@@ -27,6 +29,7 @@
                 android:textSize="30sp"/>
         </LinearLayout>
         <LinearLayout
+            android:layout_centerInParent="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -110,14 +113,27 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-        <Button
-            android:id="@+id/act_friend_add"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="20dp"
-            android:background="@drawable/button_gradient"
-            android:text="添加好友"
-            android:textSize="18sp"/>
-    </LinearLayout>
+            android:layout_alignParentBottom="true"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="20dp">
+            <Button
+                android:id="@+id/act_friend_add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_gradient"
+                android:text="添加好友"
+                android:textSize="18sp"/>
+            <Button
+                android:id="@+id/act_friend_fight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_gradient"
+                android:text="开始对战"
+                android:textSize="18sp"/>
+        </RelativeLayout>
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
