@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.pokemonrun.service.LoginService;
 import org.pokemonrun.service.RegisterService;
 
+import java.util.List;
+
 @RestController
 public class UserController {
 	@Autowired
@@ -79,4 +81,10 @@ public class UserController {
 	{
 		return ModifyUserInfo.addFriend(username, friendname);
 	}
+	@GetMapping("/getallusername")
+	public List<String> getAllUsername()
+	{
+		return GetUserInfo.GetAllUser();
+	}
+
 }
