@@ -30,4 +30,9 @@ public class ModifyUserInfoimpl implements ModifyUserInfo {
         }
         return true;
     }
+
+    @Override
+    public boolean blockUser(String username) {
+        return false;
+    }
 }

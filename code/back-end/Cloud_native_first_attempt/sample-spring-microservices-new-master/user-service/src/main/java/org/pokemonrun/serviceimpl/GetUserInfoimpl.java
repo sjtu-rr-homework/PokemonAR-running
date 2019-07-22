@@ -21,7 +21,7 @@ public class GetUserInfoimpl implements GetUserInfo {
         }
         else
         {
-            Userinfo tempinfo=new Userinfo(temp.getUsername(),temp.getStar(),temp.getEmail(),temp.getExp());
+            Userinfo tempinfo=new Userinfo(temp.getUsername(),temp.getStar(),temp.getEmail(),temp.getExp(),temp.getPet());
             return tempinfo;
         }
     }
