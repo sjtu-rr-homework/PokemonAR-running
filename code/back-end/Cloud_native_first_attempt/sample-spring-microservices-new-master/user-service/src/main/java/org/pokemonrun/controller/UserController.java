@@ -53,5 +53,10 @@ public class UserController {
 		return  GetUserInfo.AdminGetUserInfo(username);
 	}
 
+	@GetMapping("/setpet/username/{username}/setpet/{pet}")
+	public boolean UserSetPet(@PathVariable("username") String username, @PathVariable("pet") String pet)
+	{
+		return ModifyUserInfo.SetPet(username,Integer.parseInt(pet));
+	}
 
 }
