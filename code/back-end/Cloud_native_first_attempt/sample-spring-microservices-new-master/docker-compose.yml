@@ -151,6 +151,18 @@ services:
       - "30751:30751"
     networks:
       - spring-cloud-network
+      
+  proxy-service:
+    hostname: proxy-service
+    image: macoredroid/proxy-service:latest
+    build:
+      context: ./proxy-service
+    environment:
+      SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
+    ports:
+      - "30753:30753"
+    networks:
+      - spring-cloud-network
 
 networks:
   spring-cloud-network:
