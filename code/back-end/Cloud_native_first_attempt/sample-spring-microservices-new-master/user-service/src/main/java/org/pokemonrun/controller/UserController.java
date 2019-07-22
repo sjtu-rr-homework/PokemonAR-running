@@ -59,4 +59,9 @@ public class UserController {
 		return ModifyUserInfo.SetPet(username,Integer.parseInt(pet));
 	}
 
+	@GetMapping("/blockuser/username/{username}")
+	public boolean BlockUser(@PathVariable("username") String username)
+	{
+		return ModifyUserInfo.blockUser(username);
+	}
 }
