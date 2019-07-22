@@ -44,30 +44,34 @@
             <div v-else-if="getBasicRuleFail" class="text-danger">获取基本规则信息失败</div>
             <div v-if="gettingBorder" class="text-info">获取跑步范围信息……</div>
             <div v-else-if="getBorderFail" class="text-danger">获取跑步范围信息失败</div>
+            <div v-else-if="borderInfoError" class="text-warning">获取的跑步范围不合法，已重新生成默认范围</div>
             <div v-if="gettingFlags" class="text-info">获取必经点信息……</div>
             <div v-else-if="getFlagsFail" class="text-danger">获取必经点信息失败</div>
             <div v-else>
                 <div v-if="markers.length<=0">（暂未预设必经点）</div>
             </div>
         </div>
-        <div v-if="modifierOn">右键新建标记，左键拖动标记，左键双击删除标记</div>
+        <div v-if="modifierOn">
+            <div>右键新建标记，左键按下拖动标记，左键双击删除标记</div>
+            <div>左键按下拖动跑步范围（多边形）或其顶点，左键点击多边形顶点以添加/删除该顶点</div>
+        </div>
         <div v-else>可以点击上方“修改规则”按钮进行设置</div>
         <div class="amap-wrapper m-auto pt-3">
             <el-amap class="amap-box" :vid="'amap-vue'" :amap-manager="amapManager" :zoom="zoom" :center="center"
                      :events="mapEvents">
                 <div v-if="modifierOn">
+                    <el-amap-polygon :path="modifier.border.path" :events="modifier.border.events"
+                                     :draggable="true" :editable="true" :strokeOpacity="0.5" :fillOpacity="0.1"></el-amap-polygon>
                     <el-amap-marker v-for="(marker, index) in modifier.markers" :position="marker.position"
                                     :events="marker.events" :visible="marker.visible" :draggable="true"
                                     :vid="index" :key="index"></el-amap-marker>
-                    <el-amap-polygon :path="modifier.border.path" :events="modifier.border.events"
-                                     :draggable="true" :editable="true" :strokeOpacity="0.5" :fillOpacity="0.1"></el-amap-polygon>
                 </div>
                 <div v-else>
+                    <el-amap-polygon :path="border.path" :events="border.events"
+                                     :draggable="false" :editable="false" :strokeOpacity="0.5" :fillOpacity="0.1"></el-amap-polygon>
                     <el-amap-marker v-for="(marker, index) in markers" :position="marker.position"
                                     :events="marker.events" :visible="marker.visible" :draggable="false"
                                     :vid="index" :key="index"></el-amap-marker>
-                    <el-amap-polygon :path="border.path" :events="border.events"
-                                     :draggable="false" :editable="false" :strokeOpacity="0.5" :fillOpacity="0.1"></el-amap-polygon>
                 </div>
             </el-amap>
         </div>
@@ -76,6 +80,7 @@
 
 <script>
     import * as VueAMap from "vue-amap";
+    var $ = require('jquery');
 
     export default {
         name: 'RuleManager',
@@ -120,6 +125,7 @@
                 getFlagsFail: false,
                 getBasicRuleFail: false,
                 getBorderFail: false,
+                borderInfoError: false,
                 // modifying
                 flagModifying: false,
                 basicRuleModifying: false,
@@ -137,38 +143,20 @@
                     minSpeed: 0,
                     maxSpeed: 0,
                     markers: [],
-                    border: {
-                        path: [],
-                        hideOutsideModifier: true,
-                        events: {}
-                    }
+                    border: this.newBorder([])
                 },
                 mileageGoal: 0,
                 minSpeed: 0,
                 maxSpeed: 0,
-                border: {
-                    path: [],
-                    hideOutsideModifier: true,
-                    events: {}
-                }
+                border: this.newBorder([])
             };
         },
         methods: {
             deepCopy: function (o) {
                 if (o instanceof Array) {
-                    let n = [];
-                    for (let i = 0; i < o.length; ++i) {
-                        n.push(this.deepCopy(o[i]));
-                    }
-                    return n;
-                } else if (o instanceof Function) {
-                    return o;
+                    return $.extend(true, [], o);
                 } else if (o instanceof Object) {
-                    let n = {};
-                    for (let i in o) {
-                        n[i] = this.deepCopy(o[i]);
-                    }
-                    return n;
+                    return $.extend(true, {}, o);
                 } else {
                     return o;
                 }
@@ -181,7 +169,6 @@
                 this.modifier.maxSpeed = this.maxSpeed;
                 console.log(this.border);
                 this.modifier.border = this.deepCopy(this.border);
-                this.modifier.border.hideOutsideModifier = false;
                 console.log(this.modifier.border);
                 // modifying flags
                 this.flagModifying = true;
@@ -239,7 +226,6 @@
                 }
             },
             getModifiedFlags: function () {
-                console.log(this.modifier.markers);
                 let flags = [];
                 for(let i = 0; i < this.modifier.markers.length; i++){
                     flags.push({
@@ -247,7 +233,6 @@
                         lat: this.modifier.markers[i].position[1]
                     });
                 }
-                console.log(flags);
                 return flags;
             },
             requestFlags: function () {
@@ -311,30 +296,48 @@
                     this.basicRuleModifySubmitting = false;
                 });
             },
-            addInitialBorder: function () {
-                // TODO: add initial border
-                this.border = {
-                    path: [[121.455746, 31.037906], [121.460161, 31.026424],
-                        [121.427936, 31.016467], [121.42311, 31.027518]],
-                    events: {},
-                    hideOutsideModifier: true // will not be displayed when the modifier is off
+            newBorder: function (path) {
+                let border = {
+                    path: path,
+                    events: {
+                        rightclick: (e) => {
+                            // right click the polygon is the same as right click on the map
+                            if(this.modifierOn){
+                                this.addFlag(e.lnglat.lng, e.lnglat.lat);
+                            }
+                        },
+                        dragend: (e) => {
+                            if(this.modifierOn){
+                                // only keep one border object
+                                this.modifier.border.path = e.target.getPath();
+                            }
+                        }
+                    }
                 };
-                console.log(this.border);
+                return border;
+            },
+            addInitialBorder: function () {
+                let path = [[121.455746, 31.037906], [121.460161, 31.026424],
+                    [121.427936, 31.016467], [121.42311, 31.027518]];
+                this.border = this.newBorder(path);
             },
             requestBorder: function () {
                 this.gettingBorder = true;
                 this.getBorderFail = false;
+                this.borderInfoError = false;
                 this.$http.get('api/admin/rule/border')
                     .then((resp) => {
-                        if(resp.data.path.length < 3){
+                        if(resp.data.length < 3){
                             this.addInitialBorder();
+                            this.borderInfoError = true;
                         }else{
-                            this.border = {
-                                path: resp.data,
-                                events: {},
-                                hideOutsideModifier: false
-                            };
+                            let path = [];
+                            for (let i = 0; i < resp.data.length; i++) {
+                                path.push([resp.data[i].lng, resp.data[i].lat]);
+                            }
+                            this.border = this.newBorder(path);
                         }
+                        this.gettingBorder = false;
                     }, () => {
                         this.addInitialBorder();
                         this.getBorderFail = true;
@@ -344,7 +347,18 @@
             modifyBorder: function () {
                 this.borderModifySubmitting = true;
                 this.borderModifyFail = false;
-                this.$http.put('api/admin/rule/border', {}).then((resp) => {
+                let path = [];
+                for (let i = 0; i < this.modifier.border.path.length; i++) {
+                    path.push({
+                        lng: this.modifier.border.path[i].lng,
+                        lat: this.modifier.border.path[i].lat
+                    });
+                }
+                console.log('path');
+                console.log(path);
+                this.$http.put('api/admin/rule/border',
+                    path
+                ).then((resp) => {
                     this.borderModifying = false;
                     this.borderModifySubmitting = false;
                     this.requestBorder();
@@ -356,6 +370,7 @@
             submitModification: function () {
                 this.modifyFlags();
                 this.modifyBasicRule();
+                this.modifyBorder();
             },
             cancelModification: function () {
                 this.closeModifier();
