@@ -5,4 +5,5 @@ public interface ModifyUserInfo {
     public boolean blockUser(String username);
     public boolean SetPet(String username, int pet);
     public boolean AddDistance(String username, double distance);
+    public boolean addFriend(String username,String friendname);
 }

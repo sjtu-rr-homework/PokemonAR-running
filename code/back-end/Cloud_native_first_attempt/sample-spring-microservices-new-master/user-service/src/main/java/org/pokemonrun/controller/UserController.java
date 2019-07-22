@@ -74,4 +74,9 @@ public class UserController {
 	{
 		return GetUserInfo.GetPet(username);
 	}
+	@GetMapping("/addfriend/username/{username}/friendname/{friendname}")
+	public boolean addFriend(@PathVariable("username") String username,@PathVariable("friendname") String friendname)
+	{
+		return ModifyUserInfo.addFriend(username, friendname);
+	}
 }
