@@ -26,7 +26,7 @@ public class UserDaoimpl implements UserDao {
 
     @Override
     public void save(String username, String password, String email, int star) {
-        User temp= new User(username,password,email,star,0);
+        User temp= new User(username,password,email,star,0,-1);
         userRepository.save(temp);
     }
 
