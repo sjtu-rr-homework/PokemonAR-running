@@ -5,6 +5,7 @@ import android.util.Log;
 import com.amap.api.maps.model.LatLng;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
@@ -22,9 +23,17 @@ public class UserData {
     private static  boolean onlyHave=false;
     public static boolean isFriendGet=false;
     public static Map getUserInfo(){return userInfo;}
+    public static Map getElfWithId(int id){
+        for (int i = 0; i < elfDetailsList.size(); i++) {
+            if(elfDetailsList.get(i).get("typeID").toString().equals(id+"")){
+               return elfDetailsList.get(i);
+            }
+        }
+        return new HashMap();
+    }
     public static Map getFriendInfo(String username){
         isFriendInfoGet=true;
-        HttpHandler.getUserInfo(userName,2);
+        HttpHandler.getUserInfo(username,2);
         while(isFriendInfoGet){
             try {
                 Thread.sleep(10);
