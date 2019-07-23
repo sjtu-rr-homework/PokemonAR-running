@@ -50,12 +50,6 @@ public class FightActivity extends AppCompatActivity {
         rightPower = intent.getIntExtra("rightPower", 100);
         leftGrade = intent.getIntExtra("leftGrade",2);
         rightGrade = intent.getIntExtra("rightGrade", 2);
-        Log.d("1111111111",""+leftElf);
-        Log.d("22222222",""+rightElf);
-        Log.d("333333333333",""+leftGrade);
-        Log.d("44444444",""+rightGrade);
-        Log.d("a5555555555",""+leftPower);
-        Log.d("aa666666666666a",""+rightPower);
         setContentView(R.layout.activity_fight);
         mRecyclerView = findViewById(R.id.elf_fight_recycle_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(FightActivity.this));

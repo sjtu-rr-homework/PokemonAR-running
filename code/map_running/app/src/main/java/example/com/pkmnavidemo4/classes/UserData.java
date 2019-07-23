@@ -41,6 +41,10 @@ public class UserData {
                 e.printStackTrace();
             }
         }
+        //用户未设置出战精灵
+        if((int)friendUserInfo.get("pet")==-1) {
+            return null;
+        }
         isFriendInfoGet=true;
         HttpHandler.getPetInfo(username,(int)friendUserInfo.get("pet"));
         while(isFriendInfoGet){

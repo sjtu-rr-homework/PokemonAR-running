@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import example.com.pkmnavidemo4.classes.ElfSourceController;
 import example.com.pkmnavidemo4.classes.HttpHandler;
@@ -52,6 +53,10 @@ public class FriendActivity extends AppCompatActivity {
             fightfriend.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if(typeID==-1) {
+                        Toast.makeText(getApplicationContext(),"该用户未设置出战精灵", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     int myPet=(int)(UserData.getElfWithId((int)UserData.getUserInfo().get("pet")).get("typeID"));
                     Intent intent=new Intent(FriendActivity.this,FightActivity.class);
                     intent.putExtra("leftElf",myPet);
