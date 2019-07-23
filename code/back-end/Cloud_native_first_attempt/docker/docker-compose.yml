@@ -174,9 +174,10 @@ services:
       - "8080:8080"
     networks:
       - spring-cloud-network
-    command: "npm start"
-    environment:
-      HOST: 0.0.0.0
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    
 
 networks:
   spring-cloud-network:
