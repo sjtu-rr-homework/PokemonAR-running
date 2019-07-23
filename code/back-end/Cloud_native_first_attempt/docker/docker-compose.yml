@@ -172,6 +172,9 @@ services:
       - "8080:8080"
     networks:
       - spring-cloud-network
+    command: sh -c "npm install && npm run dev"
+    environment:
+      HOST: 0.0.0.0
 
 networks:
   spring-cloud-network:
