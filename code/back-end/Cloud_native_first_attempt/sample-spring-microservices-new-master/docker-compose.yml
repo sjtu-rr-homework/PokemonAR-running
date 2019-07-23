@@ -176,16 +176,6 @@ services:
     networks:
       - spring-cloud-network
 
-  admin-ui:
-    hostname: admin-ui
-    image: macoredroid/admin-ui:latest
-    build:
-      context: ./admin-ui
-    ports:
-      - '80:80'
-    volumes:
-      - '.:/app'
-
 
 networks:
   spring-cloud-network:

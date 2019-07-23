@@ -165,15 +165,6 @@ services:
     networks:
       - spring-cloud-network
       
-  admin-ui:
-    hostname: admin-ui
-    image: macoredroid/admin-ui:latest
-    environment:
-      - NODE_ENV=production
-    ports:
-      - "80:80"
-    networks:
-      - spring-cloud-network
    
     
 
