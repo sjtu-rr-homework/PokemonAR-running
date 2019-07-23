@@ -45,7 +45,7 @@ button.btn-outline-fav:hover {
 }
 
 .window-sm {
-    position: fixed;
+    position: absolute;
     left: 40%;
     top: 32vh;
     width: 30%;
@@ -53,7 +53,7 @@ button.btn-outline-fav:hover {
 }
 
 .window-md {
-    position: fixed;
+    position: absolute;
     left: 20%;
     top: 15vh;
     width: 60%;

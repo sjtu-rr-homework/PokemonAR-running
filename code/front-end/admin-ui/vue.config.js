@@ -7,12 +7,36 @@ module.exports = {
         hotOnly: false, //热更新（webpack已实现了，这里false即可）
         proxy: {
             //配置跨域
-            '/api': {
+            '/ruleadmin_api': {
                 target: 'http://localhost:8080',
                 ws: true,
                 changOrigin: true,
                 pathRewrite: {
-                    '^/api': '/'
+                    '^/ruleadmin_api': '/'
+                }
+            },
+            '/user_api': {
+                target: 'http://202.120.40.8:30751/user',
+                ws: true,
+                changOrigin: true,
+                pathRewrite: {
+                    '^/user_api': '/'
+                }
+            },
+            '/record_api': {
+                target: 'http://202.120.40.8:30751/record',
+                ws: true,
+                changOrigin: true,
+                pathRewrite: {
+                    '^/record_api': '/'
+                }
+            },
+            '/pet_api': {
+                target: 'http://202.120.40.8:30751/pet',
+                ws: true,
+                changOrigin: true,
+                pathRewrite: {
+                    '^/pet_api': '/'
                 }
             }
         }

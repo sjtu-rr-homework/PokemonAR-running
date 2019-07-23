@@ -2,7 +2,9 @@ package org.pokemonrun.ruleadmin.controller;
 
 import org.pokemonrun.ruleadmin.info.BasicRuleInfo;
 import org.pokemonrun.ruleadmin.info.FlagInfo;
+import org.pokemonrun.ruleadmin.info.PathNodeInfo;
 import org.pokemonrun.ruleadmin.service.BasicRuleService;
+import org.pokemonrun.ruleadmin.service.BorderService;
 import org.pokemonrun.ruleadmin.service.FlagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,8 @@ public class RuleAdminController {
     private FlagService flagService;
     @Autowired
     private BasicRuleService basicRuleService;
+    @Autowired
+    private BorderService borderService;
 
     @GetMapping("/admin/rule/basic")
     public BasicRuleInfo getBasicRule(){
@@ -36,5 +40,14 @@ public class RuleAdminController {
     @PutMapping("/admin/rule/flags")
     public boolean setFlags(@RequestBody List<FlagInfo> flags){
         return flagService.setFlags(flags);
+    }
+
+    @GetMapping("/admin/rule/border")
+    public List<PathNodeInfo> getBorder(){
+        return borderService.getBorder();
+    }
+    @PutMapping("/admin/rule/border")
+    public boolean setBorder(@RequestBody List<PathNodeInfo> border){
+        return borderService.setBorder(border);
     }
 }
