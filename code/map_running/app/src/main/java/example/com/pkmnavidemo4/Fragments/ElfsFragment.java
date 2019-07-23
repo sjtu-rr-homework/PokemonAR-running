@@ -49,6 +49,7 @@ public class ElfsFragment extends Fragment {
         //实例化并传输数据给adapter
         TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity(),list);
         mRecyclerView.setAdapter(adapter);
+        refresh( mRecyclerView);
         refreshText=view.findViewById(R.id.elf_fg_text_wait);
         refresh=view.findViewById(R.id.elf_fg_button_refresh);
         refresh.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +88,7 @@ public class ElfsFragment extends Fragment {
         if(!UserData.getOnlyHave())
             return;
         try {
-            Thread.sleep(100);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -120,6 +121,14 @@ public class ElfsFragment extends Fragment {
         list = new ArrayList<>();
         for (int i = 0; i < elfs.size(); i++) {
             list.add("" + elfs.get(i).get("typeID"));
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden){
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            refresh( mRecyclerView);
         }
     }
     /*private Button arButton;

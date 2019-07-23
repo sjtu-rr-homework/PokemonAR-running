@@ -49,7 +49,9 @@ import example.com.pkmnavidemo4.R;
 
 public class HttpHandler {
 
-    private static String UrlHead="http://202.120.40.8:30751";
+    private static String UrlHead="http://d06b88e6.ngrok.io";
+    //private static String UrlHead="http://202.120.40.8:30751";
+    
 
     @Nullable
     public static Activity findActivity(Context context) {
@@ -211,6 +213,47 @@ public class HttpHandler {
                     conn.setConnectTimeout(8000);
                     conn.setReadTimeout(8000);
                     InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }finally {
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+
+    public static void setPet(String username,int typeid){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String loginUrl=UrlHead+"/user/setpet/username/"+username+"/setpet/"+typeid;
+                try {
+                    //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
+                    URL url=new URL(loginUrl);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(8000);
+                    InputStream in=conn.getInputStream();
+
                     br=new BufferedReader(new InputStreamReader(in));
 
                     StringBuilder sb=new StringBuilder();
@@ -501,13 +544,13 @@ public class HttpHandler {
         }).start();
     }
 
-    public static void getDistance(String username) {
+    public static void getPetInfo(String username,int variety) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 HttpURLConnection conn=null;
                 BufferedReader br=null;
-                String loginUrl=UrlHead+"/user/getexp/username/"+username;
+                String loginUrl=UrlHead+"/pet/user/"+username+"/getinfo/"+variety;
                 try {
                     //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
                     URL url=new URL(loginUrl);
@@ -523,9 +566,77 @@ public class HttpHandler {
                     while((s = br.readLine())!=null){
                         sb.append(s);
                     }
-                    UserData.setDistance(Double.valueOf(sb.toString()));
+                    Log.d("123","---"+sb.toString());
+                    JSONObject jsonobject = new JSONObject(sb.toString());
+                    int exp = jsonobject.getInt("exp"); // 获取对象对应的值
+                    int grade =jsonobject.getInt("grade");
+                    Map map = null;
+                    map = new HashMap(); // 存放到MAP里面
+                    map.put("exp", exp);
+                    map.put("grade",grade);
+                    map.put("typeID",variety);
+                    UserData.isFriendInfoGet=false;
+                    UserData.setFriengPetInfoMap(map);
                     //setContent(sb.toString());
                     Log.d("123","---"+sb.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.d("haha",e.getMessage());
+                }finally {
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+
+    public static void getUserInfo(String username,int variety) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String loginUrl=UrlHead+"/user/getinfo/username/"+username;
+                try {
+                    //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
+                    URL url=new URL(loginUrl);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(8000);
+                    InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                    Log.d("133","---"+sb.toString());
+                    JSONObject jsonobject = new JSONObject(sb.toString());
+                    double distance = jsonobject.getDouble("distance"); // 获取对象对应的值
+                    int pet =jsonobject.getInt("pet");
+                    String username=jsonobject.getString("username");
+                    Map map = null;
+                    map = new HashMap(); // 存放到MAP里面
+                    Log.d("133","-3333--"+pet);
+                    map.put("distance", distance );
+                    map.put("pet",pet);
+                    map.put("username",username);
+                    if(variety==2)
+                    UserData.isFriendInfoGet=false;
+
+                    UserData.setUserInfoMap(map,variety);
+                    //setContent(sb.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
                     Log.d("haha",e.getMessage());
@@ -823,6 +934,7 @@ public class HttpHandler {
         }).start();
     }
     public static void getRun() {
+        UserData.isrecordGet=false;
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -849,7 +961,7 @@ public class HttpHandler {
                         }
                         Log.d("mse", sb.toString());
                         try {
-                            if (UserData.isrecordGet) {
+                            if (UserData.rocordLength.size()>0) {
                                 UserData.recordLastTime.clear();
                                 for (int i = 0; i < UserData.recordLatLngList.size(); ++i) {
                                     UserData.recordLatLngList.get(i).clear();
@@ -909,7 +1021,7 @@ public class HttpHandler {
                             //Log.d("m",UserData.startTime.get(i));
                             //}
                         } catch (Exception e) {
-
+                            UserData.isrecordGet = true;
                         }
                     }
                     else{
@@ -933,76 +1045,8 @@ public class HttpHandler {
 
                         }
                     }
-                }
-            }
-        }).start();
-
-    }
-    public static void test() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Log.d("haha","go1");
-                HttpURLConnection conn=null;
-                BufferedReader br=null;
-                String recordUrl=UrlHead+"/running/record/user/wzr/page/0";
-                //https://6ed30734.ngrok.io/user/register/username/macoredroid/password/c7o2r1e4/email/coredroid0401@gmail.com
-                try {
-                    //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
-                    URL url=new URL(recordUrl);
-                    conn= (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("GET");
-                    conn.setConnectTimeout(8000);
-                    conn.setReadTimeout(8000);
-                    InputStream in=conn.getInputStream();
-                    br=new BufferedReader(new InputStreamReader(in));
-
-                    StringBuilder sb=new StringBuilder();
-                    String s;
-                    while((s = br.readLine())!=null){
-                        sb.append(s);
-                    }
-                    //Log.d("sb",sb.toString());
-                    try{
-                        JSONArray json=new JSONArray(sb.toString());
-                        for(int i=0;i<json.length();i++)
-                        {
-                            JSONObject jb=json.getJSONObject(i);
-                            //Log.d("AAA", jb.getString("username"));
-                            String startTime=jb.getString("startTime");
-                            String duration=jb.getString("duration");
-                            String courseLength=jb.getString("courseLength");
-                            JSONArray array=new JSONArray(jb.getString("course"));
-                            //UserData.rocordLength.add(Double.valueOf(courseLength));
-                            //UserData.recordLastTime.add(Long.valueOf(duration));
-                            UserData.startTime.add(startTime);
-                            for(int j=0;j<array.length();++j){
-                                JSONObject jjj=array.getJSONObject(i);
-
-                                Log.d("CCC",jjj.getString("lat")+","+jjj.getString("lng"));
-                            }
-                            //Log.d("AAA",String.valueOf(json.length()));
-                        }
-                    }
-                    catch (Exception e){
-
-                    }
-                    //setContent(sb.toString());
-                    //iLog.d("123","---"+sb.toString());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Log.d("haha",e.getMessage());
-                }finally {
-                    if (conn!=null){
-                        conn.disconnect();
-                    }
-                    if (br!=null){
-                        try {
-                            br.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-
-                        }
+                    if(!UserData.isrecordGet){
+                        UserData.isrecordGet = true;
                     }
                 }
             }
@@ -1070,6 +1114,7 @@ public class HttpHandler {
     }
 
     public static void getFriend() {
+        UserData.isFriendGet=false;
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -1077,7 +1122,6 @@ public class HttpHandler {
                 HttpURLConnection conn=null;
                 BufferedReader br=null;
                 String Url=UrlHead+"/user/getinfo/username/"+UserData.getUserName();
-                UserData.isFriendGet=false;
                 //https://6ed30734.ngrok.io/user/register/username/macoredroid/password/c7o2r1e4/email/coredroid0401@gmail.com
                 try {
                     //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
@@ -1097,7 +1141,7 @@ public class HttpHandler {
                         }
                         Log.d("mse", sb.toString());
                         try {
-                            if(UserData.isFriendGet||UserData.friend.size()>0){
+                            if(UserData.friend.size()>0){
                                 UserData.friend.clear();
                                 UserData.isFriendGet=false;
                             }
@@ -1114,6 +1158,7 @@ public class HttpHandler {
                             UserData.isFriendGet=true;
 
                         } catch (Exception e) {
+                            UserData.isFriendGet=true;
                         }
                     }
                     else{
@@ -1136,6 +1181,9 @@ public class HttpHandler {
                             e.printStackTrace();
 
                         }
+                    }
+                    if(!UserData.isFriendGet){
+                        UserData.isFriendGet=true;
                     }
                 }
             }

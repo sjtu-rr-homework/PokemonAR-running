@@ -3,6 +3,7 @@ package example.com.pkmnavidemo4;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
 
 import example.com.pkmnavidemo4.FriendPage.SideBar;
 import example.com.pkmnavidemo4.FriendPage.SortAdapter;
@@ -29,11 +31,29 @@ public class FriendPageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_friendpage);
         HttpHandler.getFriend();
         while(!UserData.isFriendGet){
-
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+            }
         };
+        //Log.d("lock","finishget");
         initView();
         initData();
     }
+
+    /*
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        HttpHandler.getFriend();
+        Log.d("lock",""+UserData.isFriendGet);
+        while(!UserData.isFriendGet){
+
+        };
+        Log.d("lock",""+UserData.isFriendGet);
+        initView();
+        initData();
+    }*/
 
     private void initView() {
         listView = (ListView) findViewById(R.id.act_friendpage_listView);
@@ -53,8 +73,12 @@ public class FriendPageActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?>parent,View view,int position,long id) {
                 Intent intent=new Intent(FriendPageActivity.this,FriendActivity.class);
+                Map petMap=UserData.getFriendInfo(list.get(position).getName());
                 intent.putExtra("username",list.get(position).getName());
                 intent.putExtra("type",2);
+                intent.putExtra("typeID",(int)petMap.get("typeID"));
+                intent.putExtra("exp",(int)petMap.get("exp"));
+                intent.putExtra("grade",(int)petMap.get("grade"));
                 startActivity(intent);
                 Toast.makeText(FriendPageActivity.this,list.get(position).getName(),Toast.LENGTH_SHORT).show();
             }

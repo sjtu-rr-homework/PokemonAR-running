@@ -9,7 +9,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -23,6 +25,9 @@ import java.util.List;
 import example.com.pkmnavidemo4.Fragments.ElfsFragment;
 import example.com.pkmnavidemo4.Fragments.MyFragment;
 import example.com.pkmnavidemo4.Fragments.RunningFragment;
+import example.com.pkmnavidemo4.classes.HttpHandler;
+import example.com.pkmnavidemo4.classes.TestRecycleViewAdapter;
+import example.com.pkmnavidemo4.classes.UserData;
 
 /**
  * Created by Coder-pig on 2015/8/28 0028.
@@ -120,6 +125,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(elfsFragment != null)fragmentTransaction.hide(elfsFragment);
         if(runningFragment != null)fragmentTransaction.hide(runningFragment);
         if(fg3 != null)fragmentTransaction.hide(fg3);
+    }
+
+    private void refresh( RecyclerView mRecyclerView){
+        HttpHandler.getElfs(MainActivity.this, UserData.getUserName());
+        if(!UserData.getOnlyHave())
+            return;
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(MainActivity.this,UserData.getElfList());
+        mRecyclerView.setAdapter(adapter);
     }
 
     @Override
