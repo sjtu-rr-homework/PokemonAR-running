@@ -164,6 +164,14 @@ services:
       - "8095:8095"
     networks:
       - spring-cloud-network
+      
+  admin-ui:
+    hostname: admin-ui
+    image: macoredroid/admin-ui:latest
+    ports:
+      - "8080:8080"
+    networks:
+      - spring-cloud-network
 
 networks:
   spring-cloud-network:
