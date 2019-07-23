@@ -181,7 +181,6 @@ services:
     image: macoredroid/admin-ui:latest
     build:
       context: ./admin-ui
-      target: 'production-stage'
     ports:
       - '80:80'
     volumes:
