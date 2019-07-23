@@ -61,6 +61,19 @@ services:
       - "3309:3306"
     networks:
       - spring-cloud-network
+      
+  mysql-rule:
+    hostname: mysql-rule
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=c7o2r1e4
+      - MYSQL_DATABASE=pet
+      - MYSQL_USER=coredroid
+      - MYSQL_PASSWORD=c7o2r1e4
+    ports:
+      - "3310:3306"
+    networks:
+      - spring-cloud-network
 
   discovery-service:
     hostname: discovery-service
@@ -137,6 +150,18 @@ services:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     ports:
       - "30753:30753"
+    networks:
+      - spring-cloud-network
+      
+  rule-service:
+    hostname: rule-service
+    image: macoredroid/rule-service:latest
+    environment:
+      SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
+    depends_on:
+      - mysql-rule
+    ports:
+      - "8095:8095"
     networks:
       - spring-cloud-network
 
