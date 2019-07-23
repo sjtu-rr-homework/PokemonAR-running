@@ -1,0 +1,76 @@
+.btn-outline-fav {
+    color: #ff1493;
+    border-color: #ff1493;
+}
+
+button.btn-outline-fav:hover {
+    color: #ffffff;
+    background-color: #ff1493;
+}
+
+.btn-implicit-dark {
+    border-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.btn-implicit-dark:hover {
+    color: #ffffff;
+    border-color: #343a40;
+    background-color: #343a40;
+}
+
+.btn-implicit-primary {
+    border-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.btn-implicit-primary:hover {
+    color: #ffffff;
+    border-color: #007bff;
+    background-color: #007bff;
+}
+
+.mask {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.8);
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 32766;
+}
+
+.on-mask {
+    z-index: 32767;
+}
+
+.window-sm {
+    position: absolute;
+    left: 40%;
+    top: 32vh;
+    width: 30%;
+    min-height: 36vh;
+}
+
+.window-md {
+    position: absolute;
+    left: 20%;
+    top: 15vh;
+    width: 60%;
+    min-height: 70vh;
+}
+
+.pic-item {
+    position: relative;
+    width: 150px;
+    height: 160px;
+}
+
+.pic-item input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 150px;
+    height: 160px;
+    opacity: 0;
+}

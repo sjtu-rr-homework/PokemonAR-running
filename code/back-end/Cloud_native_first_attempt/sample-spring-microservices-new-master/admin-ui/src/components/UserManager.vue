@@ -1,0 +1,115 @@
+<template>
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>用户名</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(user, index) in users" v-bind:key="index" class="btn-implicit-primary"
+                v-on:click="showUserDetails(user)">
+                <td>{{ user }}</td>
+            </tr>
+            </tbody>
+            <tfoot></tfoot>
+        </table>
+        <!-- Detail & mask -->
+        <div v-if="detailed">
+            <div class="mask"></div>
+            <div class="on-mask bg-white window-md p-4">
+                <button class="btn btn-outline-danger col-2 offset-10 mb-3"
+                        v-on:click="hideUserDetails()">关闭</button>
+                <UserDetails v-bind:user="detailedUser" v-on:ban="requestBan(detailedUser.username)"
+                             v-on:unban="requestBan(detailedUser.username)"></UserDetails>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    import UserDetails from '@/components/UserDetails.vue'
+    //var $ = require('jquery');
+
+    export default {
+        name: 'UserManager',
+        components: {
+            UserDetails
+        },
+        mounted: function () {
+            this.requestUserList();
+        },
+        data: function () {
+            return {
+                users: [],
+                detailed: false,
+                detailedUser: {
+                    info: {},
+                    history: [],
+                    pets: []
+                }
+            }
+        },
+        methods: {
+            showUserDetails: function (username) {
+                this.requestUserDetails(username);
+            },
+            hideUserDetails: function () {
+                this.detailed = false;
+            },
+            requestPetInfo: function (username) {
+                this.$http.get('pet_api/user/' + username + '/getpets'
+                ).then((resp) => {
+                    this.detailedUser.pets = resp.data;
+                    this.detailed = true;
+                }, () => {
+                    alert('get pet info fail');
+                });
+            },
+            requestRunningHistory: function (username) {
+                this.$http.get('record_api/running/record/user/' + username
+                ).then((resp) => {
+                    console.log(typeof resp.data[0].startTime);
+                    console.log(typeof resp.data[0].duration);
+                    this.detailedUser.history = resp.data;
+                    this.requestPetInfo(username);
+                }, () => {
+                    alert('get running history fail');
+                });
+            },
+            requestUserInfo: function (username) {
+                this.$http.get('user_api/admingetuserinfo/username/' + username
+                ).then((resp) => {
+                    this.detailedUser.info = resp.data;
+                    this.requestRunningHistory(username);
+                }, () => {
+                    alert('get user info fail');
+                });
+            },
+            requestUserDetails: function (username) {
+                this.requestUserInfo(username);
+            },
+            requestUserList: function () {
+                this.$http.get('user_api/getallusername'
+                ).then((resp) => {
+                    this.users = resp.data;
+                }, () => {
+                    alert('get user list fail');
+                });
+            },
+            requestBan: function (username) {
+                this.$http.get('user_api/blockuser/username/' + username
+                ).then((resp) => {
+                    // refresh
+                    this.requestUserDetails(username);
+                }, () => {
+                    alert('ban/unban user fail');
+                });
+            }
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>

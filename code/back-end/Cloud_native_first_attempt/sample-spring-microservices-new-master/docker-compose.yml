@@ -83,7 +83,7 @@ services:
       - "30752:30752"
     networks:
       - spring-cloud-network
-  
+
   pet-service:
     hostname: pet-service
     image: macoredroid/pet-service:latest
@@ -151,7 +151,7 @@ services:
       - "30751:30751"
     networks:
       - spring-cloud-network
-      
+
   proxy-service:
     hostname: proxy-service
     image: macoredroid/proxy-service:latest
@@ -163,7 +163,7 @@ services:
       - "30753:30753"
     networks:
       - spring-cloud-network
-      
+
   rule-service:
     hostname: rule-service
     image: macoredroid/rule-service:latest
@@ -176,9 +176,21 @@ services:
     networks:
       - spring-cloud-network
 
+  admin-ui:
+    hostname: admin-ui
+    image: macoredroid/admin-ui:latest
+    build:
+      context: ./admin-ui
+      target: 'production-stage'
+    ports:
+      - '8080:8080'
+    volumes:
+      - '.:/app'
+
+
 networks:
   spring-cloud-network:
     driver: bridge
 
-        
- 
+
+
