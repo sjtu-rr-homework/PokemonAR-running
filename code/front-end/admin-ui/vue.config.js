@@ -8,7 +8,7 @@ module.exports = {
         proxy: {
             //配置跨域
             '/ruleadmin_api': {
-                target: 'http://localhost:8080',
+                target: 'http://202.120.40.8:30751/rule',
                 ws: true,
                 changOrigin: true,
                 pathRewrite: {
