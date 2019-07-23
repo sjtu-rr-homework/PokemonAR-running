@@ -163,6 +163,18 @@ services:
       - "30753:30753"
     networks:
       - spring-cloud-network
+      
+  rule-service:
+    hostname: rule-service
+    image: macoredroid/rule-service:latest
+    build:
+      context: ./rule-service
+    environment:
+      SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
+    ports:
+      - "8095:8095"
+    networks:
+      - spring-cloud-network
 
 networks:
   spring-cloud-network:
