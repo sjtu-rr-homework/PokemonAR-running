@@ -183,7 +183,7 @@ services:
       context: ./admin-ui
       target: 'production-stage'
     ports:
-      - '8080:8080'
+      - '80:80'
     volumes:
       - '.:/app'
 

@@ -171,12 +171,10 @@ services:
     environment:
       - NODE_ENV=production
     ports:
-      - "8080:8080"
+      - "80:80"
     networks:
       - spring-cloud-network
-    volumes:
-      - '.:/app'
-      - '/app/node_modules'
+   
     
 
 networks:
