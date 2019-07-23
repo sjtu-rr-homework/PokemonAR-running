@@ -83,7 +83,7 @@ services:
       - "30752:30752"
     networks:
       - spring-cloud-network
-  
+
   pet-service:
     hostname: pet-service
     image: macoredroid/pet-service:latest
@@ -151,7 +151,7 @@ services:
       - "30751:30751"
     networks:
       - spring-cloud-network
-      
+
   proxy-service:
     hostname: proxy-service
     image: macoredroid/proxy-service:latest
@@ -164,9 +164,22 @@ services:
     networks:
       - spring-cloud-network
 
+  rule-service:
+    hostname: rule-service
+    image: macoredroid/rule-service:latest
+    build:
+      context: ./rule-service
+    environment:
+      SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
+    ports:
+      - "8095:8095"
+    networks:
+      - spring-cloud-network
+
+
 networks:
   spring-cloud-network:
     driver: bridge
 
-        
- 
+
+

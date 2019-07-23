@@ -9,6 +9,7 @@
         <module name="discovery-service" />
         <module name="gateway-service" />
         <module name="location-service" />
+        <module name="rule-service" />
         <module name="proxy-service" />
         <module name="record-service" />
         <module name="config-service" />
@@ -26,6 +27,7 @@
       <module name="pet-service" target="1.8" />
       <module name="proxy-service" target="1.8" />
       <module name="record-service" target="1.8" />
+      <module name="rule-service" target="1.8" />
       <module name="sample-spring-microservices-new" target="1.5" />
       <module name="user-service" target="1.8" />
     </bytecodeTargetLevel>
@@ -41,6 +43,7 @@
       <module name="pet-service" options="-parameters" />
       <module name="proxy-service" options="-parameters" />
       <module name="record-service" options="-parameters" />
+      <module name="rule-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
   </component>
