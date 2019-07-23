@@ -168,11 +168,13 @@ services:
   admin-ui:
     hostname: admin-ui
     image: macoredroid/admin-ui:latest
+    environment:
+      - NODE_ENV=production
     ports:
       - "8080:8080"
     networks:
       - spring-cloud-network
-    command: sh -c "npm start"
+    command: "npm start"
     environment:
       HOST: 0.0.0.0
 
