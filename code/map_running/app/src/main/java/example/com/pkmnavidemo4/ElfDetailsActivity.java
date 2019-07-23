@@ -92,6 +92,7 @@ public class ElfDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int exp=Integer.valueOf(numOfExp.getText().toString());
+                //经验输入框为空
                 if(nowNum<1){
                     Toast.makeText(getApplicationContext(), "你尚未拥有该精灵", Toast.LENGTH_SHORT).show();
                     return;
@@ -172,6 +173,11 @@ public class ElfDetailsActivity extends AppCompatActivity {
                         power.setText("战斗力 "+ ElfSourceController.getPower(variety,(nowExp/100+1),nowGrade));
                         break;
                     case 2:
+                        //如果已经是最高形态
+                        if(ElfSourceController.getMaxLevel(variety)==2){
+                            Toast.makeText(getApplicationContext(), "已经是最高形态", Toast.LENGTH_SHORT).show();
+                            break;
+                        }
                         if(ElfSourceController.getMaxLevel(variety)==3) {
                             if(nowExp<6000||nowNum<10){
                                 Toast.makeText(getApplicationContext(), "尚未满足条件", Toast.LENGTH_SHORT).show();
@@ -191,6 +197,13 @@ public class ElfDetailsActivity extends AppCompatActivity {
                             power.setText("战斗力 "+ ElfSourceController.getPower(variety,(nowExp/100+1),nowGrade));
                             break;
                         }
+                    case 3:
+                        //如果已经是最高形态
+                        if(ElfSourceController.getMaxLevel(variety)==2){
+                            Toast.makeText(getApplicationContext(), "已经是最高形态", Toast.LENGTH_SHORT).show();
+                            break;
+                        }
+                        break;
                     default:
 
                 }
