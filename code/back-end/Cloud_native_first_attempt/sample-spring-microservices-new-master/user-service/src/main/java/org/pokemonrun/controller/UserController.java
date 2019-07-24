@@ -5,6 +5,7 @@ import org.pokemonrun.info.Userinfo;
 import org.pokemonrun.service.GetUserInfo;
 import org.pokemonrun.service.ModifyUserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +13,7 @@ import org.pokemonrun.service.LoginService;
 import org.pokemonrun.service.RegisterService;
 
 import java.util.List;
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class UserController {
 	@Autowired
