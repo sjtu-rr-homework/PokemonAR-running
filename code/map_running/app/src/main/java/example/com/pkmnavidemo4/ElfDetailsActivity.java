@@ -91,8 +91,13 @@ public class ElfDetailsActivity extends AppCompatActivity {
         addExp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int exp=Integer.valueOf(numOfExp.getText().toString());
                 //经验输入框为空
+                if(numOfExp.getText().toString().equals("")) {
+                    Toast.makeText(getApplicationContext(), "经验输入为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                int exp=Integer.valueOf(numOfExp.getText().toString());
+                //用户尚未拥有该精灵
                 if(nowNum<1){
                     Toast.makeText(getApplicationContext(), "你尚未拥有该精灵", Toast.LENGTH_SHORT).show();
                     return;
