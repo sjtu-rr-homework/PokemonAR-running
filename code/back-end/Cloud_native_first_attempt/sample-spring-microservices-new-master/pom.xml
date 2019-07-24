@@ -15,6 +15,7 @@
 		<module>record-service</module>
 		<module>pet-service</module>
 		<module>proxy-service</module>
+		<module>rule-service</module>
 	</modules>
 
 </project>

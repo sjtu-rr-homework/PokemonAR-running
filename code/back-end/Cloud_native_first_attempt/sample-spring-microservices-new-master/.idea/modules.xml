@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/pet-service/pet-service.iml" filepath="$PROJECT_DIR$/pet-service/pet-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/proxy-service/proxy-service.iml" filepath="$PROJECT_DIR$/proxy-service/proxy-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/record-service/record-service.iml" filepath="$PROJECT_DIR$/record-service/record-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rule-service/rule-service.iml" filepath="$PROJECT_DIR$/rule-service/rule-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/sample-spring-microservices-new.iml" filepath="$PROJECT_DIR$/sample-spring-microservices-new.iml" />
       <module fileurl="file://$PROJECT_DIR$/user-service/user-service.iml" filepath="$PROJECT_DIR$/user-service/user-service.iml" />
     </modules>

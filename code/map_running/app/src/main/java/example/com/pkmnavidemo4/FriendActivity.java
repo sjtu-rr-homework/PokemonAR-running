@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import example.com.pkmnavidemo4.classes.ElfSourceController;
 import example.com.pkmnavidemo4.classes.HttpHandler;
@@ -52,13 +53,17 @@ public class FriendActivity extends AppCompatActivity {
             fightfriend.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    if(typeID==-1) {
+                        Toast.makeText(getApplicationContext(),"该用户未设置出战精灵", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    int myPet=(int)(UserData.getElfWithId((int)UserData.getUserInfo().get("pet")).get("typeID"));
                     Intent intent=new Intent(FriendActivity.this,FightActivity.class);
-                    intent.putExtra("leftElf",(int)UserData.getElfDetails().get((int)UserData.getUserInfo().get("pet")).get("typeID"));
+                    intent.putExtra("leftElf",myPet);
                     intent.putExtra("rightElf",typeID);
-                    intent.putExtra("leftPower",ElfSourceController.getPower((int)UserData.getElfDetails().get((int)UserData.getUserInfo().get("pet")).get("typeID"),(int)UserData.getElfDetails().get((int)UserData.getUserInfo().get("pet")).get("exp")/100+1,(int)UserData.getElfDetails().get((int)UserData.getUserInfo().get("pet")).get("grade")));
+                    intent.putExtra("leftPower",ElfSourceController.getPower(myPet,(int)UserData.getElfWithId(myPet).get("exp")/100+1,(int)UserData.getElfWithId(myPet).get("grade")));
                     intent.putExtra("rightPower",ElfSourceController.getPower(typeID,exp/100+1,grade));
-                    intent.putExtra("leftGrade",(int)UserData.getElfDetails().get((int)UserData.getUserInfo().get("pet")).get("grade"));
+                    intent.putExtra("leftGrade",(int)UserData.getElfWithId(myPet).get("grade"));
                     intent.putExtra("rightGrade",grade);
                     startActivity(intent);
                 }

@@ -76,10 +76,15 @@ public class FriendPageActivity extends AppCompatActivity {
                 Map petMap=UserData.getFriendInfo(list.get(position).getName());
                 intent.putExtra("username",list.get(position).getName());
                 intent.putExtra("type",2);
-                intent.putExtra("typeID",(int)petMap.get("typeID"));
-                intent.putExtra("exp",(int)petMap.get("exp"));
-                intent.putExtra("grade",(int)petMap.get("grade"));
-                startActivity(intent);
+                //好友未设置出战精灵
+                if(petMap==null)
+                    startActivity(intent);
+                else {
+                    intent.putExtra("typeID", (int) petMap.get("typeID"));
+                    intent.putExtra("exp", (int) petMap.get("exp"));
+                    intent.putExtra("grade", (int) petMap.get("grade"));
+                    startActivity(intent);
+                }
                 Toast.makeText(FriendPageActivity.this,list.get(position).getName(),Toast.LENGTH_SHORT).show();
             }
         });

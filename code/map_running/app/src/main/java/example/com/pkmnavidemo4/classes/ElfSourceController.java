@@ -23,7 +23,7 @@ public class ElfSourceController {
             case 5:
                 return (int) (1.10*level*level*(1+grade*0.5));
             default:
-                return 99999;
+                return 0;
         }
     }
     //精灵图鉴中背景图片
@@ -113,7 +113,7 @@ public class ElfSourceController {
                         return R.drawable.psyduck;
                 }
             default:
-                return R.drawable.charizard;
+                return R.drawable.catchball;
         }
     }
     //得到精灵名字
@@ -169,7 +169,7 @@ public class ElfSourceController {
                         return "可达鸭";
                 }
             default:
-                return "ERROR";
+                return "无";
         }
     }
 

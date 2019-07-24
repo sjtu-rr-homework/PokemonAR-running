@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -42,10 +43,6 @@ public class FightActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fight);
-        mRecyclerView = findViewById(R.id.elf_fight_recycle_view);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(FightActivity.this));
-        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL));
         Intent intent = getIntent();
         leftElf = intent.getIntExtra("leftElf", 1);
         rightElf = intent.getIntExtra("rightElf", 2);
@@ -53,6 +50,10 @@ public class FightActivity extends AppCompatActivity {
         rightPower = intent.getIntExtra("rightPower", 100);
         leftGrade = intent.getIntExtra("leftGrade",2);
         rightGrade = intent.getIntExtra("rightGrade", 2);
+        setContentView(R.layout.activity_fight);
+        mRecyclerView = findViewById(R.id.elf_fight_recycle_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(FightActivity.this));
+        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL));
         start=findViewById(R.id.act_fight_button_start);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +62,7 @@ public class FightActivity extends AppCompatActivity {
             }
         });
         finish=findViewById(R.id.act_fight_button_finish);
-        start.setOnClickListener(new View.OnClickListener() {
+        finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                finish();
@@ -80,7 +81,10 @@ public class FightActivity extends AppCompatActivity {
         for (i = 0; leftHp>0&&rightHp>0; i++) {
             if(i%2==0) {
                 int randomAttack=luck.nextInt(10);
-                attack=ElfSourceController.getAttack(leftPower,rightPower)/2+luck.nextInt(ElfSourceController.getAttack(leftPower,rightPower)/2);
+                if(ElfSourceController.getAttack(leftPower,rightPower)/2>=1)
+                    attack=ElfSourceController.getAttack(leftPower,rightPower)/2+luck.nextInt(ElfSourceController.getAttack(leftPower,rightPower)/2);
+                else
+                    attack=1;
                 switch (randomAttack){
                     case 1:
                         list.add(ElfSourceController.getName(leftElf, leftGrade)+"的攻击MISS了");
@@ -114,7 +118,10 @@ public class FightActivity extends AppCompatActivity {
                 list.add(ElfSourceController.getName(rightElf, rightGrade) +"还有" + rightHp+ "%血量");
             }
             else {
-                attack=ElfSourceController.getAttack(rightPower,leftPower)/2+luck.nextInt(ElfSourceController.getAttack(rightPower,leftPower)/2);
+                if(ElfSourceController.getAttack(rightPower,leftPower)/2>=1)
+                    attack=ElfSourceController.getAttack(rightPower,leftPower)/2+luck.nextInt(ElfSourceController.getAttack(rightPower,leftPower)/2);
+                else
+                    attack=1;
                 int randomAttack=luck.nextInt(10);
                 switch (randomAttack){
                     case 1:
@@ -149,7 +156,7 @@ public class FightActivity extends AppCompatActivity {
                 list.add(ElfSourceController.getName(leftElf, leftGrade) +"还有" + leftHp+ "%血量");
             }
         }
-            FightTextAdapter adapter = new FightTextAdapter(FightActivity.this,list);
-            mRecyclerView.setAdapter(adapter);
+        FightTextAdapter adapter = new FightTextAdapter(FightActivity.this,list);
+        mRecyclerView.setAdapter(adapter);
     }
 }
