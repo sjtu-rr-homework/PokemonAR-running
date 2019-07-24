@@ -144,7 +144,11 @@ public class ElfDetailsActivity extends AppCompatActivity {
         setMainElf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UserData.setPet(variety);
+                if(UserData.getElfWithId(variety).get("typeID")!=null)
+                    UserData.setPet(variety);
+                else
+                    Toast.makeText(getApplicationContext(), "你没有该精灵", Toast.LENGTH_SHORT).show();
+
             }
         });
 
