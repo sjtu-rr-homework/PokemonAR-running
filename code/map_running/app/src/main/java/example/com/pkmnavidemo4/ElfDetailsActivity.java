@@ -70,6 +70,7 @@ public class ElfDetailsActivity extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putInt("variety", variety);
                 bundle.putInt("grade",grade);
+                bundle.putInt("cantCatch",1);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

@@ -80,6 +80,7 @@ public class SceneformActivity extends AppCompatActivity implements Scene.OnUpda
     setContentView(R.layout.activity_ux);
     //获取生成精灵模型的id
       Intent intent=getIntent();
+      int cantCatch=intent.getIntExtra("cantCatch",  -1);
       int variety=intent.getIntExtra("variety", -1);
       int level=intent.getIntExtra("grade", 1);
     arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment);
@@ -91,6 +92,8 @@ public class SceneformActivity extends AppCompatActivity implements Scene.OnUpda
           }
       });
       catchButton=findViewById(R.id.act_ux_button_catch);
+      if(cantCatch==1)
+          catchButton.setVisibility(View.INVISIBLE);
       catchButton.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
