@@ -13,15 +13,53 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent">
 
+        <LinearLayout
+            android:id="@+id/fg_running_topbar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="1dp"
+            android:background="@android:color/white"
+            android:baselineAligned="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp">
+
+            <TextView
+                android:id="@+id/item_weixin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="自由跑"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:id="@+id/item_tongxunlu"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="约束跑"
+                android:textSize="15dp"/>
+        </LinearLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/fg_running_mainViewPager"
+            android:layout_below="@id/fg_running_topbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
         <ImageView
             android:id="@+id/fg_running_checkneighbour"
+            android:layout_below="@id/fg_running_topbar"
+            android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/elf_4"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"/>
+            android:background="@drawable/elf_4"/>
 
-        <Button
+        <!--Button
             android:id="@+id/button3"
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -29,7 +67,7 @@
             android:background="@drawable/button_circle"
             android:text="开始跑步"
             android:visibility="visible"
-            tools:text="testButton" />
+            tools:text="testButton" /-->
 
         <TextView
             android:id="@+id/fg_running_textView"

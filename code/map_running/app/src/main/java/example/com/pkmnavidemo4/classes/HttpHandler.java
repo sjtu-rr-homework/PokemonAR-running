@@ -49,9 +49,9 @@ import example.com.pkmnavidemo4.R;
 
 public class HttpHandler {
 
-    private static String UrlHead="http://d06b88e6.ngrok.io";
-    //private static String UrlHead="http://202.120.40.8:30751";
-    
+    //private static String UrlHead="http://d06b88e6.ngrok.io";
+    private static String UrlHead="http://202.120.40.8:30751";
+
 
     @Nullable
     public static Activity findActivity(Context context) {
@@ -628,7 +628,6 @@ public class HttpHandler {
                     String username=jsonobject.getString("username");
                     Map map = null;
                     map = new HashMap(); // 存放到MAP里面
-                    Log.d("133","-3333--"+pet);
                     map.put("distance", distance );
                     map.put("pet",pet);
                     map.put("username",username);

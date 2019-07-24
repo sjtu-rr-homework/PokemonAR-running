@@ -70,6 +70,7 @@ public class ElfDetailsActivity extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putInt("variety", variety);
                 bundle.putInt("grade",grade);
+                bundle.putInt("cantCatch",1);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -91,7 +92,13 @@ public class ElfDetailsActivity extends AppCompatActivity {
         addExp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //经验输入框为空
+                if(numOfExp.getText().toString().equals("")) {
+                    Toast.makeText(getApplicationContext(), "经验输入为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 int exp=Integer.valueOf(numOfExp.getText().toString());
+                //用户尚未拥有该精灵
                 if(nowNum<1){
                     Toast.makeText(getApplicationContext(), "你尚未拥有该精灵", Toast.LENGTH_SHORT).show();
                     return;
@@ -143,7 +150,11 @@ public class ElfDetailsActivity extends AppCompatActivity {
         setMainElf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UserData.setPet(variety);
+                if(UserData.getElfWithId(variety).get("typeID")!=null)
+                    UserData.setPet(variety);
+                else
+                    Toast.makeText(getApplicationContext(), "你没有该精灵", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -172,6 +183,11 @@ public class ElfDetailsActivity extends AppCompatActivity {
                         power.setText("战斗力 "+ ElfSourceController.getPower(variety,(nowExp/100+1),nowGrade));
                         break;
                     case 2:
+                        //如果已经是最高形态
+                        if(ElfSourceController.getMaxLevel(variety)==2){
+                            Toast.makeText(getApplicationContext(), "已经是最高形态", Toast.LENGTH_SHORT).show();
+                            break;
+                        }
                         if(ElfSourceController.getMaxLevel(variety)==3) {
                             if(nowExp<6000||nowNum<10){
                                 Toast.makeText(getApplicationContext(), "尚未满足条件", Toast.LENGTH_SHORT).show();
@@ -191,6 +207,13 @@ public class ElfDetailsActivity extends AppCompatActivity {
                             power.setText("战斗力 "+ ElfSourceController.getPower(variety,(nowExp/100+1),nowGrade));
                             break;
                         }
+                    case 3:
+                        //如果已经是最高形态
+                        if(ElfSourceController.getMaxLevel(variety)==2){
+                            Toast.makeText(getApplicationContext(), "已经是最高形态", Toast.LENGTH_SHORT).show();
+                            break;
+                        }
+                        break;
                     default:
 
                 }

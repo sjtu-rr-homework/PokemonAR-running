@@ -28,8 +28,8 @@
 </template>
 
 <script>
-    import UserDetails from '@/components/UserDetails.vue'
-    //var $ = require('jquery');
+    import UserDetails from '@/components/UserDetails.vue';
+    import * as api from '@/js/api_prefix.js';
 
     export default {
         name: 'UserManager',
@@ -58,7 +58,7 @@
                 this.detailed = false;
             },
             requestPetInfo: function (username) {
-                this.$http.get('pet_api/user/' + username + '/getpets'
+                this.$http.get(api.petApi('user/' + username + '/getpets')
                 ).then((resp) => {
                     this.detailedUser.pets = resp.data;
                     this.detailed = true;
@@ -67,7 +67,7 @@
                 });
             },
             requestRunningHistory: function (username) {
-                this.$http.get('record_api/running/record/user/' + username
+                this.$http.get(api.recordApi('running/record/user/' + username)
                 ).then((resp) => {
                     console.log(typeof resp.data[0].startTime);
                     console.log(typeof resp.data[0].duration);
@@ -78,7 +78,7 @@
                 });
             },
             requestUserInfo: function (username) {
-                this.$http.get('user_api/admingetuserinfo/username/' + username
+                this.$http.get(api.userApi('admingetuserinfo/username/' + username)
                 ).then((resp) => {
                     this.detailedUser.info = resp.data;
                     this.requestRunningHistory(username);
@@ -90,7 +90,7 @@
                 this.requestUserInfo(username);
             },
             requestUserList: function () {
-                this.$http.get('user_api/getallusername'
+                this.$http.get(api.userApi('getallusername')
                 ).then((resp) => {
                     this.users = resp.data;
                 }, () => {
@@ -98,7 +98,7 @@
                 });
             },
             requestBan: function (username) {
-                this.$http.get('user_api/blockuser/username/' + username
+                this.$http.get(api.userApi('blockuser/username/' + username)
                 ).then((resp) => {
                     // refresh
                     this.requestUserDetails(username);
