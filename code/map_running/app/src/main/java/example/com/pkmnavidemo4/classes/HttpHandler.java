@@ -904,6 +904,7 @@ public class HttpHandler {
                         View view = View.inflate(context, R.layout.view_marker_constraint, null);
                         Bitmap bitmap = ElfPointController.convertViewToBitmap(view);
                         MarkerOptions markerOptions = new MarkerOptions()
+                                .title("flag")
                                 .snippet("必经点位")
                                 .position(point)
                                 .draggable(false)

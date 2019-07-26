@@ -321,7 +321,12 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                             LatLng point = marker.getPosition();
                             float distance = AMapUtils.calculateLineDistance(point, present);
                             if (distance < 10) {
-                                showCatchMessage(Integer.parseInt(marker.getSnippet()), marker);
+                                if(marker.getTitle().equals("elf")) {
+                                    showCatchMessage(Integer.parseInt(marker.getSnippet()), marker);
+                                }
+                                else if(marker.getTitle().equals("flag")){
+                                    Toast.makeText(MapActivity.this,"经过一个必经点位",Toast.LENGTH_SHORT).show();
+                                }
                                 break;
                             }
                         }
