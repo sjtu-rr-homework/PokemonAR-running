@@ -255,9 +255,10 @@
                     });
             },
             modifyFlags: function () {
+                let headers= {'Content-Type': 'application/json'};
                 this.flagModifySubmitting = true;
                 this.flagModifyFail = false;
-                this.$http.post(api.ruleApi('admin/post/rule/flags'), this.getModifiedFlags())
+                this.$http.post(api.ruleApi('admin/post/rule/flags'), this.getModifiedFlags(),{headers})
                     .then((resp) => {
                         this.flagModifying = false;
                         this.flagModifySubmitting = false;
@@ -282,13 +283,14 @@
                     });
             },
             modifyBasicRule: function () {
+                let headers= {'Content-Type': 'application/json'};
                 this.basicRuleModifySubmitting = true;
                 this.basicRuleModifyFail = false;
                 this.$http.post(api.ruleApi('admin/post/rule/basic'), {
                     mileageRequirement: this.modifier.mileageGoal,
                     minSpeed: this.modifier.minSpeed,
                     maxSpeed: this.modifier.maxSpeed
-                }).then((resp) => {
+                },{headers}).then((resp) => {
                     this.basicRuleModifying = false;
                     this.basicRuleModifySubmitting = false;
                     this.requestBasicRule();
@@ -346,6 +348,7 @@
                     });
             },
             modifyBorder: function () {
+                let headers= {'Content-Type': 'application/json'};
                 this.borderModifySubmitting = true;
                 this.borderModifyFail = false;
                 let path = [];
@@ -358,7 +361,7 @@
                 console.log('path');
                 console.log(path);
                 this.$http.post(api.ruleApi('admin/post/rule/border'),
-                    path
+                    path,{headers}
                 ).then((resp) => {
                     this.borderModifying = false;
                     this.borderModifySubmitting = false;

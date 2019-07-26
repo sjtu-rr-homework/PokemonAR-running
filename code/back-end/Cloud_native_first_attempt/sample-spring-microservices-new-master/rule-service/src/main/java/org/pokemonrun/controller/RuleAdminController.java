@@ -28,7 +28,7 @@ public class RuleAdminController {
     }
 
     @PostMapping("/admin/post/rule/basic")
-
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public boolean setBasicRule(@RequestBody BasicRuleInfo info){
         return basicRuleService.setBasicRule(info);
     }
@@ -39,6 +39,7 @@ public class RuleAdminController {
     }
 
     @PostMapping("/admin/post/rule/flags")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public boolean setFlags(@RequestBody List<FlagInfo> flags){
         return flagService.setFlags(flags);
     }
@@ -49,6 +50,7 @@ public class RuleAdminController {
     }
 
     @PostMapping("/admin/post/rule/border")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public boolean setBorder(@RequestBody List<PathNodeInfo> border){
         return borderService.setBorder(border);
     }
