@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: jaccount-auth-service
+  datasource:
+    url: jdbc:mysql://localhost/jaccount_auth?serverTimezone=UTC
+    username: root
+    password: 3a1ce180
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+
