@@ -32,8 +32,9 @@ public class FreeModeFragment extends Fragment {
         run.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"开始自由跑",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(),"开始自由跑",Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(getActivity(), MapActivity.class);
+                intent.putExtra("type",1);
                 startActivity(intent);
             }
         });

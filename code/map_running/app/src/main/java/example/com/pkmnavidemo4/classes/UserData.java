@@ -22,6 +22,8 @@ public class UserData {
     private static  List<Map> elfDetailsList;
     private static  boolean onlyHave=false;
     public static boolean isFriendGet=false;
+    public static int flagNum=0;
+    public static List<LatLng> constraint=new ArrayList<LatLng>();
     public static Map getUserInfo(){return userInfo;}
     public static Map getElfWithId(int id){
         for (int i = 0; i < elfDetailsList.size(); i++) {
@@ -107,7 +109,7 @@ public class UserData {
         return onlyHave;
     }
     public static boolean consumeExp(int num){
-        if(exp>num){
+        if(exp>=num){
             exp-=num;
             HttpHandler.changeExp(userName,0-num);
             return true;
@@ -121,5 +123,8 @@ public class UserData {
     public static void setExp(int num){
         exp=num;
     }
-
+	public static void addExp(int num){
+        HttpHandler.changeExp(userName,num);
+        exp+=num;
+    }
 }

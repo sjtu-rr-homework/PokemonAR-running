@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,17 +10,13 @@
         android:id="@+id/relativeLayout3"
         android:layout_width="180dp"
         android:layout_height="480dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="14dp"
         android:layout_marginTop="180dp"
         android:layout_marginEnd="220dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/bg_white"
         android:clickable="true"
-        app:layout_constraintBottom_toTopOf="@+id/act_elf_details_elf_button_return"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_alignParentTop="true">
 
         <ImageView
             android:id="@+id/act_elf_details_elf_image1"
@@ -52,18 +48,13 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
-        android:layout_width="0dp"
-        android:layout_height="150dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_width="369dp"
+        android:layout_height="149dp"
         android:layout_marginStart="14dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/bg_white"
-        android:clickable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:clickable="true">
 
 
         <ImageView
@@ -113,10 +104,7 @@
         android:layout_marginEnd="20dp"
         android:background="@drawable/bg_white"
         android:clickable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_alignParentTop="true">
 
         <TextView
             android:id="@+id/act_elf_details_elf_num"
@@ -165,11 +153,7 @@
         android:layout_marginTop="420dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/bg_white"
-        android:clickable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:clickable="true">
 
         <Button
             android:id="@+id/act_elf_details_elf_button_grow"
@@ -211,38 +195,29 @@
         android:id="@+id/act_elf_details_elf_button_return"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="7dp"
+        android:layout_marginBottom="22dp"
+        android:layout_marginRight="10dp"
         android:text="返回"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.938"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
 
     <TextView
         android:id="@+id/act_elf_details_elf_user_exp"
         android:layout_width="wrap_content"
         android:layout_height="38dp"
         android:layout_marginTop="17dp"
-        android:layout_marginBottom="16dp"
-        android:text="经验"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3" />
+        android:layout_marginBottom="19dp"
+        android:layout_marginStart="190dp"
+        android:layout_alignParentBottom="true"
+        android:text="经验" />
 
     <Button
         android:id="@+id/act_elf_details_elf_button_set"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginBottom="7dp"
-        android:text="设为出战精灵"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.013"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3"
-        app:layout_constraintVertical_bias="1.0" />
+        android:layout_marginBottom="22dp"
+        android:text="出战"
+        android:layout_alignParentBottom="true" />
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

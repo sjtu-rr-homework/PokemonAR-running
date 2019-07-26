@@ -12,6 +12,7 @@ import android.icu.text.SimpleDateFormat;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Vibrator;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -65,6 +66,8 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
     private RunningMessage runningMessage;
     private ElfPointController elfPointController;
     private List<ElfPoint> presentElfPoint=new ArrayList<ElfPoint>();
+    private int type;//0为约束跑模式，1为自由跑模式
+    private Vibrator vibrator;
     //private List<LatLng> latLngs=new ArrayList<LatLng>();
     //private double run_dist=0;
 
@@ -88,7 +91,16 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
-        Log.d("sha1",sHA1(MapActivity.this));
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+
+        Intent intent=getIntent();
+        type=intent.getIntExtra("type",-1);
+        if(type==1){
+            Toast.makeText(MapActivity.this,"自由跑模式",Toast.LENGTH_SHORT).show();
+        }else if(type==0){
+            Toast.makeText(MapActivity.this,"定点跑模式",Toast.LENGTH_SHORT).show();
+        }
+
         //绑定文本控件
         positionText=(TextView)findViewById(R.id.act_map_textView);
         distText=(TextView)findViewById(R.id.act_map_textView_dist);
@@ -289,12 +301,14 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         if (mListener != null && aMapLocation != null) {
             if (aMapLocation != null && aMapLocation.getErrorCode() == 0) {
                 if(isFirstLocate){
-
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             LatLng start=new LatLng(aMapLocation.getLatitude(),aMapLocation.getLongitude());
                             HttpHandler.postPosition(start);
+                            if(type==0){
+                                HttpHandler.getflag(aMap,start,MapActivity.this);
+                            }
                             elfPointController.generateElfPoing(getApplicationContext(),aMap,start);
                             presentElfPoint=elfPointController.getPresentElfPoint();
                             //elfPoint.showAllPoints(aMap);
@@ -311,7 +325,18 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                             LatLng point = marker.getPosition();
                             float distance = AMapUtils.calculateLineDistance(point, present);
                             if (distance < 10) {
-                                showCatchMessage(Integer.parseInt(marker.getSnippet()), marker);
+                                if(marker.getTitle().equals("elf")) {
+                                    showCatchMessage(Integer.parseInt(marker.getSnippet()), marker);
+                                }
+                                else if(marker.getTitle().equals("flag")){
+                                    vibrator.vibrate(500);
+                                    Toast.makeText(MapActivity.this,"经过一个必经点位",Toast.LENGTH_SHORT).show();
+                                    View view = View.inflate(MapActivity.this, R.layout.view_marker_done, null);
+                                    Bitmap bitmap = ElfPointController.convertViewToBitmap(view);
+                                    marker.setTitle("flag_done");
+                                    UserData.flagNum--;
+                                    marker.setIcon(BitmapDescriptorFactory.fromBitmap(bitmap));
+                                }
                                 break;
                             }
                         }
@@ -347,27 +372,82 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
 
     @Override
     public void finish() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(MapActivity.this);
-        dialog.setTitle("温馨提示");
-        dialog.setMessage("是否结束跑步？");
-        dialog.setCancelable(false);
-        dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                HttpHandler.postRunningRecord1(runningMessage);
-                HttpHandler.addDistance(UserData.getUserName(),runningMessage.getLength());
-                HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size()-1));
-                HttpHandler.changeExp(UserData.getUserName(),runningMessage.getExp());
-                MapActivity.super.finish();
+        if(type==1) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(MapActivity.this);
+            dialog.setTitle("温馨提示");
+            dialog.setMessage("是否结束跑步？");
+            dialog.setCancelable(false);
+            dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    HttpHandler.postRunningRecord1(runningMessage);
+                    HttpHandler.addDistance(UserData.getUserName(), runningMessage.getLength());
+                    HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
+                    UserData.addExp(runningMessage.getExp());
+                    MapActivity.super.finish();
+                }
+            });
+            dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    return;
+                }
+            });
+            dialog.show();
+        }
+        else if(type==0){
+            AlertDialog.Builder dialog = new AlertDialog.Builder(MapActivity.this);
+            if(checkFlagDone()) {
+                dialog.setTitle("你即将结束定点跑步");
+                dialog.setMessage("是否结束跑步？");
+                dialog.setCancelable(false);
+                dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        HttpHandler.postRunningRecord1(runningMessage);
+                        HttpHandler.addDistance(UserData.getUserName(), runningMessage.getLength());
+                        HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
+                        UserData.addExp(runningMessage.getExp());
+                        MapActivity.super.finish();
+                    }
+                });
+                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        return;
+                    }
+                });
+                dialog.show();
             }
-        });
-        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                return;
+            else{
+                dialog.setTitle("你还没有经过所有必经点位");
+                dialog.setMessage("现在结束跑步得不到任何经验和精灵，是否结束跑步？");
+                dialog.setCancelable(false);
+                dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        HttpHandler.postRunningRecord1(runningMessage);
+                        HttpHandler.addDistance(UserData.getUserName(), runningMessage.getLength());
+                        HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
+                        MapActivity.super.finish();
+                    }
+                });
+                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        return;
+                    }
+                });
+                dialog.show();
             }
-        });
-        dialog.show();
+        }
+    }
+
+    private boolean checkFlagDone(){
+        if(UserData.flagNum>0){
+            return false;
+        }
+        return true;
     }
 
 

@@ -7,7 +7,7 @@
         android:layout_height="match_parent">
         <ImageView
             android:id="@+id/ivQuality"
-            android:layout_width="300px"
-            android:layout_height="300px" />
+            android:layout_width="250px"
+            android:layout_height="250px" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

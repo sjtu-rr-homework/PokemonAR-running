@@ -1,8 +1,14 @@
 package example.com.pkmnavidemo4.classes;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +20,8 @@ import example.com.pkmnavidemo4.R;
 
 public class FightTextAdapter extends RecyclerView.Adapter<FightTextAdapter.ViewHolderA> {
     private Context mContext;
-    private List<String> mList;
-    public FightTextAdapter(Context context, List<String> list) {
+    private List<Spanned> mList;
+    public FightTextAdapter(Context context, List<Spanned> list) {
         mContext = context;
         mList = list;
     }
@@ -38,6 +44,14 @@ public class FightTextAdapter extends RecyclerView.Adapter<FightTextAdapter.View
     public int getItemCount() {
         //生成的item的数量
         return mList.size();
+    }
+    public void myclear(){
+
+    }
+    public void addData(Spanned content){
+        mList.add(1, content);
+        //通知适配器item内容插入
+        notifyItemInserted(1);
     }
 
     //Item的ViewHolder以及item内部布局控件的id绑定

@@ -7,4 +7,5 @@ import java.util.List;
 public interface FlagService {
     List<FlagInfo> getFlags();
     boolean setFlags(List<FlagInfo> flags);
+    List<FlagInfo> getRandomRoute(double lng, double lat);
 }

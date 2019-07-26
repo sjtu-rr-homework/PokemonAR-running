@@ -37,7 +37,7 @@ public class FriendActivity extends AppCompatActivity {
         elfname=(TextView)findViewById(R.id.act_friend_elfname);
         elfname.setText(ElfSourceController.getName(typeID,grade));
         level=(TextView)findViewById(R.id.act_friend_elflevel);
-        level.setText(""+exp/100+1);
+        level.setText(""+(exp/100+1));
         fightPoint=(TextView)findViewById(R.id.act_friend_fightpoint);
         fightPoint.setText(""+ElfSourceController.getPower(typeID,exp/100+1,grade));
         addfriend=(Button)findViewById(R.id.act_friend_add);

@@ -257,7 +257,7 @@
             modifyFlags: function () {
                 this.flagModifySubmitting = true;
                 this.flagModifyFail = false;
-                this.$http.put(api.ruleApi('admin/rule/flags'), this.getModifiedFlags())
+                this.$http.post(api.ruleApi('admin/post/rule/flags'), this.getModifiedFlags())
                     .then((resp) => {
                         this.flagModifying = false;
                         this.flagModifySubmitting = false;
@@ -284,7 +284,7 @@
             modifyBasicRule: function () {
                 this.basicRuleModifySubmitting = true;
                 this.basicRuleModifyFail = false;
-                this.$http.put(api.ruleApi('admin/rule/basic'), {
+                this.$http.post(api.ruleApi('admin/post/rule/basic'), {
                     mileageRequirement: this.modifier.mileageGoal,
                     minSpeed: this.modifier.minSpeed,
                     maxSpeed: this.modifier.maxSpeed
@@ -357,7 +357,7 @@
                 }
                 console.log('path');
                 console.log(path);
-                this.$http.put(api.ruleApi('admin/rule/border'),
+                this.$http.post(api.ruleApi('admin/post/rule/border'),
                     path
                 ).then((resp) => {
                     this.borderModifying = false;
