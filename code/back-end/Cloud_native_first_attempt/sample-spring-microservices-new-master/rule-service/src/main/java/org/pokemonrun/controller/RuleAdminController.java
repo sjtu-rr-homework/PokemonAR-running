@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class RuleAdminController {
     @Autowired
@@ -20,12 +19,14 @@ public class RuleAdminController {
     @Autowired
     private BorderService borderService;
 
+
+
     @GetMapping("/admin/rule/basic")
     public BasicRuleInfo getBasicRule(){
         return basicRuleService.getBasicRule();
     }
 
-    @PostMapping("/admin/rule/basic")
+    @PostMapping("/admin/post/rule/basic")
     public boolean setBasicRule(@RequestBody BasicRuleInfo info){
         return basicRuleService.setBasicRule(info);
     }
@@ -35,7 +36,7 @@ public class RuleAdminController {
         return flagService.getFlags();
     }
 
-    @PostMapping("/admin/rule/flags")
+    @PostMapping("/admin/post/rule/flags")
     public boolean setFlags(@RequestBody List<FlagInfo> flags){
         return flagService.setFlags(flags);
     }
@@ -45,7 +46,7 @@ public class RuleAdminController {
         return borderService.getBorder();
     }
 
-    @PostMapping("/admin/rule/border")
+    @PostMapping("/admin/post/rule/border")
     public boolean setBorder(@RequestBody List<PathNodeInfo> border){
         return borderService.setBorder(border);
     }
@@ -55,3 +56,5 @@ public class RuleAdminController {
         return flagService.getRandomRoute(Double.parseDouble(lng), Double.parseDouble(lat));
     }
 }
+
+

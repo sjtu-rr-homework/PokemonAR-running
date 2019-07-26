@@ -4,16 +4,20 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.icu.text.SimpleDateFormat;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 
 import android.support.annotation.Nullable;
@@ -49,8 +53,8 @@ import example.com.pkmnavidemo4.R;
 
 public class HttpHandler {
 
-    //private static String UrlHead="http://d06b88e6.ngrok.io";
-    private static String UrlHead="http://202.120.40.8:30751";
+    private static String UrlHead="http://5d5d95b8.ngrok.io";
+    //private static String UrlHead="http://202.120.40.8:30751";
 
 
     @Nullable
@@ -66,8 +70,8 @@ public class HttpHandler {
         }
     }
 
-
     public static void getElfs(String username){
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -868,6 +872,66 @@ public class HttpHandler {
                 }
             }
         }).start();
+    }
+    public static void getflag(AMap aMap,LatLng latLng,Context context) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("haha","go1");
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String Url=UrlHead+"/rule/route/start_lng/"+latLng.longitude+"/start_lat/"+latLng.latitude;
+                try {
+                    URL url=new URL(Url);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(8000);
+                    InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                    JSONArray array = new JSONArray(sb.toString());
+                    UserData.constraint.clear();
+                    for (int j = 0; j < array.length(); ++j) {
+                        JSONObject jjj = array.getJSONObject(j);
+                        LatLng point = new LatLng(jjj.getDouble("lat"), jjj.getDouble("lng"));
+                        UserData.constraint.add(point);
+                        View view = View.inflate(context, R.layout.view_marker_constraint, null);
+                        Bitmap bitmap = ElfPointController.convertViewToBitmap(view);
+                        MarkerOptions markerOptions = new MarkerOptions()
+                                .title("flag")
+                                .snippet("必经点位")
+                                .position(point)
+                                .draggable(false)
+                                .setFlat(true)
+                                .icon(BitmapDescriptorFactory.fromBitmap(bitmap));
+                        Marker marker = aMap.addMarker(markerOptions);
+                        Log.d("CCC", jjj.getString("lat") + "," + jjj.getString("lng"));
+                    }
+                    Log.d("123","---"+sb.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.d("haha",e.getMessage());
+                }finally {
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }).start();
+
     }
     public static void postPosition(LatLng latLng){
         new Thread(new Runnable() {

@@ -28,12 +28,13 @@ public class RestrainModeFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        run = (Button) getActivity().findViewById(R.id.fg_running_freerun);
+        run = (Button) getActivity().findViewById(R.id.fg_running_restrainrun);
         run.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"开始定点跑",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(),"开始定点跑",Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(getActivity(), MapActivity.class);
+                intent.putExtra("type",0);
                 startActivity(intent);
             }
         });
