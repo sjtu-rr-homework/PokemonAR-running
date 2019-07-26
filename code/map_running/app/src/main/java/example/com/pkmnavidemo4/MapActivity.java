@@ -334,6 +334,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                                     View view = View.inflate(MapActivity.this, R.layout.view_marker_done, null);
                                     Bitmap bitmap = ElfPointController.convertViewToBitmap(view);
                                     marker.setTitle("flag_done");
+                                    UserData.flagNum--;
                                     marker.setIcon(BitmapDescriptorFactory.fromBitmap(bitmap));
                                 }
                                 break;
@@ -371,27 +372,82 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
 
     @Override
     public void finish() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(MapActivity.this);
-        dialog.setTitle("温馨提示");
-        dialog.setMessage("是否结束跑步？");
-        dialog.setCancelable(false);
-        dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                HttpHandler.postRunningRecord1(runningMessage);
-                HttpHandler.addDistance(UserData.getUserName(),runningMessage.getLength());
-                HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size()-1));
-                UserData.addExp(runningMessage.getExp());
-                MapActivity.super.finish();
+        if(type==1) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(MapActivity.this);
+            dialog.setTitle("温馨提示");
+            dialog.setMessage("是否结束跑步？");
+            dialog.setCancelable(false);
+            dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    HttpHandler.postRunningRecord1(runningMessage);
+                    HttpHandler.addDistance(UserData.getUserName(), runningMessage.getLength());
+                    HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
+                    UserData.addExp(runningMessage.getExp());
+                    MapActivity.super.finish();
+                }
+            });
+            dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    return;
+                }
+            });
+            dialog.show();
+        }
+        else if(type==0){
+            AlertDialog.Builder dialog = new AlertDialog.Builder(MapActivity.this);
+            if(checkFlagDone()) {
+                dialog.setTitle("你即将结束定点跑步");
+                dialog.setMessage("是否结束跑步？");
+                dialog.setCancelable(false);
+                dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        HttpHandler.postRunningRecord1(runningMessage);
+                        HttpHandler.addDistance(UserData.getUserName(), runningMessage.getLength());
+                        HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
+                        UserData.addExp(runningMessage.getExp());
+                        MapActivity.super.finish();
+                    }
+                });
+                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        return;
+                    }
+                });
+                dialog.show();
             }
-        });
-        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                return;
+            else{
+                dialog.setTitle("你还没有经过所有必经点位");
+                dialog.setMessage("现在结束跑步得不到任何经验和精灵，是否结束跑步？");
+                dialog.setCancelable(false);
+                dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        HttpHandler.postRunningRecord1(runningMessage);
+                        HttpHandler.addDistance(UserData.getUserName(), runningMessage.getLength());
+                        HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
+                        MapActivity.super.finish();
+                    }
+                });
+                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        return;
+                    }
+                });
+                dialog.show();
             }
-        });
-        dialog.show();
+        }
+    }
+
+    private boolean checkFlagDone(){
+        if(UserData.flagNum>0){
+            return false;
+        }
+        return true;
     }
 
 
