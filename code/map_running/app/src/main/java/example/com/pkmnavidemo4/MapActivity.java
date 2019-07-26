@@ -65,6 +65,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
     private RunningMessage runningMessage;
     private ElfPointController elfPointController;
     private List<ElfPoint> presentElfPoint=new ArrayList<ElfPoint>();
+    private int type;//0为约束跑模式，1为自由跑模式
     //private List<LatLng> latLngs=new ArrayList<LatLng>();
     //private double run_dist=0;
 
@@ -88,7 +89,14 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
-        Log.d("sha1",sHA1(MapActivity.this));
+        Intent intent=getIntent();
+        type=intent.getIntExtra("type",-1);
+        if(type==1){
+            Toast.makeText(MapActivity.this,"自由跑模式",Toast.LENGTH_SHORT).show();
+        }else if(type==0){
+            Toast.makeText(MapActivity.this,"定点跑模式",Toast.LENGTH_SHORT).show();
+        }
+
         //绑定文本控件
         positionText=(TextView)findViewById(R.id.act_map_textView);
         distText=(TextView)findViewById(R.id.act_map_textView_dist);
@@ -289,12 +297,14 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         if (mListener != null && aMapLocation != null) {
             if (aMapLocation != null && aMapLocation.getErrorCode() == 0) {
                 if(isFirstLocate){
-
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             LatLng start=new LatLng(aMapLocation.getLatitude(),aMapLocation.getLongitude());
                             HttpHandler.postPosition(start);
+                            if(type==0){
+                                HttpHandler.getflag(aMap,start,MapActivity.this);
+                            }
                             elfPointController.generateElfPoing(getApplicationContext(),aMap,start);
                             presentElfPoint=elfPointController.getPresentElfPoint();
                             //elfPoint.showAllPoints(aMap);
