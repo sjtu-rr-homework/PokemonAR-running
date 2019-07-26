@@ -25,8 +25,7 @@ public class RuleAdminController {
         return basicRuleService.getBasicRule();
     }
 
-    @PutMapping("/admin/rule/basic")
-    @ResponseBody
+    @PostMapping("/admin/rule/basic")
     public boolean setBasicRule(@RequestBody BasicRuleInfo info){
         return basicRuleService.setBasicRule(info);
     }
@@ -36,8 +35,7 @@ public class RuleAdminController {
         return flagService.getFlags();
     }
 
-    @PutMapping("/admin/rule/flags")
-    @ResponseBody
+    @PostMapping("/admin/rule/flags")
     public boolean setFlags(@RequestBody List<FlagInfo> flags){
         return flagService.setFlags(flags);
     }
@@ -46,9 +44,8 @@ public class RuleAdminController {
     public List<PathNodeInfo> getBorder(){
         return borderService.getBorder();
     }
-    
-    @PutMapping("/admin/rule/border")
-    @ResponseBody
+
+    @PostMapping("/admin/rule/border")
     public boolean setBorder(@RequestBody List<PathNodeInfo> border){
         return borderService.setBorder(border);
     }
