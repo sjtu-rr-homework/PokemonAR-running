@@ -150,3 +150,13 @@ sceneform.asset('sampledata/models/006 - Charizard/Charizard.obj',
         'default',
         'sampledata/models/006 - Charizard/charizard.sfa',
         'src/main/res/raw/charizard')
+
+sceneform.asset('sampledata/models/041 - Zubat/Zubat.obj',
+        'default',
+        'sampledata/models/041 - Zubat/zubat.sfa',
+        'src/main/res/raw/zubat')
+
+sceneform.asset('sampledata/models/042 - Golbat/Golbat.obj',
+        'default',
+        'sampledata/models/042 - Golbat/golbat.sfa',
+        'src/main/res/raw/golbat')

@@ -1,0 +1,81 @@
+{
+  materials: [
+    {
+      name: 'mat1',
+      parameters: [
+        {
+          baseColor: 'GolbatDh',
+        },
+        {
+          baseColorTint: [
+            0.90000000000000002,
+            0.90000000000000002,
+            0.90000000000000002,
+            1,
+          ],
+        },
+        {
+          metallic: 1,
+        },
+        {
+          roughness: 0.408248,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/obj_material.sfm',
+    },
+    {
+      name: 'mat2',
+      parameters: [
+        {
+          baseColor: 'GolbatEyeDh',
+        },
+        {
+          baseColorTint: [
+            0.90000000000000002,
+            0.90000000000000002,
+            0.90000000000000002,
+            1,
+          ],
+        },
+        {
+          metallic: 1,
+        },
+        {
+          roughness: 0.408248,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/obj_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+    ],
+    collision: {},
+    file: 'sampledata/models/042 - Golbat/Golbat.obj',
+    name: 'Golbat',
+    recenter: 'root',
+    scale: 0.166211,
+  },
+  samplers: [
+    {
+      file: 'sampledata/models/042 - Golbat\\Textures\\GolbatDh.png',
+      name: 'GolbatDh',
+      pipeline_name: 'Textures\\GolbatDh.tga',
+    },
+    {
+      file: 'sampledata/models/042 - Golbat\\Textures\\GolbatEyeDh.png',
+      name: 'GolbatEyeDh',
+      pipeline_name: 'Textures\\GolbatEyeDh.tga',
+    },
+  ],
+  version: '0.54:2',
+}

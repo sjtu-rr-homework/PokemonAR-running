@@ -109,7 +109,7 @@ public class UserData {
         return onlyHave;
     }
     public static boolean consumeExp(int num){
-        if(exp>num){
+        if(exp>=num){
             exp-=num;
             HttpHandler.changeExp(userName,0-num);
             return true;
