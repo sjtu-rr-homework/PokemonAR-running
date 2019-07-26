@@ -23,6 +23,10 @@ public class UserData {
     private static  boolean onlyHave=false;
     public static boolean isFriendGet=false;
     public static Map getUserInfo(){return userInfo;}
+    public static void addExp(int num){
+        HttpHandler.changeExp(userName,num);
+        exp+=num;
+    }
     public static Map getElfWithId(int id){
         for (int i = 0; i < elfDetailsList.size(); i++) {
             if(elfDetailsList.get(i).get("typeID").toString().equals(id+"")){
