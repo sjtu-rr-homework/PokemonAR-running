@@ -67,12 +67,12 @@
   },
   samplers: [
     {
-      file: 'sampledata/models/055 - Golduck\\Textures\\GolduckDh.tga',
+      file: 'sampledata/models/055 - Golduck\\Textures\\GolduckDh.png',
       name: 'GolduckDh',
       pipeline_name: 'Textures\\GolduckDh.tga',
     },
     {
-      file: 'sampledata/models/055 - Golduck\\Textures\\GolduckEyeDh.tga',
+      file: 'sampledata/models/055 - Golduck\\Textures\\GolduckEyeDh.png',
       name: 'GolduckEyeDh',
       pipeline_name: 'Textures\\GolduckEyeDh.tga',
     },
