@@ -52,10 +52,11 @@ public class FlagServiceImpl implements FlagService {
         // generate route
         int num = 5;
         double range = 0.00926275;
-        Point start = new Point(lng, lat);
+        //double range = 0.002;
+        Point start = new Point(lng, lat * 2);
         // filter flags that are out of border or too far
         for(Flag flag : flags){
-            Point p = new Point(flag.getLongitude(), flag.getLatitude());
+            Point p = new Point(flag.getLongitude(), flag.getLatitude() * 2);
             if(true && p.distanceFrom(start) <= range){ // TODO: inside border
                 points.add(p);
             }
@@ -71,7 +72,7 @@ public class FlagServiceImpl implements FlagService {
             j = j % points.size();
             Point p = points.get(j);
             points.remove(j);
-            route.add(new FlagInfo(String.valueOf(p.getX()), String.valueOf(p.getY())));
+            route.add(new FlagInfo(String.valueOf(p.getX()), String.valueOf(p.getY() / 2)));
         }
         return route;
     }
