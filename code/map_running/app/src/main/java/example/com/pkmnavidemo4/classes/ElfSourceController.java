@@ -27,6 +27,8 @@ public class ElfSourceController {
                 return (int) (1.30 * level * level * (1 + grade * 0.55));
             case 5:
                 return (int) (1.10*level*level*(1+grade*0.5));
+            case 6:
+                return (int) (1.12*level*level*(1+grade*0.46));
             default:
                 return 0;
         }
@@ -60,6 +62,8 @@ public class ElfSourceController {
             case 4:
                 return 2;
             case 5:
+                return 2;
+            case 6:
                 return 2;
             default:
                 return 2;
@@ -109,6 +113,15 @@ public class ElfSourceController {
                         return R.drawable.pikachu;
                 }
             case 5:
+                switch (level) {
+                    case 1:
+                        return R.drawable.psyduck;
+                    case 2:
+                        return R.drawable.psyduck2;
+                    default:
+                        return R.drawable.psyduck;
+                }
+            case 6:
                 switch (level) {
                     case 1:
                         return R.drawable.psyduck;
@@ -203,9 +216,7 @@ public class ElfSourceController {
             case 2:
                 switch (level) {
                     case 1:
-                        SpannableStringBuilder ssb = new SpannableStringBuilder("小火龙");
-                        ssb.setSpan(new ForegroundColorSpan(Color.GREEN),1,3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                        return ssb.toString();
+                        return "小火龙";
                     case 2:
                         return "火恐龙";
                     case 3:
@@ -234,6 +245,15 @@ public class ElfSourceController {
                         return "雷丘";
                 }
             case 5:
+                switch (level) {
+                    case 1:
+                        return "可达鸭";
+                    case 2:
+                        return "哥达鸭";
+                    default:
+                        return "可达鸭";
+                }
+                case 6:
                 switch (level) {
                     case 1:
                         return "可达鸭";
