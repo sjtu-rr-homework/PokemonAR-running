@@ -52,7 +52,6 @@ public class RuleAdminController {
 
     @GetMapping("/rule/route/start_lng/{lng}/start_lat/{lat}")
     public List<FlagInfo> generateRoute(@PathVariable("lng") String lng, @PathVariable("lat") String lat){
-        // TODO: temp
-        return flagService.getFlags();
+        return flagService.getRandomRoute(Double.parseDouble(lng), Double.parseDouble(lat));
     }
 }
