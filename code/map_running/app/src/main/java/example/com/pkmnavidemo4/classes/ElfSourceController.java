@@ -1,6 +1,11 @@
 package example.com.pkmnavidemo4.classes;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 
 import example.com.pkmnavidemo4.R;
 
@@ -116,6 +121,73 @@ public class ElfSourceController {
                 return R.drawable.catchball;
         }
     }
+
+    private static SpannableString getColorfulName(String content,int who,int len)
+    {
+        SpannableStringBuilder ssb = new SpannableStringBuilder(content);
+        if(who==0)
+            ssb.setSpan(new ForegroundColorSpan(Color.BLUE), 1, len, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        else
+            ssb.setSpan(new ForegroundColorSpan(Color.RED), 1, len, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return SpannableString.valueOf(ssb);
+    }
+    //得到彩色精灵名字
+    public static SpannableString getColorfulElfName(int id, int level,int who)
+    {
+        switch (id) {
+            case 1:
+                switch (level) {
+                    case 1:
+                        return getColorfulName("妙蛙种子",who,4);
+                    case 2:
+                        return getColorfulName("妙蛙花",who,3);
+                    default:
+                        return getColorfulName("妙蛙种子",who,4);
+                }
+            case 2:
+                switch (level) {
+                    case 1:
+                        return getColorfulName("小火龙",who,3);
+                    case 2:
+                        return getColorfulName("火恐龙",who,3);
+                    case 3:
+                        return getColorfulName("喷火龙",who,3);
+                    default:
+                        return getColorfulName("小火龙",who,3);
+                }
+            case 3:
+                switch (level) {
+                    case 1:
+                        return getColorfulName("杰尼龟",who,3);
+                    case 2:
+                        return getColorfulName("卡米龟",who,3);
+                    case 3:
+                        return getColorfulName("水箭龟",who,3);
+                    default:
+                        return getColorfulName("杰尼龟",who,3);
+                }
+            case 4:
+                switch (level) {
+                    case 1:
+                        return getColorfulName("皮卡丘",who,3);
+                    case 2:
+                        return getColorfulName("雷丘",who,2);
+                    default:
+                        return getColorfulName("皮卡丘",who,3);
+                }
+            case 5:
+                switch (level) {
+                    case 1:
+                        return getColorfulName("可达鸭",who,3);
+                    case 2:
+                        return getColorfulName("哥达鸭",who,3);
+                    default:
+                        return getColorfulName("可达鸭",who,3);
+                }
+            default:
+                return getColorfulName("无",0,1);
+        }
+    }
     //得到精灵名字
     public static String getName(int id, int level){
         switch (id){
@@ -131,7 +203,9 @@ public class ElfSourceController {
             case 2:
                 switch (level) {
                     case 1:
-                        return "小火龙";
+                        SpannableStringBuilder ssb = new SpannableStringBuilder("小火龙");
+                        ssb.setSpan(new ForegroundColorSpan(Color.GREEN),1,3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        return ssb.toString();
                     case 2:
                         return "火恐龙";
                     case 3:

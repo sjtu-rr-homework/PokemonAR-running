@@ -1,16 +1,23 @@
 package example.com.pkmnavidemo4;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -26,7 +33,7 @@ import example.com.pkmnavidemo4.classes.TestRecycleViewAdapter;
 import example.com.pkmnavidemo4.classes.UserData;
 
 public class FightActivity extends AppCompatActivity {
-    private int i;
+    FightTextAdapter adapter;
     private int leftHp=100;
     private int rightHp=100;
     private int leftElf;
@@ -35,9 +42,13 @@ public class FightActivity extends AppCompatActivity {
     private int rightPower;
     private int leftGrade;
     private int rightGrade;
+    private ProgressBar hp1;
+    private ProgressBar hp2;
     private ImageView image1;
     private ImageView image2;
-    private List<String> list;
+    private TextView hpt1;
+    private TextView hpt2;
+    private List<SpannableString> list;
     private Button start;
     private Button finish;
     RecyclerView mRecyclerView;
@@ -51,14 +62,24 @@ public class FightActivity extends AppCompatActivity {
         leftGrade = intent.getIntExtra("leftGrade",2);
         rightGrade = intent.getIntExtra("rightGrade", 2);
         setContentView(R.layout.activity_fight);
+        hp1=findViewById(R.id.act_fight_elf_hp1);
+        hp2=findViewById(R.id.act_fight_elf_hp2);
+        hpt1=findViewById(R.id.act_fight_elf_hpt1);
+        hpt2=findViewById(R.id.act_fight_elf_hpt2);
         mRecyclerView = findViewById(R.id.elf_fight_recycle_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(FightActivity.this));
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL));
+        list = new ArrayList<>();
+        SpannableStringBuilder ssb = new SpannableStringBuilder("点击对战");
+            ssb.setSpan(new ForegroundColorSpan(Color.YELLOW), 0, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        list.add(SpannableString.valueOf(ssb));
+        adapter = new FightTextAdapter(FightActivity.this, list);
+        mRecyclerView.setAdapter(adapter);
         start=findViewById(R.id.act_fight_button_start);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startFight();
+                nextFight();
             }
         });
         finish=findViewById(R.id.act_fight_button_finish);
@@ -73,7 +94,17 @@ public class FightActivity extends AppCompatActivity {
         image2=findViewById(R.id.act_fight_elf_player2);
         image2.setBackgroundResource(ElfSourceController.getBackgroundWithLevel(rightElf,rightGrade));
     }
+
     private void startFight() {
+        for(int i=0;leftHp > 0 && rightHp > 0;i++) {
+            new Handler().postDelayed(new Runnable() {
+                public void run() {
+                    nextFight();
+                }
+            }, 1000*i);
+        }
+    }
+    /*private void startFight() {
         list = new ArrayList<>();
         int attack=0;
         //判断精灵攻击强度
@@ -158,5 +189,97 @@ public class FightActivity extends AppCompatActivity {
         }
         FightTextAdapter adapter = new FightTextAdapter(FightActivity.this,list);
         mRecyclerView.setAdapter(adapter);
+    }*/
+    private void nextFight() {
+        adapter.myclear();
+        list = new ArrayList<>();
+        int attack = 0;
+        //判断精灵攻击强度
+        Random luck = new Random();
+        if (leftHp > 0 && rightHp > 0) {
+                int randomAttack = luck.nextInt(10);
+                if (ElfSourceController.getAttack(leftPower, rightPower) / 2 >= 1)
+                    attack = ElfSourceController.getAttack(leftPower, rightPower) / 2 + luck.nextInt(ElfSourceController.getAttack(leftPower, rightPower) / 2);
+                else
+                    attack = 1;
+                switch (randomAttack) {
+                    case 1:
+                        adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "的攻击MISS了"));
+                        attack = 0;
+                        break;
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                        adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "打出了普通一击"));
+                        break;
+                    case 8:
+                    case 9:
+                        adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "打出了会心一击"));
+                        attack *= 2;
+                        break;
+                    case 0:
+                        adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "打出了致命一击"));
+                        attack *= 5;
+                        break;
+                    default:
+                }
+                adapter.addData(SpannableString.valueOf("" +ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "对" +ElfSourceController.getColorfulElfName(rightElf, rightGrade,1) + "造成了" + attack + "%血量的伤害"));
+                rightHp -= attack;
+                if (rightHp <= 0) {
+                    hp2.setProgress(0);
+                    hpt1.setText("Win");
+                    hpt2.setText("Lose");
+                    adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "胜利!!!"));
+                    return;
+                }
+                //adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(rightElf, rightGrade,1) + "还有" + rightHp + "%血量"));
+                hpt2.setText(rightHp+"/100");
+                hp2.setProgress(rightHp);
+
+                if (ElfSourceController.getAttack(rightPower, leftPower) / 2 >= 1)
+                    attack = ElfSourceController.getAttack(rightPower, leftPower) / 2 + luck.nextInt(ElfSourceController.getAttack(rightPower, leftPower) / 2);
+                else
+                    attack = 1;
+                randomAttack = luck.nextInt(10);
+                switch (randomAttack) {
+                    case 1:
+                        adapter.addData(SpannableString.valueOf("" +ElfSourceController.getColorfulElfName(rightElf, rightGrade,1)+ "的攻击MISS了"));
+                        attack = 0;
+                        break;
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                        adapter.addData(SpannableString.valueOf("" +ElfSourceController.getColorfulElfName(rightElf, rightGrade,1) + "打出了普通一击"));
+                        break;
+                    case 8:
+                    case 9:
+                        adapter.addData(SpannableString.valueOf("" +ElfSourceController.getColorfulElfName(rightElf, rightGrade,1) + "打出了会心一击"));
+                        attack *= 2.5;
+                        break;
+                    case 0:
+                        adapter.addData(SpannableString.valueOf("" +ElfSourceController.getColorfulElfName(rightElf, rightGrade,1) + "打出了致命一击"));
+                        attack *= 6;
+                        break;
+                    default:
+                }
+                adapter.addData(SpannableString.valueOf("     " + "" +ElfSourceController.getColorfulElfName(rightElf, rightGrade,1) + "对" + ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "造成了" + attack + "%血量的伤害"));
+                leftHp -= attack;
+                if (leftHp <= 0) {
+                    hp1.setProgress(0);
+                    hpt1.setText("Lose");
+                    hpt2.setText("Win");
+                    adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(rightElf, rightGrade,1) + "胜利!!!"));
+                    return;
+                }
+                //adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "还有" + leftHp + "%血量"));
+                hpt1.setText(leftHp+"/100");
+                hp1.setProgress(leftHp);
+        }
     }
-}
+    }
