@@ -20,12 +20,15 @@ public class RuleAdminController {
     @Autowired
     private BorderService borderService;
 
+
+
     @GetMapping("/admin/rule/basic")
     public BasicRuleInfo getBasicRule(){
         return basicRuleService.getBasicRule();
     }
 
     @PostMapping("/admin/rule/basic")
+
     public boolean setBasicRule(@RequestBody BasicRuleInfo info){
         return basicRuleService.setBasicRule(info);
     }
@@ -50,3 +53,5 @@ public class RuleAdminController {
         return borderService.setBorder(border);
     }
 }
+
+
