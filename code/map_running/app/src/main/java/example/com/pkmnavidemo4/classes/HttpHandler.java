@@ -874,6 +874,7 @@ public class HttpHandler {
         }).start();
     }
     public static void getflag(AMap aMap,LatLng latLng,Context context) {
+        UserData.flagNum=0;
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -911,6 +912,7 @@ public class HttpHandler {
                                 .setFlat(true)
                                 .icon(BitmapDescriptorFactory.fromBitmap(bitmap));
                         Marker marker = aMap.addMarker(markerOptions);
+                        UserData.flagNum++;
                         Log.d("CCC", jjj.getString("lat") + "," + jjj.getString("lng"));
                     }
                     Log.d("123","---"+sb.toString());

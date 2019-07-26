@@ -334,6 +334,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                                     View view = View.inflate(MapActivity.this, R.layout.view_marker_done, null);
                                     Bitmap bitmap = ElfPointController.convertViewToBitmap(view);
                                     marker.setTitle("flag_done");
+                                    UserData.flagNum--;
                                     marker.setIcon(BitmapDescriptorFactory.fromBitmap(bitmap));
                                 }
                                 break;
@@ -443,12 +444,8 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
     }
 
     private boolean checkFlagDone(){
-        List<Marker> mapScreenMarkers=aMap.getMapScreenMarkers();
-        for (int i = 0; i < mapScreenMarkers.size(); ++i) {
-            Marker marker = mapScreenMarkers.get(i);
-            if(marker.getTitle().equals("flag")){
-                return false;
-            }
+        if(UserData.flagNum>0){
+            return false;
         }
         return true;
     }
