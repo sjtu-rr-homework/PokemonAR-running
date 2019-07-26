@@ -233,6 +233,8 @@ public class FightActivity extends AppCompatActivity {
                     hpt1.setText("Win");
                     hpt2.setText("Lose");
                     adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "胜利!!!"));
+                    UserData.addExp(rightPower/leftPower*10);
+                    adapter.addData(SpannableString.valueOf("你获得了"+rightPower/leftPower*10+"经验"));
                     return;
                 }
                 //adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(rightElf, rightGrade,1) + "还有" + rightHp + "%血量"));
