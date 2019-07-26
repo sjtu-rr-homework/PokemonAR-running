@@ -291,6 +291,7 @@ public class ElfPointController {
             imageView.setImageResource(ElfSourceController.getMapPic(id));
             Bitmap bitmap = convertViewToBitmap(view);
             MarkerOptions markerOptions = new MarkerOptions()
+                    .title("elf")
                     .snippet(""+id)
                     .position(latlng)
                     .draggable(false)
