@@ -12,6 +12,7 @@ import android.icu.text.SimpleDateFormat;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Vibrator;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -66,6 +67,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
     private ElfPointController elfPointController;
     private List<ElfPoint> presentElfPoint=new ArrayList<ElfPoint>();
     private int type;//0为约束跑模式，1为自由跑模式
+    private Vibrator vibrator;
     //private List<LatLng> latLngs=new ArrayList<LatLng>();
     //private double run_dist=0;
 
@@ -88,6 +90,8 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
         Intent intent=getIntent();
         type=intent.getIntExtra("type",-1);
@@ -325,6 +329,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                                     showCatchMessage(Integer.parseInt(marker.getSnippet()), marker);
                                 }
                                 else if(marker.getTitle().equals("flag")){
+                                    vibrator.vibrate(500);
                                     Toast.makeText(MapActivity.this,"经过一个必经点位",Toast.LENGTH_SHORT).show();
                                     View view = View.inflate(MapActivity.this, R.layout.view_marker_done, null);
                                     Bitmap bitmap = ElfPointController.convertViewToBitmap(view);

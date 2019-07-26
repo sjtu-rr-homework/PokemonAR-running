@@ -28,6 +28,9 @@
     <uses-permission android:name="android.permission.BLUETOOTH"></uses-permission>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"></uses-permission>
 
+    <!--震动权限-->
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
 
 
     <application
