@@ -49,4 +49,10 @@ public class RuleAdminController {
     public boolean setBorder(@RequestBody List<PathNodeInfo> border){
         return borderService.setBorder(border);
     }
+
+    @GetMapping("/rule/route/start_lng/{lng}/start_lat/{lat}")
+    public List<FlagInfo> generateRoute(@PathVariable("lng") String lng, @PathVariable("lat") String lat){
+        // TODO: temp
+        return flagService.getFlags();
+    }
 }
