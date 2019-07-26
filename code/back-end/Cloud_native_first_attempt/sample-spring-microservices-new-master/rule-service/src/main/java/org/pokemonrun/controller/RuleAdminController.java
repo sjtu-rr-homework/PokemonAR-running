@@ -7,6 +7,8 @@ import org.pokemonrun.service.BasicRuleService;
 import org.pokemonrun.service.BorderService;
 import org.pokemonrun.service.FlagService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +31,11 @@ public class RuleAdminController {
     @PostMapping("/admin/post/rule/basic")
     public boolean setBasicRule(@RequestBody BasicRuleInfo info){
         return basicRuleService.setBasicRule(info);
+    }
+
+    @RequestMapping(value = "/admin/post/rule/basic", method = RequestMethod.OPTIONS)
+    public ResponseEntity handle() {
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @GetMapping("/admin/rule/flags")
