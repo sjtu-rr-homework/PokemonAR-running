@@ -22,6 +22,7 @@ public class UserData {
     private static  List<Map> elfDetailsList;
     private static  boolean onlyHave=false;
     public static boolean isFriendGet=false;
+    public static int flagNum=0;
     public static List<LatLng> constraint=new ArrayList<LatLng>();
     public static Map getUserInfo(){return userInfo;}
     public static Map getElfWithId(int id){
