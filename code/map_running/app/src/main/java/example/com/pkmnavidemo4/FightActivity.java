@@ -1,9 +1,11 @@
 package example.com.pkmnavidemo4;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,6 +33,7 @@ import java.util.TimerTask;
 
 import example.com.pkmnavidemo4.classes.ElfSourceController;
 import example.com.pkmnavidemo4.classes.FightTextAdapter;
+import example.com.pkmnavidemo4.classes.HttpHandler;
 import example.com.pkmnavidemo4.classes.TestRecycleViewAdapter;
 import example.com.pkmnavidemo4.classes.UserData;
 
@@ -242,6 +245,7 @@ public class FightActivity extends AppCompatActivity {
                     adapter.addData(SpannableString.valueOf("胜利!!!"));
                     UserData.addExp(rightPower*50/leftPower);
                     adapter.addData(SpannableString.valueOf("你获得了"+rightPower*50/leftPower+"经验"));
+                    finish();
                     return;
                 }
                 //adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(rightElf, rightGrade,1) + "还有" + rightHp + "%血量"));
@@ -289,6 +293,7 @@ public class FightActivity extends AppCompatActivity {
                     hpt1.setText("Lose");
                     hpt2.setText("Win");
                     adapter.addData(SpannableString.valueOf("失败"));
+                    finish();
                     return;
                 }
                 //adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "还有" + leftHp + "%血量"));
@@ -296,4 +301,28 @@ public class FightActivity extends AppCompatActivity {
                 hp1.setProgress(leftHp);
         }
     }
+
+    @Override
+    public void finish() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(FightActivity.this);
+        if(leftHp>0)
+            dialog.setTitle("你胜利了!");
+        else
+            dialog.setTitle("你失败了!");
+        dialog.setMessage("是否返回？");
+        dialog.setCancelable(false);
+        dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                FightActivity.super.finish();
+            }
+        });
+        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                return;
+            }
+        });
+        dialog.show();
     }
+}
