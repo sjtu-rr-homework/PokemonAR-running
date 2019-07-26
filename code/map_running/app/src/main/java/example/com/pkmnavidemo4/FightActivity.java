@@ -8,9 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
@@ -48,7 +50,7 @@ public class FightActivity extends AppCompatActivity {
     private ImageView image2;
     private TextView hpt1;
     private TextView hpt2;
-    private List<SpannableString> list;
+    private List<Spanned> list;
     private Button start;
     private Button finish;
     RecyclerView mRecyclerView;
@@ -198,13 +200,14 @@ public class FightActivity extends AppCompatActivity {
         Random luck = new Random();
         if (leftHp > 0 && rightHp > 0) {
                 int randomAttack = luck.nextInt(10);
-                if (ElfSourceController.getAttack(leftPower, rightPower) / 2 >= 1)
+                if (ElfSourceController.getAttack(leftPower, rightPower)>= 1)
                     attack = ElfSourceController.getAttack(leftPower, rightPower) / 2 + luck.nextInt(ElfSourceController.getAttack(leftPower, rightPower) / 2);
                 else
                     attack = 1;
                 switch (randomAttack) {
                     case 1:
-                        adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "的攻击MISS了"));
+                        adapter.addData( Html.fromHtml(getResources().getString(R.string.player1Fight2,ElfSourceController.getName(leftElf,leftGrade))));
+                        //adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "的攻击MISS了"));
                         attack = 0;
                         break;
                     case 2:
@@ -213,42 +216,47 @@ public class FightActivity extends AppCompatActivity {
                     case 5:
                     case 6:
                     case 7:
-                        adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "打出了普通一击"));
+                        adapter.addData( Html.fromHtml(getResources().getString(R.string.player1Fight1,ElfSourceController.getName(leftElf,leftGrade))));
+                       // adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "打出了普通一击"));
                         break;
                     case 8:
                     case 9:
-                        adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "打出了会心一击"));
+                        adapter.addData( Html.fromHtml(getResources().getString(R.string.player1Fight3,ElfSourceController.getName(leftElf,leftGrade))));
+                       // adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "打出了会心一击"));
                         attack *= 2;
                         break;
                     case 0:
-                        adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "打出了致命一击"));
+                        adapter.addData( Html.fromHtml(getResources().getString(R.string.player1Fight4,ElfSourceController.getName(leftElf,leftGrade))));
+                        //adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "打出了致命一击"));
                         attack *= 5;
                         break;
                     default:
                 }
-                adapter.addData(SpannableString.valueOf("" +ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "对" +ElfSourceController.getColorfulElfName(rightElf, rightGrade,1) + "造成了" + attack + "%血量的伤害"));
+                adapter.addData( Html.fromHtml(getResources().getString(R.string.player12,ElfSourceController.getName(leftElf,leftGrade),ElfSourceController.getName(rightElf,rightGrade),""+attack)));
+               //adapter.addData(SpannableString.valueOf("" +ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "对" +ElfSourceController.getColorfulElfName(rightElf, rightGrade,1) + "造成了" + attack + "%血量的伤害"));
                 rightHp -= attack;
                 if (rightHp <= 0) {
                     hp2.setProgress(0);
                     hpt1.setText("Win");
                     hpt2.setText("Lose");
-                    adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "胜利!!!"));
-                    UserData.addExp(rightPower/leftPower*10);
-                    adapter.addData(SpannableString.valueOf("你获得了"+rightPower/leftPower*10+"经验"));
+                    adapter.addData(SpannableString.valueOf("胜利!!!"));
+                    UserData.addExp(rightPower*50/leftPower);
+                    adapter.addData(SpannableString.valueOf("你获得了"+rightPower*50/leftPower+"经验"));
                     return;
                 }
                 //adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(rightElf, rightGrade,1) + "还有" + rightHp + "%血量"));
                 hpt2.setText(rightHp+"/100");
                 hp2.setProgress(rightHp);
 
-                if (ElfSourceController.getAttack(rightPower, leftPower) / 2 >= 1)
+                if (ElfSourceController.getAttack(rightPower, leftPower)>= 1)
                     attack = ElfSourceController.getAttack(rightPower, leftPower) / 2 + luck.nextInt(ElfSourceController.getAttack(rightPower, leftPower) / 2);
                 else
                     attack = 1;
                 randomAttack = luck.nextInt(10);
                 switch (randomAttack) {
                     case 1:
-                        adapter.addData(SpannableString.valueOf("" +ElfSourceController.getColorfulElfName(rightElf, rightGrade,1)+ "的攻击MISS了"));
+                        adapter.addData( Html.fromHtml(getResources().getString(R.string.player2Fight2,ElfSourceController.getName(rightElf,rightGrade))));
+                        //adapter.addData(SpannableString.valueOf("" +ElfSourceController.getColorfulElfName(rightElf, rightGrade,1)+ "的攻击MISS了"));
                         attack = 0;
                         break;
                     case 2:
@@ -257,26 +265,30 @@ public class FightActivity extends AppCompatActivity {
                     case 5:
                     case 6:
                     case 7:
-                        adapter.addData(SpannableString.valueOf("" +ElfSourceController.getColorfulElfName(rightElf, rightGrade,1) + "打出了普通一击"));
+                        adapter.addData( Html.fromHtml(getResources().getString(R.string.player2Fight1,ElfSourceController.getName(rightElf,rightGrade))));
+                        //adapter.addData(SpannableString.valueOf("" +ElfSourceController.getColorfulElfName(rightElf, rightGrade,1) + "打出了普通一击"));
                         break;
                     case 8:
                     case 9:
-                        adapter.addData(SpannableString.valueOf("" +ElfSourceController.getColorfulElfName(rightElf, rightGrade,1) + "打出了会心一击"));
+                        adapter.addData( Html.fromHtml(getResources().getString(R.string.player2Fight3,ElfSourceController.getName(rightElf,rightGrade))));
+                        //adapter.addData(SpannableString.valueOf("" +ElfSourceController.getColorfulElfName(rightElf, rightGrade,1) + "打出了会心一击"));
                         attack *= 2.5;
                         break;
                     case 0:
-                        adapter.addData(SpannableString.valueOf("" +ElfSourceController.getColorfulElfName(rightElf, rightGrade,1) + "打出了致命一击"));
+                        adapter.addData( Html.fromHtml(getResources().getString(R.string.player2Fight4,ElfSourceController.getName(rightElf,rightGrade))));
+                        //adapter.addData(SpannableString.valueOf("" +ElfSourceController.getColorfulElfName(rightElf, rightGrade,1) + "打出了致命一击"));
                         attack *= 6;
                         break;
                     default:
                 }
-                adapter.addData(SpannableString.valueOf("     " + "" +ElfSourceController.getColorfulElfName(rightElf, rightGrade,1) + "对" + ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "造成了" + attack + "%血量的伤害"));
+                 adapter.addData( Html.fromHtml(getResources().getString(R.string.player21,ElfSourceController.getName(leftElf,leftGrade),ElfSourceController.getName(rightElf,rightGrade),""+attack)));
+                 // adapter.addData(SpannableString.valueOf("     " + "" +ElfSourceController.getColorfulElfName(rightElf, rightGrade,1) + "对" + ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "造成了" + attack + "%血量的伤害"));
                 leftHp -= attack;
                 if (leftHp <= 0) {
                     hp1.setProgress(0);
                     hpt1.setText("Lose");
                     hpt2.setText("Win");
-                    adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(rightElf, rightGrade,1) + "胜利!!!"));
+                    adapter.addData(SpannableString.valueOf("失败"));
                     return;
                 }
                 //adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "还有" + leftHp + "%血量"));

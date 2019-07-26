@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,8 +20,8 @@ import example.com.pkmnavidemo4.R;
 
 public class FightTextAdapter extends RecyclerView.Adapter<FightTextAdapter.ViewHolderA> {
     private Context mContext;
-    private List<SpannableString> mList;
-    public FightTextAdapter(Context context, List<SpannableString> list) {
+    private List<Spanned> mList;
+    public FightTextAdapter(Context context, List<Spanned> list) {
         mContext = context;
         mList = list;
     }
@@ -47,7 +48,7 @@ public class FightTextAdapter extends RecyclerView.Adapter<FightTextAdapter.View
     public void myclear(){
 
     }
-    public void addData(SpannableString content){
+    public void addData(Spanned content){
         mList.add(1, content);
         //通知适配器item内容插入
         notifyItemInserted(1);

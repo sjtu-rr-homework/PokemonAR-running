@@ -12,7 +12,7 @@ import example.com.pkmnavidemo4.R;
 public class ElfSourceController {
     //得到精灵之间互相的伤害值
     public static int getAttack(int leftPower,int rightPower){
-        return 40*(leftPower*leftPower)/(leftPower*leftPower+rightPower*rightPower);
+        return (30*leftPower)/(rightPower+leftPower/2);
     }
     //精灵战斗力计算;
     public static int getPower(int id,int level,int grade) {
