@@ -10,8 +10,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableSwagger2
-@EnableWebSecurity
-@Configuration
 public class RuleadminApplication {
 
     public static void main(String[] args) {
