@@ -326,6 +326,10 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                                 }
                                 else if(marker.getTitle().equals("flag")){
                                     Toast.makeText(MapActivity.this,"经过一个必经点位",Toast.LENGTH_SHORT).show();
+                                    View view = View.inflate(MapActivity.this, R.layout.view_marker_done, null);
+                                    Bitmap bitmap = ElfPointController.convertViewToBitmap(view);
+                                    marker.setTitle("flag_done");
+                                    marker.setIcon(BitmapDescriptorFactory.fromBitmap(bitmap));
                                 }
                                 break;
                             }
