@@ -380,6 +380,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
             dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
+                    UserData.successRun();
                     HttpHandler.postRunningRecord1(runningMessage);
                     HttpHandler.addDistance(UserData.getUserName(), runningMessage.getLength());
                     HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
@@ -404,6 +405,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                 dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        UserData.successRun();
                         HttpHandler.postRunningRecord1(runningMessage);
                         HttpHandler.addDistance(UserData.getUserName(), runningMessage.getLength());
                         HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
@@ -426,6 +428,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                 dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        UserData.failRun();
                         HttpHandler.postRunningRecord1(runningMessage);
                         HttpHandler.addDistance(UserData.getUserName(), runningMessage.getLength());
                         HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
