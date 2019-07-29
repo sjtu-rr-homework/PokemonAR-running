@@ -1,6 +1,7 @@
 package example.com.pkmnavidemo4.classes;
 
 import android.util.Log;
+import android.util.Pair;
 
 import com.amap.api.maps.model.LatLng;
 
@@ -10,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
+import example.com.pkmnavidemo4.SceneformActivity;
 
 public class UserData {
     public static boolean isFriendInfoGet=false;
@@ -23,7 +26,26 @@ public class UserData {
     private static  boolean onlyHave=false;
     public static boolean isFriendGet=false;
     public static int flagNum=0;
+    public static Map<Integer,Integer> catchElfList=new HashMap();
     public static List<LatLng> constraint=new ArrayList<LatLng>();
+    public static void catchOne(int variety){
+         if(catchElfList.get(variety)==null)
+             catchElfList.put(variety,1);
+         else{
+             int termVariety=variety;
+             int num=catchElfList.get(variety)+1;
+                 catchElfList.put(termVariety,num);
+         }
+    }
+    public static void successRun(){
+        for (Integer key : catchElfList.keySet()) {
+            HttpHandler.successCatch(userName,key+"",""+catchElfList.get(key));
+        }
+        catchElfList.clear();
+    }
+    public static void  failRun(){
+        catchElfList.clear();
+    }
     public static Map getUserInfo(){return userInfo;}
     public static Map getElfWithId(int id){
         for (int i = 0; i < elfDetailsList.size(); i++) {
