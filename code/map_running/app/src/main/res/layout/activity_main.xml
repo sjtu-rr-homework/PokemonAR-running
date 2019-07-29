@@ -34,6 +34,7 @@
             android:layout_height="56dp"
             android:layout_alignParentBottom="true"
             android:background="@color/bg_white"
+            android:paddingTop="0dp"
             android:orientation="horizontal">
 
             <TextView

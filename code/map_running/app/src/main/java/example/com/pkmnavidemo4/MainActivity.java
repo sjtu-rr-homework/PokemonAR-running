@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ActivityCompat.requestPermissions(MainActivity.this, permissions, 1);
         }
         else {
-            txt_message.performClick();   //模拟一次点击，既进去后选择第一项
+            txt_message.performClick();//模拟一次点击，既进去后选择第一项
         }
 
     }
