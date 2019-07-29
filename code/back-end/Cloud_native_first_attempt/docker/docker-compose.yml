@@ -132,16 +132,6 @@ services:
       - "8094:8094"
     networks:
       - spring-cloud-network
-
-  gateway-service:
-    hostname: gateway-service
-    image: macoredroid/gateway-service:latest
-    environment:
-      SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
-    ports:
-      - "30751:30751"
-    networks:
-      - spring-cloud-network
       
   proxy-service:
     hostname: proxy-service
@@ -149,7 +139,7 @@ services:
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     ports:
-      - "30753:30753"
+      - "30751:30751"
     networks:
       - spring-cloud-network
       
