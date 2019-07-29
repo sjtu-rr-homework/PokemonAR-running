@@ -57,7 +57,7 @@ public class RunningFragment extends Fragment implements View.OnClickListener{
         vp.setOffscreenPageLimit(4);//ViewPager的缓存为4帧
         vp.setAdapter(mFragmentAdapter);
         vp.setCurrentItem(0);//初始设置ViewPager选中第一帧
-        item_weixin.setTextColor(Color.parseColor("#66CDAA"));
+        item_weixin.setTextColor(Color.parseColor("#ffffff"));
 
         //ViewPager的监听事件
         vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -153,11 +153,11 @@ public class RunningFragment extends Fragment implements View.OnClickListener{
     }
     private void changeTextColor(int position) {
         if (position == 0) {
-            item_weixin.setTextColor(Color.parseColor("#66CDAA"));
-            item_tongxunlu.setTextColor(Color.parseColor("#000000"));
+            item_weixin.setTextColor(Color.parseColor("#ffffff"));
+            item_tongxunlu.setTextColor(Color.parseColor("#72A4C2"));
         } else if (position == 1) {
-            item_tongxunlu.setTextColor(Color.parseColor("#66CDAA"));
-            item_weixin.setTextColor(Color.parseColor("#000000"));
+            item_tongxunlu.setTextColor(Color.parseColor("#ffffff"));
+            item_weixin.setTextColor(Color.parseColor("#72A4C2"));
         }
     }
 }

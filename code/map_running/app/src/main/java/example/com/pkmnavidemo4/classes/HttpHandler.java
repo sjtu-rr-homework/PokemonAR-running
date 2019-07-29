@@ -202,7 +202,7 @@ public class HttpHandler {
             }
         }).start();
     }
-    public static void successCatch(Context context,String username,String typeid,String num){
+    public static void successCatch(String username,String typeid,String num){
         new Thread(new Runnable() {
             @Override
             public void run() {

@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.List;
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @EnableSwagger2
 @RestController
 public class PetController {

@@ -34,7 +34,6 @@ import example.com.pkmnavidemo4.classes.UserData;
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     //UI Object
-    private TextView txt_topbar;
     private TextView txt_channel;
     private TextView txt_message;
     private TextView txt_better;
@@ -73,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ActivityCompat.requestPermissions(MainActivity.this, permissions, 1);
         }
         else {
-            txt_message.performClick();   //模拟一次点击，既进去后选择第一项
+            txt_message.performClick();//模拟一次点击，既进去后选择第一项
         }
 
     }
@@ -102,7 +101,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //UI组件初始化与事件绑定
     private void bindViews() {
-        txt_topbar = (TextView) findViewById(R.id.txt_topbar);
         txt_channel = (TextView) findViewById(R.id.txt_channel);
         txt_message = (TextView) findViewById(R.id.txt_message);
         txt_better = (TextView) findViewById(R.id.txt_better);

@@ -56,7 +56,7 @@ public class RecordActivity extends AppCompatActivity {
                 Intent intent=new Intent(RecordActivity.this,RecordOnMapActivity.class);
                 intent.putExtra("id",String.valueOf(id));
                 startActivity(intent);
-                //Toast.makeText(MainActivity.this, "选择了"+textID[position],Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ShareActivity.this, "选择了"+textID[position],Toast.LENGTH_SHORT).show();
             }
         });
 

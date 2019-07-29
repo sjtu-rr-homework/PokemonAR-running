@@ -98,7 +98,7 @@ public class SceneformActivity extends AppCompatActivity implements Scene.OnUpda
           @Override
           public void onClick(View v) {
               if(elfSetted) {
-                  HttpHandler.successCatch(SceneformActivity.this, UserData.getUserName(),variety+"",""+1);
+                  UserData.catchOne(variety);
                   AlertDialog alertDialog = new AlertDialog.Builder(SceneformActivity.this)
                           .setTitle("捕捉成功")
                           .setMessage("是否返回")

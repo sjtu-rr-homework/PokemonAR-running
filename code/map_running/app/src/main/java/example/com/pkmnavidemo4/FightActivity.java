@@ -305,10 +305,14 @@ public class FightActivity extends AppCompatActivity {
     @Override
     public void finish() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(FightActivity.this);
-        if(leftHp>0)
-            dialog.setTitle("你胜利了!");
-        else
-            dialog.setTitle("你失败了!");
+        if(leftHp>0&&rightHp>0)
+            dialog.setTitle("战斗还没结束!");
+        else{
+            if(leftHp>0)
+                dialog.setTitle("你胜利了!");
+            else
+                dialog.setTitle("你失败了!");
+        }
         dialog.setMessage("是否返回？");
         dialog.setCancelable(false);
         dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
