@@ -53,6 +53,9 @@
 
         </activity>
         <activity android:name=".MainActivity">
+
+        </activity>
+        <activity android:name=".ShareActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
