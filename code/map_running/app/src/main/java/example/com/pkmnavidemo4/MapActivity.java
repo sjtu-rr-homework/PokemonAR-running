@@ -56,7 +56,6 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
 
     MapView mMapView = null;
     private int countDown=0;
-    private TextView positionText;
     private TextView distText;
     private TextView timePerKM;
     private TextView timeText;
@@ -102,7 +101,6 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         }
 
         //绑定文本控件
-        positionText=(TextView)findViewById(R.id.act_map_textView);
         distText=(TextView)findViewById(R.id.act_map_textView_dist);
         timePerKM=(TextView)findViewById(R.id.act_map_textView_speed);
         timeText=(TextView)findViewById(R.id.act_map_textView_time);
@@ -354,11 +352,6 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                     }*/
                 }
                 mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点
-                currentPosition=new StringBuilder();
-                currentPosition.append("经度：").append(aMapLocation.getLongitude()).append("\n");
-                currentPosition.append("纬度：").append(aMapLocation.getLatitude()).append("\n");
-                //currentPosition.append("时间：").append(date.getTime()).append("\n");
-                positionText.setText(currentPosition);
                 LatLng latLng=new LatLng(aMapLocation.getLatitude(),aMapLocation.getLongitude());
                 drawLine(latLng);
 

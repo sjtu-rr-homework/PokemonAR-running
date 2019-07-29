@@ -26,14 +26,6 @@ import example.com.pkmnavidemo4.classes.UserData;
 public class MyFragment extends Fragment {
 
     private Button checkfriend;
-	ImageView elfImage;
-    TextView username;
-    int elfId=-1;
-    TextView elfname;
-    TextView level;
-    TextView fightPoint;
-    Button addfriend;
-    Button fightfriend;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,36 +38,10 @@ public class MyFragment extends Fragment {
                 startActivity(intent);
             }
         });
-		int typeID=(int)(UserData.getElfWithId((int)UserData.getUserInfo().get("pet")).get("typeID"));
-        int grade=(int)UserData.getElfWithId(typeID).get("grade");
-        int exp=(int)UserData.getElfWithId(typeID).get("exp");
-        username=(TextView)view.findViewById(R.id.fg_username);
-        username.setText(UserData.getUserName());
-        elfname=(TextView)view.findViewById(R.id.fg_elfname);
-        elfname.setText(ElfSourceController.getName(typeID,grade));
-        level=(TextView)view.findViewById(R.id.fg_elflevel);
-        level.setText(""+(exp/100+1));
-        fightPoint=(TextView)view.findViewById(R.id.fg_fightpoint);
-        fightPoint.setText(""+ElfSourceController.getPower(typeID,exp/100+1,grade));
-        elfImage=view.findViewById(R.id.fg_elf);
-        elfImage.setBackgroundResource(ElfSourceController.getBackgroundWithLevel(typeID,grade));
         LinearLayout linearLayout=view.findViewById(R.id.fg_content_outer);
         linearLayout.setPadding(0,getStatusBarHeight(),0,0);
         return view;
     }
-	
-	@Override
-    public void onHiddenChanged(boolean hidden){
-        super.onHiddenChanged(hidden);
-        int typeID=(int)(UserData.getElfWithId((int)UserData.getUserInfo().get("pet")).get("typeID"));
-        int grade=(int)UserData.getElfWithId(typeID).get("grade");
-        int exp=(int)UserData.getElfWithId(typeID).get("exp");
-        username.setText(UserData.getUserName());
-        elfname.setText(ElfSourceController.getName(typeID,grade));
-        level.setText(""+(exp/100+1));
-        fightPoint.setText(""+ElfSourceController.getPower(typeID,exp/100+1,grade));
-		elfImage.setBackgroundResource(ElfSourceController.getBackgroundWithLevel(typeID,grade));
-	}
 
     private int getStatusBarHeight() {
         Resources resources = getActivity().getResources();
