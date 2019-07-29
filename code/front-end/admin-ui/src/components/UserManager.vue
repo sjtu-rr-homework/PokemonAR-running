@@ -20,8 +20,8 @@
             <div class="on-mask bg-white window-md p-4">
                 <button class="btn btn-outline-danger col-2 offset-10 mb-3"
                         v-on:click="hideUserDetails()">关闭</button>
-                <UserDetails v-bind:user="detailedUser" v-on:ban="requestBan(detailedUser.username)"
-                             v-on:unban="requestBan(detailedUser.username)"></UserDetails>
+                <UserDetails v-bind:user="detailedUser" v-on:ban="requestBan(detailedUser.info.username)"
+                             v-on:unban="requestBan(detailedUser.info.username)"></UserDetails>
             </div>
         </div>
     </div>
