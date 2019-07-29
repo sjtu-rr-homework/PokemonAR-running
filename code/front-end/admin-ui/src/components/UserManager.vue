@@ -69,8 +69,6 @@
             requestRunningHistory: function (username) {
                 this.$http.get(api.recordApi('running/record/user/' + username)
                 ).then((resp) => {
-                    console.log(typeof resp.data[0].startTime);
-                    console.log(typeof resp.data[0].duration);
                     this.detailedUser.history = resp.data;
                     this.requestPetInfo(username);
                 }, () => {
