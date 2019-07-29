@@ -88,11 +88,6 @@ public class ElfsFragment extends Fragment {
         HttpHandler.getElfs(getActivity(),UserData.getUserName());
         if(!UserData.getOnlyHave())
             return;
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity(),UserData.getElfList());
         mRecyclerView.setAdapter(adapter);
     }

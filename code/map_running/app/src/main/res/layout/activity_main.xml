@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -15,25 +16,14 @@
         <RelativeLayout
             android:id="@+id/ly_top_bar"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:background="@color/bg_topbar">
-
-            <TextView
-                android:id="@+id/txt_topbar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:gravity="center"
-                android:textSize="18sp"
-                android:textColor="@color/text_topbar"
-                android:text="信息"/>
 
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2px"
-                android:background="@color/div_white"
-                android:layout_alignParentBottom="true"/>
+                android:layout_height="0dp"
+                android:background="@color/div_white"/>
 
         </RelativeLayout>
 

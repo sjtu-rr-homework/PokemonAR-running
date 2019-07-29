@@ -9,17 +9,28 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg_white"
+        android:background="@drawable/bg_blue"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent">
-
+        <RelativeLayout
+            android:id="@+id/fg_running_status_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/fg_running_calculate"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/button_half_circle"
+                android:text="计入成绩：0.00公里"
+                />
+        </RelativeLayout>
         <LinearLayout
             android:id="@+id/fg_running_topbar"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_alignParentTop="true"
+            android:layout_below="@id/fg_running_status_top"
             android:layout_marginTop="1dp"
-            android:background="@android:color/white"
             android:baselineAligned="false"
             android:gravity="center_vertical"
             android:orientation="horizontal"
