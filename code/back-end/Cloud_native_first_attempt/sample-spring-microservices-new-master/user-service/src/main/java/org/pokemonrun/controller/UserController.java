@@ -13,7 +13,6 @@ import org.pokemonrun.service.LoginService;
 import org.pokemonrun.service.RegisterService;
 
 import java.util.List;
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class UserController {
 	@Autowired

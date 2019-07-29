@@ -50,6 +50,10 @@
         <!-- 定位需要的服务 -->
         <service android:name="com.amap.api.location.APSService"></service>
         <activity android:name=".LoginActivity">
+
+        </activity>
+        <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -57,8 +61,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".ShareActivity">
-        </activity>
-        <activity android:name=".MainActivity">
         </activity>
         <activity android:name=".FightActivity">
         </activity>

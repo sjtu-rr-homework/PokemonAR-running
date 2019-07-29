@@ -1,14 +1,18 @@
 package example.com.pkmnavidemo4.Fragments;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.LinearLayout;
 
 import example.com.pkmnavidemo4.FriendPageActivity;
 import example.com.pkmnavidemo4.R;
@@ -22,7 +26,7 @@ import example.com.pkmnavidemo4.classes.UserData;
 public class MyFragment extends Fragment {
 
     private Button checkfriend;
-    ImageView elfImage;
+	ImageView elfImage;
     TextView username;
     int elfId=-1;
     TextView elfname;
@@ -30,11 +34,11 @@ public class MyFragment extends Fragment {
     TextView fightPoint;
     Button addfriend;
     Button fightfriend;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.fg_content,container,false);
-        checkfriend=(Button)view.findViewById(R.id.fg_button);
+        checkfriend=(Button)view.findViewById(R.id.fg_button_check_friend);
         checkfriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,7 +46,7 @@ public class MyFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        int typeID=(int)(UserData.getElfWithId((int)UserData.getUserInfo().get("pet")).get("typeID"));
+		int typeID=(int)(UserData.getElfWithId((int)UserData.getUserInfo().get("pet")).get("typeID"));
         int grade=(int)UserData.getElfWithId(typeID).get("grade");
         int exp=(int)UserData.getElfWithId(typeID).get("exp");
         username=(TextView)view.findViewById(R.id.fg_username);
@@ -55,9 +59,12 @@ public class MyFragment extends Fragment {
         fightPoint.setText(""+ElfSourceController.getPower(typeID,exp/100+1,grade));
         elfImage=view.findViewById(R.id.fg_elf);
         elfImage.setBackgroundResource(ElfSourceController.getBackgroundWithLevel(typeID,grade));
+        LinearLayout linearLayout=view.findViewById(R.id.fg_content_outer);
+        linearLayout.setPadding(0,getStatusBarHeight(),0,0);
         return view;
     }
-    @Override
+	
+	@Override
     public void onHiddenChanged(boolean hidden){
         super.onHiddenChanged(hidden);
         int typeID=(int)(UserData.getElfWithId((int)UserData.getUserInfo().get("pet")).get("typeID"));
@@ -67,6 +74,15 @@ public class MyFragment extends Fragment {
         elfname.setText(ElfSourceController.getName(typeID,grade));
         level.setText(""+(exp/100+1));
         fightPoint.setText(""+ElfSourceController.getPower(typeID,exp/100+1,grade));
-        elfImage.setBackgroundResource(ElfSourceController.getBackgroundWithLevel(typeID,grade));
+		elfImage.setBackgroundResource(ElfSourceController.getBackgroundWithLevel(typeID,grade));
+	}
+
+    private int getStatusBarHeight() {
+        Resources resources = getActivity().getResources();
+        int resourceId = resources.getIdentifier("status_bar_height", "dimen","android");
+        int height = resources.getDimensionPixelSize(resourceId);
+        Log.v("dbw", "Status height:" + height);
+        return height;
     }
+
 }
