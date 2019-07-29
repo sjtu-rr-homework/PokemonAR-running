@@ -113,9 +113,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="5dp"
-            android:textSize="40px"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:text="查看历史跑步记录"/>
     </RelativeLayout>
