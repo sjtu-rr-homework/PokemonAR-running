@@ -10,6 +10,14 @@
             <span>该用户处于受限制状态，无法获得奖励</span>
         </div>
         <div v-else class="bg-white p-2"></div>
+        <div class="bg-light p-2 h5">约束跑信息</div>
+        <div class="bg-white p-2 row">
+            <div v-if="user.info.star!=1">（该用户无需约束跑）</div>
+            <div v-else>
+                <div class="offset-3 col-2">里程（m）：</div>
+                <div class="col-4">{{user.campus.mileage}} / {{user.campus.mileageGoal}}</div>
+            </div>
+        </div>
         <div class="bg-light p-2 h5">跑步历史</div>
         <div class="bg-white p-2">
             <div v-for="(rec, index) in user.history" v-bind:key="index" class="row">

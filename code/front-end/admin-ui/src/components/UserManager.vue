@@ -20,8 +20,8 @@
             <div class="on-mask bg-white window-md p-4">
                 <button class="btn btn-outline-danger col-2 offset-10 mb-3"
                         v-on:click="hideUserDetails()">关闭</button>
-                <UserDetails v-bind:user="detailedUser" v-on:ban="requestBan(detailedUser.username)"
-                             v-on:unban="requestBan(detailedUser.username)"></UserDetails>
+                <UserDetails v-bind:user="detailedUser" v-on:ban="requestBan(detailedUser.info.username)"
+                             v-on:unban="requestBan(detailedUser.info.username)"></UserDetails>
             </div>
         </div>
     </div>
@@ -45,6 +45,7 @@
                 detailed: false,
                 detailedUser: {
                     info: {},
+                    campus: {},
                     history: [],
                     pets: []
                 }
@@ -69,21 +70,33 @@
             requestRunningHistory: function (username) {
                 this.$http.get(api.recordApi('running/record/user/' + username)
                 ).then((resp) => {
-                    console.log(typeof resp.data[0].startTime);
-                    console.log(typeof resp.data[0].duration);
                     this.detailedUser.history = resp.data;
                     this.requestPetInfo(username);
                 }, () => {
                     alert('get running history fail');
+                    this.requestPetInfo(username);
                 });
             },
+            /*requestCampusRunningInfo: function (username) {
+                this.$http.get(api.ruleApi('rule/campus/user/' + username)
+                ).then((resp) => {
+                    console.log(typeof resp.data[0].startTime);
+                    console.log(typeof resp.data[0].duration);
+                    this.detailedUser.campus = resp.data; // {mileage, mileageGoal}
+                    this.requestRunningHistory(username);
+                }, () => {
+                    alert('get campus running info fail');
+                });
+            },*/
             requestUserInfo: function (username) {
                 this.$http.get(api.userApi('admingetuserinfo/username/' + username)
                 ).then((resp) => {
                     this.detailedUser.info = resp.data;
+                    //this.requestCampusRunningInfo(username);
                     this.requestRunningHistory(username);
                 }, () => {
                     alert('get user info fail');
+                    this.requestRunningHistory(username);
                 });
             },
             requestUserDetails: function (username) {

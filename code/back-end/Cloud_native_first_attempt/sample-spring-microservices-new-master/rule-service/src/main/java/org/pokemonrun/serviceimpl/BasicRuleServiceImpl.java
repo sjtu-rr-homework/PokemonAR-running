@@ -22,12 +22,8 @@ public class BasicRuleServiceImpl implements BasicRuleService {
     @Override
     public boolean setBasicRule(BasicRuleInfo info) {
         BasicRule rule = BasicRuleConverter.toEntity(info);
-        Double mile = rule.getMileageRequirement();
         Double min = rule.getMinSpeed();
         Double max = rule.getMaxSpeed();
-        if(mile != null && mile < 0){
-            return false;
-        }
         if(min != null && max != null && (min >= max || min < 0)){
             return false;
         }
