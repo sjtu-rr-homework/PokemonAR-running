@@ -6,48 +6,44 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/fg_elfs_content_outer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         android:background="@color/bg_white"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="-29dp">
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/fg_elf_topbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <Button
+                android:id="@+id/elf_fg_button_refresh"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@android:drawable/ic_menu_rotate" />
+            <TextView
+                android:id="@+id/elf_fg_text_wait"
+                android:layout_width="132dp"
+                android:layout_height="30dp"
+                android:textSize="16dp"
+                android:text="点击刷新精灵信息" />
 
-        <TextView
-            android:id="@+id/elf_fg_text_wait"
-            android:layout_width="132dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="70dp"
-            android:layout_marginTop="10dp"
-            android:textSize="16dp"
-            android:text="点击刷新精灵信息" />
-
-        <Button
-            android:id="@+id/elf_fg_button_refresh"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@android:drawable/ic_menu_rotate" />
-
-        <Switch
-            android:id="@+id/elf_fg_button_switch"
-            android:layout_width="132dp"
-            android:layout_height="52dp"
-            android:layout_marginStart="280dp"
-            android:text="只看已拥有"
-            app:layout_constraintStart_toStartOf="@+id/elf_fg_recycle_view"
-            app:layout_constraintTop_toTopOf="@+id/elf_fg_recycle_view" />
+            <Switch
+                android:id="@+id/elf_fg_button_switch"
+                android:layout_width="132dp"
+                android:layout_height="52dp"
+                android:layout_marginLeft="90dp"
+                android:text="只看已拥有"/>
+        </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/elf_fg_recycle_view"
+            android:layout_below="@id/fg_elf_topbar"
             android:layout_width="match_parent"
-            android:layout_height="676dp"
-            android:layout_marginTop="55dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            android:layout_height="match_parent"/>
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
