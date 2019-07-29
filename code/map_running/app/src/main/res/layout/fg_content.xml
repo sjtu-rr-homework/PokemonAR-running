@@ -129,6 +129,12 @@
                 android:text="撤销出战"
                 android:textSize="18sp"/>
         </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="80dp">
         <Button
             android:id="@+id/fg_button"
             android:layout_width="60dp"
@@ -160,6 +166,6 @@
             android:layout_marginBottom="22dp"
             android:background="@mipmap/tab_message_normal"
             android:textAlignment="gravity" />
-
+    </RelativeLayout>
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
