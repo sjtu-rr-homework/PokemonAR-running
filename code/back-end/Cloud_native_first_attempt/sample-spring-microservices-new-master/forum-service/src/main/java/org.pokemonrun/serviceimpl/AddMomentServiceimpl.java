@@ -14,6 +14,7 @@ public class AddMomentServiceimpl implements AddMomentService {
     @Override
     public boolean addMoment(MomentInfo momentInfo) {
         Moment temp=new Moment(momentInfo.text,momentInfo.timestamp,momentInfo.username,momentInfo.picture);
-
+        MomentDao.save(temp);
+        return true;
     }
 }

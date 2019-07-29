@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface GetMomentService {
     List<MomentInfo> getAll();
-    List<MomentInfo> getOneUser();
+    List<MomentInfo> getOneUser(String username);
 }
