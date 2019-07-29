@@ -34,7 +34,7 @@ public class MyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.fg_content,container,false);
-        checkfriend=(Button)view.findViewById(R.id.fg_button_check_friend);
+        checkfriend=(Button)view.findViewById(R.id.fg_button);
         checkfriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
