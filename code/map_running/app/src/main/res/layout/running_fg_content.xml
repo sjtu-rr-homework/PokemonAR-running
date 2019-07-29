@@ -81,7 +81,7 @@
             android:layout_height="28dp"
             android:layout_below="@id/fg_running_topbar"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="22dp"
             android:layout_alignParentRight="true"
             android:gravity="center_vertical"
             android:background="@drawable/button_half_circle"
