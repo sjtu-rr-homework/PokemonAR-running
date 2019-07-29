@@ -22,7 +22,7 @@ public class MyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fg_content,container,false);
-        checkfriend=(Button)view.findViewById(R.id.fg_button);
+        checkfriend=(Button)view.findViewById(R.id.fg_button_check_friend);
         checkfriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

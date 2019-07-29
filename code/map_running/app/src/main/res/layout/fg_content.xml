@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
     <LinearLayout
-        android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/bg_white">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <Button
-            android:id="@+id/fg_button"
+            android:id="@+id/fg_button_check_friend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="查看好友" />
-
+            android:text="查看好友"
+            android:visibility="visible"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
