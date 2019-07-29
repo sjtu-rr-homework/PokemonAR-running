@@ -114,17 +114,18 @@ public class ShareActivity extends Activity {
 					Uri uri = data.getData();
 					// 这里开始的第二部分，获取图片的路径：
 					String[] proj = { MediaStore.Images.Media.DATA };
-					Log.d("11111111111110","1");
+					Log.d("11111111111110","2");
 					Cursor cursor = managedQuery(uri, proj, null, null, null);
-					Log.d("11111111111110","1");
+					Log.d("11111111111110","3");
 					// 按我个人理解 这个是获得用户选择的图片的索引值
 					int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-					Log.d("11111111111110","1");
+					Log.d("11111111111110","4");
 					cursor.moveToFirst();
-					Log.d("11111111111110","1");
+					Log.d("11111111111110","5");
 					// 最后根据索引值获取图片路径
 					photoPath = cursor.getString(column_index);
-					Log.d("11111111111110","1");
+					Log.d("11111111111110","6");
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
