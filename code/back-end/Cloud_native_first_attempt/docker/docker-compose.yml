@@ -93,7 +93,7 @@ services:
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     ports:
-      - "8091:8091"
+      - "8091"
     networks:
       - spring-cloud-network
 
@@ -105,7 +105,7 @@ services:
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     ports:
-      - "8092:8092"
+      - "8092"
     networks:
       - spring-cloud-network
 
@@ -117,7 +117,7 @@ services:
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     ports:
-      - "8093:8093"
+      - "8093"
     networks:
       - spring-cloud-network
 
@@ -129,7 +129,7 @@ services:
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     ports:
-      - "8094:8094"
+      - "8094"
     networks:
       - spring-cloud-network
       
@@ -151,7 +151,7 @@ services:
     depends_on:
       - mysql-rule
     ports:
-      - "8095:8095"
+      - "8095"
     networks:
       - spring-cloud-network
       
