@@ -14,6 +14,7 @@
         <module name="record-service" />
         <module name="config-service" />
         <module name="user-service" />
+        <module name="forum-service" />
         <module name="pet-service" />
       </profile>
     </annotationProcessing>
@@ -22,6 +23,7 @@
       <module name="department-service" target="1.8" />
       <module name="discovery-service" target="1.8" />
       <module name="employee-service" target="1.8" />
+      <module name="forum-service" target="1.8" />
       <module name="gateway-service" target="1.8" />
       <module name="location-service" target="1.8" />
       <module name="pet-service" target="1.8" />
@@ -38,6 +40,7 @@
       <module name="department-service" options="-parameters" />
       <module name="discovery-service" options="-parameters" />
       <module name="employee-service" options="-parameters" />
+      <module name="forum-service" options="-parameters" />
       <module name="gateway-service" options="-parameters" />
       <module name="location-service" options="-parameters" />
       <module name="pet-service" options="-parameters" />

@@ -3,6 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/config-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/discovery-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/forum-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gateway-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/location-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pet-service" charset="UTF-8" />
