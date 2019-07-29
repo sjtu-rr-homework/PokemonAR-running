@@ -16,6 +16,7 @@
 		<module>pet-service</module>
 		<module>proxy-service</module>
 		<module>rule-service</module>
+		<module>forum-service</module>
 	</modules>
 
 </project>
