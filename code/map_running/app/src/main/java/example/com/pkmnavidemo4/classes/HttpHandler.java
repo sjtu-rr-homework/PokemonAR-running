@@ -937,7 +937,69 @@ public class HttpHandler {
 
     }
 
-    public static void postPic(String pic){
+    public static void getMonments(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                List<Map> list = new ArrayList<Map>();
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String loginUrl=UrlHead+"/forum/get/all/moment";
+                try {
+                    //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
+                    URL url=new URL(loginUrl);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(888000);
+                    conn.setReadTimeout(888000);
+                   /* InputStream is = conn.getInputStream(); // 获取输入流
+                    byte[] data = read(is);*/
+
+                    InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                    Log.d("123","---"+sb.toString());
+                    JSONArray jsonArray = new JSONArray(sb.toString());
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject item = jsonArray.getJSONObject(i); // 得到每个对象
+                        String content = item.getString("text"); // 获取对象对应的值
+                        String time = item.getString("timestamp");
+                        String username = item.getString("username");
+                        List<String> pics = (List<String>) item.getJSONObject("picture");
+                        Map map = null;
+                        map = new HashMap(); // 存放到MAP里面
+                        map.put("content", content );
+                        map.put("time",time);
+                        map.put("username",username);
+                        map.put("pics",pics);
+                        list.add(map);
+                    }
+                    UserData.setMoments(list);
+                    UserData.isMomentsGet=false;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }finally {
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+
+    public static void postPic(List<String> pic,String timestamp,String username,String text){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -945,9 +1007,9 @@ public class HttpHandler {
                 BufferedReader reader = null;
                 try {
                     JSONObject un=new JSONObject();
-                    un.put("text","5555");
-                    un.put("timestamp", "55555");
-                    un.put("username",UserData.getUserName());
+                    un.put("text",text);
+                    un.put("timestamp", timestamp);
+                    un.put("username",username);
                     un.put("picture",pic);
                     String Json=un.toString();
                     //String urlPath = UrlHead+"/record/refresh/location";

@@ -23,11 +23,27 @@ public class UserData {
     private static String userName;
     private static List<String> elfList;
     private static  List<Map> elfDetailsList;
+    private static  List<Map> moments;
+    public static  boolean isMomentsGet=false;
     private static  boolean onlyHave=false;
     public static boolean isFriendGet=false;
     public static int flagNum=0;
     public static Map<Integer,Integer> catchElfList=new HashMap();
     public static List<LatLng> constraint=new ArrayList<LatLng>();
+    public static List<Map> getMoments() {
+        return moments;
+    }
+    public static void setMoments( List<Map> getMoments){
+        isMomentsGet=true;
+        while(isMomentsGet){
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        moments=getMoments;
+    }
     public static void catchOne(int variety){
          if(catchElfList.get(variety)==null)
              catchElfList.put(variety,1);

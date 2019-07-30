@@ -40,7 +40,6 @@ public class TestRecycleViewAdapter extends RecyclerView.Adapter<TestRecycleView
                     Intent intent = new Intent(mContext, ElfDetailsActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putInt("variety", Integer.valueOf(UserData.getElfDetails().get(position).get("typeID").toString()));
-                    Log.d("wqwqwq",UserData.getElfDetails().get(position).get("typeID").toString());
                     intent.putExtras(bundle);
                     mContext.startActivity(intent);
                 }

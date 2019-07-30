@@ -1,4 +1,4 @@
-package example.com.pkmnavidemo4.testsend;
+package example.com.pkmnavidemo4.Bitmap;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
