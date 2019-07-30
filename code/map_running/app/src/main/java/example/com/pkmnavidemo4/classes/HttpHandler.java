@@ -1259,6 +1259,7 @@ public class HttpHandler {
                             }
                             JSONObject jb=new JSONObject(sb.toString());
                             UserData.distance=Double.parseDouble(jb.getString("distance"));
+                            Log.d("distance:",""+UserData.distance);
                             JSONArray array = new JSONArray(jb.getString("friends"));
                             for (int j = 0; j < array.length(); ++j) {
                                 JSONObject jjj = array.getJSONObject(j);
