@@ -1,8 +1,9 @@
 package org.pokemonrun.entity;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
 
 @Document(collection = "mount")
 public class Moment {
@@ -15,10 +16,10 @@ public class Moment {
 
     public String username;
 
-    public byte[] picture;
+    public List<byte[]> picture;
 
     public Moment(){}
-    public Moment(String text, String timestamp, String username, byte[] picture)
+    public Moment(String text, String timestamp, String username, List<byte[]> picture)
     {
         this.text=text;
         this.timestamp=timestamp;
