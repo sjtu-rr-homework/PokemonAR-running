@@ -1,5 +1,6 @@
 package example.com.pkmnavidemo4.classes;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,9 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.amap.api.col.stln3.dm;
+
 import java.util.List;
 
 import example.com.pkmnavidemo4.R;
+import example.com.pkmnavidemo4.SquareActivity;
 
 public class FriendsCircleImageLayout extends ViewGroup {
     /**
@@ -190,7 +194,7 @@ public class FriendsCircleImageLayout extends ViewGroup {
             imageView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    
                 }
             });
         }

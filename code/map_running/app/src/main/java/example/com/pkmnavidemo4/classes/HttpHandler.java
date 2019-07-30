@@ -54,8 +54,8 @@ import example.com.pkmnavidemo4.R;
 
 public class HttpHandler {
 
-    private static String UrlHead="http://1c77d0af.ngrok.io";
-    //private static String UrlHead="http://202.120.40.8:30751";
+    //private static String UrlHead="http://1c77d0af.ngrok.io";
+    private static String UrlHead="http://202.120.40.8:30751";
 
 
     @Nullable
@@ -937,7 +937,7 @@ public class HttpHandler {
 
     }
 
-    public static void getMonments(){
+    public static void getMoments(){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -963,20 +963,22 @@ public class HttpHandler {
                     while((s = br.readLine())!=null){
                         sb.append(s);
                     }
-                    Log.d("123","---"+sb.toString());
                     JSONArray jsonArray = new JSONArray(sb.toString());
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject item = jsonArray.getJSONObject(i); // 得到每个对象
                         String content = item.getString("text"); // 获取对象对应的值
                         String time = item.getString("timestamp");
                         String username = item.getString("username");
-                        List<String> pics = (List<String>) item.getJSONObject("picture");
+                        List<String> pics =new ArrayList<>();
+                        for(int j=1;j<=9&&item.getString("pic"+j)!="null";j++)
+                            pics.add(item.getString("pic"+j));
+                        Log.d("44444444444fd",pics.toString());
                         Map map = null;
                         map = new HashMap(); // 存放到MAP里面
                         map.put("content", content );
                         map.put("time",time);
                         map.put("username",username);
-                        map.put("pics",pics);
+                        map.put("pics", pics );
                         list.add(map);
                     }
                     UserData.setMoments(list);
@@ -1007,11 +1009,14 @@ public class HttpHandler {
                 BufferedReader reader = null;
                 try {
                     JSONObject un=new JSONObject();
+
                     un.put("text",text);
                     un.put("timestamp", timestamp);
                     un.put("username",username);
-                    un.put("picture",pic);
+                    for(int i=1;i<=pic.size();i++)
+                    un.put("pic"+i,pic.get(i-1));
                     String Json=un.toString();
+                    Log.d("5555",Json);
                     //String urlPath = UrlHead+"/record/refresh/location";
                     String urlPath = UrlHead+"/forum/add/moment";
                     URL url = new URL(urlPath);

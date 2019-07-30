@@ -64,7 +64,7 @@ public class ShareActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				if (data.size() ==10) {
-					Toast.makeText(ShareActivity.this, "只能添加一张照片", Toast.LENGTH_SHORT).show();
+					Toast.makeText(ShareActivity.this, "只能添加九张照片", Toast.LENGTH_SHORT).show();
 				} else {
 					if (position == data.size() - 1) {
 						Toast.makeText(ShareActivity.this, "添加图片", Toast.LENGTH_SHORT).show();
@@ -140,9 +140,11 @@ public class ShareActivity extends Activity {
 					cursor.moveToFirst();
 					// 最后根据索引值获取图片路径
 					photoPath = cursor.getString(column_index);
-					Bitmap bp=BitmapFactory.decodeFile(photoPath);
+					Bitmap term=BitmapFactory.decodeFile(photoPath);
+					int width=term.getWidth()/8;
+					int height=term.getHeight()/8;
+					Bitmap bp=BitmapUtils.decodeSampledBitmapFromFd(photoPath,width,height);
 					jsonData.add(bitmapToBase64(bp));
-					Log.d("json33333333333",jsonData.size()+"");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

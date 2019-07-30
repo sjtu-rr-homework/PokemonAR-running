@@ -34,7 +34,7 @@ public class FriendsCircleAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return Integer.MAX_VALUE;
+        return moments.size();
     }
 
     @Override

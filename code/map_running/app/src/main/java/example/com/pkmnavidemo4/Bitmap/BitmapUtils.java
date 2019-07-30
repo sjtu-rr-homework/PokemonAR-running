@@ -59,4 +59,5 @@ public class BitmapUtils {
 		Bitmap src = BitmapFactory.decodeFile(pathName, options);
 		return src;
 	}
+
 }

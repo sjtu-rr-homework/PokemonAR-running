@@ -31,10 +31,8 @@ public class UserData {
     public static Map<Integer,Integer> catchElfList=new HashMap();
     public static List<LatLng> constraint=new ArrayList<LatLng>();
     public static List<Map> getMoments() {
-        return moments;
-    }
-    public static void setMoments( List<Map> getMoments){
         isMomentsGet=true;
+        HttpHandler.getMoments();
         while(isMomentsGet){
             try {
                 Thread.sleep(10);
@@ -42,6 +40,9 @@ public class UserData {
                 e.printStackTrace();
             }
         }
+        return moments;
+    }
+    public static void setMoments( List<Map> getMoments){
         moments=getMoments;
     }
     public static void catchOne(int variety){
