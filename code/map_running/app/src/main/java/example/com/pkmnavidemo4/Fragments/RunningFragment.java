@@ -1,5 +1,7 @@
 package example.com.pkmnavidemo4.Fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -24,6 +26,7 @@ import example.com.pkmnavidemo4.classes.UserData;
 
 public class RunningFragment extends Fragment implements View.OnClickListener{
     private TextView toRecord;
+    private TextView mileageGoal;
     //private Button button;
     private TextView mileage;
     private ImageView checkNeighbour;
@@ -52,6 +55,7 @@ public class RunningFragment extends Fragment implements View.OnClickListener{
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mileage=(TextView)getActivity().findViewById(R.id.fg_running_calculate);
+        mileageGoal=(TextView)getActivity().findViewById(R.id.fg_running_goal) ;
         //button = (Button) getActivity().findViewById(R.id.button3);
         //toRecord=(TextView)getActivity().findViewById(R.id.fg_running_textView);
         //checkNeighbour=(ImageView)getActivity().findViewById(R.id.fg_running_checkneighbour);
@@ -107,6 +111,22 @@ public class RunningFragment extends Fragment implements View.OnClickListener{
             public void onClick(View v){
                 Intent intent =new Intent(getActivity(), CheckNeighbour.class);
                 startActivity(intent);
+            }
+        });
+        mileageGoal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder dialog=new AlertDialog.Builder(getActivity());
+                dialog.setTitle("学期目标");
+                DecimalFormat tmp_format=new DecimalFormat("#0.0");
+                dialog.setMessage("本学期跑步目标："+tmp_format.format(UserData.getMileageGoal()/1000)+"公里");
+                dialog.setPositiveButton("返回", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        return;
+                    }
+                });
+                dialog.show();
             }
         });
     }
