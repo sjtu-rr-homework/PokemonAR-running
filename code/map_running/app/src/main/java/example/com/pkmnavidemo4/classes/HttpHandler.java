@@ -531,6 +531,8 @@ public class HttpHandler {
                     while((s = br.readLine())!=null){
                         sb.append(s);
                     }
+                    Log.d("holytryer",sb.toString());
+                    Log.d("holytryer",username);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }finally {

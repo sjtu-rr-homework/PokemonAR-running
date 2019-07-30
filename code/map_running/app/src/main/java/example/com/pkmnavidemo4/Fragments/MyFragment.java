@@ -65,4 +65,16 @@ public class MyFragment extends Fragment {
         return height;
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden){
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            Log.d("holytryer",""+UserData.distance);
+            DecimalFormat format=new DecimalFormat("#0.00");
+            distance.setText(""+format.format(UserData.distance/1000)+"公里");
+            mileage.setText(""+format.format(UserData.getMileage()/1000)+"公里");
+            mileageGoal.setText(""+format.format(UserData.getMileageGoal()/1000)+"公里");
+        }
+    }
+
 }
