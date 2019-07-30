@@ -45,6 +45,7 @@
                 detailed: false,
                 detailedUser: {
                     info: {},
+                    campus: {},
                     history: [],
                     pets: []
                 }
@@ -73,15 +74,29 @@
                     this.requestPetInfo(username);
                 }, () => {
                     alert('get running history fail');
+                    this.requestPetInfo(username);
                 });
             },
+            /*requestCampusRunningInfo: function (username) {
+                this.$http.get(api.ruleApi('rule/campus/user/' + username)
+                ).then((resp) => {
+                    console.log(typeof resp.data[0].startTime);
+                    console.log(typeof resp.data[0].duration);
+                    this.detailedUser.campus = resp.data; // {mileage, mileageGoal}
+                    this.requestRunningHistory(username);
+                }, () => {
+                    alert('get campus running info fail');
+                });
+            },*/
             requestUserInfo: function (username) {
                 this.$http.get(api.userApi('admingetuserinfo/username/' + username)
                 ).then((resp) => {
                     this.detailedUser.info = resp.data;
+                    //this.requestCampusRunningInfo(username);
                     this.requestRunningHistory(username);
                 }, () => {
                     alert('get user info fail');
+                    this.requestRunningHistory(username);
                 });
             },
             requestUserDetails: function (username) {

@@ -25,12 +25,12 @@ import example.com.pkmnavidemo4.classes.UserData;
  */
 public class MyFragment extends Fragment {
 
-    private Button checkfriend;
+    private LinearLayout checkfriend;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fg_content,container,false);
-        checkfriend=(Button)view.findViewById(R.id.fg_button_check_friend);
+        checkfriend=(LinearLayout) view.findViewById(R.id.fg_layout_check_friend);
         checkfriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,7 +38,7 @@ public class MyFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        LinearLayout linearLayout=view.findViewById(R.id.fg_content_outer);
+        LinearLayout linearLayout=view.findViewById(R.id.fg_title);
         linearLayout.setPadding(0,getStatusBarHeight(),0,0);
         return view;
     }

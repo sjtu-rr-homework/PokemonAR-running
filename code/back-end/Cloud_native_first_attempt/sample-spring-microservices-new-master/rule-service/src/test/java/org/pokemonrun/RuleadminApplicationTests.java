@@ -11,8 +11,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import javax.transaction.Transactional;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -27,13 +26,13 @@ public class RuleadminApplicationTests {
 
     @Test
     public void testSetFlags() throws Exception {
-        mockMvc.perform(post("/admin/rule/flags")
+        mockMvc.perform(post("/admin/post/rule/flags")
                 .contentType("application/json;charset=UTF-8")
                 .content("[{\"lng\":\"1\",\"lat\":\"1\"}," +
                         "{\"lng\":\"2\",\"lat\":\"2\"}]"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
-        mockMvc.perform(post("/admin/rule/flags")
+        mockMvc.perform(post("/admin/post/rule/flags")
                 .contentType("application/json;charset=UTF-8")
                 .content("[{\"lng\":\"1\",\"lat\":\"1\"}," +
                         "{\"lng\":\"2\",\"lat\":\"-2\"}," +
@@ -41,24 +40,24 @@ public class RuleadminApplicationTests {
                         "{\"lng\":\"4\",\"lat\":\"2.55\"}]"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
-        mockMvc.perform(post("/admin/rule/flags")
+        mockMvc.perform(post("/admin/post/rule/flags")
                 .contentType("application/json;charset=UTF-8")
                 .content("[]"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
         // -90 <= lat <= 90
-        mockMvc.perform(post("/admin/rule/flags")
+        mockMvc.perform(post("/admin/post/rule/flags")
                 .contentType("application/json;charset=UTF-8")
                 .content("[{\"lng\":\"-100\",\"lat\":\"90.1\"}]"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("false"));
         // -180 <= lng <= 180
-        mockMvc.perform(post("/admin/rule/flags")
+        mockMvc.perform(post("/admin/post/rule/flags")
                 .contentType("application/json;charset=UTF-8")
                 .content("[{\"lng\":\"180.0\",\"lat\":\"-89.9\"}]"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
-        mockMvc.perform(post("/admin/rule/flags")
+        mockMvc.perform(post("/admin/post/rule/flags")
                 .contentType("application/json;charset=UTF-8")
                 .content("[{\"lng\":\"-180.0\",\"lat\":\"89.9\"}]"))
                 .andExpect(status().isOk())
@@ -69,7 +68,7 @@ public class RuleadminApplicationTests {
     @Test
     public void testGetFlags() throws Exception {
         // test data 1
-        mockMvc.perform(post("/admin/rule/flags")
+        mockMvc.perform(post("/admin/post/rule/flags")
                 .contentType("application/json;charset=UTF-8")
                 .content("[{\"lng\":\"-180.0\",\"lat\":\"89.9\"}," +
                         "{\"lng\":\"-135.8\",\"lat\":\"39.2\"}," +
@@ -86,7 +85,7 @@ public class RuleadminApplicationTests {
                         "{\"lng\":\"121.331\",\"lat\":\"31.15\"}," +
                         "{\"lng\":\"0.0\",\"lat\":\"45.131\"}]"));
         // test data 2
-        mockMvc.perform(post("/admin/rule/flags")
+        mockMvc.perform(post("/admin/post/rule/flags")
                 .contentType("application/json;charset=UTF-8")
                 .content("[]"))
                 .andExpect(status().isOk())
@@ -98,63 +97,62 @@ public class RuleadminApplicationTests {
 
     @Test
     public void testSetBasicRule() throws Exception {
-        mockMvc.perform(post("/admin/rule/basic")
+        mockMvc.perform(post("/admin/post/rule/basic")
                 .contentType("application/json;charset=UTF-8")
-                .content("{\"mileageRequirement\":\"80000\"," +
+                .content("{" +
                         "\"minSpeed\":\"1.8\"," +
                         "\"maxSpeed\":\"6\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
-        mockMvc.perform(post("/admin/rule/basic")
+        mockMvc.perform(post("/admin/post/rule/basic")
                 .contentType("application/json;charset=UTF-8")
-                .content("{\"mileageRequirement\":\"0\"," +
+                .content("{" +
                         "\"minSpeed\":\"0\"," +
                         "\"maxSpeed\":\"100\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
-        // mileage >= 0
-        mockMvc.perform(post("/admin/rule/basic")
-                .contentType("application/json;charset=UTF-8")
-                .content("{\"mileageRequirement\":\"-1\"," +
-                        "\"minSpeed\":\"1.8\"," +
-                        "\"maxSpeed\":\"6\"}"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("false"));
         // maxSpeed > minSpeed >= 0
-        mockMvc.perform(post("/admin/rule/basic")
+        mockMvc.perform(post("/admin/post/rule/basic")
                 .contentType("application/json;charset=UTF-8")
-                .content("{\"mileageRequirement\":\"80000\"," +
+                .content("{" +
                         "\"minSpeed\":\"6\"," +
                         "\"maxSpeed\":\"1.8\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("false"));
-        mockMvc.perform(post("/admin/rule/basic")
+        mockMvc.perform(post("/admin/post/rule/basic")
                 .contentType("application/json;charset=UTF-8")
-                .content("{\"mileageRequirement\":\"80000\"," +
+                .content("{" +
                         "\"minSpeed\":\"-0.1\"," +
                         "\"maxSpeed\":\"1.8\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("false"));
-        mockMvc.perform(post("/admin/rule/basic")
+        mockMvc.perform(post("/admin/post/rule/basic")
                 .contentType("application/json;charset=UTF-8")
-                .content("{\"mileageRequirement\":\"80000\"," +
+                .content("{" +
                         "\"minSpeed\":\"-6\"," +
                         "\"maxSpeed\":\"-0.1\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("false"));
-        mockMvc.perform(post("/admin/rule/basic")
+        mockMvc.perform(post("/admin/post/rule/basic")
                 .contentType("application/json;charset=UTF-8")
-                .content("{\"mileageRequirement\":\"80000\"," +
+                .content("{" +
                         "\"minSpeed\":\"1.5\"," +
                         "\"maxSpeed\":\"1.5\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("false"));
         // empty
-        mockMvc.perform(post("/admin/rule/basic")
+        mockMvc.perform(post("/admin/post/rule/basic")
                 .contentType("application/json;charset=UTF-8")
-                .content("{\"mileageRequirement\":\"80000\"," +
+                .content("{" +
                         "\"minSpeed\":\"\"," +
                         "\"maxSpeed\":\"\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+        mockMvc.perform(post("/admin/post/rule/basic")
+                .contentType("application/json;charset=UTF-8")
+                .content("{" +
+                        "\"minSpeed\":\"\"," +
+                        "\"maxSpeed\":\"100\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
     }
@@ -162,69 +160,69 @@ public class RuleadminApplicationTests {
     @Test
     public void testGetBasicRule() throws Exception {
         // empty data
-        mockMvc.perform(post("/admin/rule/basic")
+        mockMvc.perform(post("/admin/post/rule/basic")
                 .contentType("application/json;charset=UTF-8")
-                .content("{\"mileageRequirement\":\"\"," +
+                .content("{" +
                         "\"minSpeed\":\"\"," +
                         "\"maxSpeed\":\"\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
         mockMvc.perform(get("/admin/rule/basic"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("{\"mileageRequirement\":\"\"," +
+                .andExpect(content().string("{" +
                         "\"minSpeed\":\"\"," +
                         "\"maxSpeed\":\"\"}"));
         // test data 1
-        mockMvc.perform(post("/admin/rule/basic")
+        mockMvc.perform(post("/admin/post/rule/basic")
                 .contentType("application/json;charset=UTF-8")
-                .content("{\"mileageRequirement\":\"80000\"," +
+                .content("{" +
                         "\"minSpeed\":\"1.8\"," +
                         "\"maxSpeed\":\"6\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
         mockMvc.perform(get("/admin/rule/basic"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("{\"mileageRequirement\":\"80000.0\"," +
+                .andExpect(content().string("{" +
                         "\"minSpeed\":\"1.8\"," +
                         "\"maxSpeed\":\"6.0\"}"));
         // test data 2
-        mockMvc.perform(post("/admin/rule/basic")
+        mockMvc.perform(post("/admin/post/rule/basic")
                 .contentType("application/json;charset=UTF-8")
-                .content("{\"mileageRequirement\":\"80000\"," +
+                .content("{" +
                         "\"minSpeed\":\"\"," +
                         "\"maxSpeed\":\"10\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
         mockMvc.perform(get("/admin/rule/basic"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("{\"mileageRequirement\":\"80000.0\"," +
+                .andExpect(content().string("{" +
                         "\"minSpeed\":\"\"," +
                         "\"maxSpeed\":\"10.0\"}"));
         // test data 3
-        mockMvc.perform(post("/admin/rule/basic")
+        mockMvc.perform(post("/admin/post/rule/basic")
                 .contentType("application/json;charset=UTF-8")
-                .content("{\"mileageRequirement\":\"\"," +
+                .content("{" +
                         "\"minSpeed\":\"0.5\"," +
                         "\"maxSpeed\":\"\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
         mockMvc.perform(get("/admin/rule/basic"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("{\"mileageRequirement\":\"\"," +
+                .andExpect(content().string("{" +
                         "\"minSpeed\":\"0.5\"," +
                         "\"maxSpeed\":\"\"}"));
     }
 
     @Test
     public void testSetBorder() throws Exception {
-        mockMvc.perform(post("/admin/rule/border")
+        mockMvc.perform(post("/admin/post/rule/border")
                 .contentType("application/json;charset=UTF-8")
                 .content("[{\"lng\":\"1\",\"lat\":\"1\"}," +
                         "{\"lng\":\"2\",\"lat\":\"2\"}," +
                         "{\"lng\":\"0\",\"lat\":\"2\"}]"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
-        mockMvc.perform(post("/admin/rule/border")
+        mockMvc.perform(post("/admin/post/rule/border")
                 .contentType("application/json;charset=UTF-8")
                 .content("[{\"lng\":\"1\",\"lat\":\"1\"}," +
                         "{\"lng\":\"2\",\"lat\":\"-2\"}," +
@@ -232,13 +230,13 @@ public class RuleadminApplicationTests {
                         "{\"lng\":\"4\",\"lat\":\"2.55\"}]"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
-        mockMvc.perform(post("/admin/rule/border")
+        mockMvc.perform(post("/admin/post/rule/border")
                 .contentType("application/json;charset=UTF-8")
                 .content("[]"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
         // -90 <= lat <= 90
-        mockMvc.perform(post("/admin/rule/border")
+        mockMvc.perform(post("/admin/post/rule/border")
                 .contentType("application/json;charset=UTF-8")
                 .content("[{\"lng\":\"-100\",\"lat\":\"90.1\"}," +
                         "{\"lng\":\"-110\",\"lat\":\"89\"}," +
@@ -246,14 +244,14 @@ public class RuleadminApplicationTests {
                 .andExpect(status().isOk())
                 .andExpect(content().string("false"));
         // -180 <= lng <= 180
-        mockMvc.perform(post("/admin/rule/border")
+        mockMvc.perform(post("/admin/post/rule/border")
                 .contentType("application/json;charset=UTF-8")
                 .content("[{\"lng\":\"180.0\",\"lat\":\"-89.9\"}," +
                         "{\"lng\":\"175.0\",\"lat\":\"-79.9\"}," +
                         "{\"lng\":\"170.0\",\"lat\":\"-89.9\"}]"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
-        mockMvc.perform(post("/admin/rule/border")
+        mockMvc.perform(post("/admin/post/rule/border")
                 .contentType("application/json;charset=UTF-8")
                 .content("[{\"lng\":\"170.0\",\"lat\":\"89.9\"}," +
                         "{\"lng\":\"160.0\",\"lat\":\"89.9\"}," +
@@ -261,7 +259,7 @@ public class RuleadminApplicationTests {
                 .andExpect(status().isOk())
                 .andExpect(content().string("false"));
         // no intersection between non-adjacent edges
-        mockMvc.perform(post("/admin/rule/border")
+        mockMvc.perform(post("/admin/post/rule/border")
                 .contentType("application/json;charset=UTF-8")
                 .content("[{\"lng\":\"-1\",\"lat\":\"-1\"}," +
                         "{\"lng\":\"1\",\"lat\":\"-1\"}," +
@@ -269,7 +267,7 @@ public class RuleadminApplicationTests {
                         "{\"lng\":\"1\",\"lat\":\"1\"}]"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("false"));
-        mockMvc.perform(post("/admin/rule/border")
+        mockMvc.perform(post("/admin/post/rule/border")
                 .contentType("application/json;charset=UTF-8")
                 .content("[{\"lng\":\"-1\",\"lat\":\"-1\"}," +
                         "{\"lng\":\"1\",\"lat\":\"-1\"}," +
@@ -278,7 +276,7 @@ public class RuleadminApplicationTests {
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
         // no duplicate between adjacent edges
-        mockMvc.perform(post("/admin/rule/border")
+        mockMvc.perform(post("/admin/post/rule/border")
                 .contentType("application/json;charset=UTF-8")
                 .content("[{\"lng\":\"-1\",\"lat\":\"-1\"}," +
                         "{\"lng\":\"1\",\"lat\":\"-1\"}," +
@@ -287,19 +285,19 @@ public class RuleadminApplicationTests {
                 .andExpect(status().isOk())
                 .andExpect(content().string("false"));
         // empty
-        mockMvc.perform(post("/admin/rule/border")
+        mockMvc.perform(post("/admin/post/rule/border")
                 .contentType("application/json;charset=UTF-8")
                 .content("[]"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
         // 1 or 2 edges
-        mockMvc.perform(post("/admin/rule/border")
+        mockMvc.perform(post("/admin/post/rule/border")
                 .contentType("application/json;charset=UTF-8")
                 .content("[{\"lng\":\"1\",\"lat\":\"-1\"}," +
                         "{\"lng\":\"1\",\"lat\":\"1\"}]"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("false"));
-        mockMvc.perform(post("/admin/rule/border")
+        mockMvc.perform(post("/admin/post/rule/border")
                 .contentType("application/json;charset=UTF-8")
                 .content("[{\"lng\":\"1\",\"lat\":\"-1\"}]"))
                 .andExpect(status().isOk())
@@ -309,7 +307,7 @@ public class RuleadminApplicationTests {
     @Test
     public void testGetBorder() throws Exception {
         // test data 1
-        mockMvc.perform(post("/admin/rule/border")
+        mockMvc.perform(post("/admin/post/rule/border")
                 .contentType("application/json;charset=UTF-8")
                 .content("[{\"lng\":\"1\",\"lat\":\"1\"}," +
                         "{\"lng\":\"2\",\"lat\":\"2\"}," +
@@ -322,7 +320,7 @@ public class RuleadminApplicationTests {
                         "{\"lng\":\"2.0\",\"lat\":\"2.0\"}," +
                         "{\"lng\":\"0.0\",\"lat\":\"2.0\"}]"));
         // test data 2
-        mockMvc.perform(post("/admin/rule/border")
+        mockMvc.perform(post("/admin/post/rule/border")
                 .contentType("application/json;charset=UTF-8")
                 .content("[]"))
                 .andExpect(status().isOk())
@@ -336,7 +334,7 @@ public class RuleadminApplicationTests {
     // use POSTMAN to test
     public void testGenerateRoute() throws Exception {
         // test data 1
-        mockMvc.perform(post("/admin/rule/border")
+        mockMvc.perform(post("/admin/post/rule/border")
                 .contentType("application/json;charset=UTF-8")
                 .content("[{\"lng\":\"0\",\"lat\":\"0\"}," +
                         "{\"lng\":\"10\",\"lat\":\"0\"}," +
@@ -344,7 +342,7 @@ public class RuleadminApplicationTests {
                         "{\"lng\":\"0\",\"lat\":\"10\"}]"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
-        mockMvc.perform(post("/admin/rule/flags")
+        mockMvc.perform(post("/admin/post/rule/flags")
                 .contentType("application/json;charset=UTF-8")
                 .content("[{\"lng\":\"1\",\"lat\":\"1\"}," +
                         "{\"lng\":\"5\",\"lat\":\"5\"}," +
@@ -368,5 +366,191 @@ public class RuleadminApplicationTests {
                 .andExpect(status().isOk())
                 .andExpect(content().string("[]"));
     }*/
+
+    @Test
+    public void testRecordCampusRunning() throws Exception {
+        mockMvc.perform(post("/rule/campus/semester")
+                .contentType("application/json;charset=UTF-8")
+                .content("{" +
+                        "\"mileageGoal\":\"8888\"," +
+                        "\"endTime\":\"2019-09-31T23:59\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+        // new user
+        mockMvc.perform(post("/rule/campus/user/1/length/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+        // existing user
+        mockMvc.perform(post("/rule/campus/user/1/length/2.1"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+        // length < 0
+        mockMvc.perform(post("/rule/campus/user/2/length/-1"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("false"));
+        mockMvc.perform(post("/rule/campus/user/1/length/-0.1"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("false"));
+        // empty username
+        mockMvc.perform(post("/rule/campus/user//length/2"))
+                .andExpect(status().is4xxClientError());
+        // empty length
+        mockMvc.perform(post("/rule/campus/user/1/length/"))
+                .andExpect(status().is4xxClientError());
+        // empty username & length
+        mockMvc.perform(post("/rule/campus/user//length/"))
+                .andExpect(status().is4xxClientError());
+        // not in the time window
+        /*mockMvc.perform(put("/rule/campus/semester")
+                .contentType("application/json;charset=UTF-8")
+                .content("{" +
+                        "\"mileageGoal\":\"8888\"," +
+                        "\"endTime\":\"2019-07-02T23:59\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+        mockMvc.perform(post("/rule/campus/user/1/length/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("false"));*/
+    }
+
+    @Test
+    public void testGetCampusRunningInfo() throws Exception {
+        mockMvc.perform(post("/rule/campus/semester")
+                .contentType("application/json;charset=UTF-8")
+                .content("{" +
+                        "\"mileageGoal\":\"8888\"," +
+                        "\"endTime\":\"2019-09-31T23:59\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+        // test data
+        mockMvc.perform(post("/admin/post/rule/basic")
+                .contentType("application/json;charset=UTF-8")
+                .content("{" +
+                        "\"minSpeed\":\"1.8\"," +
+                        "\"maxSpeed\":\"6\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+        mockMvc.perform(post("/rule/campus/user/_1/length/10"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+        mockMvc.perform(post("/rule/campus/user/_1/length/5"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+        mockMvc.perform(post("/rule/campus/user/_2/length/10"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+        mockMvc.perform(post("/rule/campus/user/_2/length/-5"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("false"));
+        mockMvc.perform(post("/rule/campus/user/_3/length/-1"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("false"));
+        mockMvc.perform(post("/rule/campus/user/_4/length/-10"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("false"));
+        mockMvc.perform(post("/rule/campus/user/_4/length/5"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+        // test
+        mockMvc.perform(get("/rule/campus/user/_1"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("{" +
+                        "\"mileage\":\"15.0\"," +
+                        "\"mileageGoal\":\"8888.0\"}"));
+        mockMvc.perform(get("/rule/campus/user/_2"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("{" +
+                        "\"mileage\":\"10.0\"," +
+                        "\"mileageGoal\":\"8888.0\"}"));
+        mockMvc.perform(get("/rule/campus/user/_3"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("{" +
+                        "\"mileage\":\"0.0\"," +
+                        "\"mileageGoal\":\"8888.0\"}"));
+        mockMvc.perform(get("/rule/campus/user/_4"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("{" +
+                        "\"mileage\":\"5.0\"," +
+                        "\"mileageGoal\":\"8888.0\"}"));
+        mockMvc.perform(get("/rule/campus/user/_100"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("{" +
+                        "\"mileage\":\"0.0\"," +
+                        "\"mileageGoal\":\"8888.0\"}"));
+    }
+
+    @Transactional
+    public void createSemester1() throws Exception {
+        mockMvc.perform(post("/rule/campus/semester")
+                .contentType("application/json;charset=UTF-8")
+                .content("{" +
+                        "\"mileageGoal\":\"8888\"," +
+                        "\"endTime\":\"2019-09-31T23:59\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+    }
+    @Transactional
+    public void createSemester2() throws Exception {
+        // negative mileage goal
+        mockMvc.perform(post("/rule/campus/semester")
+                .contentType("application/json;charset=UTF-8")
+                .content("{" +
+                        "\"mileageGoal\":\"-1\"," +
+                        "\"endTime\":\"2019-09-31T23:59\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("false"));
+    }
+    @Transactional
+    public void createSemester3() throws Exception {
+        // past time as end time
+        mockMvc.perform(post("/rule/campus/semester")
+                .contentType("application/json;charset=UTF-8")
+                .content("{" +
+                        "\"mileageGoal\":\"1\"," +
+                        "\"endTime\":\"2000-01-01T23:59\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("false"));
+    }
+
+    @Test
+    public void testBeginNewSemester() throws Exception {
+        createSemester1();
+        createSemester2();
+        createSemester3();
+    }
+
+    @Test
+    public void testModifySemesterInfo() throws Exception {
+        mockMvc.perform(post("/rule/campus/semester")
+                .contentType("application/json;charset=UTF-8")
+                .content("{" +
+                        "\"mileageGoal\":\"8888\"," +
+                        "\"endTime\":\"2019-09-31T23:59\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+        mockMvc.perform(put("/rule/campus/semester")
+                .contentType("application/json;charset=UTF-8")
+                .content("{" +
+                        "\"mileageGoal\":\"1\"," +
+                        "\"endTime\":\"2019-09-31T23:59\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+        // negative mileage goal
+        mockMvc.perform(put("/rule/campus/semester")
+                .contentType("application/json;charset=UTF-8")
+                .content("{" +
+                        "\"mileageGoal\":\"-1\"," +
+                        "\"endTime\":\"2019-09-31T23:59\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("false"));
+        // past time as end time
+        mockMvc.perform(put("/rule/campus/semester")
+                .contentType("application/json;charset=UTF-8")
+                .content("{" +
+                        "\"mileageGoal\":\"1\"," +
+                        "\"endTime\":\"2000-09-31T23:59\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("false"));
+    }
 
 }

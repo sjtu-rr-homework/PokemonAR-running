@@ -13,7 +13,6 @@ import javax.persistence.*;
         property = "ruleID")
 public class BasicRule {
     private int ruleID;
-    private Double mileageRequirement = null;
     private Double minSpeed = null;
     private Double maxSpeed = null;
 
@@ -30,15 +29,6 @@ public class BasicRule {
 
     public void setRuleID(int ruleID) {
         this.ruleID = ruleID;
-    }
-
-    @Column(name = "mileageRequirement")
-    public Double getMileageRequirement() {
-        return mileageRequirement;
-    }
-
-    public void setMileageRequirement(Double mileageRequirement) {
-        this.mileageRequirement = mileageRequirement;
     }
 
     @Column(name = "minSpeed")

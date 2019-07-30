@@ -1,5 +1,28 @@
 <template>
     <div>
+        <div class="h5 p-3">校园跑</div>
+        <!--可能的状态：
+         ---未开启
+         ---进行中
+         -->
+        <!--允许的操作：
+         ---开始新一轮跑步
+         ---修改结束时间
+         -->
+        <div class="row bg-light">
+            <div class="col-4 p-2 input-group row">
+                <span class="input-group-prepend col-4">总里程数（m）：</span>
+                <input class="form-control col-4" type="number" v-model.number="modifier.mileageGoal"/>
+            </div>
+            <div class="col-4 p-2 input-group row">
+                <span class="input-group-prepend col-4">起始时间：</span>
+                <input class="form-control col-4" type="datetime-local" v-model="modifier.startTime"/>
+            </div>
+            <div class="col-4 p-2 input-group row">
+                <span class="input-group-prepend col-4">结算时间：</span>
+                <input class="form-control col-4" type="datetime-local" v-model="modifier.endTime"/>
+            </div>
+        </div>
         <div v-if="modifierOn">
             <div class="row col-10 offset-1">
                 <button class="btn btn-block btn-outline-success col-5" v-on:click="submitModification()">提交修改</button>
@@ -9,10 +32,6 @@
             </div>
             <div class="h5 p-3">基本配置</div>
             <div class="row bg-light">
-                <div class="col-4 p-2 input-group row">
-                    <span class="input-group-prepend col-4">总里程数（m）：</span>
-                    <input class="form-control col-4" type="number" v-model.number="modifier.mileageGoal"/>
-                </div>
                 <div class="col-4 p-2 input-group row">
                     <span class="input-group-prepend offset-2 col-6">最低合法配速（m/s）：</span>
                     <input class="form-control col-4" type="number" v-model.number="modifier.minSpeed"/>
@@ -143,12 +162,16 @@
                     mileageGoal: 0,
                     minSpeed: 0,
                     maxSpeed: 0,
+                    startTime: new Date(),
+                    endTime: new Date(),
                     markers: [],
                     border: this.newBorder([])
                 },
                 mileageGoal: 0,
                 minSpeed: 0,
                 maxSpeed: 0,
+                startTime: new Date(),
+                endTime: new Date(),
                 border: this.newBorder([])
             };
         },
@@ -168,6 +191,8 @@
                 this.modifier.mileageGoal = this.mileageGoal;
                 this.modifier.minSpeed = this.minSpeed;
                 this.modifier.maxSpeed = this.maxSpeed;
+                this.modifier.startTime = this.deepCopy(this.startTime);
+                this.modifier.endTime = this.deepCopy(this.endTime);
                 console.log(this.border);
                 this.modifier.border = this.deepCopy(this.border);
                 console.log(this.modifier.border);
@@ -275,6 +300,8 @@
                         this.mileageGoal = resp.data.mileageRequirement;
                         this.minSpeed = resp.data.minSpeed;
                         this.maxSpeed = resp.data.maxSpeed;
+                        this.startTime = resp.data.startTime;
+                        this.endTime = resp.data.endTime;
                         this.gettingBasicRule = false;
                     }, () => {
                         this.getBasicRuleFail = true;
@@ -287,7 +314,9 @@
                 this.$http.post(api.ruleApi('admin/post/rule/basic'), {
                     mileageRequirement: this.modifier.mileageGoal,
                     minSpeed: this.modifier.minSpeed,
-                    maxSpeed: this.modifier.maxSpeed
+                    maxSpeed: this.modifier.maxSpeed,
+                    startTime: this.modifier.startTime,
+                    endTime: this.modifier.endTime
                 }).then((resp) => {
                     this.basicRuleModifying = false;
                     this.basicRuleModifySubmitting = false;
