@@ -1,5 +1,7 @@
 package example.com.pkmnavidemo4;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +18,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,6 +27,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import example.com.pkmnavidemo4.classes.HttpHandler;
 import example.com.pkmnavidemo4.testsend.Adapter;
 import example.com.pkmnavidemo4.testsend.BitmapUtils;
 
@@ -50,14 +54,12 @@ public class ShareActivity extends Activity {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				if (data.size() == 10) {
-					Toast.makeText(ShareActivity.this, "图片数9张已满", Toast.LENGTH_SHORT).show();
+				if (data.size() ==2) {
+					Toast.makeText(ShareActivity.this, "只能添加一张照片", Toast.LENGTH_SHORT).show();
 				} else {
 					if (position == data.size() - 1) {
-						Log.d("11111111111110","1");
 						Toast.makeText(ShareActivity.this, "添加图片", Toast.LENGTH_SHORT).show();
 						// 选择图片
-						Log.d("11111111111110","1");
 						Intent intent = new Intent(Intent.ACTION_PICK, null);
 						intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
 						startActivityForResult(intent, 0x1);
@@ -82,24 +84,26 @@ public class ShareActivity extends Activity {
 	 * Dialog对话框提示用户删除操作 position为删除图片位置
 	 */
 	protected void dialog(final int position) {
-		AlertDialog.Builder builder = new Builder(ShareActivity.this);
-		builder.setMessage("确认移除已添加图片吗？");
-		builder.setTitle("提示");
-		builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-				data.remove(position);
-				adapter.notifyDataSetChanged();
-			}
-		});
-		builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-			}
-		});
-		builder.create().show();
+		if(position!=data.size()-1) {
+			AlertDialog.Builder builder = new Builder(ShareActivity.this);
+			builder.setMessage("确认移除已添加图片吗？");
+			builder.setTitle("提示");
+			builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+					data.remove(position);
+					adapter.notifyDataSetChanged();
+				}
+			});
+			builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+				}
+			});
+			builder.create().show();
+		}
 	}
 
 	// 响应startActivityForResult，获取图片路径
@@ -110,21 +114,17 @@ public class ShareActivity extends Activity {
 
 				ContentResolver resolver = getContentResolver();
 				try {
-					Log.d("11111111111110","1");
 					Uri uri = data.getData();
 					// 这里开始的第二部分，获取图片的路径：
 					String[] proj = { MediaStore.Images.Media.DATA };
-					Log.d("11111111111110","1");
 					Cursor cursor = managedQuery(uri, proj, null, null, null);
-					Log.d("11111111111110","1");
 					// 按我个人理解 这个是获得用户选择的图片的索引值
 					int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-					Log.d("11111111111110","1");
 					cursor.moveToFirst();
-					Log.d("11111111111110","1");
 					// 最后根据索引值获取图片路径
 					photoPath = cursor.getString(column_index);
-					Log.d("11111111111110","1");
+					Bitmap bp=BitmapFactory.decodeFile(photoPath);
+					HttpHandler.postPic(bitmapToBase64(bp));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -148,5 +148,50 @@ public class ShareActivity extends Activity {
 			photoPath = null;
 			adapter.notifyDataSetChanged();
 		}
+	}
+
+	/**
+	 * bitmap转为base64
+	 * @param bitmap
+	 * @return
+	 */
+	public static String bitmapToBase64(Bitmap bitmap) {
+
+		String result = null;
+		ByteArrayOutputStream baos = null;
+		try {
+			if (bitmap != null) {
+				baos = new ByteArrayOutputStream();
+				bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+
+				baos.flush();
+				baos.close();
+
+				byte[] bitmapBytes = baos.toByteArray();
+				result = Base64.encodeToString(bitmapBytes, Base64.DEFAULT);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (baos != null) {
+					baos.flush();
+					baos.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * base64转为bitmap
+	 * @param base64Data
+	 * @return
+	 */
+	public static Bitmap base64ToBitmap(String base64Data) {
+		byte[] bytes = Base64.decode(base64Data, Base64.DEFAULT);
+		return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 	}
 }
