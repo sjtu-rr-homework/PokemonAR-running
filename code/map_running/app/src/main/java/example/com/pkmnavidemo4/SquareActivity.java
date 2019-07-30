@@ -20,6 +20,7 @@ public class SquareActivity extends AppCompatActivity {
     private Button share;
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        UserData.setSquareContext(SquareActivity.this);
         moments= UserData.getMoments();
         super.onCreate(savedInstanceState);
         setTitle("仿微信朋友圈");

@@ -1,5 +1,6 @@
 package example.com.pkmnavidemo4.classes;
 
+import android.content.Context;
 import android.util.Log;
 import android.util.Pair;
 
@@ -15,6 +16,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import example.com.pkmnavidemo4.SceneformActivity;
 
 public class UserData {
+    public static Context squareContext;
     public static boolean isFriendInfoGet=false;
     private static Map userInfo;
     private static Map friendUserInfo;
@@ -30,6 +32,9 @@ public class UserData {
     public static int flagNum=0;
     public static Map<Integer,Integer> catchElfList=new HashMap();
     public static List<LatLng> constraint=new ArrayList<LatLng>();
+    public static void setSquareContext(Context context){
+        squareContext =context;
+    }
     public static List<Map> getMoments() {
         isMomentsGet=true;
         HttpHandler.getMoments();

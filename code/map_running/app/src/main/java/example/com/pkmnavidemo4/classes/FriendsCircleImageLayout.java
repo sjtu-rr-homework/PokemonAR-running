@@ -191,10 +191,16 @@ public class FriendsCircleImageLayout extends ViewGroup {
             imageView.setImageBitmap(base64ToBitmap(images.get(i)));
             addView(imageView);
             //点击查看大图
+            int finalI = i;
             imageView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    
+                    final Dialog dialog = new Dialog(getContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+                    ImageView imgView = new ImageView(getContext());
+                    imgView.setImageBitmap(base64ToBitmap(images.get(finalI)));
+                    dialog.setContentView(imgView);
+                    dialog.show();
+
                 }
             });
         }
