@@ -15,6 +15,8 @@ import java.util.concurrent.locks.ReentrantLock;
 import example.com.pkmnavidemo4.SceneformActivity;
 
 public class UserData {
+    private static double mileage;
+    private static double mileageGoal;
     public static boolean isFriendInfoGet=false;
     private static Map userInfo;
     private static Map friendUserInfo;
@@ -28,6 +30,18 @@ public class UserData {
     public static int flagNum=0;
     public static Map<Integer,Integer> catchElfList=new HashMap();
     public static List<LatLng> constraint=new ArrayList<LatLng>();
+    public static double getMileage(){
+        return mileage;
+    }
+    public static double getMileageGoal(){
+        return mileageGoal;
+    }
+    public static void setMileage(double mileage){
+        UserData.mileage=mileage;
+    }
+    public static void setMileageGoal(double mileageGoal){
+        UserData.mileageGoal=mileageGoal;
+    }
     public static void catchOne(int variety){
          if(catchElfList.get(variety)==null)
              catchElfList.put(variety,1);

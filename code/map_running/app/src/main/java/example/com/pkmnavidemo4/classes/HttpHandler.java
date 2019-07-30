@@ -53,8 +53,8 @@ import example.com.pkmnavidemo4.R;
 
 public class HttpHandler {
 
-    //private static String UrlHead="http://5d5d95b8.ngrok.io";
-    private static String UrlHead="http://202.120.40.8:30751";
+    private static String UrlHead="http://1f54143f.ngrok.io";
+    //private static String UrlHead="http://202.120.40.8:30751";
 
 
     @Nullable
@@ -508,6 +508,7 @@ public class HttpHandler {
         }).start();
     }
 
+
     public static void addDistance(String username,double distance){
         new Thread(new Runnable() {
             @Override
@@ -873,6 +874,52 @@ public class HttpHandler {
             }
         }).start();
     }
+
+    public static void getMileage(String username) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String Url=UrlHead+"/rule/campus/user/"+username;
+                try {
+                    URL url=new URL(Url);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(8000);
+                    InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                    JSONObject jb = new JSONObject(sb.toString());
+                    UserData.setMileage(Double.parseDouble(jb.getString("mileage")));
+                    UserData.setMileageGoal(Double.parseDouble(jb.getString("mileageGoal")));
+                    Log.d("123","---"+sb.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.d("haha",e.getMessage());
+                }finally {
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+
     public static void getflag(AMap aMap,LatLng latLng,Context context) {
         UserData.flagNum=0;
         new Thread(new Runnable() {
