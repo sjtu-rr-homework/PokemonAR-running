@@ -18,14 +18,14 @@ import example.com.pkmnavidemo4.classes.UserData;
 public class SquareActivity extends AppCompatActivity {
     private static List<Map> moments;
     private Button share;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        UserData.setSquareContext(SquareActivity.this);
-        moments= UserData.getMoments();
+        moments = UserData.getMoments();
         super.onCreate(savedInstanceState);
         setTitle("仿微信朋友圈");
         setContentView(R.layout.activity_square);
-        share=findViewById(R.id.act_square_button_share);
+        share = findViewById(R.id.act_square_button_share);
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,10 +33,11 @@ public class SquareActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        if(moments!=null) {
+        if (moments != null) {
             RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(new FriendsCircleAdapter(this, moments));
         }
     }
+    
 }

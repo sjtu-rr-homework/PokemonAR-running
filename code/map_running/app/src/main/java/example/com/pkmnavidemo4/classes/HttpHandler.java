@@ -53,7 +53,7 @@ import example.com.pkmnavidemo4.MainActivity;
 import example.com.pkmnavidemo4.R;
 
 public class HttpHandler {
-    
+
     //private static String UrlHead="http://1c77d0af.ngrok.io";
 
     private static String UrlHead="http://202.120.40.8:30751";
@@ -1035,7 +1035,9 @@ public class HttpHandler {
                     UserData.isMomentsGet=false;
                 } catch (Exception e) {
                     e.printStackTrace();
+                    UserData.isMomentsGet=false;
                 }finally {
+                    UserData.isMomentsGet=false;
                     if (conn!=null){
                         conn.disconnect();
                     }
