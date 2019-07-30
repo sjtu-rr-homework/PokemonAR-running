@@ -17,6 +17,7 @@ import example.com.pkmnavidemo4.SceneformActivity;
 public class UserData {
     private static double mileage;
     private static double mileageGoal;
+    public static double distance;
     public static boolean isFriendInfoGet=false;
     private static Map userInfo;
     private static Map friendUserInfo;
@@ -26,7 +27,7 @@ public class UserData {
     private static List<String> elfList;
     private static  List<Map> elfDetailsList;
     private static  boolean onlyHave=false;
-    public static boolean isFriendGet=false;
+    public static boolean isUserinfoGet=false;
     public static int flagNum=0;
     public static Map<Integer,Integer> catchElfList=new HashMap();
     public static List<LatLng> constraint=new ArrayList<LatLng>();

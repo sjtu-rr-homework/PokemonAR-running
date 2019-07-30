@@ -1225,8 +1225,8 @@ public class HttpHandler {
         }).start();
     }
 
-    public static void getFriend() {
-        UserData.isFriendGet=false;
+    public static void getUserInfo() {
+        UserData.isUserinfoGet=false;
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -1255,9 +1255,10 @@ public class HttpHandler {
                         try {
                             if(UserData.friend.size()>0){
                                 UserData.friend.clear();
-                                UserData.isFriendGet=false;
+                                UserData.isUserinfoGet=false;
                             }
                             JSONObject jb=new JSONObject(sb.toString());
+                            UserData.distance=Double.parseDouble(jb.getString("distance"));
                             JSONArray array = new JSONArray(jb.getString("friends"));
                             for (int j = 0; j < array.length(); ++j) {
                                 JSONObject jjj = array.getJSONObject(j);
@@ -1267,20 +1268,20 @@ public class HttpHandler {
                                 //runRecord.add(point);
                                 //Log.d("CCC", jjj.getString("lat") + "," + jjj.getString("lng"));
                             }
-                            UserData.isFriendGet=true;
+                            UserData.isUserinfoGet=true;
 
                         } catch (Exception e) {
-                            UserData.isFriendGet=true;
+                            UserData.isUserinfoGet=true;
                         }
                     }
                     else{
-                        UserData.isFriendGet = true;
+                        UserData.isUserinfoGet = true;
                     }
                     //setContent(sb.toString());
                     //iLog.d("123","---"+sb.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
-                    UserData.isFriendGet=true;
+                    UserData.isUserinfoGet=true;
                     Log.d("haha",e.getMessage());
                 }finally {
                     if (conn!=null){
@@ -1294,8 +1295,8 @@ public class HttpHandler {
 
                         }
                     }
-                    if(!UserData.isFriendGet){
-                        UserData.isFriendGet=true;
+                    if(!UserData.isUserinfoGet){
+                        UserData.isUserinfoGet=true;
                     }
                 }
             }
