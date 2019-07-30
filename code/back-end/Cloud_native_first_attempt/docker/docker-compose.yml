@@ -155,7 +155,7 @@ services:
     networks:
       - spring-cloud-network
       
-  mongo:
+  mongo-moment:
     hostname: mongo-moment
     image: mongo
     ports:
