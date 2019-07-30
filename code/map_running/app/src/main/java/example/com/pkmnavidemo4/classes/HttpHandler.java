@@ -53,8 +53,8 @@ import example.com.pkmnavidemo4.R;
 
 public class HttpHandler {
 
-    private static String UrlHead="http://1f54143f.ngrok.io";
-    //private static String UrlHead="http://202.120.40.8:30751";
+    //private static String UrlHead="http://1f54143f.ngrok.io";
+    private static String UrlHead="http://202.120.40.8:30751";
 
 
     @Nullable
@@ -881,7 +881,7 @@ public class HttpHandler {
             public void run() {
                 HttpURLConnection conn=null;
                 BufferedReader br=null;
-                String Url=UrlHead+"/rule/campus/user/"+username;
+                String Url=UrlHead+"/rule/rule/campus/user/"+username;
                 try {
                     URL url=new URL(Url);
                     conn= (HttpURLConnection) url.openConnection();
@@ -899,8 +899,6 @@ public class HttpHandler {
                     JSONObject jb = new JSONObject(sb.toString());
                     UserData.setMileage(Double.parseDouble(jb.getString("mileage")));
                     UserData.setMileageGoal(Double.parseDouble(jb.getString("mileageGoal")));
-                    Log.d("ttt",""+UserData.getMileage());
-                    Log.d("ttt",""+UserData.getMileageGoal());
                     Log.d("123","---"+sb.toString());
                 } catch (Exception e) {
                     e.printStackTrace();

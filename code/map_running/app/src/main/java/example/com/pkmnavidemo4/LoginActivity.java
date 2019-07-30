@@ -38,15 +38,15 @@ public class LoginActivity  extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*
+
                 String username=usernameText.getText().toString();
                 String password=passwordText.getText().toString();
                 HttpHandler.login(LoginActivity.this,username,password);
+                HttpHandler.getMileage(username);
                 HttpHandler.getElfs(username);
                 HttpHandler.getExp(username);
                 UserData.setUserInfo(username,1);
-                UserData.initonlyHave();*/
-                HttpHandler.getMileage("1");
+                UserData.initonlyHave();
             }
         });
         toRegister=findViewById(R.id.act_login_text_new);

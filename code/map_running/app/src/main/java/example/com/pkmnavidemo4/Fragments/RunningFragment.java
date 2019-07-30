@@ -13,16 +13,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import example.com.pkmnavidemo4.CheckNeighbour;
 import example.com.pkmnavidemo4.R;
 import example.com.pkmnavidemo4.RecordActivity;
+import example.com.pkmnavidemo4.classes.UserData;
 
 public class RunningFragment extends Fragment implements View.OnClickListener{
     private TextView toRecord;
     //private Button button;
+    private TextView mileage;
     private ImageView checkNeighbour;
     //private String content;
 
@@ -48,6 +51,7 @@ public class RunningFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mileage=(TextView)getActivity().findViewById(R.id.fg_running_calculate);
         //button = (Button) getActivity().findViewById(R.id.button3);
         //toRecord=(TextView)getActivity().findViewById(R.id.fg_running_textView);
         //checkNeighbour=(ImageView)getActivity().findViewById(R.id.fg_running_checkneighbour);
@@ -89,6 +93,8 @@ public class RunningFragment extends Fragment implements View.OnClickListener{
                 startActivity(intent);
             }
         });*/
+        DecimalFormat format=new DecimalFormat("#0.00");
+        mileage.setText("计入成绩："+ format.format(UserData.getMileage()/1000)+"公里");
         toRecord.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
