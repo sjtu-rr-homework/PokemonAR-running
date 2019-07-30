@@ -1,5 +1,6 @@
 package example.com.pkmnavidemo4.classes;
 
+import android.content.Context;
 import android.util.Log;
 import android.util.Pair;
 
@@ -15,6 +16,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import example.com.pkmnavidemo4.SceneformActivity;
 
 public class UserData {
+    public static Context squareContext;
     public static boolean isFriendInfoGet=false;
     private static Map userInfo;
     private static Map friendUserInfo;
@@ -23,11 +25,31 @@ public class UserData {
     private static String userName;
     private static List<String> elfList;
     private static  List<Map> elfDetailsList;
+    private static  List<Map> moments;
+    public static  boolean isMomentsGet=false;
     private static  boolean onlyHave=false;
     public static boolean isFriendGet=false;
     public static int flagNum=0;
     public static Map<Integer,Integer> catchElfList=new HashMap();
     public static List<LatLng> constraint=new ArrayList<LatLng>();
+    public static void setSquareContext(Context context){
+        squareContext =context;
+    }
+    public static List<Map> getMoments() {
+        isMomentsGet=true;
+        HttpHandler.getMoments();
+        while(isMomentsGet){
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return moments;
+    }
+    public static void setMoments( List<Map> getMoments){
+        moments=getMoments;
+    }
     public static void catchOne(int variety){
          if(catchElfList.get(variety)==null)
              catchElfList.put(variety,1);

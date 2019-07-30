@@ -1,4 +1,4 @@
-package example.com.pkmnavidemo4.testsend;
+package example.com.pkmnavidemo4.Bitmap;
 
 import java.util.List;
 
@@ -13,7 +13,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 
 import example.com.pkmnavidemo4.R;
