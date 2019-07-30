@@ -403,6 +403,8 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                         HttpHandler.postRunningRecord1(runningMessage);
                         HttpHandler.addDistance(UserData.getUserName(), runningMessage.getLength());
                         UserData.distance+=runningMessage.getLength();
+                        HttpHandler.finishRestrainRun(runningMessage.getLength());
+                        UserData.setMileage(runningMessage.getLength()+UserData.getMileage());
                         HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
                         UserData.addExp(runningMessage.getExp());
                         MapActivity.super.finish();
@@ -426,6 +428,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                         UserData.failRun();
                         HttpHandler.postRunningRecord1(runningMessage);
                         HttpHandler.addDistance(UserData.getUserName(), runningMessage.getLength());
+                        UserData.distance+=runningMessage.getLength();
                         HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
                         MapActivity.super.finish();
                     }

@@ -46,7 +46,6 @@ public class LoginActivity  extends AppCompatActivity {
                 HttpHandler.getExp(username);
                 UserData.setUserInfo(username,1);
                 UserData.initonlyHave();
-                //HttpHandler.finishRestrainRun(100);
             }
         });
         toRegister=findViewById(R.id.act_login_text_new);

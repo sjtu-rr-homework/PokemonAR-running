@@ -930,7 +930,7 @@ public class HttpHandler {
                 Log.d("haha","go1");
                 HttpURLConnection conn=null;
                 BufferedReader br=null;
-                String Url=UrlHead+"/rule/route/start_lng/"+latLng.longitude+"/start_lat/"+latLng.latitude;
+                String Url=UrlHead+"/rule/rule/route/start_lng/"+latLng.longitude+"/start_lat/"+latLng.latitude;
                 try {
                     URL url=new URL(Url);
                     conn= (HttpURLConnection) url.openConnection();
@@ -1338,7 +1338,7 @@ public class HttpHandler {
                         while ((s = reader.readLine()) != null) {
                             sb.append(s);
                         }
-                        Log.d("mess",sb.toString());
+                        Log.d("hahahaha",sb.toString());
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
