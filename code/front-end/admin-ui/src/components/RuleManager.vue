@@ -1,5 +1,68 @@
 <template>
     <div>
+        <div class="h5 p-3">校园跑</div>
+        <div v-if="modifySemesterSubmitting" class="text-info"></div>
+        <div v-else-if="modifySemesterFail" class="text-danger"></div>
+        <!--可能的状态：
+         ---未开启
+         ---进行中
+         -->
+        <!--允许的操作：
+         ---开始新一轮跑步
+         ---修改结束时间
+         -->
+        <div v-if="semesterModifierOn">
+            <div v-if="semesterCreatorMode">
+                <div class="row col-10 offset-1 mb-2">
+                    <button class="btn btn-block btn-outline-success col-5" v-on:click="createSemester()">开始新一轮跑步</button>
+                    <button class="btn btn-block btn-outline-secondary col-5 offset-2" v-on:click="cancelSemesterCreation()">取消</button>
+                </div>
+            </div>
+            <div v-else>
+                <div class="row col-10 offset-1 mb-2">
+                    <button class="btn btn-block btn-outline-success col-5" v-on:click="modifySemester()">提交修改</button>
+                    <button class="btn btn-block btn-outline-secondary col-5 offset-2" v-on:click="cancelSemesterModification()">
+                        {{ modifySemesterFail ? '放弃未成功提交的修改' : '放弃修改' }}
+                    </button>
+                </div>
+            </div>
+            <div class="row bg-light">
+                <div class="col-4 p-2 input-group">
+                    <span class="input-group-prepend col-4">总里程数（m）：</span>
+                    <input class="form-control col-7" type="number" v-model.number="modifier.mileageGoal"/>
+                </div>
+                <div class="col-4 p-2 row">
+                    <span class="col-4">起始时间：</span>
+                    <span class="col-7"
+                          v-bind:title="semesterCreatorMode?'起始时间将被设置为您提交本表单的时间':''">
+                        {{semesterCreatorMode?'即日起':startTime}}
+                    </span>
+                </div>
+                <div class="col-4 p-2 input-group">
+                    <span class="input-group-prepend col-4">结算时间：</span>
+                    <input class="form-control col-7" type="datetime-local" v-model="modifier.endTime"/>
+                </div>
+            </div>
+        </div>
+        <div v-else>
+            <button v-if="inSemester()" class="btn btn-block btn-outline-info mb-3 mt-2" v-on:click="openSemesterModifier()">修改本轮跑步信息</button>
+            <button v-else class="btn btn-block btn-outline-primary mt-2 mb-3" v-on:click="openSemesterCreator()">配置新一轮跑步</button>
+            <div class="row bg-light">
+                <div class="col-4 p-2 row">
+                    <span class="col-4">总里程数（m）：</span>
+                    <span class="col-7">{{mileageGoal}}</span>
+                </div>
+                <div class="col-4 p-2 row">
+                    <span class="col-4">起始时间：</span>
+                    <span class="col-7">{{startTime}}</span>
+                </div>
+                <div class="col-4 p-2 row">
+                    <span class="col-4">结算时间：</span>
+                    <span class="col-7">{{endTime}}</span>
+                </div>
+            </div>
+        </div>
+        <hr/>
         <div v-if="modifierOn">
             <div class="row col-10 offset-1">
                 <button class="btn btn-block btn-outline-success col-5" v-on:click="submitModification()">提交修改</button>
@@ -10,19 +73,14 @@
             <div class="h5 p-3">基本配置</div>
             <div class="row bg-light">
                 <div class="col-4 p-2 input-group row">
-                    <span class="input-group-prepend col-4">总里程数（m）：</span>
-                    <input class="form-control col-4" type="number" v-model.number="modifier.mileageGoal"/>
-                </div>
-                <div class="col-4 p-2 input-group row">
-                    <span class="input-group-prepend offset-2 col-6">最低合法配速（m/s）：</span>
+                    <span class="input-group-prepend offset-2 col-6">最低合法配速（min/km）：</span>
                     <input class="form-control col-4" type="number" v-model.number="modifier.minSpeed"/>
                 </div>
                 <div class="col-4 p-2 input-group row">
-                    <span class="input-group-prepend offset-2 col-6">最高合法配速（m/s）：</span>
+                    <span class="input-group-prepend offset-2 col-6">最高合法配速（min/km）：</span>
                     <input class="form-control col-4" type="number" v-model.number="modifier.maxSpeed"/>
                 </div>
             </div>
-            <hr/>
             <div class="h5 p-3">跑步范围、必经点预设</div>
             <div v-if="basicRuleModifySubmitting" class="text-info">提交基本规则信息……</div>
             <div v-else-if="basicRuleModifyFail" class="text-danger">提交基本规则信息失败</div>
@@ -32,13 +90,11 @@
             <div v-else-if="flagModifyFail" class="text-danger">提交必经点信息失败</div>
         </div>
         <div v-else>
-            <button class="btn btn-block btn-outline-primary" v-on:click="openModifier()">修改规则</button>
+            <button class="btn btn-block btn-outline-primary" v-on:click="openModifier()">修改下方规则</button>
             <div class="h5 p-3">基本配置</div>
             <div class="row bg-light">
-                <div class="col-4 p-2">总里程数（m）：{{mileageGoal}}</div>
-                <div class="col-4 p-2">合法配速（m/s）：({{minSpeed}}, {{maxSpeed}})</div>
+                <div class="col-4 p-2">合法公里配速：({{maxSpeed}}, {{minSpeed}})分钟</div>
             </div>
-            <hr/>
             <div class="h5 p-3">跑步范围、必经点预设</div>
             <div v-if="gettingBasicRule" class="text-info">获取基本规则信息……</div>
             <div v-else-if="getBasicRuleFail" class="text-danger">获取基本规则信息失败</div>
@@ -55,7 +111,7 @@
             <div>右键新建标记，左键按下拖动标记，左键双击删除标记</div>
             <div>左键按下拖动跑步范围（多边形）或其顶点，左键点击多边形顶点以添加/删除该顶点</div>
         </div>
-        <div v-else>可以点击上方“修改规则”按钮进行设置</div>
+        <div v-else>可以点击上方“修改下方规则”按钮进行设置</div>
         <div class="amap-wrapper m-auto pt-3">
             <el-amap class="amap-box" :vid="'amap-vue'" :amap-manager="amapManager" :zoom="zoom" :center="center"
                      :events="mapEvents">
@@ -92,6 +148,7 @@
             this.requestBasicRule();
             this.requestBorder();
             this.requestFlags();
+            this.requestSemester();
         },
         computed: {
             modifierOn: function () {
@@ -122,11 +179,13 @@
                 gettingFlags: false,
                 gettingBasicRule: false,
                 gettingBorder: false,
+                gettingSemester: false,
                 // get fail
                 getFlagsFail: false,
                 getBasicRuleFail: false,
                 getBorderFail: false,
                 borderInfoError: false,
+                getSemesterFail: false,
                 // modifying
                 flagModifying: false,
                 basicRuleModifying: false,
@@ -135,20 +194,28 @@
                 flagModifySubmitting: false,
                 basicRuleModifySubmitting: false,
                 borderModifySubmitting: false,
+                modifySemesterSubmitting: false,
                 // modify submit fail
                 flagModifyFail: false,
                 basicRuleModifyFail: false,
                 borderModifyFail: false,
+                modifySemesterFail: false,
                 modifier: {
                     mileageGoal: 0,
                     minSpeed: 0,
                     maxSpeed: 0,
+                    startTime: new Date(),
+                    endTime: new Date(),
                     markers: [],
                     border: this.newBorder([])
                 },
                 mileageGoal: 0,
                 minSpeed: 0,
                 maxSpeed: 0,
+                startTime: new Date(),
+                endTime: new Date(),
+                semesterModifierOn: false,
+                semesterCreatorMode: false,
                 border: this.newBorder([])
             };
         },
@@ -165,12 +232,9 @@
             openModifier: function () {
                 // deep copy
                 this.modifier.markers = this.deepCopy(this.markers);
-                this.modifier.mileageGoal = this.mileageGoal;
                 this.modifier.minSpeed = this.minSpeed;
                 this.modifier.maxSpeed = this.maxSpeed;
-                console.log(this.border);
                 this.modifier.border = this.deepCopy(this.border);
-                console.log(this.modifier.border);
                 // modifying flags
                 this.flagModifying = true;
                 this.basicRuleModifying = true;
@@ -272,7 +336,6 @@
                 this.getBasicRuleFail = false;
                 this.$http.get(api.ruleApi('admin/rule/basic'))
                     .then((resp) => {
-                        this.mileageGoal = resp.data.mileageRequirement;
                         this.minSpeed = resp.data.minSpeed;
                         this.maxSpeed = resp.data.maxSpeed;
                         this.gettingBasicRule = false;
@@ -285,7 +348,6 @@
                 this.basicRuleModifySubmitting = true;
                 this.basicRuleModifyFail = false;
                 this.$http.post(api.ruleApi('admin/post/rule/basic'), {
-                    mileageRequirement: this.modifier.mileageGoal,
                     minSpeed: this.modifier.minSpeed,
                     maxSpeed: this.modifier.maxSpeed
                 }).then((resp) => {
@@ -375,6 +437,81 @@
             },
             cancelModification: function () {
                 this.closeModifier();
+            },
+            requestSemester: function () {
+                this.gettingSemester = true;
+                this.$http.get(api.ruleApi('rule/campus/semester'),
+                ).then((resp) => {
+                    this.mileageGoal = resp.data.mileageGoal;
+                    this.endTime = resp.data.endTime;
+                    this.startTime = resp.data.startTime;
+                    this.gettingSemester = false;
+                }, () => {
+                    this.getSemesterFail = true;
+                    this.gettingSemester = false;
+                });
+            },
+            inSemester: function () {
+                let now = new Date();
+                let end = new Date(this.endTime);
+                return end.getTime() >= now.getTime();
+            },
+            openSemesterModifier: function () {
+                this.semesterCreatorMode = false;
+                this.semesterModifierOn = true;
+                this.modifier.mileageGoal = this.mileageGoal;
+                this.modifier.startTime = new Date(this.startTime);
+                this.modifier.endTime = new Date(this.endTime);
+            },
+            openSemesterCreator: function () {
+                this.semesterCreatorMode = true;
+                this.semesterModifierOn = true;
+                this.modifier.mileageGoal = this.mileageGoal;
+                this.modifier.startTime = new Date(this.startTime);
+                this.modifier.endTime = new Date(this.endTime);
+            },
+            createSemester: function () {
+                this.modifySemesterSubmitting = true;
+                this.$http.post(api.ruleApi('rule/campus/semester'),
+                    {
+                        mileageGoal: this.modifier.mileageGoal,
+                        endTime: this.modifier.endTime
+                    }
+                ).then((resp) => {
+                    this.modifySemesterFail = false;
+                    this.modifySemesterSubmitting = false;
+                    this.semesterModifierOn = false;
+                    this.requestSemester();
+                }, () => {
+                    this.modifySemesterFail = true;
+                    this.modifySemesterSubmitting = false;
+                });
+            },
+            modifySemester: function () {
+                this.modifySemesterSubmitting = true;
+                this.$http.put(api.ruleApi('rule/campus/semester'),
+                    {
+                        mileageGoal: this.modifier.mileageGoal,
+                        endTime: this.modifier.endTime
+                    }
+                ).then((resp) => {
+                    this.modifySemesterFail = false;
+                    this.modifySemesterSubmitting = false;
+                    this.semesterModifierOn = false;
+                    this.requestSemester();
+                }, () => {
+                    this.modifySemesterFail = true;
+                    this.modifySemesterSubmitting = false;
+                });
+            },
+            closeSemesterModifier: function () {
+                this.semesterModifierOn = false;
+            },
+            cancelSemesterCreation: function () {
+                this.closeSemesterModifier();
+            },
+            cancelSemesterModification: function () {
+                this.closeSemesterModifier();
             }
         }
     }

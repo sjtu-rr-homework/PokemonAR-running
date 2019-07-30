@@ -47,9 +47,21 @@ public class ModifyUserInfoimpl implements ModifyUserInfo {
             {
                 temp.setStar(0);
             }
-            else
+            else if(star==-2)
+            {
+                temp.setStar(1);
+            }
+            else if(star==1)
+            {
+                temp.setStar(-2);
+            }
+            else if(star==0)
             {
                 temp.setStar(-1);
+            }
+            else
+            {
+                return false;
             }
             UserDao.save(temp);
             return true;
