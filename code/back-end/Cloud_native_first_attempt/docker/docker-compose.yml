@@ -155,6 +155,29 @@ services:
     networks:
       - spring-cloud-network
       
+  mongo:
+    hostname: mongo-moment
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - spring-cloud-network
+  
+  forum-service:
+    hostname: forum-service
+    image: macoredroid/forum-service:latest
+    environment:
+      SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
+    depends_on:
+      - mongo-moment
+    ports:
+      - "8096"
+    networks:
+      - spring-cloud-network  
+  
+    
+  
+      
    
     
 
