@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +55,7 @@ public class RunningFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.d("hahahaha","oncreate");
         mileage=(TextView)getActivity().findViewById(R.id.fg_running_calculate);
         mileageGoal=(TextView)getActivity().findViewById(R.id.fg_running_goal) ;
         //button = (Button) getActivity().findViewById(R.id.button3);
@@ -184,6 +186,16 @@ public class RunningFragment extends Fragment implements View.OnClickListener{
         } else if (position == 1) {
             item_tongxunlu.setTextColor(Color.parseColor("#ffffff"));
             item_weixin.setTextColor(Color.parseColor("#72A4C2"));
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden){
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            Log.d("hahahaha","onshow");
+            //DecimalFormat format=new DecimalFormat("#0.00");
+            //mileage.setText("计入成绩："+ format.format(UserData.getMileage()/1000)+"公里");
         }
     }
 }
