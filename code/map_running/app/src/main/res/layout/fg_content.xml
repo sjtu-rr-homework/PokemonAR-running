@@ -159,6 +159,7 @@
             android:orientation="horizontal"
             android:background="@drawable/bg_white">
             <LinearLayout
+                android:id="@+id/fg_layout_check_neighbour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
@@ -177,6 +178,7 @@
                     android:text="附近用户"/>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/fg_layout_check_record"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
@@ -214,6 +216,7 @@
                     android:text="我的好友"/>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/fg_layout_check_bbs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"

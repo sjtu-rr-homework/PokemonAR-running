@@ -53,8 +53,9 @@ import example.com.pkmnavidemo4.MainActivity;
 import example.com.pkmnavidemo4.R;
 
 public class HttpHandler {
-
+    
     //private static String UrlHead="http://1c77d0af.ngrok.io";
+
     private static String UrlHead="http://202.120.40.8:30751";
 
 
@@ -509,6 +510,7 @@ public class HttpHandler {
         }).start();
     }
 
+
     public static void addDistance(String username,double distance){
         new Thread(new Runnable() {
             @Override
@@ -531,6 +533,8 @@ public class HttpHandler {
                     while((s = br.readLine())!=null){
                         sb.append(s);
                     }
+                    Log.d("holytryer",sb.toString());
+                    Log.d("holytryer",username);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }finally {
@@ -874,6 +878,52 @@ public class HttpHandler {
             }
         }).start();
     }
+
+    public static void getMileage(String username) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String Url=UrlHead+"/rule/rule/campus/user/"+username;
+                try {
+                    URL url=new URL(Url);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(8000);
+                    InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                    JSONObject jb = new JSONObject(sb.toString());
+                    UserData.setMileage(Double.parseDouble(jb.getString("mileage")));
+                    UserData.setMileageGoal(Double.parseDouble(jb.getString("mileageGoal")));
+                    Log.d("123","---"+sb.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.d("haha",e.getMessage());
+                }finally {
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+
     public static void getflag(AMap aMap,LatLng latLng,Context context) {
         UserData.flagNum=0;
         new Thread(new Runnable() {
@@ -882,7 +932,7 @@ public class HttpHandler {
                 Log.d("haha","go1");
                 HttpURLConnection conn=null;
                 BufferedReader br=null;
-                String Url=UrlHead+"/rule/route/start_lng/"+latLng.longitude+"/start_lat/"+latLng.latitude;
+                String Url=UrlHead+"/rule/rule/route/start_lng/"+latLng.longitude+"/start_lat/"+latLng.latitude;
                 try {
                     URL url=new URL(Url);
                     conn= (HttpURLConnection) url.openConnection();
@@ -1312,8 +1362,8 @@ public class HttpHandler {
         }).start();
     }
 
-    public static void getFriend() {
-        UserData.isFriendGet=false;
+    public static void getUserInfo() {
+        UserData.isUserinfoGet=false;
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -1342,9 +1392,11 @@ public class HttpHandler {
                         try {
                             if(UserData.friend.size()>0){
                                 UserData.friend.clear();
-                                UserData.isFriendGet=false;
+                                UserData.isUserinfoGet=false;
                             }
                             JSONObject jb=new JSONObject(sb.toString());
+                            UserData.distance=Double.parseDouble(jb.getString("distance"));
+                            Log.d("distance:",""+UserData.distance);
                             JSONArray array = new JSONArray(jb.getString("friends"));
                             for (int j = 0; j < array.length(); ++j) {
                                 JSONObject jjj = array.getJSONObject(j);
@@ -1354,20 +1406,20 @@ public class HttpHandler {
                                 //runRecord.add(point);
                                 //Log.d("CCC", jjj.getString("lat") + "," + jjj.getString("lng"));
                             }
-                            UserData.isFriendGet=true;
+                            UserData.isUserinfoGet=true;
 
                         } catch (Exception e) {
-                            UserData.isFriendGet=true;
+                            UserData.isUserinfoGet=true;
                         }
                     }
                     else{
-                        UserData.isFriendGet = true;
+                        UserData.isUserinfoGet = true;
                     }
                     //setContent(sb.toString());
                     //iLog.d("123","---"+sb.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
-                    UserData.isFriendGet=true;
+                    UserData.isUserinfoGet=true;
                     Log.d("haha",e.getMessage());
                 }finally {
                     if (conn!=null){
@@ -1381,12 +1433,60 @@ public class HttpHandler {
 
                         }
                     }
-                    if(!UserData.isFriendGet){
-                        UserData.isFriendGet=true;
+                    if(!UserData.isUserinfoGet){
+                        UserData.isUserinfoGet=true;
                     }
                 }
             }
         }).start();
 
+    }
+
+    public static void finishRestrainRun(double length){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String result = "";
+                BufferedReader reader = null;
+                try {
+                    JSONObject un=new JSONObject();
+                    String urlPath = UrlHead+"/rule/rule/campus/user/"+"1"+"/length/"+length;
+                    URL url = new URL(urlPath);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("POST");
+                    conn.setDoOutput(true);
+                    conn.setDoInput(true);
+                    conn.setUseCaches(false);
+                    conn.setRequestProperty("Connection", "Keep-Alive");
+                    conn.setRequestProperty("Charset", "UTF-8");
+                    // 设置文件类型:
+                    conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                    // 设置接收类型否则返回415错误
+                    //conn.setRequestProperty("accept","*/*")此处为暴力方法设置接受所有类型，以此来防范返回415;
+                    conn.setRequestProperty("accept", "application/json");
+                    if (conn.getResponseCode() == 200) {
+                        Log.d("success","connected!!!!!");
+                        reader = new BufferedReader(
+                                new InputStreamReader(conn.getInputStream()));
+                        StringBuilder sb = new StringBuilder();
+                        String s;
+                        while ((s = reader.readLine()) != null) {
+                            sb.append(s);
+                        }
+                        Log.d("hahahaha",sb.toString());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (reader != null) {
+                        try {
+                            reader.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }).start();
     }
 }

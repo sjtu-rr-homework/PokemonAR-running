@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:style="http://schemas.android.com/apk/distribution"
     package="example.com.pkmnavidemo4">
     <uses-permission android:name="android.permission.CAMERA" />
     <!-- This tag indicates that this application requires ARCore. This results in the application
@@ -51,8 +52,8 @@
         <service android:name="com.amap.api.location.APSService"></service>
         <activity android:name=".LoginActivity">
         </activity>
-        <activity android:name=".MainActivity">
-
+        <activity android:name=".MainActivity"
+            android:theme="@style/mainTheme">
         </activity>
         <activity android:name=".ShareActivity">
         </activity>
