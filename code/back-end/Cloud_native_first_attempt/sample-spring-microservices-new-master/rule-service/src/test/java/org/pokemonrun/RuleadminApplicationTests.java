@@ -100,37 +100,37 @@ public class RuleadminApplicationTests {
         mockMvc.perform(post("/admin/post/rule/basic")
                 .contentType("application/json;charset=UTF-8")
                 .content("{" +
-                        "\"minSpeed\":\"1.8\"," +
-                        "\"maxSpeed\":\"6\"}"))
+                        "\"minSpeed\":\"6\"," +
+                        "\"maxSpeed\":\"1.8\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
         mockMvc.perform(post("/admin/post/rule/basic")
                 .contentType("application/json;charset=UTF-8")
                 .content("{" +
-                        "\"minSpeed\":\"0\"," +
-                        "\"maxSpeed\":\"100\"}"))
+                        "\"minSpeed\":\"100\"," +
+                        "\"maxSpeed\":\"10\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
         // maxSpeed > minSpeed >= 0
         mockMvc.perform(post("/admin/post/rule/basic")
                 .contentType("application/json;charset=UTF-8")
                 .content("{" +
-                        "\"minSpeed\":\"6\"," +
-                        "\"maxSpeed\":\"1.8\"}"))
+                        "\"minSpeed\":\"3\"," +
+                        "\"maxSpeed\":\"9\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("false"));
         mockMvc.perform(post("/admin/post/rule/basic")
                 .contentType("application/json;charset=UTF-8")
                 .content("{" +
-                        "\"minSpeed\":\"-0.1\"," +
-                        "\"maxSpeed\":\"1.8\"}"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("false"));
-        mockMvc.perform(post("/admin/post/rule/basic")
-                .contentType("application/json;charset=UTF-8")
-                .content("{" +
-                        "\"minSpeed\":\"-6\"," +
+                        "\"minSpeed\":\"1.8\"," +
                         "\"maxSpeed\":\"-0.1\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("false"));
+        mockMvc.perform(post("/admin/post/rule/basic")
+                .contentType("application/json;charset=UTF-8")
+                .content("{" +
+                        "\"minSpeed\":\"6\"," +
+                        "\"maxSpeed\":\"0\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("false"));
         mockMvc.perform(post("/admin/post/rule/basic")
@@ -152,7 +152,14 @@ public class RuleadminApplicationTests {
                 .contentType("application/json;charset=UTF-8")
                 .content("{" +
                         "\"minSpeed\":\"\"," +
-                        "\"maxSpeed\":\"100\"}"))
+                        "\"maxSpeed\":\"1\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+        mockMvc.perform(post("/admin/post/rule/basic")
+                .contentType("application/json;charset=UTF-8")
+                .content("{" +
+                        "\"minSpeed\":\"9\"," +
+                        "\"maxSpeed\":\"\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
     }
@@ -176,40 +183,40 @@ public class RuleadminApplicationTests {
         mockMvc.perform(post("/admin/post/rule/basic")
                 .contentType("application/json;charset=UTF-8")
                 .content("{" +
-                        "\"minSpeed\":\"1.8\"," +
-                        "\"maxSpeed\":\"6\"}"))
+                        "\"minSpeed\":\"6\"," +
+                        "\"maxSpeed\":\"1.8\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
         mockMvc.perform(get("/admin/rule/basic"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("{" +
-                        "\"minSpeed\":\"1.8\"," +
-                        "\"maxSpeed\":\"6.0\"}"));
+                        "\"minSpeed\":\"6.0\"," +
+                        "\"maxSpeed\":\"1.8\"}"));
         // test data 2
         mockMvc.perform(post("/admin/post/rule/basic")
                 .contentType("application/json;charset=UTF-8")
                 .content("{" +
                         "\"minSpeed\":\"\"," +
-                        "\"maxSpeed\":\"10\"}"))
+                        "\"maxSpeed\":\"1\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
         mockMvc.perform(get("/admin/rule/basic"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("{" +
                         "\"minSpeed\":\"\"," +
-                        "\"maxSpeed\":\"10.0\"}"));
+                        "\"maxSpeed\":\"1.0\"}"));
         // test data 3
         mockMvc.perform(post("/admin/post/rule/basic")
                 .contentType("application/json;charset=UTF-8")
                 .content("{" +
-                        "\"minSpeed\":\"0.5\"," +
+                        "\"minSpeed\":\"10.5\"," +
                         "\"maxSpeed\":\"\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
         mockMvc.perform(get("/admin/rule/basic"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("{" +
-                        "\"minSpeed\":\"0.5\"," +
+                        "\"minSpeed\":\"10.5\"," +
                         "\"maxSpeed\":\"\"}"));
     }
 
@@ -426,8 +433,8 @@ public class RuleadminApplicationTests {
         mockMvc.perform(post("/admin/post/rule/basic")
                 .contentType("application/json;charset=UTF-8")
                 .content("{" +
-                        "\"minSpeed\":\"1.8\"," +
-                        "\"maxSpeed\":\"6\"}"))
+                        "\"minSpeed\":\"6\"," +
+                        "\"maxSpeed\":\"1.8\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
         mockMvc.perform(post("/rule/campus/user/_1/length/10"))
@@ -551,6 +558,39 @@ public class RuleadminApplicationTests {
                         "\"endTime\":\"2000-09-31T23:59\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("false"));
+        mockMvc.perform(put("/rule/campus/semester")
+                .contentType("application/json;charset=UTF-8")
+                .content("{" +
+                        "\"mileageGoal\":\"1\"," +
+                        "\"endTime\":\"2019-07-21T23:59\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("false"));
     }
+
+    /*@Test
+    // use Postman to test this part
+    public void testGetSemesterDetails() throws Exception {
+        // specify semester info
+        mockMvc.perform(post("/rule/campus/semester")
+                .contentType("application/json;charset=UTF-8")
+                .content("{" +
+                        "\"mileageGoal\":\"80000\"," +
+                        "\"endTime\":\"2019-09-30T23:59\"}"))
+                .andExpect(status().isOk());
+        mockMvc.perform(put("/rule/campus/semester")
+                .contentType("application/json;charset=UTF-8")
+                .content("{" +
+                        "\"mileageGoal\":\"80000\"," +
+                        "\"endTime\":\"2019-09-30T23:59\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+        // test GET
+        mockMvc.perform(get("/rule/campus/semester"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("{" +
+                        "\"mileageGoal\":\"\"," +
+                        "\"endTime\":\"\"}"));
+    }*/
+
 
 }

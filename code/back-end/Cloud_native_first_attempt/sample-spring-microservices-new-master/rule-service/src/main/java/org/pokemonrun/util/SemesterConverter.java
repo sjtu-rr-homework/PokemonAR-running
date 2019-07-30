@@ -1,6 +1,7 @@
 package org.pokemonrun.util;
 
 import org.pokemonrun.entity.Semester;
+import org.pokemonrun.info.SemesterDetailedInfo;
 import org.pokemonrun.info.SemesterInfo;
 
 import java.sql.Timestamp;
@@ -16,6 +17,15 @@ public class SemesterConverter {
         semester.setMileageGoal(mileage);
         semester.setEndTime(endTime);
         return semester;
+    }
+    public static SemesterDetailedInfo toDetails(Semester semester){
+        double mileage = semester.getMileageGoal();
+        String mile = Double.toString(mileage);
+        Timestamp endTime = semester.getEndTime();
+        String end = DateUtils.format(endTime);
+        Timestamp startTime = semester.getStartTime();
+        String start = DateUtils.format(startTime);
+        return new SemesterDetailedInfo(mile, end, start);
     }
     public static SemesterInfo toInfo(Semester semester){
         double mileage = semester.getMileageGoal();

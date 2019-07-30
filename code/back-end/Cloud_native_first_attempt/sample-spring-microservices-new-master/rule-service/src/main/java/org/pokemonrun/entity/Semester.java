@@ -16,6 +16,7 @@ public class Semester {
     private int semesterID;
     private double mileageGoal;
     private Timestamp endTime;
+    private Timestamp startTime;
 
     @Id
     @Column(name = "semesterID")
@@ -46,5 +47,15 @@ public class Semester {
 
     public void setEndTime(Timestamp endTime) {
         this.endTime = endTime;
+    }
+
+    @Basic
+    @Column(name = "startTime")
+    public Timestamp getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Timestamp startTime) {
+        this.startTime = startTime;
     }
 }

@@ -3,6 +3,7 @@ package org.pokemonrun.serviceimpl;
 import org.pokemonrun.dao.CampusRecordDao;
 import org.pokemonrun.dao.SemesterDao;
 import org.pokemonrun.entity.Semester;
+import org.pokemonrun.info.SemesterDetailedInfo;
 import org.pokemonrun.info.SemesterInfo;
 import org.pokemonrun.service.SemesterService;
 import org.pokemonrun.util.SemesterConverter;
@@ -18,7 +19,7 @@ public class SemesterServiceImpl implements SemesterService {
     @Autowired
     private CampusRecordDao campusRecordDao;
 
-    private Semester toSemester(SemesterInfo info){
+    private Semester testSemester(SemesterInfo info){
         Semester semester = SemesterConverter.toEntity(info);
         // negative mileage goal
         if(semester.getMileageGoal() < 0){
@@ -35,7 +36,7 @@ public class SemesterServiceImpl implements SemesterService {
 
     @Override
     public boolean beginNewSemester(SemesterInfo info) {
-        Semester semester = toSemester(info);
+        Semester semester = testSemester(info);
         if(semester == null){
             return false;
         }
@@ -43,16 +44,25 @@ public class SemesterServiceImpl implements SemesterService {
         if(!campusRecordDao.reset()){
             return false;
         }
+        semester.setStartTime(new Timestamp(System.currentTimeMillis()));
         return semesterDao.setSemester(semester);
     }
 
     @Override
     public boolean modifySemester(SemesterInfo info) {
-        Semester semester = toSemester(info);
+        // non-existing semesters should not be modified
+        Semester semester = semesterDao.getSemester();
         if(semester == null){
             return false;
         }
-        return semesterDao.setSemester(semester);
+        // check if intended semester info is valid
+        Semester semester1 = testSemester(info);
+        if(semester1 == null){
+            return false;
+        }
+        // execute
+        semester1.setStartTime(semester.getStartTime());
+        return semesterDao.setSemester(semester1);
     }
 
     @Override
@@ -62,5 +72,14 @@ public class SemesterServiceImpl implements SemesterService {
             return "0";
         }
         return String.valueOf(semester.getMileageGoal());
+    }
+
+    @Override
+    public SemesterDetailedInfo getSemesterDetails() {
+        Semester semester = semesterDao.getSemester();
+        if(semester == null){
+            return null;
+        }
+        return SemesterConverter.toDetails(semester);
     }
 }
