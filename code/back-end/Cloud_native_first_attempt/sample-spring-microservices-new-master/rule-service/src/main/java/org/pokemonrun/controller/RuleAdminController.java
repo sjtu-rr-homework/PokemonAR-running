@@ -83,6 +83,11 @@ public class RuleAdminController {
     public boolean modifySemesterInfo(@RequestBody SemesterInfo info){
         return semesterService.modifySemester(info);
     }
+
+    @GetMapping("/rule/campus/semester")
+    public SemesterDetailedInfo getSemesterDetails(){
+        return semesterService.getSemesterDetails();
+    }
 }
 
 
