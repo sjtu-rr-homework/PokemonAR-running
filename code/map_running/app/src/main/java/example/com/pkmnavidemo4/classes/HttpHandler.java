@@ -1304,4 +1304,52 @@ public class HttpHandler {
         }).start();
 
     }
+
+    public static void finishRestrainRun(double length){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String result = "";
+                BufferedReader reader = null;
+                try {
+                    JSONObject un=new JSONObject();
+                    String urlPath = UrlHead+"/rule/rule/campus/user/"+"1"+"/length/"+length;
+                    URL url = new URL(urlPath);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("POST");
+                    conn.setDoOutput(true);
+                    conn.setDoInput(true);
+                    conn.setUseCaches(false);
+                    conn.setRequestProperty("Connection", "Keep-Alive");
+                    conn.setRequestProperty("Charset", "UTF-8");
+                    // 设置文件类型:
+                    conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                    // 设置接收类型否则返回415错误
+                    //conn.setRequestProperty("accept","*/*")此处为暴力方法设置接受所有类型，以此来防范返回415;
+                    conn.setRequestProperty("accept", "application/json");
+                    if (conn.getResponseCode() == 200) {
+                        Log.d("success","connected!!!!!");
+                        reader = new BufferedReader(
+                                new InputStreamReader(conn.getInputStream()));
+                        StringBuilder sb = new StringBuilder();
+                        String s;
+                        while ((s = reader.readLine()) != null) {
+                            sb.append(s);
+                        }
+                        Log.d("mess",sb.toString());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (reader != null) {
+                        try {
+                            reader.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
 }

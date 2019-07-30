@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+        //HttpHandler.finishRestrainRun(1000);
         HttpHandler.getUserInfo();
         fManager = getSupportFragmentManager();
         bindViews();
