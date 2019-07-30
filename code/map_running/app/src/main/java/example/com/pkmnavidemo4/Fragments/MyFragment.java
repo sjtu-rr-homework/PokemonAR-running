@@ -16,8 +16,10 @@ import android.widget.LinearLayout;
 
 import java.text.DecimalFormat;
 
+import example.com.pkmnavidemo4.CheckNeighbour;
 import example.com.pkmnavidemo4.FriendPageActivity;
 import example.com.pkmnavidemo4.R;
+import example.com.pkmnavidemo4.RecordActivity;
 import example.com.pkmnavidemo4.classes.ElfSourceController;
 import example.com.pkmnavidemo4.classes.HttpHandler;
 import example.com.pkmnavidemo4.classes.UserData;
@@ -28,6 +30,9 @@ import example.com.pkmnavidemo4.classes.UserData;
 public class MyFragment extends Fragment {
 
     private LinearLayout checkfriend;
+    private LinearLayout checkneighbour;
+    private LinearLayout checkrecord;
+    private LinearLayout checkBBS;
     private TextView distance;
     private TextView mileage;
     private TextView mileageGoal;
@@ -36,6 +41,10 @@ public class MyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fg_content,container,false);
         checkfriend=(LinearLayout) view.findViewById(R.id.fg_layout_check_friend);
+        checkneighbour=(LinearLayout) view.findViewById(R.id.fg_layout_check_neighbour);
+        checkrecord=(LinearLayout) view.findViewById(R.id.fg_layout_check_record);
+        checkBBS=(LinearLayout) view.findViewById(R.id.fg_layout_check_bbs);
+
         distance=(TextView)view.findViewById(R.id.fg_achieve);
         mileage=(TextView)view.findViewById(R.id.fg_score);
         mileageGoal=(TextView)view.findViewById(R.id.fg_goal);
@@ -52,6 +61,23 @@ public class MyFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        checkneighbour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(getActivity(), CheckNeighbour.class);
+                startActivity(intent);
+            }
+        });
+
+        checkrecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(), RecordActivity.class);
+                startActivity(intent);
+            }
+        });
+
         LinearLayout linearLayout=view.findViewById(R.id.fg_title);
         linearLayout.setPadding(0,getStatusBarHeight(),0,0);
         return view;
