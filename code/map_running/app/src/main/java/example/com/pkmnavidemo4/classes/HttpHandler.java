@@ -54,7 +54,8 @@ import example.com.pkmnavidemo4.R;
 
 public class HttpHandler {
 
-    //private static String UrlHead="http://1f54143f.ngrok.io";
+    //private static String UrlHead="http://1c77d0af.ngrok.io";
+
     private static String UrlHead="http://202.120.40.8:30751";
 
 
@@ -986,7 +987,73 @@ public class HttpHandler {
 
     }
 
-    public static void postPic(String pic){
+    public static void getMoments(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                List<Map> list = new ArrayList<Map>();
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String loginUrl=UrlHead+"/forum/get/all/moment";
+                try {
+                    //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
+                    URL url=new URL(loginUrl);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(888000);
+                    conn.setReadTimeout(888000);
+                   /* InputStream is = conn.getInputStream(); // 获取输入流
+                    byte[] data = read(is);*/
+
+                    InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                    JSONArray jsonArray = new JSONArray(sb.toString());
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject item = jsonArray.getJSONObject(i); // 得到每个对象
+                        String content = item.getString("text"); // 获取对象对应的值
+                        String time = item.getString("timestamp");
+                        String username = item.getString("username");
+                        List<String> pics =new ArrayList<>();
+                        for(int j=1;j<=9&&item.getString("pic"+j)!="null";j++)
+                            pics.add(item.getString("pic"+j));
+                        Log.d("44444444444fd",pics.toString());
+                        Map map = null;
+                        map = new HashMap(); // 存放到MAP里面
+                        map.put("content", content );
+                        map.put("time",time);
+                        map.put("username",username);
+                        map.put("pics", pics );
+                        list.add(map);
+                    }
+                    UserData.setMoments(list);
+                    UserData.isMomentsGet=false;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    UserData.isMomentsGet=false;
+                }finally {
+                    UserData.isMomentsGet=false;
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+
+    public static void postPic(List<String> pic,String timestamp,String username,String text){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -994,11 +1061,14 @@ public class HttpHandler {
                 BufferedReader reader = null;
                 try {
                     JSONObject un=new JSONObject();
-                    un.put("text","5555");
-                    un.put("timestamp", "55555");
-                    un.put("username",UserData.getUserName());
-                    un.put("picture",pic);
+
+                    un.put("text",text);
+                    un.put("timestamp", timestamp);
+                    un.put("username",username);
+                    for(int i=1;i<=pic.size();i++)
+                    un.put("pic"+i,pic.get(i-1));
                     String Json=un.toString();
+                    Log.d("5555",Json);
                     //String urlPath = UrlHead+"/record/refresh/location";
                     String urlPath = UrlHead+"/forum/add/moment";
                     URL url = new URL(urlPath);

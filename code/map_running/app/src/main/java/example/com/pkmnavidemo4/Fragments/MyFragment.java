@@ -20,6 +20,7 @@ import example.com.pkmnavidemo4.CheckNeighbour;
 import example.com.pkmnavidemo4.FriendPageActivity;
 import example.com.pkmnavidemo4.R;
 import example.com.pkmnavidemo4.RecordActivity;
+import example.com.pkmnavidemo4.SquareActivity;
 import example.com.pkmnavidemo4.classes.ElfSourceController;
 import example.com.pkmnavidemo4.classes.HttpHandler;
 import example.com.pkmnavidemo4.classes.UserData;
@@ -74,6 +75,14 @@ public class MyFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getActivity(), RecordActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        checkBBS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(), SquareActivity.class);
                 startActivity(intent);
             }
         });
