@@ -163,6 +163,18 @@ services:
       - "8095:8095"
     networks:
       - spring-cloud-network
+  
+  forum-service:
+    hostname: forum-service
+    image: macoredroid/forum-service:latest
+    build:
+      context: ./forum-service
+    environment:
+      SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
+    ports:
+      - "8096:8096"
+    networks:
+      - spring-cloud-network
 
 
 networks:
