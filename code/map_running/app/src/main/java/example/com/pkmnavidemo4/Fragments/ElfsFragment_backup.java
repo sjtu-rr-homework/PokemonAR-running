@@ -1,11 +1,9 @@
 package example.com.pkmnavidemo4.Fragments;
 
 
-import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -15,27 +13,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import example.com.pkmnavidemo4.LoginActivity;
 import example.com.pkmnavidemo4.R;
-import example.com.pkmnavidemo4.SceneformActivity;
 import example.com.pkmnavidemo4.classes.HttpHandler;
 import example.com.pkmnavidemo4.classes.TestRecycleViewAdapter;
 import example.com.pkmnavidemo4.classes.UserData;
 
-public class ElfsFragment extends Fragment {
+public class ElfsFragment_backup extends Fragment {
+    private Switch switchModel;
+    private Button refresh;
     private List<String> list;
     RecyclerView mRecyclerView;
-    public ElfsFragment() {
+    public ElfsFragment_backup() {
 
     }
 
@@ -52,9 +47,53 @@ public class ElfsFragment extends Fragment {
         mRecyclerView.setAdapter(adapter);
         //refresh( mRecyclerView);
         refresh();
+        refresh=view.findViewById(R.id.elf_fg_button_refresh);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                refresh( mRecyclerView);
+            }
+        });
+        switchModel =view.findViewById(R.id.elf_fg_button_switch);
+        switchModel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    //选择只查看已有精灵
+                    /*HttpHandler.getElfs(getActivity(), UserData.getUserName());
+                    while(lock){};*/
+                    UserData.reverse();
+                    TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity(),UserData.getElfList());
+                    mRecyclerView.setAdapter(adapter);
+                }else {
+                    UserData.reverse();
+                    //查看所有精灵
+                    initData();
+                    //实例化并传输数据给adapter
+                    TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity(),list);
+                    mRecyclerView.setAdapter(adapter);
+                }
+            }
+        });
+
         RelativeLayout relativeLayout=view.findViewById(R.id.fg_elfs_content_outer);
         relativeLayout.setPadding(0,getStatusBarHeight(),0,0);
         return view;
+    }
+
+    private void refresh( RecyclerView mRecyclerView){
+        HttpHandler.getElfs(UserData.getUserName());
+        while(!UserData.isElfsget){
+            try {
+                Thread.sleep(10);
+            }catch (Exception e){
+
+            }
+        }
+        if(!UserData.getOnlyHave())
+            return;
+        TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity(),UserData.getElfList());
+        mRecyclerView.setAdapter(adapter);
     }
 
     private void refresh(){

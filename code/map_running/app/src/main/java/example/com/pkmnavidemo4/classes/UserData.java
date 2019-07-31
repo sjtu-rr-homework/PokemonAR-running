@@ -26,6 +26,7 @@ public class UserData {
     private static Map friendUserInfo;
     private static Map friendPetInfo;
     private static int exp;
+	public static boolean isElfsget=false;
     private static String userName;
     private static List<String> elfList;
     private static  List<Map> elfDetailsList;
