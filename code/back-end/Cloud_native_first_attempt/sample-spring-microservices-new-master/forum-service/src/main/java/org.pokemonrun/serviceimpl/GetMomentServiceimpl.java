@@ -29,7 +29,7 @@ public class GetMomentServiceimpl implements GetMomentService {
             }
         }
         List<Moment> reslist=new ArrayList<>();
-        while(reslist.size()<5&&beforelist.size()>0)
+        while(reslist.size()<10&&beforelist.size()>0)
         {
             Timestamp newest=Timestamp.valueOf(beforelist.get(0).timestamp);
             int index=0;
@@ -71,7 +71,7 @@ public class GetMomentServiceimpl implements GetMomentService {
             }
         }
         List<Moment> reslist=new ArrayList<>();
-        while(reslist.size()<5&&beforelist.size()>0)
+        while(reslist.size()<10&&beforelist.size()>0)
         {
             Timestamp newest=Timestamp.valueOf(beforelist.get(0).timestamp);
             int index=0;
