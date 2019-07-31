@@ -33,6 +33,8 @@ import example.com.pkmnavidemo4.classes.TestRecycleViewAdapter;
 import example.com.pkmnavidemo4.classes.UserData;
 
 public class ElfsFragment extends Fragment {
+    private Switch switchModel;
+    private Button refresh;
     private List<String> list;
     RecyclerView mRecyclerView;
     public ElfsFragment() {
@@ -50,24 +52,51 @@ public class ElfsFragment extends Fragment {
         //实例化并传输数据给adapter
         TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity(),list);
         mRecyclerView.setAdapter(adapter);
-        //refresh( mRecyclerView);
-        refresh();
+        refresh( mRecyclerView);
+        refresh=view.findViewById(R.id.elf_fg_button_refresh);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                refresh( mRecyclerView);
+            }
+        });
+        switchModel =view.findViewById(R.id.elf_fg_button_switch);
+        switchModel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    //选择只查看已有精灵
+                    /*HttpHandler.getElfs(getActivity(), UserData.getUserName());
+                    while(lock){};*/
+                    UserData.reverse();
+                    TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity(),UserData.getElfList());
+                    mRecyclerView.setAdapter(adapter);
+                }else {
+                    UserData.reverse();
+                    //查看所有精灵
+                    initData();
+                    //实例化并传输数据给adapter
+                    TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity(),list);
+                    mRecyclerView.setAdapter(adapter);
+                }
+            }
+        });
+
         RelativeLayout relativeLayout=view.findViewById(R.id.fg_elfs_content_outer);
         relativeLayout.setPadding(0,getStatusBarHeight(),0,0);
         return view;
     }
 
-    private void refresh(){
-        HttpHandler.getElfs(UserData.getUserName());
-        while(!UserData.isElfsget){
-            try {
-                Thread.sleep(10);
-            }catch (Exception e){
-
-            }
-        }
+    private void refresh( RecyclerView mRecyclerView){
+        HttpHandler.getElfs(getActivity(),UserData.getUserName());
         if(!UserData.getOnlyHave())
             return;
+        TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity(),UserData.getElfList());
+        mRecyclerView.setAdapter(adapter);
+    }
+
+    private void refresh(String userName){
+        HttpHandler.getElfs(UserData.getUserName());
         TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity(),UserData.getElfList());
         mRecyclerView.setAdapter(adapter);
     }
@@ -91,9 +120,7 @@ public class ElfsFragment extends Fragment {
     public void onHiddenChanged(boolean hidden){
         super.onHiddenChanged(hidden);
         if (!hidden) {
-            //refresh( mRecyclerView);
-            refresh();
-            Log.d("testrefresh",""+UserData.getElfList());
+            refresh( mRecyclerView);
         }
     }
 
