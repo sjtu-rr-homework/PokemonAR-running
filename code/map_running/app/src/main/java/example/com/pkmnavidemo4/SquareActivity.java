@@ -2,29 +2,43 @@ package example.com.pkmnavidemo4;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import example.com.pkmnavidemo4.classes.EndlessRecyclerOnScrollListener;
 import example.com.pkmnavidemo4.classes.FriendsCircleAdapter;
 import example.com.pkmnavidemo4.classes.HttpHandler;
 import example.com.pkmnavidemo4.classes.UserData;
 
-public class SquareActivity extends AppCompatActivity {
+public class SquareActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+    boolean isAdd=false;
+    boolean isFresh=false;
     private static List<Map> moments;
     private Button share;
-
+    private SwipeRefreshLayout refreshLayout;
+    private FriendsCircleAdapter adapter;
+    private RecyclerView recyclerView;
+    private Handler mHandler = new Handler(Looper.getMainLooper());
+    private int lastVisibleItem = 0;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         moments = UserData.getMoments();
         super.onCreate(savedInstanceState);
         setTitle("仿微信朋友圈");
         setContentView(R.layout.activity_square);
+        initRefreshLayout();
         share = findViewById(R.id.act_square_button_share);
         share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,11 +47,67 @@ public class SquareActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView_forum);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         if (moments != null) {
-            RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            recyclerView.setAdapter(new FriendsCircleAdapter(this, moments));
+            adapter=new FriendsCircleAdapter(this, moments);
+            recyclerView.setAdapter(adapter);
         }
+        recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
+            @Override
+            public void onLoadMore() {
+                if (!isAdd) {
+                    isAdd=true;
+                    adapter.setLoadState(adapter.LOADING);
+                    moments = UserData.getMoments();
+                    if (moments != null) {
+                        new Timer().schedule(new TimerTask() {
+                            @Override
+                            public void run() {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        adapter.setLoadState(adapter.LOADING_COMPLETE);
+                                    }
+                                });
+                            }
+                        }, 1000);
+                        adapter.addEnd(moments);
+                    } else {
+                        // 显示加载到底的提示
+                        adapter.setLoadState(adapter.LOADING_END);
+                    }
+                }
+                isAdd=false;
+                Log.d("add!!!!!!!", ""+adapter.getItemCount());
+            }
+        });
+        Log.d("size",""+adapter.getItemCount());
     }
-    
+
+    private void initRefreshLayout() {
+        refreshLayout=findViewById(R.id.refreshLayout);
+        refreshLayout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light,
+                android.R.color.holo_orange_light, android.R.color.holo_green_light);
+        refreshLayout.setOnRefreshListener(this);
+    }
+
+    @Override
+    public void onRefresh() {
+        if (!isFresh) {
+            isFresh=true;
+            // 设置可见
+            refreshLayout.setRefreshing(true);
+            adapter.setLoadState(adapter.LOADING);
+            moments = UserData.refreshMoments();
+            if (moments != null) {
+                adapter.addStart(moments);
+            }
+            refreshLayout.setRefreshing(false);
+        }
+        isFresh=false;
+        Log.d("fresh!!!!!!!", ""+adapter.getItemCount());
+    }
+
+
 }
