@@ -23,14 +23,14 @@ public class MomentController {
         return AddMomentService.addMoment(MomentInfo);
     }
 
-    @GetMapping("/get/user/moment/{username}")
-    public List<MomentInfo> getUserMoment(@PathVariable("username") String username) {
-        return GetMomentService.getOneUser(username);
+    @GetMapping("/get/user/moment/username/{username}/timestamp/{timestamp}")
+    public List<MomentInfo> getUserMoment(@PathVariable("username") String username, @PathVariable("timestamp") String timestamp) {
+        return GetMomentService.getOneUser(username,timestamp);
     }
 
-    @GetMapping("/get/all/moment")
-    public List<MomentInfo> getAllMoment() {
-        return GetMomentService.getAll();
+    @GetMapping("/get/all/moment/timestamp/{timestamp}")
+    public List<MomentInfo> getAllMoment(@PathVariable("timestamp") String timestamp) {
+        return GetMomentService.getAll(timestamp);
     }
 
 
