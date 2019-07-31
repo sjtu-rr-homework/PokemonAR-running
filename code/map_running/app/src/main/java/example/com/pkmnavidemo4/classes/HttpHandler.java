@@ -1195,7 +1195,7 @@ public class HttpHandler {
                 Log.d("haha","go1");
                 HttpURLConnection conn=null;
                 BufferedReader br=null;
-                String recordUrl=UrlHead+"/record/running/record/user/"+UserData.getUserName()+"/page/0";
+                String recordUrl=UrlHead+"/record/running/record/user/"+UserData.getUserName();
                 //https://6ed30734.ngrok.io/user/register/username/macoredroid/password/c7o2r1e4/email/coredroid0401@gmail.com
                 try {
                     //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
