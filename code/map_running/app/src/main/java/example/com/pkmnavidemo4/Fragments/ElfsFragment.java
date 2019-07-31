@@ -80,8 +80,8 @@ public class ElfsFragment extends Fragment {
             }
         });
 
-        RelativeLayout relativeLayout=view.findViewById(R.id.fg_elfs_content_outer);
-        relativeLayout.setPadding(0,getStatusBarHeight(),0,0);
+        LinearLayout linearLayout=view.findViewById(R.id.fg_elf_topbar);
+        linearLayout.setPadding(0,getStatusBarHeight(),0,0);
         return view;
     }
 
