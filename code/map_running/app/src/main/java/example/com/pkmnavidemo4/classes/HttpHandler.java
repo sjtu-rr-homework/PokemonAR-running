@@ -1020,9 +1020,11 @@ public class HttpHandler {
                         String time = item.getString("timestamp");
                         String username = item.getString("username");
                         List<String> pics =new ArrayList<>();
-                        for(int j=1;j<=9&&item.getString("pic"+j)!="null";j++)
-                            pics.add(item.getString("pic"+j));
-                        Log.d("44444444444fd",pics.toString());
+                        for(int j=1;j<=9&&item.getString("pic"+j)!="null";j++) {
+                            pics.add(item.getString("pic" + j));
+                            Log.d("44444444444fd",j+"\\"+item.getString("pic" + j).length());
+
+                        }
                         Map map = null;
                         map = new HashMap(); // 存放到MAP里面
                         map.put("content", content );
