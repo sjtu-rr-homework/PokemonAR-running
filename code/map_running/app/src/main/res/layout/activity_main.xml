@@ -47,7 +47,7 @@
                 android:drawableTop="@drawable/tab_menu_channel"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="@string/tab_menu_alert"
+                android:text="精灵"
                 android:textColor="@drawable/tab_menu_text"
                 android:textSize="16sp" />
 
@@ -61,7 +61,7 @@
                 android:drawableTop="@drawable/tab_menu_message"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="@string/tab_menu_profile"
+                android:text="跑步"
                 android:textColor="@drawable/tab_menu_text"
                 android:textSize="16sp" />
 
@@ -75,7 +75,7 @@
                 android:drawableTop="@drawable/tab_menu_better"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="@string/tab_menu_pay"
+                android:text="我的"
                 android:textColor="@drawable/tab_menu_text"
                 android:textSize="16sp" />
 

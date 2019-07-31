@@ -317,29 +317,28 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                 else{
                     LatLng present=new LatLng(aMapLocation.getLatitude(),aMapLocation.getLongitude());
                     List<Marker> mapScreenMarkers=aMap.getMapScreenMarkers();
-                    if(countDown==0) {
-                        for (int i = 0; i < mapScreenMarkers.size(); ++i) {
-                            Marker marker = mapScreenMarkers.get(i);
-                            LatLng point = marker.getPosition();
-                            float distance = AMapUtils.calculateLineDistance(point, present);
-                            if (distance < 10) {
-                                if(marker.getTitle().equals("elf")) {
-                                    showCatchMessage(Integer.parseInt(marker.getSnippet()), marker);
-                                }
-                                else if(marker.getTitle().equals("flag")){
-                                    vibrator.vibrate(500);
-                                    Toast.makeText(MapActivity.this,"经过一个必经点位",Toast.LENGTH_SHORT).show();
-                                    View view = View.inflate(MapActivity.this, R.layout.view_marker_done, null);
-                                    Bitmap bitmap = ElfPointController.convertViewToBitmap(view);
-                                    marker.setTitle("flag_done");
-                                    UserData.flagNum--;
-                                    marker.setIcon(BitmapDescriptorFactory.fromBitmap(bitmap));
-                                }
+                    for (int i = 0; i < mapScreenMarkers.size(); ++i) {
+                        Marker marker = mapScreenMarkers.get(i);
+                        LatLng point = marker.getPosition();
+                        float distance = AMapUtils.calculateLineDistance(point, present);
+                        if (distance < 10) {
+                            if(marker.getTitle().equals("elf")&&countDown==0) {
+                                showCatchMessage(Integer.parseInt(marker.getSnippet()), marker);
+                                break;
+                            }
+                            else if(marker.getTitle().equals("flag")){
+                                vibrator.vibrate(500);
+                                Toast.makeText(MapActivity.this,"经过一个必经点位",Toast.LENGTH_SHORT).show();
+                                View view = View.inflate(MapActivity.this, R.layout.view_marker_done, null);
+                                Bitmap bitmap = ElfPointController.convertViewToBitmap(view);
+                                marker.setTitle("flag_done");
+                                UserData.flagNum--;
+                                marker.setIcon(BitmapDescriptorFactory.fromBitmap(bitmap));
                                 break;
                             }
                         }
                     }
-                    else if(countDown>=1){
+                    if(countDown>=1){
                         --countDown;
                     }
                     /*
@@ -376,6 +375,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                     UserData.successRun();
                     HttpHandler.postRunningRecord1(runningMessage);
                     HttpHandler.addDistance(UserData.getUserName(), runningMessage.getLength());
+                    UserData.distance+=runningMessage.getLength();
                     HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
                     UserData.addExp(runningMessage.getExp());
                     MapActivity.super.finish();
@@ -401,6 +401,9 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                         UserData.successRun();
                         HttpHandler.postRunningRecord1(runningMessage);
                         HttpHandler.addDistance(UserData.getUserName(), runningMessage.getLength());
+                        UserData.distance+=runningMessage.getLength();
+                        HttpHandler.finishRestrainRun(runningMessage.getLength());
+                        UserData.setMileage(runningMessage.getLength()+UserData.getMileage());
                         HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
                         UserData.addExp(runningMessage.getExp());
                         MapActivity.super.finish();
@@ -424,6 +427,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                         UserData.failRun();
                         HttpHandler.postRunningRecord1(runningMessage);
                         HttpHandler.addDistance(UserData.getUserName(), runningMessage.getLength());
+                        UserData.distance+=runningMessage.getLength();
                         HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
                         MapActivity.super.finish();
                     }

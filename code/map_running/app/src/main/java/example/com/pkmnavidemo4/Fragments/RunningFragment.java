@@ -1,5 +1,7 @@
 package example.com.pkmnavidemo4.Fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,23 +9,27 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import example.com.pkmnavidemo4.CheckNeighbour;
 import example.com.pkmnavidemo4.R;
 import example.com.pkmnavidemo4.RecordActivity;
+import example.com.pkmnavidemo4.classes.UserData;
 
 public class RunningFragment extends Fragment implements View.OnClickListener{
     private TextView toRecord;
+    private TextView mileageGoal;
     //private Button button;
-    private ImageView checkNeighbour;
+    private TextView mileage;
     //private String content;
 
     //public RunningFragment(String content) {
@@ -48,6 +54,9 @@ public class RunningFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.d("hahahaha","oncreate");
+        mileage=(TextView)getActivity().findViewById(R.id.fg_running_calculate);
+        mileageGoal=(TextView)getActivity().findViewById(R.id.fg_running_goal) ;
         //button = (Button) getActivity().findViewById(R.id.button3);
         //toRecord=(TextView)getActivity().findViewById(R.id.fg_running_textView);
         //checkNeighbour=(ImageView)getActivity().findViewById(R.id.fg_running_checkneighbour);
@@ -80,15 +89,8 @@ public class RunningFragment extends Fragment implements View.OnClickListener{
                 arg0==0的时辰默示什么都没做。*/
             }
         });
-        /*
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(),"开始跑步",Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(getActivity(), MapActivity.class);
-                startActivity(intent);
-            }
-        });*/
+        DecimalFormat format=new DecimalFormat("#0.00");
+        mileage.setText("计入成绩："+ format.format(UserData.getMileage()/1000)+"公里");
         toRecord.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -96,17 +98,25 @@ public class RunningFragment extends Fragment implements View.OnClickListener{
                 startActivity(intent);
             }
         });
-        checkNeighbour.setOnClickListener(new View.OnClickListener(){
+        mileageGoal.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                Intent intent =new Intent(getActivity(), CheckNeighbour.class);
-                startActivity(intent);
+            public void onClick(View view) {
+                AlertDialog.Builder dialog=new AlertDialog.Builder(getActivity());
+                dialog.setTitle("学期目标");
+                DecimalFormat tmp_format=new DecimalFormat("#0.0");
+                dialog.setMessage("本学期跑步目标："+tmp_format.format(UserData.getMileageGoal()/1000)+"公里");
+                dialog.setPositiveButton("返回", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        return;
+                    }
+                });
+                dialog.show();
             }
         });
     }
     private void initViews() {
         toRecord=(TextView)getActivity().findViewById(R.id.fg_running_textView);
-        checkNeighbour=(ImageView)getActivity().findViewById(R.id.fg_running_checkneighbour);
         item_weixin = (TextView) getActivity().findViewById(R.id.item_weixin);
         item_tongxunlu = (TextView) getActivity().findViewById(R.id.item_tongxunlu);
 
@@ -158,6 +168,16 @@ public class RunningFragment extends Fragment implements View.OnClickListener{
         } else if (position == 1) {
             item_tongxunlu.setTextColor(Color.parseColor("#ffffff"));
             item_weixin.setTextColor(Color.parseColor("#72A4C2"));
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden){
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            Log.d("hahahaha","onshow");
+            //DecimalFormat format=new DecimalFormat("#0.00");
+            //mileage.setText("计入成绩："+ format.format(UserData.getMileage()/1000)+"公里");
         }
     }
 }

@@ -6,13 +6,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#F1F1F1"
         android:orientation="vertical">
         <TextView
             android:id="@+id/listview_title"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:text="2019.05.18 18:23:06"
             android:gravity="center"
@@ -23,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="25dp"
             android:layout_gravity="center_horizontal"
-            android:background="#FAFAFA">
+            android:background="@drawable/bg_white">
             <LinearLayout
                 android:id="@+id/listview_layout1"
                 android:layout_marginTop="20dp"

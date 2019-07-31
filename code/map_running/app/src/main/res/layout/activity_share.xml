@@ -17,7 +17,7 @@
             android:src="#E4E3E3" />
 
         <EditText
-            android:id="@+id/content_et"
+            android:id="@+id/act_share_content_et"
             android:layout_width="fill_parent"
             android:layout_height="480dp"
             android:background="#FFFFFF"
@@ -41,7 +41,7 @@
             android:src="#E4E3E3" />
 
         <GridView
-            android:id="@+id/gridView1"
+            android:id="@+id/act_share_gridView1"
             android:layout_width="fill_parent"
             android:layout_height="100dp"
             android:background="#FFFFFF"
@@ -60,7 +60,7 @@
             android:src="#E4E3E3" />
 
         <Button
-            android:id="@+id/send_btn"
+            android:id="@+id/act_share_send_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

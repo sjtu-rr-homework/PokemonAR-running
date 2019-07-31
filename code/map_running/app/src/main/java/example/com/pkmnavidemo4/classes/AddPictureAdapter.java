@@ -1,4 +1,4 @@
-package example.com.pkmnavidemo4.testsend;
+package example.com.pkmnavidemo4.classes;
 
 import java.util.List;
 
@@ -13,12 +13,11 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 
 import example.com.pkmnavidemo4.R;
 
-public class Adapter extends BaseAdapter {
+public class AddPictureAdapter extends BaseAdapter {
 	private Context context;
 	private List<Bitmap> data;
 	private LayoutInflater inflater;
@@ -26,7 +25,7 @@ public class Adapter extends BaseAdapter {
 	private int gridViewH;
 	private int imageViewH;
 
-	public Adapter(Context context, List<Bitmap> data, GridView mGridView) {
+	public AddPictureAdapter(Context context, List<Bitmap> data, GridView mGridView) {
 		this.context = context;
 		this.data = data;
 		this.mGridView = mGridView;
