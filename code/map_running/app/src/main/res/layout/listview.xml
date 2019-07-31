@@ -11,7 +11,6 @@
             android:id="@+id/listview_title"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:text="2019.05.18 18:23:06"
             android:gravity="center"

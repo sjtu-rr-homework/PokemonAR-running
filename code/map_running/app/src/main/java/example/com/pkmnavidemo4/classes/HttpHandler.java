@@ -405,7 +405,7 @@ public class HttpHandler {
         }).start();
     }
 
-    public static void login(Context context,String username, String password) {
+    public static void login(Context context,String username, String password,boolean isauto) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -429,6 +429,9 @@ public class HttpHandler {
                         sb.append(s);
                     }
                     if(sb.toString().equals("true")){
+                        if(isauto) {
+                            SharedPreferencesUtil.putBoolean(context.getApplicationContext(), "isauto", true);
+                        }
                         Looper.prepare();
                         UserData.setUserName(username);
                         Toast.makeText(context,"登陆成功",Toast.LENGTH_SHORT).show();
@@ -1263,7 +1266,7 @@ public class HttpHandler {
                 Log.d("haha","go1");
                 HttpURLConnection conn=null;
                 BufferedReader br=null;
-                String recordUrl=UrlHead+"/record/running/record/user/"+UserData.getUserName()+"/page/0";
+                String recordUrl=UrlHead+"/record/running/record/user/"+UserData.getUserName();
                 //https://6ed30734.ngrok.io/user/register/username/macoredroid/password/c7o2r1e4/email/coredroid0401@gmail.com
                 try {
                     //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");

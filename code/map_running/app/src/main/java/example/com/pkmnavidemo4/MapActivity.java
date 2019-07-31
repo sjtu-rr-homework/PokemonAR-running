@@ -317,29 +317,28 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                 else{
                     LatLng present=new LatLng(aMapLocation.getLatitude(),aMapLocation.getLongitude());
                     List<Marker> mapScreenMarkers=aMap.getMapScreenMarkers();
-                    if(countDown==0) {
-                        for (int i = 0; i < mapScreenMarkers.size(); ++i) {
-                            Marker marker = mapScreenMarkers.get(i);
-                            LatLng point = marker.getPosition();
-                            float distance = AMapUtils.calculateLineDistance(point, present);
-                            if (distance < 10) {
-                                if(marker.getTitle().equals("elf")) {
-                                    showCatchMessage(Integer.parseInt(marker.getSnippet()), marker);
-                                }
-                                else if(marker.getTitle().equals("flag")){
-                                    vibrator.vibrate(500);
-                                    Toast.makeText(MapActivity.this,"经过一个必经点位",Toast.LENGTH_SHORT).show();
-                                    View view = View.inflate(MapActivity.this, R.layout.view_marker_done, null);
-                                    Bitmap bitmap = ElfPointController.convertViewToBitmap(view);
-                                    marker.setTitle("flag_done");
-                                    UserData.flagNum--;
-                                    marker.setIcon(BitmapDescriptorFactory.fromBitmap(bitmap));
-                                }
+                    for (int i = 0; i < mapScreenMarkers.size(); ++i) {
+                        Marker marker = mapScreenMarkers.get(i);
+                        LatLng point = marker.getPosition();
+                        float distance = AMapUtils.calculateLineDistance(point, present);
+                        if (distance < 10) {
+                            if(marker.getTitle().equals("elf")&&countDown==0) {
+                                showCatchMessage(Integer.parseInt(marker.getSnippet()), marker);
+                                break;
+                            }
+                            else if(marker.getTitle().equals("flag")){
+                                vibrator.vibrate(500);
+                                Toast.makeText(MapActivity.this,"经过一个必经点位",Toast.LENGTH_SHORT).show();
+                                View view = View.inflate(MapActivity.this, R.layout.view_marker_done, null);
+                                Bitmap bitmap = ElfPointController.convertViewToBitmap(view);
+                                marker.setTitle("flag_done");
+                                UserData.flagNum--;
+                                marker.setIcon(BitmapDescriptorFactory.fromBitmap(bitmap));
                                 break;
                             }
                         }
                     }
-                    else if(countDown>=1){
+                    if(countDown>=1){
                         --countDown;
                     }
                     /*
