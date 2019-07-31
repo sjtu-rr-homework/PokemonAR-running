@@ -42,10 +42,14 @@ public class LoginActivity  extends AppCompatActivity {
         auto_login=(CheckBox)findViewById(R.id.act_login_auto);
         text=(TextView)findViewById(R.id.act_login_text_jaccount);
         login = (Button)findViewById(R.id.act_login_button_login);
+        if(SharedPreferencesUtil.getBoolean(getApplicationContext(),"isremember",false)){
+            usernameText.setText(SharedPreferencesUtil.getString(getApplicationContext(),"username",""));
+            passwordText.setText(SharedPreferencesUtil.getString(getApplicationContext(),"password",""));
+            remember_password.setChecked(true);
+        }
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String username=usernameText.getText().toString();
                 String password=passwordText.getText().toString();
                 if(remember_password.isChecked()){
