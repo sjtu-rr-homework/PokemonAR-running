@@ -69,7 +69,7 @@ public class LoginActivity  extends AppCompatActivity {
                 mHandler.sendEmptyMessageDelayed(1, 1000);
                 String username=usernameText.getText().toString();
                 String password=passwordText.getText().toString();
-                HttpHandler.login(LoginActivity.this,username,password);
+                HttpHandler.login(LoginActivity.this,username,password,auto_login.isChecked());
                 HttpHandler.getMileage(username);
                 HttpHandler.getElfs(username);
                 HttpHandler.getExp(username);
@@ -87,7 +87,7 @@ public class LoginActivity  extends AppCompatActivity {
                     SharedPreferencesUtil.putString(getApplicationContext(),"password",password);
                     SharedPreferencesUtil.putBoolean(getApplicationContext(),"isremember",true);
                 }
-                HttpHandler.login(LoginActivity.this,username,password);
+                HttpHandler.login(LoginActivity.this,username,password,auto_login.isChecked());
                 HttpHandler.getMileage(username);
                 HttpHandler.getElfs(username);
                 HttpHandler.getExp(username);

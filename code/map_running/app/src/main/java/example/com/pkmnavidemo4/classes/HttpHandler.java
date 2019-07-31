@@ -405,7 +405,7 @@ public class HttpHandler {
         }).start();
     }
 
-    public static void login(Context context,String username, String password) {
+    public static void login(Context context,String username, String password,boolean isauto) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -429,7 +429,7 @@ public class HttpHandler {
                         sb.append(s);
                     }
                     if(sb.toString().equals("true")){
-                        if(SharedPreferencesUtil.getBoolean(context.getApplicationContext(),"isremember",false)) {
+                        if(isauto) {
                             SharedPreferencesUtil.putBoolean(context.getApplicationContext(), "isauto", true);
                         }
                         Looper.prepare();
