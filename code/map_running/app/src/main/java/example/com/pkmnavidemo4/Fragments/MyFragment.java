@@ -82,6 +82,7 @@ public class MyFragment extends Fragment {
         checkBBS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                UserData.setOldForumTime(null);
                 Intent intent=new Intent(getActivity(), SquareActivity.class);
                 startActivity(intent);
             }
