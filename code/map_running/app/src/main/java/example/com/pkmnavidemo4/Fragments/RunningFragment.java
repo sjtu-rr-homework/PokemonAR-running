@@ -30,7 +30,6 @@ public class RunningFragment extends Fragment implements View.OnClickListener{
     private TextView mileageGoal;
     //private Button button;
     private TextView mileage;
-    private ImageView checkNeighbour;
     //private String content;
 
     //public RunningFragment(String content) {
@@ -90,28 +89,12 @@ public class RunningFragment extends Fragment implements View.OnClickListener{
                 arg0==0的时辰默示什么都没做。*/
             }
         });
-        /*
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(),"开始跑步",Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(getActivity(), MapActivity.class);
-                startActivity(intent);
-            }
-        });*/
         DecimalFormat format=new DecimalFormat("#0.00");
         mileage.setText("计入成绩："+ format.format(UserData.getMileage()/1000)+"公里");
         toRecord.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Intent intent=new Intent(getActivity(), RecordActivity.class);
-                startActivity(intent);
-            }
-        });
-        checkNeighbour.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent =new Intent(getActivity(), CheckNeighbour.class);
                 startActivity(intent);
             }
         });
@@ -134,7 +117,6 @@ public class RunningFragment extends Fragment implements View.OnClickListener{
     }
     private void initViews() {
         toRecord=(TextView)getActivity().findViewById(R.id.fg_running_textView);
-        checkNeighbour=(ImageView)getActivity().findViewById(R.id.fg_running_checkneighbour);
         item_weixin = (TextView) getActivity().findViewById(R.id.item_weixin);
         item_tongxunlu = (TextView) getActivity().findViewById(R.id.item_tongxunlu);
 

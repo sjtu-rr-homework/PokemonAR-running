@@ -66,8 +66,6 @@ public class ElfsFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
                     //选择只查看已有精灵
-                    /*HttpHandler.getElfs(getActivity(), UserData.getUserName());
-                    while(lock){};*/
                     UserData.reverse();
                     TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity(),UserData.getElfList());
                     mRecyclerView.setAdapter(adapter);
