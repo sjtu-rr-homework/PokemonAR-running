@@ -1,7 +1,10 @@
 package example.com.pkmnavidemo4;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -23,15 +26,29 @@ import java.util.List;
 import example.com.pkmnavidemo4.classes.HttpHandler;
 import example.com.pkmnavidemo4.classes.SharedPreferencesUtil;
 import example.com.pkmnavidemo4.classes.UserData;
+import example.com.pkmnavidemo4.classes.WeiboDialogUtils;
 
 public class LoginActivity  extends AppCompatActivity {
     private Button login;
     private TextView toRegister;
+    private Dialog mWeiboDialog;
     EditText usernameText;
     EditText passwordText;
     TextView text;
     CheckBox remember_password;
     CheckBox auto_login;
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    WeiboDialogUtils.closeDialog(mWeiboDialog);
+                    break;
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +67,9 @@ public class LoginActivity  extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mWeiboDialog = WeiboDialogUtils.createLoadingDialog(LoginActivity.this, "加载中...");
+                mHandler.sendEmptyMessageDelayed(1, 2000);
+                /*
                 String username=usernameText.getText().toString();
                 String password=passwordText.getText().toString();
                 if(remember_password.isChecked()){
@@ -62,7 +82,8 @@ public class LoginActivity  extends AppCompatActivity {
                 HttpHandler.getElfs(username);
                 HttpHandler.getExp(username);
                 UserData.setUserInfo(username,1);
-                UserData.initonlyHave();
+                UserData.initonlyHave();*/
+
             }
         });
         auto_login.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
