@@ -63,13 +63,23 @@ public class LoginActivity  extends AppCompatActivity {
             usernameText.setText(SharedPreferencesUtil.getString(getApplicationContext(),"username",""));
             passwordText.setText(SharedPreferencesUtil.getString(getApplicationContext(),"password",""));
             remember_password.setChecked(true);
+            if(SharedPreferencesUtil.getBoolean(getApplicationContext(),"isauto",false)){
+                auto_login.setChecked(true);
+                mWeiboDialog = WeiboDialogUtils.createLoadingDialog(LoginActivity.this, "自动登录中...");
+                mHandler.sendEmptyMessageDelayed(1, 1000);
+                String username=usernameText.getText().toString();
+                String password=passwordText.getText().toString();
+                HttpHandler.login(LoginActivity.this,username,password);
+                HttpHandler.getMileage(username);
+                HttpHandler.getElfs(username);
+                HttpHandler.getExp(username);
+                UserData.setUserInfo(username,1);
+                UserData.initonlyHave();
+            }
         }
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mWeiboDialog = WeiboDialogUtils.createLoadingDialog(LoginActivity.this, "加载中...");
-                mHandler.sendEmptyMessageDelayed(1, 2000);
-                /*
                 String username=usernameText.getText().toString();
                 String password=passwordText.getText().toString();
                 if(remember_password.isChecked()){
@@ -82,7 +92,7 @@ public class LoginActivity  extends AppCompatActivity {
                 HttpHandler.getElfs(username);
                 HttpHandler.getExp(username);
                 UserData.setUserInfo(username,1);
-                UserData.initonlyHave();*/
+                UserData.initonlyHave();
 
             }
         });

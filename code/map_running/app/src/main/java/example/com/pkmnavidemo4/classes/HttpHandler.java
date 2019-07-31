@@ -429,6 +429,9 @@ public class HttpHandler {
                         sb.append(s);
                     }
                     if(sb.toString().equals("true")){
+                        if(SharedPreferencesUtil.getBoolean(context.getApplicationContext(),"isremember",false)) {
+                            SharedPreferencesUtil.putBoolean(context.getApplicationContext(), "isauto", true);
+                        }
                         Looper.prepare();
                         UserData.setUserName(username);
                         Toast.makeText(context,"登陆成功",Toast.LENGTH_SHORT).show();
