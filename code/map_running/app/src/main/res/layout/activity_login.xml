@@ -61,6 +61,7 @@
             android:background="#11000000" />
 
         <CheckBox
+            android:id="@+id/act_login_remember"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -68,6 +69,7 @@
             android:textSize="14sp"
             android:text="记住密码"/>
         <CheckBox
+            android:id="@+id/act_login_auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
