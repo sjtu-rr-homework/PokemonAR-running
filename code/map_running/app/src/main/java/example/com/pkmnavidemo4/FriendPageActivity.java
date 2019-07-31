@@ -29,8 +29,8 @@ public class FriendPageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friendpage);
-        HttpHandler.getFriend();
-        while(!UserData.isFriendGet){
+        HttpHandler.getUserInfo();
+        while(!UserData.isUserinfoGet){
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {

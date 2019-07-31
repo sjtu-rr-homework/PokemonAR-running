@@ -1,5 +1,6 @@
 package example.com.pkmnavidemo4.classes;
 
+import android.content.Context;
 import android.util.Log;
 import android.util.Pair;
 
@@ -15,6 +16,11 @@ import java.util.concurrent.locks.ReentrantLock;
 import example.com.pkmnavidemo4.SceneformActivity;
 
 public class UserData {
+
+
+    private static double mileage;
+    private static double mileageGoal;
+    public static double distance;
     public static boolean isFriendInfoGet=false;
     private static Map userInfo;
     private static Map friendUserInfo;
@@ -23,11 +29,40 @@ public class UserData {
     private static String userName;
     private static List<String> elfList;
     private static  List<Map> elfDetailsList;
+    private static  List<Map> moments;
+    public static  boolean isMomentsGet=false;
     private static  boolean onlyHave=false;
-    public static boolean isFriendGet=false;
+    public static boolean isUserinfoGet=false;
     public static int flagNum=0;
     public static Map<Integer,Integer> catchElfList=new HashMap();
     public static List<LatLng> constraint=new ArrayList<LatLng>();
+    public static List<Map> getMoments() {
+        isMomentsGet=true;
+        HttpHandler.getMoments();
+        while(isMomentsGet){
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return moments;
+    }
+    public static void setMoments( List<Map> getMoments) {
+        moments = getMoments;
+    }
+    public static double getMileage(){
+        return mileage;
+    }
+    public static double getMileageGoal(){
+        return mileageGoal;
+    }
+    public static void setMileage(double mileage){
+        UserData.mileage=mileage;
+    }
+    public static void setMileageGoal(double mileageGoal){
+        UserData.mileageGoal=mileageGoal;
+    }
     public static void catchOne(int variety){
          if(catchElfList.get(variety)==null)
              catchElfList.put(variety,1);

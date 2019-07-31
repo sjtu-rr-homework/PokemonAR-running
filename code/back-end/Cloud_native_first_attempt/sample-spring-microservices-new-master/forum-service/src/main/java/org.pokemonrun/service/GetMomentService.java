@@ -5,6 +5,7 @@ import org.pokemonrun.info.MomentInfo;
 import java.util.List;
 
 public interface GetMomentService {
-    List<MomentInfo> getAll();
-    List<MomentInfo> getOneUser(String username);
+    List<MomentInfo> getAll(String timestamp);
+    List<MomentInfo> getOneUser(String username, String timestamp);
+    List<MomentInfo> refresh(String timestamp);
 }

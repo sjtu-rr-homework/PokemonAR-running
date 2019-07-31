@@ -2,6 +2,8 @@ package example.com.pkmnavidemo4;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,19 +26,24 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.Button;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import example.com.pkmnavidemo4.classes.HttpHandler;
-import example.com.pkmnavidemo4.testsend.Adapter;
-import example.com.pkmnavidemo4.testsend.BitmapUtils;
+import example.com.pkmnavidemo4.Bitmap.Adapter;
+import example.com.pkmnavidemo4.Bitmap.BitmapUtils;
+import example.com.pkmnavidemo4.classes.UserData;
 
 public class ShareActivity extends Activity {
 	private List<Bitmap> data = new ArrayList<Bitmap>();
+	private List<String> jsonData=new ArrayList<>();
 	private GridView mGridView;
 	private String photoPath;
 	private Adapter adapter;
-
+    private TextView content;
+    private Button send;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,8 +51,10 @@ public class ShareActivity extends Activity {
        // 设置默认图片为加号
 		Bitmap bp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_addpic);
 		data.add(bp);
+		//找到内容控件
+		content=findViewById(R.id.act_share_content_et);
 		// 找到控件ID
-		mGridView = (GridView) findViewById(R.id.gridView1);
+		mGridView = (GridView) findViewById(R.id.act_share_gridView1);
 		// 绑定Adapter
 		adapter = new Adapter(getApplicationContext(), data, mGridView);
 		mGridView.setAdapter(adapter);
@@ -54,8 +63,8 @@ public class ShareActivity extends Activity {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				if (data.size() ==2) {
-					Toast.makeText(ShareActivity.this, "只能添加一张照片", Toast.LENGTH_SHORT).show();
+				if (data.size() ==10) {
+					Toast.makeText(ShareActivity.this, "只能添加九张照片", Toast.LENGTH_SHORT).show();
 				} else {
 					if (position == data.size() - 1) {
 						Toast.makeText(ShareActivity.this, "添加图片", Toast.LENGTH_SHORT).show();
@@ -78,7 +87,14 @@ public class ShareActivity extends Activity {
 				return true;
 			}
 		});
-
+		send=findViewById(R.id.act_share_send_btn);
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Timestamp time = new Timestamp(System.currentTimeMillis());
+                HttpHandler.postPic(jsonData,time.toString(), UserData.getUserName(),content.getText().toString());
+            }
+        });
 	}
 	/*
 	 * Dialog对话框提示用户删除操作 position为删除图片位置
@@ -92,6 +108,7 @@ public class ShareActivity extends Activity {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					dialog.dismiss();
+					jsonData.remove(position);
 					data.remove(position);
 					adapter.notifyDataSetChanged();
 				}
@@ -123,8 +140,11 @@ public class ShareActivity extends Activity {
 					cursor.moveToFirst();
 					// 最后根据索引值获取图片路径
 					photoPath = cursor.getString(column_index);
-					Bitmap bp=BitmapFactory.decodeFile(photoPath);
-					HttpHandler.postPic(bitmapToBase64(bp));
+					Bitmap term=BitmapFactory.decodeFile(photoPath);
+					int width=term.getWidth()/8;
+					int height=term.getHeight()/8;
+					Bitmap bp=BitmapUtils.decodeSampledBitmapFromFd(photoPath,width,height);
+					jsonData.add(bitmapToBase64(bp));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -185,13 +205,4 @@ public class ShareActivity extends Activity {
 		return result;
 	}
 
-	/**
-	 * base64转为bitmap
-	 * @param base64Data
-	 * @return
-	 */
-	public static Bitmap base64ToBitmap(String base64Data) {
-		byte[] bytes = Base64.decode(base64Data, Base64.DEFAULT);
-		return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-	}
 }
