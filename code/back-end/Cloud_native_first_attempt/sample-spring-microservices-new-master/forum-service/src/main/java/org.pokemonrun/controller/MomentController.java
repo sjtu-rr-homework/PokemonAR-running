@@ -33,5 +33,9 @@ public class MomentController {
         return GetMomentService.getAll(timestamp);
     }
 
+    @GetMapping("/get/refresh/moment/timestamp/{timestamp}")
+    public List<MomentInfo> refreshMoment(@PathVariable("timestamp") String timestamp) {
+        return GetMomentService.refresh(timestamp);
+    }
 
 }
