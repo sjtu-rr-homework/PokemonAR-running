@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -46,8 +47,7 @@ public class ElfsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.elfs_fg_content,container,false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.elf_fg_recycle_view);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
         initData();
         //实例化并传输数据给adapter
         TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity(),list);
