@@ -15,6 +15,7 @@ import com.amap.api.col.stln3.dm;
 
 import java.util.List;
 
+import example.com.pkmnavidemo4.Bitmap.BitmapUtils;
 import example.com.pkmnavidemo4.R;
 import example.com.pkmnavidemo4.SquareActivity;
 
@@ -188,7 +189,7 @@ public class FriendsCircleImageLayout extends ViewGroup {
 
         for (int i = 0; i < images.size(); i++) {
             ImageView imageView = new ImageView(getContext());
-            imageView.setImageBitmap(base64ToBitmap(images.get(i)));
+            imageView.setImageBitmap(BitmapUtils.base64ToBitmap(images.get(i)));
             addView(imageView);
             //点击查看大图
             int finalI = i;
@@ -197,7 +198,7 @@ public class FriendsCircleImageLayout extends ViewGroup {
                 public void onClick(View v) {
                     final Dialog dialog = new Dialog(getContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
                     ImageView imgView = new ImageView(getContext());
-                    imgView.setImageBitmap(base64ToBitmap(images.get(finalI)));
+                    imgView.setImageBitmap(BitmapUtils.base64ToBitmap(images.get(finalI)));
                     dialog.setContentView(imgView);
                     dialog.show();
 
@@ -206,15 +207,6 @@ public class FriendsCircleImageLayout extends ViewGroup {
         }
     }
 
-    /**
-     * base64转为bitmap
-     * @param base64Data
-     * @return
-     */
-    public static Bitmap base64ToBitmap(String base64Data) {
-        byte[] bytes = Base64.decode(base64Data, Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-    }
 
     public int getItemWidth() {
         return mItemWidth;

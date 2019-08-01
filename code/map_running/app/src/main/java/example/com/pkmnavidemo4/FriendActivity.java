@@ -15,14 +15,15 @@ import example.com.pkmnavidemo4.classes.HttpHandler;
 import example.com.pkmnavidemo4.classes.UserData;
 
 public class FriendActivity extends AppCompatActivity {
-    ImageView elfImage;
-    TextView username;
-    int elfId=-1;
-    TextView elfname;
-    TextView level;
-    TextView fightPoint;
-    Button addfriend;
-    Button fightfriend;
+    private ImageView elfImage;
+    private TextView username;
+    private int elfId=-1;
+    private TextView elfname;
+    private TextView level;
+    private TextView fightPoint;
+    private Button addfriend;
+    private Button fightfriend;
+    private ImageView cover;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +43,11 @@ public class FriendActivity extends AppCompatActivity {
         fightPoint.setText(""+ElfSourceController.getPower(typeID,exp/100+1,grade));
         addfriend=(Button)findViewById(R.id.act_friend_add);
         fightfriend=(Button)findViewById(R.id.act_friend_fight);
+        cover=findViewById(R.id.act_friend_cover);
+        if(UserData.getCover(friendname)==null)
+            cover.setBackgroundResource(R.drawable.pikachu);
+        else
+            cover.setImageBitmap(UserData.getCover(friendname));
         elfImage=findViewById(R.id.act_friend_elf);
         elfImage.setBackgroundResource(ElfSourceController.getBackgroundWithLevel(typeID,grade));
         if(type==1){
