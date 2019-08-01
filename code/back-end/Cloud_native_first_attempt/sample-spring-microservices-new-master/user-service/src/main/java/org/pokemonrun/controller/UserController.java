@@ -90,7 +90,7 @@ public class UserController {
 		return ModifyUserInfo.addCover(Coverinfo);
 	}
 	@GetMapping("/get/cover/username/{username}")
-	public byte[] getCover(@PathVariable("username") String username)
+	public Coverinfo getCover(@PathVariable("username") String username)
 	{
 		return GetUserInfo.getCover(username);
 	}

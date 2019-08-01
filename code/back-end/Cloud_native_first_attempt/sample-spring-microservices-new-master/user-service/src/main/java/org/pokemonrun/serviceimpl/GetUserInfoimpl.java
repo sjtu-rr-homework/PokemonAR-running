@@ -4,6 +4,7 @@ import org.pokemonrun.dao.CoverDao;
 import org.pokemonrun.dao.UserDao;
 import org.pokemonrun.entity.Cover;
 import org.pokemonrun.entity.User;
+import org.pokemonrun.info.Coverinfo;
 import org.pokemonrun.info.Friendinfo;
 import org.pokemonrun.info.UserInfoForAdmin;
 import org.pokemonrun.info.Userinfo;
@@ -82,7 +83,7 @@ public class GetUserInfoimpl implements GetUserInfo {
     }
 
     @Override
-    public byte[] getCover(String username) {
+    public Coverinfo getCover(String username) {
         User tempUser=UserDao.findOne(username);
         if(tempUser==null)
         {
@@ -95,7 +96,8 @@ public class GetUserInfoimpl implements GetUserInfo {
         }
         else
         {
-            return tempCover.pic;
+            Coverinfo res =new Coverinfo(username,tempCover.pic);
+            return res;
         }
     }
 
