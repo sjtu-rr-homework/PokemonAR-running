@@ -1,0 +1,208 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: User</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">org.pokemonrun.entity</a> ]
+</div>
+
+<h1>Coverage Summary for Class: User (org.pokemonrun.entity)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">User</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (22/ 22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (38/ 38)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package org.pokemonrun.entity;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.fasterxml.jackson.annotation.JsonBackReference;
+<i>4</i>&nbsp;import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+<i>5</i>&nbsp;import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+<i>6</i>&nbsp;import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import javax.persistence.*;
+<i>9</i>&nbsp;import java.io.Serializable;
+<i>10</i>&nbsp;import java.util.HashSet;
+<i>11</i>&nbsp;import java.util.Objects;
+<i>12</i>&nbsp;import java.util.Set;
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;@Entity
+<i>15</i>&nbsp;@JsonIgnoreProperties(value = {&quot;handler&quot;,&quot;hibernateLazyInitializer&quot;,&quot;fieldHandler&quot;})
+<i>16</i>&nbsp;@JsonIdentityInfo(
+<i>17</i>&nbsp;        generator = ObjectIdGenerators.PropertyGenerator.class,
+<i>18</i>&nbsp;        property = &quot;userID&quot;)
+<i>19</i>&nbsp;public class User implements Serializable {
+<i>20</i>&nbsp;    private int userID;
+<i>21</i>&nbsp;    private String username;
+<i>22</i>&nbsp;    private String password;
+<i>23</i>&nbsp;    private String email;
+<i>24</i>&nbsp;    private int star;
+<i>25</i>&nbsp;    private int exp;
+<i>26</i>&nbsp;    private int pet;
+<i>27</i>&nbsp;    private double distance;
+<b class="fc"><i>28</i>&nbsp;    private Set&lt;User&gt; following = new HashSet&lt;User&gt;();</b>
+<b class="fc"><i>29</i>&nbsp;    private Set&lt;User&gt; followers = new HashSet&lt;User&gt;();</b>
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    @Id
+<i>32</i>&nbsp;    @Column(name = &quot;userID&quot;)
+<i>33</i>&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+<b class="fc"><i>34</i>&nbsp;    public int getUserID() { return userID; }</b>
+<i>35</i>&nbsp;
+<b class="fc"><i>36</i>&nbsp;    public void setUserID(int userID) { this.userID=userID; }</b>
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    @Basic
+<i>39</i>&nbsp;    @Column(name = &quot;username&quot; ,unique=true)
+<i>40</i>&nbsp;    public String getUsername() {
+<b class="fc"><i>41</i>&nbsp;        return username;</b>
+<i>42</i>&nbsp;    }
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;    public void setUsername(String username) {
+<b class="fc"><i>45</i>&nbsp;        this.username = username;</b>
+<b class="fc"><i>46</i>&nbsp;    }</b>
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    @Basic
+<i>50</i>&nbsp;    @Column(name = &quot;password&quot;)
+<i>51</i>&nbsp;    public String getPassword() {
+<b class="fc"><i>52</i>&nbsp;        return password;</b>
+<i>53</i>&nbsp;    }
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;    public void setPassword(String password) {
+<b class="fc"><i>56</i>&nbsp;        this.password = password;</b>
+<b class="fc"><i>57</i>&nbsp;    }</b>
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;    @Basic
+<i>60</i>&nbsp;    @Column(name = &quot;email&quot;)
+<i>61</i>&nbsp;    public String getEmail() {
+<b class="fc"><i>62</i>&nbsp;        return email;</b>
+<i>63</i>&nbsp;    }
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;    public void setEmail(String email) {
+<b class="fc"><i>66</i>&nbsp;        this.email = email;</b>
+<b class="fc"><i>67</i>&nbsp;    }</b>
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;    @Basic
+<i>70</i>&nbsp;    @Column(name = &quot;star&quot;)
+<b class="fc"><i>71</i>&nbsp;    public int getStar() { return star; }</b>
+<i>72</i>&nbsp;
+<b class="fc"><i>73</i>&nbsp;    public void setStar(int star) { this.star =star; }</b>
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;    @Basic
+<i>76</i>&nbsp;    @Column(name = &quot;exp&quot;)
+<b class="fc"><i>77</i>&nbsp;    public int getExp() {return exp;}</b>
+<b class="fc"><i>78</i>&nbsp;    public void setExp(int exp) { this.exp=exp; }</b>
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;    @Basic
+<i>81</i>&nbsp;    @Column(name=&quot;pet&quot;)
+<b class="fc"><i>82</i>&nbsp;    public int getPet() {return pet; }</b>
+<b class="fc"><i>83</i>&nbsp;    public void setPet(int pet) { this.pet=pet; }</b>
+<i>84</i>&nbsp;
+<i>85</i>&nbsp;    @Basic
+<i>86</i>&nbsp;    @Column(name=&quot;distance&quot;)
+<b class="fc"><i>87</i>&nbsp;    public double getDistance() {return distance; }</b>
+<b class="fc"><i>88</i>&nbsp;    public void setDistance(double distance) {this.distance=distance; }</b>
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;    @ManyToMany(cascade = CascadeType.ALL)
+<i>91</i>&nbsp;    @JoinTable(name=&quot;UserRel&quot;,
+<i>92</i>&nbsp;            joinColumns={@JoinColumn(name=&quot;ParentId&quot;)},
+<i>93</i>&nbsp;            inverseJoinColumns={@JoinColumn(name=&quot;UserId&quot;)})
+<i>94</i>&nbsp;    @JsonBackReference
+<b class="fc"><i>95</i>&nbsp;    public Set&lt;User&gt; getFollowers() {return followers;}</b>
+<b class="fc"><i>96</i>&nbsp;    public void setFollowers(Set&lt;User&gt; followers) {this.followers=followers; }</b>
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;
+<i>99</i>&nbsp;    @ManyToMany(cascade = CascadeType.ALL)
+<i>100</i>&nbsp;    @JoinTable(name=&quot;UserRel&quot;,
+<i>101</i>&nbsp;            joinColumns={@JoinColumn(name=&quot;UserId&quot;)},
+<i>102</i>&nbsp;            inverseJoinColumns={@JoinColumn(name=&quot;ParentId&quot;)})
+<i>103</i>&nbsp;    @JsonBackReference
+<b class="fc"><i>104</i>&nbsp;    public Set&lt;User&gt; getFollowing(){return following; }</b>
+<b class="fc"><i>105</i>&nbsp;    public void setFollowing(Set&lt;User&gt; following) {this.following= following; }</b>
+<i>106</i>&nbsp;
+<i>107</i>&nbsp;    private User()
+<b class="fc"><i>108</i>&nbsp;    {</b>
+<i>109</i>&nbsp;
+<b class="fc"><i>110</i>&nbsp;    }</b>
+<i>111</i>&nbsp;
+<i>112</i>&nbsp;    public User(String username,String password,String email,int star,int exp,int pet)
+<b class="fc"><i>113</i>&nbsp;    {</b>
+<b class="fc"><i>114</i>&nbsp;        this.username=username;</b>
+<b class="fc"><i>115</i>&nbsp;        this.password=password;</b>
+<b class="fc"><i>116</i>&nbsp;        this.email=email;</b>
+<b class="fc"><i>117</i>&nbsp;        this.star=star;</b>
+<b class="fc"><i>118</i>&nbsp;        this.exp=exp;</b>
+<b class="fc"><i>119</i>&nbsp;        this.pet=pet;</b>
+<b class="fc"><i>120</i>&nbsp;        this.distance=0;</b>
+<b class="fc"><i>121</i>&nbsp;        this.followers=new HashSet&lt;User&gt;();</b>
+<b class="fc"><i>122</i>&nbsp;        this.following=new HashSet&lt;User&gt;();</b>
+<i>123</i>&nbsp;
+<b class="fc"><i>124</i>&nbsp;    }</b>
+<i>125</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-08-01 16:11</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: RegisterServiceimpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">org.pokemonrun.serviceimpl</a> ]
+</div>
+
+<h1>Coverage Summary for Class: RegisterServiceimpl (org.pokemonrun.serviceimpl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RegisterServiceimpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package org.pokemonrun.serviceimpl;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import org.pokemonrun.entity.User;
+<i>4</i>&nbsp;import org.pokemonrun.service.RegisterService;
+<i>5</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>6</i>&nbsp;import org.springframework.stereotype.Service;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;@Service
+<b class="fc"><i>9</i>&nbsp;public class RegisterServiceimpl implements RegisterService {</b>
+<i>10</i>&nbsp;    @Autowired
+<i>11</i>&nbsp;    private org.pokemonrun.dao.UserDao UserDao;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;    @Override
+<i>14</i>&nbsp;    public boolean Register(String username, String password, String email, int star) {
+<i>15</i>&nbsp;
+<b class="fc"><i>16</i>&nbsp;        User tempUser=UserDao.findOne(username);</b>
+<b class="fc"><i>17</i>&nbsp;        if(tempUser==null) {</b>
+<b class="fc"><i>18</i>&nbsp;            UserDao.save(username, password, email, star);</b>
+<b class="fc"><i>19</i>&nbsp;            return true;</b>
+<i>20</i>&nbsp;        }
+<i>21</i>&nbsp;        else
+<i>22</i>&nbsp;        {
+<b class="fc"><i>23</i>&nbsp;            return false;</b>
+<i>24</i>&nbsp;        }
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    }
+<i>27</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-08-01 16:11</div>
+</div>
+</body>
+</html>
