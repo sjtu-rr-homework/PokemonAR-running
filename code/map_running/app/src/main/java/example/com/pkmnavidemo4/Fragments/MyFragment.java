@@ -43,6 +43,7 @@ public class MyFragment extends Fragment {
     private TextView elfname;
     private TextView level;
     private TextView fightPoint;
+    private TextView myExp;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fg_content,container,false);
@@ -54,7 +55,7 @@ public class MyFragment extends Fragment {
         distance=(TextView)view.findViewById(R.id.fg_achieve);
         mileage=(TextView)view.findViewById(R.id.fg_score);
         mileageGoal=(TextView)view.findViewById(R.id.fg_goal);
-
+        myExp=view.findViewById(R.id.fg_layout_check_exp);
         DecimalFormat format=new DecimalFormat("#0.00");
         distance.setText(""+format.format(UserData.distance/1000)+"公里");
         mileage.setText(""+format.format(UserData.getMileage()/1000)+"公里");
@@ -73,7 +74,7 @@ public class MyFragment extends Fragment {
         fightPoint.setText(""+ElfSourceController.getPower(typeID,exp/100+1,grade));
         elfImage=view.findViewById(R.id.fg_elf);
         elfImage.setBackgroundResource(ElfSourceController.getBackgroundWithLevel(typeID,grade));
-
+        myExp.setText(UserData.getExp()+"");
         checkfriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -135,9 +136,10 @@ public class MyFragment extends Fragment {
             int exp=(int)UserData.getElfWithId(typeID).get("exp");
             username.setText(UserData.getUserName());
             elfname.setText(ElfSourceController.getName(typeID,grade));
-            level.setText(""+(exp/100+1));
+            level.setText("lv."+(exp/100+1));
             fightPoint.setText(""+ElfSourceController.getPower(typeID,exp/100+1,grade));
             elfImage.setBackgroundResource(ElfSourceController.getBackgroundWithLevel(typeID,grade));
+            myExp.setText(UserData.getExp()+"");
         }
     }
 
