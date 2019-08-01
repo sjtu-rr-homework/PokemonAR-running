@@ -27,6 +27,15 @@ public class RecordServiceImpl implements RecordService {
     @Override
     public List<RunningRecordInfo> getUserRecordList(String username) {
         List<RunningRecord> list = runningRecordDao.findByUsername(username);
+        list.sort((RunningRecord o1, RunningRecord o2) -> {
+            // descending
+            if(o1.getStartTime() < o2.getStartTime()){
+                return 1;
+            }else if(o1.getStartTime() > o2.getStartTime()){
+                return -1;
+            }
+            return 0;
+        });
         List<RunningRecordInfo> result = new LinkedList<>();
         for(RunningRecord record : list){
             result.add(new RunningRecordInfo(record));

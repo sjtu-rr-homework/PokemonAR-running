@@ -53,6 +53,7 @@ public class LoginActivity  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        HttpHandler.getlimit();
         usernameText=(EditText)findViewById(R.id.name);
         passwordText=(EditText)findViewById(R.id.password);
         remember_password=(CheckBox)findViewById(R.id.act_login_remember);

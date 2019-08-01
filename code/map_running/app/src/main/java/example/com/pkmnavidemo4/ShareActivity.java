@@ -2,7 +2,6 @@ package example.com.pkmnavidemo4;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -32,7 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import example.com.pkmnavidemo4.classes.HttpHandler;
-import example.com.pkmnavidemo4.Bitmap.Adapter;
+import example.com.pkmnavidemo4.classes.AddPictureAdapter;
 import example.com.pkmnavidemo4.Bitmap.BitmapUtils;
 import example.com.pkmnavidemo4.classes.UserData;
 
@@ -41,7 +39,7 @@ public class ShareActivity extends Activity {
 	private List<String> jsonData=new ArrayList<>();
 	private GridView mGridView;
 	private String photoPath;
-	private Adapter adapter;
+	private AddPictureAdapter addPictureAdapter;
     private TextView content;
     private Button send;
 	@Override
@@ -56,8 +54,8 @@ public class ShareActivity extends Activity {
 		// 找到控件ID
 		mGridView = (GridView) findViewById(R.id.act_share_gridView1);
 		// 绑定Adapter
-		adapter = new Adapter(getApplicationContext(), data, mGridView);
-		mGridView.setAdapter(adapter);
+		addPictureAdapter = new AddPictureAdapter(getApplicationContext(), data, mGridView);
+		mGridView.setAdapter(addPictureAdapter);
 		// 设置点击监听事件
 		mGridView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -91,6 +89,10 @@ public class ShareActivity extends Activity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+            	if(content.getText().toString()== null ||content.getText().toString().replace(" ", "").equals("")&&jsonData.isEmpty()){
+					Toast.makeText(getApplicationContext(), "不能发送空的动态!", Toast.LENGTH_SHORT).show();
+            		return;
+				}
                 Timestamp time = new Timestamp(System.currentTimeMillis());
                 HttpHandler.postPic(jsonData,time.toString(), UserData.getUserName(),content.getText().toString());
             }
@@ -110,7 +112,7 @@ public class ShareActivity extends Activity {
 					dialog.dismiss();
 					jsonData.remove(position);
 					data.remove(position);
-					adapter.notifyDataSetChanged();
+					addPictureAdapter.notifyDataSetChanged();
 				}
 			});
 			builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -166,7 +168,7 @@ public class ShareActivity extends Activity {
 			data.add(bp);
 			//将路径设置为空，防止在手机休眠后返回Activity调用此方法时添加照片
 			photoPath = null;
-			adapter.notifyDataSetChanged();
+			addPictureAdapter.notifyDataSetChanged();
 		}
 	}
 
