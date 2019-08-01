@@ -1,0 +1,137 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CampusRecordServiceImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">org.pokemonrun.serviceimpl</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CampusRecordServiceImpl (org.pokemonrun.serviceimpl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CampusRecordServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 16)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package org.pokemonrun.serviceimpl;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import org.pokemonrun.dao.BasicRuleDao;
+<i>4</i>&nbsp;import org.pokemonrun.dao.CampusRecordDao;
+<i>5</i>&nbsp;import org.pokemonrun.dao.SemesterDao;
+<i>6</i>&nbsp;import org.pokemonrun.entity.BasicRule;
+<i>7</i>&nbsp;import org.pokemonrun.entity.Semester;
+<i>8</i>&nbsp;import org.pokemonrun.service.CampusRecordService;
+<i>9</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>10</i>&nbsp;import org.springframework.stereotype.Service;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;import java.sql.Timestamp;
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;@Service
+<b class="nc"><i>15</i>&nbsp;public class CampusRecordServiceImpl implements CampusRecordService {</b>
+<i>16</i>&nbsp;    @Autowired
+<i>17</i>&nbsp;    private CampusRecordDao campusRecordDao;
+<i>18</i>&nbsp;    @Autowired
+<i>19</i>&nbsp;    private SemesterDao semesterDao;
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    private boolean isInTimeWindow(){
+<b class="nc"><i>22</i>&nbsp;        Timestamp now = new Timestamp(System.currentTimeMillis());</b>
+<b class="nc"><i>23</i>&nbsp;        Semester semester = semesterDao.getSemester();</b>
+<b class="nc"><i>24</i>&nbsp;        if(semester == null){</b>
+<b class="nc"><i>25</i>&nbsp;            return false;</b>
+<i>26</i>&nbsp;        }
+<b class="nc"><i>27</i>&nbsp;        Timestamp end = semester.getEndTime();</b>
+<b class="nc"><i>28</i>&nbsp;        return !now.after(end);</b>
+<i>29</i>&nbsp;    }
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    @Override
+<i>32</i>&nbsp;    public String getCampusRunningLength(String username) {
+<b class="nc"><i>33</i>&nbsp;        return String.valueOf(campusRecordDao.getMileage(username));</b>
+<i>34</i>&nbsp;    }
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;    @Override
+<i>37</i>&nbsp;    public boolean appendCampusRunningLength(String username, String length) {
+<i>38</i>&nbsp;        // empty length
+<b class="nc"><i>39</i>&nbsp;        if(length.isEmpty()){</b>
+<b class="nc"><i>40</i>&nbsp;            return false;</b>
+<i>41</i>&nbsp;        }
+<i>42</i>&nbsp;        // negative length
+<b class="nc"><i>43</i>&nbsp;        double len = Double.parseDouble(length);</b>
+<b class="nc"><i>44</i>&nbsp;        if(len &lt; 0){</b>
+<b class="nc"><i>45</i>&nbsp;            return false;</b>
+<i>46</i>&nbsp;        }
+<i>47</i>&nbsp;        // not in time window
+<b class="nc"><i>48</i>&nbsp;        if(!isInTimeWindow()){</b>
+<b class="nc"><i>49</i>&nbsp;            return false;</b>
+<i>50</i>&nbsp;        }
+<i>51</i>&nbsp;        // access Dao
+<b class="nc"><i>52</i>&nbsp;        return campusRecordDao.addMileage(username, len);</b>
+<i>53</i>&nbsp;    }
+<i>54</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-08-01 16:06</div>
+</div>
+</body>
+</html>
