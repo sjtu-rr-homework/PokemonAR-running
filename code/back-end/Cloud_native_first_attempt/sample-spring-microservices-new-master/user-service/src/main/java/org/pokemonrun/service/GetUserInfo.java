@@ -10,4 +10,6 @@ public interface GetUserInfo {
     public UserInfoForAdmin AdminGetUserInfo(String username);
     public int GetPet(String username);
     public List<String> GetAllUser();
+    public byte[] getCover(String username);
+    public int getExp(String username);
 }
