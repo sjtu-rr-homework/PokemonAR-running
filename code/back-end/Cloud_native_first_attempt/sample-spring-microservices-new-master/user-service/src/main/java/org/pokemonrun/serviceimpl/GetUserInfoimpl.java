@@ -1,6 +1,8 @@
 package org.pokemonrun.serviceimpl;
 
+import org.pokemonrun.dao.CoverDao;
 import org.pokemonrun.dao.UserDao;
+import org.pokemonrun.entity.Cover;
 import org.pokemonrun.entity.User;
 import org.pokemonrun.info.Friendinfo;
 import org.pokemonrun.info.UserInfoForAdmin;
@@ -17,6 +19,8 @@ import java.util.Set;
 public class GetUserInfoimpl implements GetUserInfo {
     @Autowired
     UserDao UserDao;
+    @Autowired
+    CoverDao CoverDao;
     @Override
     public Userinfo getUserInfo(String username) {
         User temp=UserDao.findOne(username);
@@ -75,5 +79,36 @@ public class GetUserInfoimpl implements GetUserInfo {
             usernamelist.add(tempUser.getUsername());
         }
         return usernamelist;
+    }
+
+    @Override
+    public byte[] getCover(String username) {
+        User tempUser=UserDao.findOne(username);
+        if(tempUser==null)
+        {
+            return null;
+        }
+        Cover tempCover=CoverDao.getOneCover(username);
+        if(tempCover==null)
+        {
+            return null;
+        }
+        else
+        {
+            return tempCover.pic;
+        }
+    }
+
+    @Override
+    public int getExp(String username) {
+        User tempUser=UserDao.findOne(username);
+        if(tempUser==null)
+        {
+            return 0;
+        }
+        else
+        {
+            return tempUser.getExp();
+        }
     }
 }
