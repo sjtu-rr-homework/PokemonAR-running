@@ -72,6 +72,23 @@ public class PetServiceApplicationTests {
     }
 
     @Test
+    @Before
+    public void testAddGrade() throws Exception {
+        mockMvc.perform(get("/user/wzr/addgrade/1/grade/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+        mockMvc.perform(get("/user/wzr/addgrade/1/grade/2"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+        mockMvc.perform(get("/user/wzr/addgrade/2/grade/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+        mockMvc.perform(get("/user/wzr/addgrade/5/grade/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("false"));
+    }
+
+    @Test
     public void testQuery() throws Exception {
         mockMvc.perform(get("/user/wzr/own/1"))
                 .andExpect(status().isOk())

@@ -98,6 +98,7 @@ public class ShareActivity extends Activity {
             }
         });
 	}
+
 	/*
 	 * Dialog对话框提示用户删除操作 position为删除图片位置
 	 */
@@ -146,7 +147,7 @@ public class ShareActivity extends Activity {
 					int width=term.getWidth()/8;
 					int height=term.getHeight()/8;
 					Bitmap bp=BitmapUtils.decodeSampledBitmapFromFd(photoPath,width,height);
-					jsonData.add(bitmapToBase64(bp));
+					jsonData.add(BitmapUtils.bitmapToBase64(bp));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -155,8 +156,7 @@ public class ShareActivity extends Activity {
 		}
 	}
 
-
-
+	//显示缩略图
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -170,41 +170,6 @@ public class ShareActivity extends Activity {
 			photoPath = null;
 			addPictureAdapter.notifyDataSetChanged();
 		}
-	}
-
-	/**
-	 * bitmap转为base64
-	 * @param bitmap
-	 * @return
-	 */
-	public static String bitmapToBase64(Bitmap bitmap) {
-
-		String result = null;
-		ByteArrayOutputStream baos = null;
-		try {
-			if (bitmap != null) {
-				baos = new ByteArrayOutputStream();
-				bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-
-				baos.flush();
-				baos.close();
-
-				byte[] bitmapBytes = baos.toByteArray();
-				result = Base64.encodeToString(bitmapBytes, Base64.DEFAULT);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (baos != null) {
-					baos.flush();
-					baos.close();
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return result;
 	}
 
 }

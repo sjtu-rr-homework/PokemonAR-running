@@ -102,6 +102,7 @@ services:
     image: macoredroid/user-service:latest
     depends_on:
       - mysql-user
+      - mongo-cover
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     ports:
@@ -160,6 +161,14 @@ services:
     image: mongo
     ports:
       - "27017:27017"
+    networks:
+      - spring-cloud-network
+      
+  mongo-cover:
+    hostname: mongo-cover
+    image: mongo
+    ports:
+      - "27018:27017"
     networks:
       - spring-cloud-network
   
