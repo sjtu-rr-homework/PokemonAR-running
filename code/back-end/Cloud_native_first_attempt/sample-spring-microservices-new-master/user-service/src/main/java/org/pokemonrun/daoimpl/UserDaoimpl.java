@@ -1,7 +1,9 @@
 package org.pokemonrun.daoimpl;
 
 import org.pokemonrun.dao.UserDao;
+import org.pokemonrun.entity.Cover;
 import org.pokemonrun.entity.User;
+import org.pokemonrun.repository.CoverRepository;
 import org.pokemonrun.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,6 +15,9 @@ public class UserDaoimpl implements UserDao {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private CoverRepository CoverRepository;
 
     @Override
     public User findOne(String username) {
@@ -48,5 +53,16 @@ public class UserDaoimpl implements UserDao {
     @Override
     public List<User> getAllUser() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public Cover getOneCover(String username)
+    {
+        return CoverRepository.findByUsername(username);
+    }
+
+    @Override
+    public void saveCover(Cover cover) {
+        CoverRepository.save(cover);
     }
 }

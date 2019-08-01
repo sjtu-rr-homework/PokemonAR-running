@@ -30,10 +30,10 @@ public class GetUserInfoimpl implements GetUserInfo {
             Set<User> friendsset= temp.getFollowers();
             for(User tempUser:friendsset)
             {
-                Friendinfo tempInfo=new Friendinfo(tempUser.getUsername());
+                Friendinfo tempInfo=new Friendinfo(tempUser.getUsername(),UserDao.getOneCover(tempUser.getUsername()).pic);
                 friends.add(tempInfo);
             }
-            Userinfo tempinfo=new Userinfo(temp.getUsername(),temp.getStar(),temp.getEmail(),temp.getExp(),temp.getPet(),temp.getDistance(),friends);
+            Userinfo tempinfo=new Userinfo(temp.getUsername(),temp.getStar(),temp.getEmail(),temp.getExp(),temp.getPet(),temp.getDistance(),friends,UserDao.getOneCover(temp.getUsername()).pic);
             return tempinfo;
         }
     }

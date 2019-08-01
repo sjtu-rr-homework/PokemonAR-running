@@ -1,5 +1,6 @@
 package org.pokemonrun.dao;
 
+import org.pokemonrun.entity.Cover;
 import org.pokemonrun.entity.User;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface UserDao {
     List<User> findAll();
     void remove(Integer id);
     List<User> getAllUser();
+    Cover getOneCover(String username);
+    void saveCover(Cover cover);
 }

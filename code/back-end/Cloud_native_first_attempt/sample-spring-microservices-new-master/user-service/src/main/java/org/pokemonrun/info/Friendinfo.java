@@ -2,8 +2,10 @@ package org.pokemonrun.info;
 
 public class Friendinfo {
     public String friendname;
-    public Friendinfo(String friendname)
+    public byte[] cover;
+    public Friendinfo(String friendname,byte[] cover)
     {
         this.friendname=friendname;
+        this.cover=cover;
     }
 }
