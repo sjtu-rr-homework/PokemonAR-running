@@ -990,6 +990,55 @@ public class HttpHandler {
 
     }
 
+    public static void getlimit() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("haha","go1");
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String Url=UrlHead+"/rule/admin/rule/basic";
+                try {
+                    URL url=new URL(Url);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(8000);
+                    InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                    JSONArray array = new JSONArray(sb.toString());
+                    for (int j = 0; j < array.length(); ++j) {
+                        JSONObject jjj = array.getJSONObject(j);
+                        UserData.upper_border=Double.parseDouble(jjj.getString("minSpeed"));
+                        UserData.lower_border=Double.parseDouble(jjj.getString("maxSpeed"));
+                        Log.d("CCC", jjj.getString("lat") + "," + jjj.getString("lng"));
+                    }
+                    Log.d("123","---"+sb.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.d("haha",e.getMessage());
+                }finally {
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }).start();
+
+    }
+
     public static void refreshMoments(Timestamp t){
         new Thread(new Runnable() {
             @Override
