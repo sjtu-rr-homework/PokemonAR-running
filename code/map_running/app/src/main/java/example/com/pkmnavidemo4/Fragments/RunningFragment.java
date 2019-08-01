@@ -104,7 +104,8 @@ public class RunningFragment extends Fragment implements View.OnClickListener{
                 AlertDialog.Builder dialog=new AlertDialog.Builder(getActivity());
                 dialog.setTitle("学期目标");
                 DecimalFormat tmp_format=new DecimalFormat("#0.0");
-                dialog.setMessage("本学期跑步目标："+tmp_format.format(UserData.getMileageGoal()/1000)+"公里");
+                dialog.setMessage("\n本学期跑步目标："+tmp_format.format(UserData.getMileageGoal()/1000)+"公里\n"+"\n"+
+                                "配速要求:"+tmp_format.format(UserData.lower_border)+"min/km - "+tmp_format.format(UserData.upper_border)+"min/km");
                 dialog.setPositiveButton("返回", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

@@ -31,8 +31,8 @@ public class UserData {
     private static List<String> elfList;
     private static  List<Map> elfDetailsList;
     private static  List<Map> moments;
-    public static double upper_border=1000;
-    public static double lower_border=0;
+    public static double upper_border=-1;
+    public static double lower_border=-1;
     public static  boolean isMomentsGet=false;
     public static  boolean isMomentsRefresh=false;
     private static  boolean onlyHave=false;

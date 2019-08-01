@@ -1011,13 +1011,9 @@ public class HttpHandler {
                     while((s = br.readLine())!=null){
                         sb.append(s);
                     }
-                    JSONArray array = new JSONArray(sb.toString());
-                    for (int j = 0; j < array.length(); ++j) {
-                        JSONObject jjj = array.getJSONObject(j);
-                        UserData.upper_border=Double.parseDouble(jjj.getString("minSpeed"));
-                        UserData.lower_border=Double.parseDouble(jjj.getString("maxSpeed"));
-                        Log.d("CCC", jjj.getString("lat") + "," + jjj.getString("lng"));
-                    }
+                    JSONObject jjj = new JSONObject(sb.toString());
+                    UserData.upper_border=Double.parseDouble(jjj.getString("minSpeed"));
+                    UserData.lower_border=Double.parseDouble(jjj.getString("maxSpeed"));
                     Log.d("123","---"+sb.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
