@@ -89,6 +89,10 @@ public class ShareActivity extends Activity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+            	if(content.getText().toString()== null ||content.getText().toString().replace(" ", "").equals("")&&jsonData.isEmpty()){
+					Toast.makeText(getApplicationContext(), "不能发送空的动态!", Toast.LENGTH_SHORT).show();
+            		return;
+				}
                 Timestamp time = new Timestamp(System.currentTimeMillis());
                 HttpHandler.postPic(jsonData,time.toString(), UserData.getUserName(),content.getText().toString());
             }
