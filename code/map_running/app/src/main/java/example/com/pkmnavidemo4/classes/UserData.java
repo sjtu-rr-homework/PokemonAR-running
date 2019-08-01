@@ -17,11 +17,17 @@ import java.util.concurrent.locks.ReentrantLock;
 import example.com.pkmnavidemo4.SceneformActivity;
 
 public class UserData {
+    //判断所有动态是否已经获取
+    public static boolean isAllMomentsGet;
+    //锁.用来判断得到的新的最新动态时间戳是否更更新
+    public static boolean isNewTimeInit;
+    //新旧动态时间戳
     private static Timestamp oldForumTime;
     private static Timestamp newForumTime;
     private static double mileage;
     private static double mileageGoal;
     public static double distance;
+    //锁,朋友信息获取的锁
     public static boolean isFriendInfoGet=false;
     private static Map userInfo;
     private static Map friendUserInfo;
@@ -31,15 +37,24 @@ public class UserData {
     private static List<String> elfList;
     private static  List<Map> elfDetailsList;
     private static  List<Map> moments;
+    //动态获取锁
+    public static double upper_border=-1;
+    public static double lower_border=-1;
     public static  boolean isMomentsGet=false;
     public static  boolean isMomentsRefresh=false;
+    //用来判断是否只看已拥有精灵
     private static  boolean onlyHave=false;
+    //锁,自己信息获取的锁
     public static boolean isUserinfoGet=false;
     public static int flagNum=0;
     public static Map<Integer,Integer> catchElfList=new HashMap();
     public static List<LatLng> constraint=new ArrayList<LatLng>();
     public static void setNewForumTime(Timestamp t){
-        newForumTime=t;
+        //第一次进入时刷新最新动态时间或新得到的时间更新时才能更新
+        if(!isNewTimeInit||t.after(newForumTime)) {
+            newForumTime = t;
+            isNewTimeInit=true;
+        }
     }
     public static Timestamp getNewForumTime(){
         return newForumTime;

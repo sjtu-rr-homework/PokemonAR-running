@@ -110,6 +110,7 @@ public class FriendsCircleAdapter extends RecyclerView.Adapter {
             viewHolder.mContentTv.setText(moments.get(position).get("content")+"");
             //int count = (int) (Math.random() * 9);
             viewHolder.mImageLayout.setImageUrls((List<String>)moments.get(position).get("pics"));
+            viewHolder.mTimeTv.setText(moments.get(position).get("time").toString().substring(0,19));
         } else if (holder instanceof FootViewHolder) {
             FootViewHolder footViewHolder = (FootViewHolder) holder;
             switch (loadState) {
@@ -126,9 +127,9 @@ public class FriendsCircleAdapter extends RecyclerView.Adapter {
                     break;
 
                 case LOADING_END: // 加载到底
-                    footViewHolder.pbLoading.setVisibility(View.INVISIBLE);
-                    footViewHolder.tvLoading.setVisibility(View.INVISIBLE);
-                    footViewHolder.llEnd.setVisibility(View.VISIBLE);
+                    footViewHolder.pbLoading.setVisibility(View.VISIBLE);
+                    footViewHolder.tvLoading.setVisibility(View.VISIBLE);
+                    footViewHolder.llEnd.setVisibility(View.GONE);
                     break;
 
                 default:
@@ -167,13 +168,14 @@ public class FriendsCircleAdapter extends RecyclerView.Adapter {
         private TextView mNameTv;
         private TextView mContentTv;
         private FriendsCircleImageLayout mImageLayout;
-
+        private TextView mTimeTv;
         public ContentViewHolder(View itemView) {
             super(itemView);
             mAvatarView = itemView.findViewById(R.id.friends_circle_item_Image_view);
             mNameTv = itemView.findViewById(R.id.friends_circle_item_name_tv);
             mContentTv = itemView.findViewById(R.id.friends_circle_item_content_tv);
             mImageLayout = itemView.findViewById(R.id.friends_circle_item_image_layout);
+            mTimeTv=itemView.findViewById(R.id.friends_circle_item_content_time);
         }
     }
 

@@ -37,7 +37,12 @@ public class MyFragment extends Fragment {
     private TextView distance;
     private TextView mileage;
     private TextView mileageGoal;
-
+    private ImageView elfImage;
+    private TextView username;
+    private int elfId=-1;
+    private TextView elfname;
+    private TextView level;
+    private TextView fightPoint;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fg_content,container,false);
@@ -54,6 +59,20 @@ public class MyFragment extends Fragment {
         distance.setText(""+format.format(UserData.distance/1000)+"公里");
         mileage.setText(""+format.format(UserData.getMileage()/1000)+"公里");
         mileageGoal.setText(""+format.format(UserData.getMileageGoal()/1000)+"公里");
+
+        int typeID=(int)(UserData.getElfWithId((int)UserData.getUserInfo().get("pet")).get("typeID"));
+        int grade=(int)UserData.getElfWithId(typeID).get("grade");
+        int exp=(int)UserData.getElfWithId(typeID).get("exp");
+        username=(TextView)view.findViewById(R.id.fg_username);
+        username.setText(UserData.getUserName());
+        elfname=(TextView)view.findViewById(R.id.fg_elfname);
+        elfname.setText(ElfSourceController.getName(typeID,grade));
+        level=(TextView)view.findViewById(R.id.fg_elflevel);
+        level.setText(""+(exp/100+1));
+        fightPoint=(TextView)view.findViewById(R.id.fg_fightpoint);
+        fightPoint.setText(""+ElfSourceController.getPower(typeID,exp/100+1,grade));
+        elfImage=view.findViewById(R.id.fg_elf);
+        elfImage.setBackgroundResource(ElfSourceController.getBackgroundWithLevel(typeID,grade));
 
         checkfriend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +101,8 @@ public class MyFragment extends Fragment {
         checkBBS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                UserData.isNewTimeInit=false;
+                UserData.isAllMomentsGet=false;
                 UserData.setOldForumTime(null);
                 Intent intent=new Intent(getActivity(), SquareActivity.class);
                 startActivity(intent);
@@ -109,6 +130,14 @@ public class MyFragment extends Fragment {
             distance.setText(""+format.format(UserData.distance/1000)+"公里");
             mileage.setText(""+format.format(UserData.getMileage()/1000)+"公里");
             mileageGoal.setText(""+format.format(UserData.getMileageGoal()/1000)+"公里");
+            int typeID=(int)(UserData.getElfWithId((int)UserData.getUserInfo().get("pet")).get("typeID"));
+            int grade=(int)UserData.getElfWithId(typeID).get("grade");
+            int exp=(int)UserData.getElfWithId(typeID).get("exp");
+            username.setText(UserData.getUserName());
+            elfname.setText(ElfSourceController.getName(typeID,grade));
+            level.setText(""+(exp/100+1));
+            fightPoint.setText(""+ElfSourceController.getPower(typeID,exp/100+1,grade));
+            elfImage.setBackgroundResource(ElfSourceController.getBackgroundWithLevel(typeID,grade));
         }
     }
 

@@ -59,8 +59,12 @@ public class SquareActivity extends AppCompatActivity implements SwipeRefreshLay
                 if (!isAdd) {
                     isAdd=true;
                     adapter.setLoadState(adapter.LOADING);
-                    moments = UserData.getMoments();
-                    if (moments != null) {
+                    if(!UserData.isAllMomentsGet) {
+                        moments = UserData.getMoments();
+                    }
+                    else
+                        moments=null;
+                    if (moments!=null&&moments.size()!= 0) {
                         new Timer().schedule(new TimerTask() {
                             @Override
                             public void run() {
@@ -75,14 +79,13 @@ public class SquareActivity extends AppCompatActivity implements SwipeRefreshLay
                         adapter.addEnd(moments);
                     } else {
                         // 显示加载到底的提示
+                        UserData.isAllMomentsGet=true;
                         adapter.setLoadState(adapter.LOADING_END);
                     }
                 }
                 isAdd=false;
-                Log.d("add!!!!!!!", ""+adapter.getItemCount());
             }
         });
-        Log.d("size",""+adapter.getItemCount());
     }
 
     private void initRefreshLayout() {
@@ -106,7 +109,6 @@ public class SquareActivity extends AppCompatActivity implements SwipeRefreshLay
             refreshLayout.setRefreshing(false);
         }
         isFresh=false;
-        Log.d("fresh!!!!!!!", ""+adapter.getItemCount());
     }
 
 
