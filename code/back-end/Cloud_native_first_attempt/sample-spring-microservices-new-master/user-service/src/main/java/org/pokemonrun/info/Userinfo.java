@@ -19,6 +19,5 @@ public class Userinfo {
         this.pet=pet;
         this.distance=distance;
         this.friends=friends;
-
     }
 }

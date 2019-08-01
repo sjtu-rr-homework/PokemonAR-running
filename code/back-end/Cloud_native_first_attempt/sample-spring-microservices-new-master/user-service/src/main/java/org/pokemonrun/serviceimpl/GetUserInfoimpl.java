@@ -2,7 +2,6 @@ package org.pokemonrun.serviceimpl;
 
 import org.pokemonrun.dao.UserDao;
 import org.pokemonrun.entity.User;
-import org.pokemonrun.info.Coverinfo;
 import org.pokemonrun.info.Friendinfo;
 import org.pokemonrun.info.UserInfoForAdmin;
 import org.pokemonrun.info.Userinfo;
@@ -76,18 +75,5 @@ public class GetUserInfoimpl implements GetUserInfo {
             usernamelist.add(tempUser.getUsername());
         }
         return usernamelist;
-    }
-
-    @Override
-    public Coverinfo GetCover(String username) {
-        User tempuser=UserDao.findOne(username);
-        if(tempuser==null)
-        {
-            return null;
-        }
-        else
-        {
-            
-        }
     }
 }
