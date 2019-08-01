@@ -10,8 +10,7 @@ public class Userinfo {
     public int pet;
     public double distance;
     public List<Friendinfo> friends;
-    public byte[] cover;
-    public Userinfo(String username,int star,String email,int exp,int pet, double distance,List<Friendinfo> friends,byte[] cover)
+    public Userinfo(String username,int star,String email,int exp,int pet, double distance,List<Friendinfo> friends)
     {
         this.username=username;
         this.email=email;
@@ -20,6 +19,6 @@ public class Userinfo {
         this.pet=pet;
         this.distance=distance;
         this.friends=friends;
-        this.cover=cover;
+
     }
 }

@@ -1,8 +1,8 @@
 package org.pokemonrun.serviceimpl;
 
 import org.pokemonrun.dao.UserDao;
-import org.pokemonrun.entity.Cover;
 import org.pokemonrun.entity.User;
+import org.pokemonrun.info.Coverinfo;
 import org.pokemonrun.info.Friendinfo;
 import org.pokemonrun.info.UserInfoForAdmin;
 import org.pokemonrun.info.Userinfo;
@@ -31,28 +31,10 @@ public class GetUserInfoimpl implements GetUserInfo {
             Set<User> friendsset= temp.getFollowers();
             for(User tempUser:friendsset)
             {
-                Cover tempcover=UserDao.getOneCover(tempUser.getUsername());
-                Friendinfo tempInfo;
-                if(tempcover!=null)
-                {
-                    tempInfo=new Friendinfo(tempUser.getUsername(),tempcover.pic);
-                }
-                else
-                {
-                    tempInfo = new Friendinfo(tempUser.getUsername(), null);
-                }
+                Friendinfo tempInfo=new Friendinfo(tempUser.getUsername());
                 friends.add(tempInfo);
             }
-            Cover mycover=UserDao.getOneCover(username);
-            Userinfo tempinfo;
-            if(mycover!=null)
-            {
-                tempinfo = new Userinfo(temp.getUsername(), temp.getStar(), temp.getEmail(), temp.getExp(), temp.getPet(), temp.getDistance(), friends, mycover.pic);
-            }
-            else
-            {
-                tempinfo = new Userinfo(temp.getUsername(), temp.getStar(), temp.getEmail(), temp.getExp(), temp.getPet(), temp.getDistance(), friends, null);
-            }
+            Userinfo tempinfo=new Userinfo(temp.getUsername(),temp.getStar(),temp.getEmail(),temp.getExp(),temp.getPet(),temp.getDistance(),friends);
             return tempinfo;
         }
     }
@@ -94,5 +76,18 @@ public class GetUserInfoimpl implements GetUserInfo {
             usernamelist.add(tempUser.getUsername());
         }
         return usernamelist;
+    }
+
+    @Override
+    public Coverinfo GetCover(String username) {
+        User tempuser=UserDao.findOne(username);
+        if(tempuser==null)
+        {
+            return null;
+        }
+        else
+        {
+            
+        }
     }
 }
