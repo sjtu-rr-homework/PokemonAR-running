@@ -1,6 +1,7 @@
 package org.pokemonrun.serviceimpl;
 
 import org.pokemonrun.dao.UserDao;
+import org.pokemonrun.entity.Cover;
 import org.pokemonrun.entity.User;
 import org.pokemonrun.info.Friendinfo;
 import org.pokemonrun.info.UserInfoForAdmin;
@@ -30,10 +31,28 @@ public class GetUserInfoimpl implements GetUserInfo {
             Set<User> friendsset= temp.getFollowers();
             for(User tempUser:friendsset)
             {
-                Friendinfo tempInfo=new Friendinfo(tempUser.getUsername(),UserDao.getOneCover(tempUser.getUsername()).pic);
+                Cover tempcover=UserDao.getOneCover(tempUser.getUsername());
+                Friendinfo tempInfo;
+                if(tempcover!=null)
+                {
+                    tempInfo=new Friendinfo(tempUser.getUsername(),tempcover.pic);
+                }
+                else
+                {
+                    tempInfo = new Friendinfo(tempUser.getUsername(), null);
+                }
                 friends.add(tempInfo);
             }
-            Userinfo tempinfo=new Userinfo(temp.getUsername(),temp.getStar(),temp.getEmail(),temp.getExp(),temp.getPet(),temp.getDistance(),friends,UserDao.getOneCover(temp.getUsername()).pic);
+            Cover mycover=UserDao.getOneCover(username);
+            Userinfo tempinfo;
+            if(mycover!=null)
+            {
+                tempinfo = new Userinfo(temp.getUsername(), temp.getStar(), temp.getEmail(), temp.getExp(), temp.getPet(), temp.getDistance(), friends, mycover.pic);
+            }
+            else
+            {
+                tempinfo = new Userinfo(temp.getUsername(), temp.getStar(), temp.getEmail(), temp.getExp(), temp.getPet(), temp.getDistance(), friends, null);
+            }
             return tempinfo;
         }
     }
