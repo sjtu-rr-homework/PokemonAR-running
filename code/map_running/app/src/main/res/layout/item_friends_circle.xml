@@ -14,8 +14,8 @@
 
     <ImageView
         android:id="@+id/friends_circle_item_Image_view"
-        android:layout_width="40dp"
-        android:layout_height="40dp"/>
+        android:layout_width="55dp"
+        android:layout_height="55dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,14 +27,16 @@
             android:id="@+id/friends_circle_item_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15sp" />
+            android:textSize="20sp"
+            android:textColor="#4682B4"/>
 
         <TextView
             android:id="@+id/friends_circle_item_content_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:textSize="15sp" />
+            android:textSize="18sp"
+            android:textColor="#000000"/>
 
         <example.com.pkmnavidemo4.classes.FriendsCircleImageLayout
             android:id="@+id/friends_circle_item_image_layout"
