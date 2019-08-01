@@ -449,6 +449,9 @@ public class HttpHandler {
                     Log.d("123","---"+sb.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
+                    Looper.prepare();
+                    Toast.makeText(context,"网络异常",Toast.LENGTH_SHORT).show();
+                    Looper.loop();
                     Log.d("haha",e.getMessage());
                 }finally {
                     if (conn!=null){
