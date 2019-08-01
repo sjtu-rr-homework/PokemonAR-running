@@ -162,6 +162,14 @@ services:
       - "27017:27017"
     networks:
       - spring-cloud-network
+      
+  mongo-cover:
+    hostname: mongo-cover
+    image: mongo
+    ports:
+      - "27018:27017"
+    networks:
+      - spring-cloud-network
   
   forum-service:
     hostname: forum-service
