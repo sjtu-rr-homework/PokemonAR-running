@@ -15,6 +15,7 @@
             android:background="@drawable/bg_blue"
             android:orientation="horizontal">
             <ImageView
+                android:id="@+id/fg_cover"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_margin="10dp"
@@ -132,11 +133,12 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_perm_identity_orange_24dp"/>
             <TextView
+                android:id="@+id/fg_layout_check_exp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="3dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="15200"
+                android:text="0"
                 android:textStyle="bold"/>
             <TextView
                 android:layout_gravity="center_vertical"
