@@ -1032,7 +1032,7 @@ public class HttpHandler {
                         map.put("username",username);
                         map.put("pics", pics );
                         list.add(map);
-                        if(i==0)
+                        if(i==jsonArray.length()-1)
                             UserData.setNewForumTime(Timestamp.valueOf(time));
                     }
                     UserData.setMoments(list);

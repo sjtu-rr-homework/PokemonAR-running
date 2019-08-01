@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="15dp"
-            android:text="我是有底线的"
+            android:text="已经到最后了"
             android:textColor="#4DB6AC"
             android:textSize="16sp" />
 

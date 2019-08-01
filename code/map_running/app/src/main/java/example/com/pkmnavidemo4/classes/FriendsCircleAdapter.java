@@ -126,9 +126,9 @@ public class FriendsCircleAdapter extends RecyclerView.Adapter {
                     break;
 
                 case LOADING_END: // 加载到底
-                    footViewHolder.pbLoading.setVisibility(View.INVISIBLE);
-                    footViewHolder.tvLoading.setVisibility(View.INVISIBLE);
-                    footViewHolder.llEnd.setVisibility(View.VISIBLE);
+                    footViewHolder.pbLoading.setVisibility(View.VISIBLE);
+                    footViewHolder.tvLoading.setVisibility(View.VISIBLE);
+                    footViewHolder.llEnd.setVisibility(View.GONE);
                     break;
 
                 default:
