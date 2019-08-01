@@ -38,6 +38,8 @@ public class UserData {
     private static  List<Map> elfDetailsList;
     private static  List<Map> moments;
     //动态获取锁
+    public static double upper_border=-1;
+    public static double lower_border=-1;
     public static  boolean isMomentsGet=false;
     public static  boolean isMomentsRefresh=false;
     //用来判断是否只看已拥有精灵

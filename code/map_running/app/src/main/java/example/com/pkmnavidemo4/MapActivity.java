@@ -391,7 +391,9 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         }
         else if(type==0){
             AlertDialog.Builder dialog = new AlertDialog.Builder(MapActivity.this);
-            if(checkFlagDone()) {
+            if(checkFlagDone()&&(UserData.lower_border>=0&&UserData.upper_border>=0&&
+                    (runningMessage.getTimePerKM()/60)>=UserData.lower_border&&
+                    (runningMessage.getTimePerKM()/60)<=UserData.upper_border||UserData.lower_border<0||UserData.upper_border<0)) {
                 dialog.setTitle("你即将结束定点跑步");
                 dialog.setMessage("是否结束跑步？");
                 dialog.setCancelable(false);
@@ -418,7 +420,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                 dialog.show();
             }
             else{
-                dialog.setTitle("你还没有经过所有必经点位");
+                dialog.setTitle("你还没有经过所有必经点位或配速未达到要求");
                 dialog.setMessage("现在结束跑步得不到任何经验和精灵，是否结束跑步？");
                 dialog.setCancelable(false);
                 dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
