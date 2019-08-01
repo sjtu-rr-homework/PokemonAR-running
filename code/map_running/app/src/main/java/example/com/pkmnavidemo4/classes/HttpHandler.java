@@ -54,7 +54,7 @@ import example.com.pkmnavidemo4.R;
 
 public class HttpHandler {
 
-   // private static String UrlHead="http://84e1e4a2.ngrok.io";
+   // private static String UrlHead="http://5c789fc3.ngrok.io";
 
     private static String UrlHead="http://202.120.40.8:30751";
 
@@ -1132,6 +1132,7 @@ public class HttpHandler {
                     JSONArray jsonArray = new JSONArray(sb.toString());
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject item = jsonArray.getJSONObject(i); // 得到每个对象
+                        String cover=item.getString("cover");
                         String content = item.getString("text"); // 获取对象对应的值
                         String time = item.getString("timestamp");
                         String username = item.getString("username");
@@ -1145,6 +1146,7 @@ public class HttpHandler {
                         map.put("time",time);
                         map.put("username",username);
                         map.put("pics", pics );
+                        map.put("cover", cover);
                         list.add(map);
                         if(i==0)
                             UserData.setNewForumTime(Timestamp.valueOf(time));
@@ -1178,6 +1180,7 @@ public class HttpHandler {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                Log.d("sassasdsssssssssssssssssssssasa","撒顶顶顶顶顶");
                 HttpURLConnection conn=null;
                 BufferedReader br=null;
                 String loginUrl=UrlHead+"/user/get/cover/username/"+username;
@@ -1196,8 +1199,11 @@ public class HttpHandler {
                     while((s = br.readLine())!=null){
                         sb.append(s);
                     }
+                    JSONObject item =new JSONObject(sb.toString());
+                    Log.d("sassasdsssssdddssssssssssssssssssasa",""+sb.toString().length());
                     UserData.isCoverGet=false;
-                    UserData.setCover(sb.toString());
+                    Log.d("sassasdsssssdddssssssssssssssssssasa",item.getString("pic"));
+                    UserData.setCover(item.getString("pic"));
 
                     //setContent(sb.toString());
                 } catch (Exception e) {
@@ -1301,7 +1307,7 @@ public class HttpHandler {
                     JSONObject un=new JSONObject();
 
                     un.put("username",username);
-                    un.put("cover", pic);
+                    un.put("pic", pic);
                     String Json=un.toString();
                     //String urlPath = UrlHead+"/record/refresh/location";
                     String urlPath = UrlHead+"/user/add/cover";

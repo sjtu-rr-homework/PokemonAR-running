@@ -46,8 +46,10 @@ public class FriendActivity extends AppCompatActivity {
         cover=findViewById(R.id.act_friend_cover);
         if(UserData.getCover(friendname)==null)
             cover.setBackgroundResource(R.drawable.pikachu);
-        else
+        else{
+            cover.setBackgroundResource(R.drawable.bg_blue);
             cover.setImageBitmap(UserData.getCover(friendname));
+        }
         elfImage=findViewById(R.id.act_friend_elf);
         elfImage.setBackgroundResource(ElfSourceController.getBackgroundWithLevel(typeID,grade));
         if(type==1){

@@ -63,9 +63,9 @@ public class UserData {
         else
             cover= BitmapUtils.base64ToBitmap(s);
     }
-    public static Bitmap getCover(String username){
+    public static Bitmap getCover(String name){
         isCoverGet=true;
-        HttpHandler.getCover(username);
+        HttpHandler.getCover(name);
         while(isCoverGet){
             try {
                 Thread.sleep(10);

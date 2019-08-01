@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -143,10 +144,12 @@ public class ShareActivity extends Activity {
 					cursor.moveToFirst();
 					// 最后根据索引值获取图片路径
 					photoPath = cursor.getString(column_index);
+					Log.d("pic1",photoPath);
 					Bitmap term=BitmapFactory.decodeFile(photoPath);
 					int width=term.getWidth()/8;
 					int height=term.getHeight()/8;
 					Bitmap bp=BitmapUtils.decodeSampledBitmapFromFd(photoPath,width,height);
+					Log.d("pic2",bp.toString());
 					jsonData.add(BitmapUtils.bitmapToBase64(bp));
 				} catch (Exception e) {
 					e.printStackTrace();

@@ -8,6 +8,7 @@ import android.os.Looper;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import example.com.pkmnavidemo4.Bitmap.BitmapUtils;
 import example.com.pkmnavidemo4.R;
 
 public class FriendsCircleAdapter extends RecyclerView.Adapter {
@@ -105,10 +107,13 @@ public class FriendsCircleAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ContentViewHolder) {
             ContentViewHolder viewHolder = (ContentViewHolder) holder;
-            if(UserData.getCover(moments.get(position).get("username")+"")==null)
+            if(moments.get(position).get("cover")==null)
                 viewHolder.mAvatarView.setBackgroundResource(R.drawable.pikachu);
-            else
-                viewHolder.mAvatarView.setImageBitmap(UserData.getCover(UserData.getUserName()));
+            else {
+                Log.d("dsds",moments.get(position).get("cover").toString());
+                viewHolder.mAvatarView.setBackgroundResource(R.drawable.bg_blue);
+                viewHolder.mAvatarView.setImageBitmap(BitmapUtils.base64ToBitmap(moments.get(position).get("cover").toString()));
+            }
             viewHolder.mNameTv.setText(moments.get(position).get("username")+"");
             viewHolder.mContentTv.setText(moments.get(position).get("content")+"");
             //int count = (int) (Math.random() * 9);

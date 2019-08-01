@@ -71,10 +71,14 @@ public class MyFragment extends Fragment {
         distance.setText(""+format.format(UserData.distance/1000)+"公里");
         mileage.setText(""+format.format(UserData.getMileage()/1000)+"公里");
         mileageGoal.setText(""+format.format(UserData.getMileageGoal()/1000)+"公里");
-
-        int typeID=(int)(UserData.getElfWithId((int)UserData.getUserInfo().get("pet")).get("typeID"));
-        int grade=(int)UserData.getElfWithId(typeID).get("grade");
-        int exp=(int)UserData.getElfWithId(typeID).get("exp");
+        int typeID = -1;
+        int grade = -1;
+        int exp = -1;
+        if(UserData.getElfWithId((int)UserData.getUserInfo().get("pet"))!=null) {
+            typeID = (int) (UserData.getElfWithId((int) UserData.getUserInfo().get("pet")).get("typeID"));
+            grade = (int) UserData.getElfWithId(typeID).get("grade");
+            exp = (int) UserData.getElfWithId(typeID).get("exp");
+        }
         username=(TextView)view.findViewById(R.id.fg_username);
         username.setText(UserData.getUserName());
         elfname=(TextView)view.findViewById(R.id.fg_elfname);
@@ -86,17 +90,21 @@ public class MyFragment extends Fragment {
         elfImage=view.findViewById(R.id.fg_elf);
         elfImage.setBackgroundResource(ElfSourceController.getBackgroundWithLevel(typeID,grade));
         myExp.setText(UserData.getExp()+"");
-        if(UserData.getCover(UserData.getUserName())==null)
+        if(UserData.getCover(UserData.getUserName())==null) {
+            Log.d("sddd","sdddddddddddddddd");
             myCover.setBackgroundResource(R.drawable.pikachu);
-        else
+        }
+        else{
+            myCover.setBackgroundResource(R.drawable.bg_blue);
             myCover.setImageBitmap(UserData.getCover(UserData.getUserName()));
+        }
         //用户点击头像设置头像
         myCover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                         // 选择图片
                         Intent intent = new Intent(Intent.ACTION_PICK, null);
-                        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+                        intent.setType("image/*");
                         startActivityForResult(intent, 0x1);
                 }
         });
@@ -167,30 +175,37 @@ public class MyFragment extends Fragment {
             myExp.setText(UserData.getExp()+"");
             if(UserData.getCover(UserData.getUserName())==null)
                 myCover.setBackgroundResource(R.drawable.pikachu);
-            else
+            else {
+                myCover.setBackgroundResource(R.drawable.bg_blue);
                 myCover.setImageBitmap(UserData.getCover(UserData.getUserName()));
+            }
         }
     }
 
     // 响应startActivityForResult，获取图片路径
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
         if (requestCode == 0x1 && resultCode == RESULT_OK) {
             if (data != null) {
+                Bitmap bm;
                 ContentResolver resolver = getActivity().getContentResolver();
                 try {
                     Uri uri = data.getData();
                     // 这里开始的第二部分，获取图片的路径：
-                    String[] proj = {MediaStore.Images.Media.DATA};
+                    String[] proj = { MediaStore.Images.Media.DATA };
                     Cursor cursor = getActivity().managedQuery(uri, proj, null, null, null);
                     // 按我个人理解 这个是获得用户选择的图片的索引值
                     int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
                     cursor.moveToFirst();
                     // 最后根据索引值获取图片路径
                     String photoPath = cursor.getString(column_index);
-                    Bitmap term = BitmapFactory.decodeFile(photoPath);
-                    Bitmap bp = BitmapUtils.decodeSampledBitmapFromFd(photoPath, 200, 200);
-                    HttpHandler.changeCover(UserData.getUserName(),bp.toString());
+                    Log.d("pic1",photoPath);
+                    Bitmap term=BitmapFactory.decodeFile(photoPath);
+                    Bitmap bp=BitmapUtils.decodeSampledBitmapFromFd(photoPath,100,100);
+                    Log.d("pic2",BitmapUtils.bitmapToBase64(bp));
+                    HttpHandler.changeCover(UserData.getUserName(),BitmapUtils.bitmapToBase64(bp));
+                    myCover.setImageBitmap(bp);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
