@@ -1102,6 +1102,7 @@ public class HttpHandler {
         }).start();
     }
 
+    //得到给定时间前最新的10条动态
     public static void getMoments(Timestamp t){
         new Thread(new Runnable() {
             @Override
@@ -1172,6 +1173,55 @@ public class HttpHandler {
         }).start();
     }
 
+    //得到用户头像
+    public static void getCover(String username) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String loginUrl=UrlHead+"/user/get/cover/username/"+username;
+                try {
+                    //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
+                    URL url=new URL(loginUrl);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(8000);
+                    InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                    UserData.isCoverGet=false;
+                    UserData.setCover(sb.toString());
+
+                    //setContent(sb.toString());
+                } catch (Exception e) {
+                    UserData.isCoverGet=false;
+                    e.printStackTrace();
+                }finally {
+                    UserData.isCoverGet=false;
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+
+    //用户分享动态
     public static void postPic(List<String> pic,String timestamp,String username,String text){
         new Thread(new Runnable() {
             @Override
@@ -1190,6 +1240,71 @@ public class HttpHandler {
                     Log.d("5555",Json);
                     //String urlPath = UrlHead+"/record/refresh/location";
                     String urlPath = UrlHead+"/forum/add/moment";
+                    URL url = new URL(urlPath);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("POST");
+                    conn.setDoOutput(true);
+                    conn.setDoInput(true);
+                    conn.setUseCaches(false);
+                    conn.setRequestProperty("Connection", "Keep-Alive");
+                    conn.setRequestProperty("Charset", "UTF-8");
+                    // 设置文件类型:
+                    conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                    // 设置接收类型否则返回415错误
+                    //conn.setRequestProperty("accept","*/*")此处为暴力方法设置接受所有类型，以此来防范返回415;
+                    conn.setRequestProperty("accept", "application/json");
+                    // 往服务器里面发送数据
+                    if (Json != null && !TextUtils.isEmpty(Json)) {
+                        byte[] writebytes = Json.getBytes();
+                        // 设置文件长度
+                        conn.setRequestProperty("Content-Length", String.valueOf(writebytes.length));
+                        OutputStream outwritestream = conn.getOutputStream();
+                        outwritestream.write(Json.getBytes());
+                        outwritestream.flush();
+                        outwritestream.close();
+                        Log.d("hlhupload", "doJsonPost: conn" + conn.getResponseCode());
+                    }
+                    if (conn.getResponseCode() == 200) {
+                        Log.d("success","connected!!!!!");
+                        reader = new BufferedReader(
+                                new InputStreamReader(conn.getInputStream()));
+                        StringBuilder sb = new StringBuilder();
+                        String s;
+                        while ((s = reader.readLine()) != null) {
+                            sb.append(s);
+                        }
+                        Log.d("mess",sb.toString());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (reader != null) {
+                        try {
+                            reader.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+
+    //用户更换头像
+    public static void changeCover(String username,String pic){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String result = "";
+                BufferedReader reader = null;
+                try {
+                    JSONObject un=new JSONObject();
+
+                    un.put("username",username);
+                    un.put("cover", pic);
+                    String Json=un.toString();
+                    //String urlPath = UrlHead+"/record/refresh/location";
+                    String urlPath = UrlHead+"/user/add/cover";
                     URL url = new URL(urlPath);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");

@@ -105,7 +105,10 @@ public class FriendsCircleAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ContentViewHolder) {
             ContentViewHolder viewHolder = (ContentViewHolder) holder;
-            viewHolder.mAvatarView.setBackgroundResource(R.drawable.pikachu);
+            if(UserData.getCover(moments.get(position).get("username")+"")==null)
+                viewHolder.mAvatarView.setBackgroundResource(R.drawable.pikachu);
+            else
+                viewHolder.mAvatarView.setImageBitmap(UserData.getCover(UserData.getUserName()));
             viewHolder.mNameTv.setText(moments.get(position).get("username")+"");
             viewHolder.mContentTv.setText(moments.get(position).get("content")+"");
             //int count = (int) (Math.random() * 9);
