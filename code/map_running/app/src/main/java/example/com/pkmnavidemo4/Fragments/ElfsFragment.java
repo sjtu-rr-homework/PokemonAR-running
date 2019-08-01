@@ -35,7 +35,6 @@ import example.com.pkmnavidemo4.classes.UserData;
 
 public class ElfsFragment extends Fragment {
     private Switch switchModel;
-    private Button refresh;
     private List<String> list;
     RecyclerView mRecyclerView;
     public ElfsFragment() {
@@ -53,13 +52,6 @@ public class ElfsFragment extends Fragment {
         TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(getActivity(),list);
         mRecyclerView.setAdapter(adapter);
         refresh( mRecyclerView);
-        refresh=view.findViewById(R.id.elf_fg_button_refresh);
-        refresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                refresh( mRecyclerView);
-            }
-        });
         switchModel =view.findViewById(R.id.elf_fg_button_switch);
         switchModel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

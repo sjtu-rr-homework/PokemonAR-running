@@ -19,26 +19,13 @@
             android:layout_alignParentTop="true"
             android:paddingHorizontal="5dp"
             android:orientation="horizontal"
-            android:gravity="center_vertical">
-            <Button
-                android:id="@+id/elf_fg_button_refresh"
-                android:layout_marginVertical="10dp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@android:drawable/ic_menu_rotate" />
-            <TextView
-                android:id="@+id/elf_fg_text_wait"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:text="点击刷新精灵信息"
-                android:textColor="@color/pure_white"/>
+            android:gravity="right">
 
             <Switch
                 android:id="@+id/elf_fg_button_switch"
                 android:layout_width="132dp"
                 android:layout_height="52dp"
+                android:layout_marginVertical="10dp"
                 android:text="只看已拥有"
                 android:textSize="16sp"
                 android:textColor="@color/pure_white"/>
