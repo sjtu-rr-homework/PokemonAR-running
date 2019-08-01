@@ -54,7 +54,7 @@ import example.com.pkmnavidemo4.R;
 
 public class HttpHandler {
 
-    //private static String UrlHead="http://1c77d0af.ngrok.io";
+   // private static String UrlHead="http://84e1e4a2.ngrok.io";
 
     private static String UrlHead="http://202.120.40.8:30751";
 
@@ -405,7 +405,7 @@ public class HttpHandler {
         }).start();
     }
 
-    public static void login(Context context,String username, String password) {
+    public static void login(Context context,String username, String password,boolean isauto) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -429,6 +429,9 @@ public class HttpHandler {
                         sb.append(s);
                     }
                     if(sb.toString().equals("true")){
+                        if(isauto) {
+                            SharedPreferencesUtil.putBoolean(context.getApplicationContext(), "isauto", true);
+                        }
                         Looper.prepare();
                         UserData.setUserName(username);
                         Toast.makeText(context,"登陆成功",Toast.LENGTH_SHORT).show();
@@ -987,14 +990,126 @@ public class HttpHandler {
 
     }
 
-    public static void getMoments(){
+    public static void getlimit() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("haha","go1");
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String Url=UrlHead+"/rule/admin/rule/basic";
+                try {
+                    URL url=new URL(Url);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(8000);
+                    InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                    JSONObject jjj = new JSONObject(sb.toString());
+                    UserData.upper_border=Double.parseDouble(jjj.getString("minSpeed"));
+                    UserData.lower_border=Double.parseDouble(jjj.getString("maxSpeed"));
+                    Log.d("123","---"+sb.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.d("haha",e.getMessage());
+                }finally {
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }).start();
+
+    }
+
+    public static void refreshMoments(Timestamp t){
         new Thread(new Runnable() {
             @Override
             public void run() {
                 List<Map> list = new ArrayList<Map>();
                 HttpURLConnection conn=null;
                 BufferedReader br=null;
-                String loginUrl=UrlHead+"/forum/get/all/moment";
+                String loginUrl=UrlHead+"/forum/get/refresh/moment/timestamp/"+t;
+                try {
+                    //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
+                    URL url=new URL(loginUrl);
+                    conn= (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(888000);
+                    conn.setReadTimeout(888000);
+                   /* InputStream is = conn.getInputStream(); // 获取输入流
+                    byte[] data = read(is);*/
+                    InputStream in=conn.getInputStream();
+                    br=new BufferedReader(new InputStreamReader(in));
+
+                    StringBuilder sb=new StringBuilder();
+                    String s;
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                    }
+                    JSONArray jsonArray = new JSONArray(sb.toString());
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject item = jsonArray.getJSONObject(i); // 得到每个对象
+                        String content = item.getString("text"); // 获取对象对应的值
+                        String time = item.getString("timestamp");
+                        String username = item.getString("username");
+                        List<String> pics =new ArrayList<>();
+                        for(int j=1;j<=9&&item.getString("pic"+j)!="null";j++) {
+                            pics.add(item.getString("pic" + j));
+                        }
+                        Map map = null;
+                        map = new HashMap(); // 存放到MAP里面
+                        map.put("content", content );
+                        map.put("time",time);
+                        map.put("username",username);
+                        map.put("pics", pics );
+                        list.add(map);
+                        if(i==jsonArray.length()-1)
+                            UserData.setNewForumTime(Timestamp.valueOf(time));
+                    }
+                    UserData.setMoments(list);
+                    UserData.isMomentsRefresh=false;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    UserData.isMomentsRefresh=false;
+                }finally {
+                    UserData.isMomentsRefresh=false;
+                    if (conn!=null){
+                        conn.disconnect();
+                    }
+                    if (br!=null){
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+
+    public static void getMoments(Timestamp t){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                List<Map> list = new ArrayList<Map>();
+                HttpURLConnection conn=null;
+                BufferedReader br=null;
+                String loginUrl=UrlHead+"/forum/get/all/moment/timestamp/"+t;
                 try {
                     //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");
                     URL url=new URL(loginUrl);
@@ -1020,9 +1135,9 @@ public class HttpHandler {
                         String time = item.getString("timestamp");
                         String username = item.getString("username");
                         List<String> pics =new ArrayList<>();
-                        for(int j=1;j<=9&&item.getString("pic"+j)!="null";j++)
-                            pics.add(item.getString("pic"+j));
-                        Log.d("44444444444fd",pics.toString());
+                        for(int j=1;j<=9&&item.getString("pic"+j)!="null";j++) {
+                            pics.add(item.getString("pic" + j));
+                        }
                         Map map = null;
                         map = new HashMap(); // 存放到MAP里面
                         map.put("content", content );
@@ -1030,6 +1145,10 @@ public class HttpHandler {
                         map.put("username",username);
                         map.put("pics", pics );
                         list.add(map);
+                        if(i==0)
+                            UserData.setNewForumTime(Timestamp.valueOf(time));
+                        if(i==jsonArray.length()-1)
+                        UserData.setOldForumTime(Timestamp.valueOf(time));
                     }
                     UserData.setMoments(list);
                     UserData.isMomentsGet=false;
@@ -1192,7 +1311,7 @@ public class HttpHandler {
                 Log.d("haha","go1");
                 HttpURLConnection conn=null;
                 BufferedReader br=null;
-                String recordUrl=UrlHead+"/record/running/record/user/"+UserData.getUserName()+"/page/0";
+                String recordUrl=UrlHead+"/record/running/record/user/"+UserData.getUserName();
                 //https://6ed30734.ngrok.io/user/register/username/macoredroid/password/c7o2r1e4/email/coredroid0401@gmail.com
                 try {
                     //URL url=new URL("https://5184c2d6.ngrok.io/user/login/username/macoredroid/password/c7o2r1e4");

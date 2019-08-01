@@ -3,6 +3,7 @@ package example.com.pkmnavidemo4.Fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import android.widget.Toast;
 
 import example.com.pkmnavidemo4.MapActivity;
 import example.com.pkmnavidemo4.R;
+import example.com.pkmnavidemo4.classes.HttpHandler;
+import example.com.pkmnavidemo4.classes.UserData;
 
 public class FreeModeFragment extends Fragment {
     private Button run;
