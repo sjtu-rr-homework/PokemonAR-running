@@ -96,6 +96,7 @@ public class ShareActivity extends Activity {
 				}
                 Timestamp time = new Timestamp(System.currentTimeMillis());
                 HttpHandler.postPic(jsonData,time.toString(), UserData.getUserName(),content.getText().toString());
+                finish();
             }
         });
 	}

@@ -370,7 +370,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
             dialog.setTitle("温馨提示");
             dialog.setMessage("是否结束跑步并分享动态？");
             dialog.setCancelable(false);
-            dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            dialog.setNeutralButton("退出并分享", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     UserData.successRun();
@@ -381,6 +381,18 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                     UserData.addExp(runningMessage.getExp());
                     Timestamp time = new Timestamp(System.currentTimeMillis());
                     HttpHandler.postPic(new ArrayList<>(),time.toString(),UserData.getUserName(),"我跑了"+(int)runningMessage.getLength()+"米");
+                    MapActivity.super.finish();
+                }
+            });
+            dialog.setPositiveButton("仅退出", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    UserData.successRun();
+                    HttpHandler.postRunningRecord1(runningMessage);
+                    HttpHandler.addDistance(UserData.getUserName(), runningMessage.getLength());
+                    UserData.distance+=runningMessage.getLength();
+                    HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
+                    UserData.addExp(runningMessage.getExp());
                     MapActivity.super.finish();
                 }
             });
@@ -400,7 +412,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                 dialog.setTitle("你即将结束定点跑步");
                 dialog.setMessage("是否结束跑步并分享动态？");
                 dialog.setCancelable(false);
-                dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                dialog.setNeutralButton("退出并分享", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         UserData.successRun();
@@ -413,6 +425,20 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                         UserData.addExp(runningMessage.getExp());
                         Timestamp time = new Timestamp(System.currentTimeMillis());
                         HttpHandler.postPic(new ArrayList<>(),time.toString(),UserData.getUserName(),"我跑了"+(int)runningMessage.getLength()+"米");
+                        MapActivity.super.finish();
+                    }
+                });
+                dialog.setPositiveButton("仅退出", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        UserData.successRun();
+                        HttpHandler.postRunningRecord1(runningMessage);
+                        HttpHandler.addDistance(UserData.getUserName(), runningMessage.getLength());
+                        UserData.distance+=runningMessage.getLength();
+                        HttpHandler.finishRestrainRun(runningMessage.getLength());
+                        UserData.setMileage(runningMessage.getLength()+UserData.getMileage());
+                        HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
+                        UserData.addExp(runningMessage.getExp());
                         MapActivity.super.finish();
                     }
                 });

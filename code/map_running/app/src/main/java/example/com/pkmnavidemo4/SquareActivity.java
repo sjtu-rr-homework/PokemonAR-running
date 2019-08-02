@@ -122,5 +122,26 @@ public class SquareActivity extends AppCompatActivity implements SwipeRefreshLay
         isFresh=false;
     }
 
+    @Override
+    public void onRestart(){
+        try{
+            Thread.sleep(200);
+        }catch (Exception e){
+        }
+        if (!isFresh) {
+            isFresh=true;
+            // 设置可见
+            refreshLayout.setRefreshing(true);
+            adapter.setLoadState(adapter.LOADING);
+            moments = UserData.refreshMoments();
+            if (moments != null) {
+                adapter.addStart(moments);
+            }
+            refreshLayout.setRefreshing(false);
+        }
+        isFresh=false;
+        super.onRestart();
+    }
+
 
 }
