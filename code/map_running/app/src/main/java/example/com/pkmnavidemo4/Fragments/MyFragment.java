@@ -84,7 +84,7 @@ public class MyFragment extends Fragment {
         elfname=(TextView)view.findViewById(R.id.fg_elfname);
         elfname.setText(ElfSourceController.getName(typeID,grade));
         level=(TextView)view.findViewById(R.id.fg_elflevel);
-        level.setText(""+(exp/100+1));
+        level.setText("lv."+(exp/100+1));
         fightPoint=(TextView)view.findViewById(R.id.fg_fightpoint);
         fightPoint.setText(""+ElfSourceController.getPower(typeID,exp/100+1,grade));
         elfImage=view.findViewById(R.id.fg_elf);

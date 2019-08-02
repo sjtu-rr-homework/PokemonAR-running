@@ -11,6 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.List;
 import java.util.Map;
@@ -25,8 +27,9 @@ import example.com.pkmnavidemo4.classes.UserData;
 public class SquareActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     boolean isAdd=false;
     boolean isFresh=false;
+    private TextView back_arrow;
+    private ImageView to_share;
     private static List<Map> moments;
-    private Button share;
     private SwipeRefreshLayout refreshLayout;
     private FriendsCircleAdapter adapter;
     private RecyclerView recyclerView;
@@ -39,8 +42,16 @@ public class SquareActivity extends AppCompatActivity implements SwipeRefreshLay
         setTitle("仿微信朋友圈");
         setContentView(R.layout.activity_square);
         initRefreshLayout();
-        share = findViewById(R.id.act_square_button_share);
-        share.setOnClickListener(new View.OnClickListener() {
+        back_arrow=findViewById(R.id.act_square_left_arrow);
+        to_share=findViewById(R.id.act_squre_to_share);
+        back_arrow.setText("<");
+        back_arrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        to_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SquareActivity.this, ShareActivity.class);

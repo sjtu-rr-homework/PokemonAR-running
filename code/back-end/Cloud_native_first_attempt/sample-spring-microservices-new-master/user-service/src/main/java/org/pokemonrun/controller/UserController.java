@@ -1,14 +1,12 @@
 package org.pokemonrun.controller;
 
+import org.pokemonrun.info.Coverinfo;
 import org.pokemonrun.info.UserInfoForAdmin;
 import org.pokemonrun.info.Userinfo;
 import org.pokemonrun.service.GetUserInfo;
 import org.pokemonrun.service.ModifyUserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.pokemonrun.service.LoginService;
 import org.pokemonrun.service.RegisterService;
 
@@ -85,6 +83,22 @@ public class UserController {
 	public List<String> getAllUsername()
 	{
 		return GetUserInfo.GetAllUser();
+	}
+	@PostMapping("/add/cover")
+	public boolean addCover(@RequestBody Coverinfo Coverinfo)
+	{
+		return ModifyUserInfo.addCover(Coverinfo);
+	}
+	@GetMapping("/get/cover/username/{username}")
+	public Coverinfo getCover(@PathVariable("username") String username)
+	{
+		return GetUserInfo.getCover(username);
+	}
+	@GetMapping("/getexp/username/{username}")
+	public int getExp(@PathVariable("username") String username)
+	{
+		return GetUserInfo.getExp(username);
+
 	}
 
 }
