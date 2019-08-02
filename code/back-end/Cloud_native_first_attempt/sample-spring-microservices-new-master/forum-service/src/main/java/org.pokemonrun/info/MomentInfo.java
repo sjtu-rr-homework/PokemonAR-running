@@ -10,6 +10,8 @@ public class MomentInfo implements Serializable {
 
     public String username;
 
+    public byte[] cover;
+
     public byte[] pic1;
     public byte[] pic2;
     public byte[] pic3;
@@ -20,7 +22,7 @@ public class MomentInfo implements Serializable {
     public byte[] pic8;
     public byte[] pic9;
 
-    public MomentInfo(String text, String timestamp, String username, byte[] pic1,byte[] pic2,byte[] pic3,byte[] pic4,byte[] pic5,byte[] pic6,byte[] pic7,byte[] pic8,byte[] pic9)
+    public MomentInfo(String text, String timestamp, String username, byte[] pic1,byte[] pic2,byte[] pic3,byte[] pic4,byte[] pic5,byte[] pic6,byte[] pic7,byte[] pic8,byte[] pic9,byte[] cover)
     {
         this.text=text;
         this.timestamp=timestamp;
@@ -34,5 +36,6 @@ public class MomentInfo implements Serializable {
         this.pic7=pic7;
         this.pic8=pic8;
         this.pic9=pic9;
+        this.cover=cover;
     }
 }

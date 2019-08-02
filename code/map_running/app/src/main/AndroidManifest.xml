@@ -59,6 +59,7 @@
         </activity>
         <activity android:name=".MainActivity"
             android:theme="@style/mainTheme">
+
         </activity>
         <activity android:name=".ShareActivity">
         </activity>

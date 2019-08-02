@@ -1,7 +1,10 @@
 package org.pokemonrun.serviceimpl;
 
+import org.pokemonrun.dao.CoverDao;
 import org.pokemonrun.dao.UserDao;
+import org.pokemonrun.entity.Cover;
 import org.pokemonrun.entity.User;
+import org.pokemonrun.info.Coverinfo;
 import org.pokemonrun.service.ModifyUserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +15,8 @@ import java.util.Set;
 public class ModifyUserInfoimpl implements ModifyUserInfo {
     @Autowired
     UserDao UserDao;
+    @Autowired
+    CoverDao CoverDao;
     @Override
     public boolean ModifyExp(String username, int num) {
         User temp=UserDao.findOne(username);
@@ -144,6 +149,29 @@ public class ModifyUserInfoimpl implements ModifyUserInfo {
         }
     }
 
+    @Override
+    public boolean addCover(Coverinfo Coverinfo) {
+        User tempUser=UserDao.findOne(Coverinfo.username);
+        if(tempUser==null)
+        {
+            return false;
+        }
+        else
+        {
+            Cover tempCover= CoverDao.getOneCover(Coverinfo.username);
+            if(tempCover!=null)
+            {
+                tempCover.pic=Coverinfo.pic;
+                CoverDao.save(tempCover);
+            }
+            else
+            {
+                Cover newCover=new Cover(Coverinfo.username,Coverinfo.pic);
+                CoverDao.save(newCover);
+            }
+            return true;
+        }
+    }
 
 
 }

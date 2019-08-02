@@ -1,5 +1,6 @@
 package org.pokemonrun.serviceimpl;
 
+import org.pokemonrun.client.CoverClient;
 import org.pokemonrun.dao.MomentDao;
 import org.pokemonrun.entity.Moment;
 import org.pokemonrun.info.MomentInfo;
@@ -15,6 +16,9 @@ import java.util.List;
 public class GetMomentServiceimpl implements GetMomentService {
     @Autowired
     private MomentDao MomentDao;
+
+    @Autowired
+    private CoverClient CoverClient;
 
     @Override
     public List<MomentInfo> getAll(String timestamp) {
@@ -47,7 +51,7 @@ public class GetMomentServiceimpl implements GetMomentService {
         List<MomentInfo> tempInfoList=new ArrayList<>();
         for(Moment tempMoment:reslist)
         {
-            MomentInfo tempInfo=new MomentInfo(tempMoment.text,tempMoment.timestamp,tempMoment.username,tempMoment.pic1,tempMoment.pic2,tempMoment.pic3,tempMoment.pic4,tempMoment.pic5,tempMoment.pic6,tempMoment.pic7,tempMoment.pic8,tempMoment.pic9);
+            MomentInfo tempInfo=new MomentInfo(tempMoment.text,tempMoment.timestamp,tempMoment.username,tempMoment.pic1,tempMoment.pic2,tempMoment.pic3,tempMoment.pic4,tempMoment.pic5,tempMoment.pic6,tempMoment.pic7,tempMoment.pic8,tempMoment.pic9,CoverClient.getCover(tempMoment.username).pic);
             tempInfoList.add(tempInfo);
         }
 
@@ -89,7 +93,7 @@ public class GetMomentServiceimpl implements GetMomentService {
         List<MomentInfo> tempInfoList=new ArrayList<>();
         for(Moment tempMoment:reslist)
         {
-            MomentInfo tempInfo=new MomentInfo(tempMoment.text,tempMoment.timestamp,tempMoment.username,tempMoment.pic1,tempMoment.pic2,tempMoment.pic3,tempMoment.pic4,tempMoment.pic5,tempMoment.pic6,tempMoment.pic7,tempMoment.pic8,tempMoment.pic9);
+            MomentInfo tempInfo=new MomentInfo(tempMoment.text,tempMoment.timestamp,tempMoment.username,tempMoment.pic1,tempMoment.pic2,tempMoment.pic3,tempMoment.pic4,tempMoment.pic5,tempMoment.pic6,tempMoment.pic7,tempMoment.pic8,tempMoment.pic9,CoverClient.getCover(tempMoment.username).pic);
             tempInfoList.add(tempInfo);
         }
         return tempInfoList;
@@ -110,7 +114,7 @@ public class GetMomentServiceimpl implements GetMomentService {
         List<MomentInfo> tempInfoList=new ArrayList<>();
         for(Moment tempMoment:afterlist)
         {
-            MomentInfo tempInfo=new MomentInfo(tempMoment.text,tempMoment.timestamp,tempMoment.username,tempMoment.pic1,tempMoment.pic2,tempMoment.pic3,tempMoment.pic4,tempMoment.pic5,tempMoment.pic6,tempMoment.pic7,tempMoment.pic8,tempMoment.pic9);
+            MomentInfo tempInfo=new MomentInfo(tempMoment.text,tempMoment.timestamp,tempMoment.username,tempMoment.pic1,tempMoment.pic2,tempMoment.pic3,tempMoment.pic4,tempMoment.pic5,tempMoment.pic6,tempMoment.pic7,tempMoment.pic8,tempMoment.pic9,CoverClient.getCover(tempMoment.username).pic);
             tempInfoList.add(tempInfo);
         }
         return tempInfoList;

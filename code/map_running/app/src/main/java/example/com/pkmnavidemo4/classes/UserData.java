@@ -1,6 +1,8 @@
 package example.com.pkmnavidemo4.classes;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.util.Pair;
 
@@ -14,9 +16,15 @@ import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import example.com.pkmnavidemo4.Bitmap.BitmapUtils;
+import example.com.pkmnavidemo4.R;
 import example.com.pkmnavidemo4.SceneformActivity;
 
 public class UserData {
+    //用户头像
+    private static Bitmap cover;
+    //头像锁
+    public static boolean isCoverGet;
     //判断所有动态是否已经获取
     public static boolean isAllMomentsGet;
     //锁.用来判断得到的新的最新动态时间戳是否更更新
@@ -49,6 +57,24 @@ public class UserData {
     public static int flagNum=0;
     public static Map<Integer,Integer> catchElfList=new HashMap();
     public static List<LatLng> constraint=new ArrayList<LatLng>();
+    public static void setCover(String s){
+        if(s.isEmpty())
+            cover= null;
+        else
+            cover= BitmapUtils.base64ToBitmap(s);
+    }
+    public static Bitmap getCover(String name){
+        isCoverGet=true;
+        HttpHandler.getCover(name);
+        while(isCoverGet){
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return cover;
+    }
     public static void setNewForumTime(Timestamp t){
         //第一次进入时刷新最新动态时间或新得到的时间更新时才能更新
         if(!isNewTimeInit||t.after(newForumTime)) {
@@ -223,6 +249,7 @@ public class UserData {
     public static void setExp(int num){
         exp=num;
     }
+    //增加经验
 	public static void addExp(int num){
         HttpHandler.changeExp(userName,num);
         exp+=num;

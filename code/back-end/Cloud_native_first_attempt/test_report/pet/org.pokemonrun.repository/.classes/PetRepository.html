@@ -1,0 +1,59 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PetRepository</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">org.pokemonrun.repository</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PetRepository (org.pokemonrun.repository)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">PetRepository</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package org.pokemonrun.repository;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import org.pokemonrun.entity.Pet;
+<i>4</i>&nbsp;import org.springframework.data.jpa.repository.JpaRepository;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import java.util.List;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;public interface PetRepository extends JpaRepository&lt;Pet, Integer&gt; {
+<i>9</i>&nbsp;    List&lt;Pet&gt; findAllByUsername(String username);
+<i>10</i>&nbsp;    Pet findByUsernameAndTypeID(String username, int typeID);
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-08-01 16:12</div>
+</div>
+</body>
+</html>
