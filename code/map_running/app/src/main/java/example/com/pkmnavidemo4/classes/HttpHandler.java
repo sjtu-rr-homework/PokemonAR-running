@@ -618,6 +618,7 @@ public class HttpHandler {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                UserData.setUserInfoMap(null,variety);
                 HttpURLConnection conn=null;
                 BufferedReader br=null;
                 String loginUrl=UrlHead+"/user/getinfo/username/"+username;
@@ -648,7 +649,6 @@ public class HttpHandler {
                     map.put("username",username);
                     if(variety==2)
                     UserData.isFriendInfoGet=false;
-
                     UserData.setUserInfoMap(map,variety);
                     //setContent(sb.toString());
                 } catch (Exception e) {
@@ -1202,11 +1202,13 @@ public class HttpHandler {
                     while((s = br.readLine())!=null){
                         sb.append(s);
                     }
-                    JSONObject item =new JSONObject(sb.toString());
-                    Log.d("sassasdsssssdddssssssssssssssssssasa",""+sb.toString().length());
-                    UserData.isCoverGet=false;
-                    Log.d("sassasdsssssdddssssssssssssssssssasa",item.getString("pic"));
-                    UserData.setCover(item.getString("pic"));
+                    if(!sb.toString().isEmpty()){
+                        JSONObject item =new JSONObject(sb.toString());
+                        UserData.isCoverGet=false;
+                        UserData.setCover(item.getString("pic"));
+                    }
+                    else
+                        UserData.setCover("");
 
                     //setContent(sb.toString());
                 } catch (Exception e) {

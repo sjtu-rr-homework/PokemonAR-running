@@ -1,6 +1,10 @@
 package example.com.pkmnavidemo4;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Layout;
@@ -12,8 +16,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import example.com.pkmnavidemo4.Bitmap.BitmapUtils;
 import example.com.pkmnavidemo4.classes.ElfSourceController;
 import example.com.pkmnavidemo4.classes.HttpHandler;
 import example.com.pkmnavidemo4.classes.UserData;
@@ -32,7 +40,7 @@ public class ElfDetailsActivity extends AppCompatActivity {
     private TextView  numOfExp;
     private TextView  nowLevel;
     private TextView  power;
-    private TextView  userExp;
+    private Button  share;
     private Button back;
     private Button AR;
     private Button addExp;
@@ -111,7 +119,6 @@ public class ElfDetailsActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "经验不足", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                userExp.setText(UserData.getExp()+"");
                 nowExp+=exp;
                 HttpHandler.addExp(UserData.getUserName(),variety,exp);
                 numOfExp.setText("");
@@ -142,8 +149,26 @@ public class ElfDetailsActivity extends AppCompatActivity {
         name.setText("精灵名 "+ElfSourceController.getName(variety,nowGrade));
         main=findViewById(R.id.act_elf_details_elf_nowimage);
         main.setBackgroundResource(ElfSourceController.getBackgroundWithLevel(variety,nowGrade));
-        userExp=findViewById(R.id.act_elf_details_elf_user_exp);
-        userExp.setText(UserData.getExp()+"");
+        share=findViewById(R.id.act_elf_details_elf_share);
+
+        //分享精灵
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(nowNum<1){
+                    Toast.makeText(getApplicationContext(), "你尚未拥有该精灵", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                List<String> jsonData=new ArrayList<>();
+                Resources res = getResources();
+                Bitmap bm= BitmapFactory.decodeResource(res,ElfSourceController.getBackgroundWithLevel(variety,nowGrade));
+                jsonData.add(BitmapUtils.bitmapToBase64(bm));
+                Timestamp time = new Timestamp(System.currentTimeMillis());
+                HttpHandler.postPic(jsonData,time.toString(),UserData.getUserName(),UserData.getUserName()+"分享了他的"+ElfSourceController.getName(variety,nowGrade)+",等级 "+(nowExp/100+1)+",战斗力 "+ ElfSourceController.getPower(variety,(nowExp/100+1),nowGrade));
+                Toast.makeText(getApplicationContext(), "分享成功", Toast.LENGTH_SHORT).show();
+                jsonData.clear();
+            }
+        });
 
         //设置出战精灵
         setMainElf=findViewById(R.id.act_elf_details_elf_button_set);

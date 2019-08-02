@@ -108,8 +108,10 @@ public class FriendsCircleAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ContentViewHolder) {
             ContentViewHolder viewHolder = (ContentViewHolder) holder;
-            if(moments.get(position).get("cover")==null)
+            if(moments.get(position).get("cover")==null){
+                viewHolder.mAvatarView.setBackgroundResource(R.drawable.bg_blue);
                 viewHolder.mAvatarView.setBackgroundResource(R.drawable.pikachu);
+            }
             else {
                 Log.d("dsds",moments.get(position).get("cover").toString());
                 viewHolder.mAvatarView.setBackgroundResource(R.drawable.bg_blue);
