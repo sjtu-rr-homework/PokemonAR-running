@@ -41,6 +41,7 @@ import com.amap.api.maps.model.PolylineOptions;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -367,7 +368,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         if(type==1) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(MapActivity.this);
             dialog.setTitle("温馨提示");
-            dialog.setMessage("是否结束跑步？");
+            dialog.setMessage("是否结束跑步并分享动态？");
             dialog.setCancelable(false);
             dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
@@ -378,6 +379,8 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                     UserData.distance+=runningMessage.getLength();
                     HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
                     UserData.addExp(runningMessage.getExp());
+                    Timestamp time = new Timestamp(System.currentTimeMillis());
+                    HttpHandler.postPic(new ArrayList<>(),time.toString(),UserData.getUserName(),"我跑了"+(int)runningMessage.getLength()+"米");
                     MapActivity.super.finish();
                 }
             });
@@ -395,7 +398,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                     (runningMessage.getTimePerKM()/60)>=UserData.lower_border&&
                     (runningMessage.getTimePerKM()/60)<=UserData.upper_border||UserData.lower_border<0||UserData.upper_border<0)) {
                 dialog.setTitle("你即将结束定点跑步");
-                dialog.setMessage("是否结束跑步？");
+                dialog.setMessage("是否结束跑步并分享动态？");
                 dialog.setCancelable(false);
                 dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
@@ -408,6 +411,8 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                         UserData.setMileage(runningMessage.getLength()+UserData.getMileage());
                         HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
                         UserData.addExp(runningMessage.getExp());
+                        Timestamp time = new Timestamp(System.currentTimeMillis());
+                        HttpHandler.postPic(new ArrayList<>(),time.toString(),UserData.getUserName(),"我跑了"+(int)runningMessage.getLength()+"米");
                         MapActivity.super.finish();
                     }
                 });

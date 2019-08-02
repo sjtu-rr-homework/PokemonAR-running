@@ -58,10 +58,12 @@ public class UserData {
     public static Map<Integer,Integer> catchElfList=new HashMap();
     public static List<LatLng> constraint=new ArrayList<LatLng>();
     public static void setCover(String getCover){
-        if(getCover.length()==0)
+        if(getCover.length()==0) {
             cover = null;
-        else
-            cover= BitmapUtils.base64ToBitmap(getCover);
+        }
+        else {
+            cover = BitmapUtils.base64ToBitmap(getCover);
+        }
     }
     public static Bitmap getCover(String name){
         isCoverGet=true;

@@ -1183,7 +1183,6 @@ public class HttpHandler {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Log.d("sassasdsssssssssssssssssssssasa","撒顶顶顶顶顶");
                 HttpURLConnection conn=null;
                 BufferedReader br=null;
                 String loginUrl=UrlHead+"/user/get/cover/username/"+username;
