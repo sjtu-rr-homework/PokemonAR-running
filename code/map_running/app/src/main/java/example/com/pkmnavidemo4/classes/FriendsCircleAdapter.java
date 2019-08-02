@@ -80,8 +80,9 @@ public class FriendsCircleAdapter extends RecyclerView.Adapter {
     }
 
     public void addStart( List<Map> getmoments) {
-        for(int i=0;i<getmoments.size();i++)
-            moments.add(0,getmoments.get(i));
+        for(int i=0;i<getmoments.size();i++) {
+            moments.add(0, getmoments.get(i));
+        }
         notifyDataSetChanged();
     }
 

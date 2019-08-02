@@ -74,7 +74,7 @@ public class MyFragment extends Fragment {
         int typeID = -1;
         int grade = -1;
         int exp = -1;
-        if(UserData.getElfWithId((int)UserData.getUserInfo().get("pet"))!=null) {
+        if(!UserData.getElfWithId((int)UserData.getUserInfo().get("pet")).isEmpty()) {
             typeID = (int) (UserData.getElfWithId((int) UserData.getUserInfo().get("pet")).get("typeID"));
             grade = (int) UserData.getElfWithId(typeID).get("grade");
             exp = (int) UserData.getElfWithId(typeID).get("exp");
@@ -91,7 +91,6 @@ public class MyFragment extends Fragment {
         elfImage.setBackgroundResource(ElfSourceController.getBackgroundWithLevel(typeID,grade));
         myExp.setText(UserData.getExp()+"");
         if(UserData.getCover(UserData.getUserName())==null) {
-            Log.d("sddd","sdddddddddddddddd");
             myCover.setBackgroundResource(R.drawable.pikachu);
         }
         else{
@@ -164,9 +163,14 @@ public class MyFragment extends Fragment {
             distance.setText(""+format.format(UserData.distance/1000)+"公里");
             mileage.setText(""+format.format(UserData.getMileage()/1000)+"公里");
             mileageGoal.setText(""+format.format(UserData.getMileageGoal()/1000)+"公里");
-            int typeID=(int)(UserData.getElfWithId((int)UserData.getUserInfo().get("pet")).get("typeID"));
-            int grade=(int)UserData.getElfWithId(typeID).get("grade");
-            int exp=(int)UserData.getElfWithId(typeID).get("exp");
+            int typeID = -1;
+            int grade = -1;
+            int exp = -1;
+            if(!UserData.getElfWithId((int)UserData.getUserInfo().get("pet")).isEmpty()) {
+                typeID = (int) (UserData.getElfWithId((int) UserData.getUserInfo().get("pet")).get("typeID"));
+                grade = (int) UserData.getElfWithId(typeID).get("grade");
+                exp = (int) UserData.getElfWithId(typeID).get("exp");
+            }
             username.setText(UserData.getUserName());
             elfname.setText(ElfSourceController.getName(typeID,grade));
             level.setText("lv."+(exp/100+1));
@@ -205,6 +209,7 @@ public class MyFragment extends Fragment {
                     Bitmap bp=BitmapUtils.decodeSampledBitmapFromFd(photoPath,100,100);
                     Log.d("pic2",BitmapUtils.bitmapToBase64(bp));
                     HttpHandler.changeCover(UserData.getUserName(),BitmapUtils.bitmapToBase64(bp));
+                    myCover.setBackgroundResource(R.drawable.bg_blue);
                     myCover.setImageBitmap(bp);
                 } catch (Exception e) {
                     e.printStackTrace();
