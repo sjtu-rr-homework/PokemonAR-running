@@ -58,6 +58,10 @@ public class LocationServiceimpl implements LocationService {
             temp.setLongitude(Double.parseDouble(Locationinfo.longitude));
             LocationDao.save(temp);
         }
+        if(resinfo.size()==0)
+        {
+            return null;
+        }
         return resinfo;
     }
 
