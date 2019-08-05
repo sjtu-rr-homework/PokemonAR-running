@@ -1,0 +1,142 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Location</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">org.pokemonrun.entity</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Location (org.pokemonrun.entity)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Location</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/ 10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (15/ 15)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package org.pokemonrun.entity;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+<i>4</i>&nbsp;import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+<i>5</i>&nbsp;import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import javax.persistence.*;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;@Entity
+<i>10</i>&nbsp;@JsonIgnoreProperties(value = {&quot;handler&quot;,&quot;hibernateLazyInitializer&quot;,&quot;fieldHandler&quot;})
+<i>11</i>&nbsp;@JsonIdentityInfo(
+<i>12</i>&nbsp;        generator = ObjectIdGenerators.PropertyGenerator.class,
+<i>13</i>&nbsp;        property = &quot;locationID&quot;)
+<i>14</i>&nbsp;public class Location {
+<i>15</i>&nbsp;    public int locationID;
+<i>16</i>&nbsp;    private String username;
+<i>17</i>&nbsp;    private double longitude;
+<i>18</i>&nbsp;    private double latitude;
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    @Id
+<i>23</i>&nbsp;    @Column(name = &quot;locationID&quot;)
+<i>24</i>&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+<b class="fc"><i>25</i>&nbsp;    public int getLocationID() {return locationID; }</b>
+<b class="fc"><i>26</i>&nbsp;    public void setLocationID(int locationID){this.locationID=locationID; }</b>
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    @Basic
+<i>30</i>&nbsp;    @Column(name = &quot;username&quot;)
+<b class="fc"><i>31</i>&nbsp;    public String getUsername() {return username; }</b>
+<b class="fc"><i>32</i>&nbsp;    public void setUsername(String username) {this.username=username; }</b>
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    @Basic
+<i>36</i>&nbsp;    @Column(name = &quot;longitude&quot;)
+<b class="fc"><i>37</i>&nbsp;    public double getLongitude() {return longitude; }</b>
+<b class="fc"><i>38</i>&nbsp;    public void setLongitude(double longitude) {this.longitude=longitude; }</b>
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;    @Basic
+<i>41</i>&nbsp;    @Column(name = &quot;latitude&quot;)
+<b class="fc"><i>42</i>&nbsp;    public double getLatitude() {return latitude; }</b>
+<b class="fc"><i>43</i>&nbsp;    public void setLatitude(double latitude) {this.latitude=latitude; }</b>
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;
+<b class="fc"><i>46</i>&nbsp;    public Location(){</b>
+<i>47</i>&nbsp;        // empty
+<b class="fc"><i>48</i>&nbsp;    }</b>
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;    public Location(String username, double longitude, double latitude)
+<b class="fc"><i>51</i>&nbsp;    {</b>
+<b class="fc"><i>52</i>&nbsp;        this.username=username;</b>
+<b class="fc"><i>53</i>&nbsp;        this.longitude=longitude;</b>
+<b class="fc"><i>54</i>&nbsp;        this.latitude=latitude;</b>
+<b class="fc"><i>55</i>&nbsp;    }</b>
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-08-01 16:02</div>
+</div>
+</body>
+</html>

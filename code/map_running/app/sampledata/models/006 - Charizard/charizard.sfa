@@ -77,5 +77,5 @@
       pipeline_name: 'Textures\\LizardonEyeDh.tga',
     },
   ],
-  version: '0.52:1',
+  version: '0.54:2',
 }

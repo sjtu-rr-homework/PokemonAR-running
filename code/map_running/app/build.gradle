@@ -7,9 +7,8 @@ buildscript {
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.1'
+        classpath 'com.android.tools.build:gradle:3.4.2'
         classpath 'com.google.ar.sceneform:plugin:1.10.0'
-        classpath 'com.google.ar.sceneform:plugin:1.5.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -62,6 +61,8 @@ dependencies {
     implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.10.0'
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation files('libs/AMap3DMap_6.9.0_AMapNavi_6.8.0_AMapSearch_6.9.0_AMapTrack_1.1.0_AMapLocation_4.6.0_20190530.jar')
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    implementation files('libs/pinyin4j-2.5.0.jar')
 }
 apply plugin: 'com.google.ar.sceneform.plugin'
 
@@ -70,10 +71,6 @@ sceneform.asset('sampledata/models/001 - Bulbasaur/Bulbasaur.obj',
         'sampledata/models/001 - Bulbasaur/bulbasaur.sfa',
         'src/main/assets/bulbasaur')
 
-sceneform.asset('sampledata/models/006 - Charizard/Charizard.obj',
-        'default',
-        'sampledata/models/006 - Charizard/charizard.sfa',
-        'src/main/assets/charizard')
 
 
 
@@ -88,7 +85,78 @@ sceneform.asset('sampledata/models/025 - Pikachu/Pikachu.obj',
         'src/main/res/raw/pikachu')
 
 
-sceneform.asset('sampledata/models/054 - Psyduck/Psyduck.obj',
+sceneform.asset('sampledata/models/054 - psyduck/psyduck.obj',
         'default',
-        'sampledata/models/054 - Psyduck/psyduck.sfa',
+        'sampledata/models/054 - psyduck/psyduck.sfa',
         'src/main/res/raw/psyduck')
+
+sceneform.asset('sampledata/models/004 - Charmander/Charmander.obj',
+        'default',
+        'sampledata/models/004 - Charmander/charmander.sfa',
+        'src/main/res/raw/charmander')
+
+
+
+
+sceneform.asset('sampledata/models/002 - Ivysaur/lvysaur.obj',
+        'default',
+        'sampledata/models/002 - Ivysaur/lvysaur.sfa',
+        'src/main/res/raw/lvysaur')
+
+sceneform.asset('sampledata/models/003 - Venusaur/Venusaur.obj',
+        'default',
+        'sampledata/models/003 - Venusaur/venusaur.sfa',
+        'src/main/res/raw/venusaur')
+
+sceneform.asset('sampledata/models/026 - Raichu/Raichu.obj',
+        'default',
+        'sampledata/models/026 - Raichu/raichu.sfa',
+        'src/main/res/raw/raichu')
+
+
+sceneform.asset('sampledata/models/005 - Charmeleon/Charmeleon.obj',
+        'default',
+        'sampledata/models/005 - Charmeleon/charmeleon.sfa',
+        'src/main/res/raw/charmeleon')
+
+
+
+sceneform.asset('sampledata/models/008 - Wartortle/Wartortle.obj',
+        'default',
+        'sampledata/models/008 - Wartortle/wartortle.sfa',
+        'src/main/res/raw/wartortle')
+
+sceneform.asset('sampledata/models/009 - Blastoise/Blastoise.obj',
+        'default',
+        'sampledata/models/009 - Blastoise/blastoise.sfa',
+        'src/main/res/raw/blastoise')
+
+sceneform.asset('sampledata/models/055 - Golduck/Golduck.obj',
+        'default',
+        'sampledata/models/055 - Golduck/golduck.sfa',
+        'src/main/res/raw/golduck')
+
+
+
+
+
+sceneform.asset('sampledata/models/002 - Ivysaur/Shiny.obj',
+        'default',
+        'sampledata/models/002 - Ivysaur/shiny.sfa',
+        'src/main/res/raw/shiny')
+
+
+sceneform.asset('sampledata/models/006 - Charizard/Charizard.obj',
+        'default',
+        'sampledata/models/006 - Charizard/charizard.sfa',
+        'src/main/res/raw/charizard')
+
+sceneform.asset('sampledata/models/041 - Zubat/Zubat.obj',
+        'default',
+        'sampledata/models/041 - Zubat/zubat.sfa',
+        'src/main/res/raw/zubat')
+
+sceneform.asset('sampledata/models/042 - Golbat/Golbat.obj',
+        'default',
+        'sampledata/models/042 - Golbat/golbat.sfa',
+        'src/main/res/raw/golbat')

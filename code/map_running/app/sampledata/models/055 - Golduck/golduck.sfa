@@ -1,0 +1,81 @@
+{
+  materials: [
+    {
+      name: 'mat1',
+      parameters: [
+        {
+          baseColor: 'GolduckDh',
+        },
+        {
+          baseColorTint: [
+            0.90000000000000002,
+            0.90000000000000002,
+            0.90000000000000002,
+            1,
+          ],
+        },
+        {
+          metallic: 1,
+        },
+        {
+          roughness: 0.408248,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/obj_material.sfm',
+    },
+    {
+      name: 'mat2',
+      parameters: [
+        {
+          baseColor: 'GolduckEyeDh',
+        },
+        {
+          baseColorTint: [
+            0.90000000000000002,
+            0.90000000000000002,
+            0.90000000000000002,
+            1,
+          ],
+        },
+        {
+          metallic: 1,
+        },
+        {
+          roughness: 0.408248,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/obj_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+    ],
+    collision: {},
+    file: 'sampledata/models/055 - Golduck/Golduck.obj',
+    name: 'Golduck',
+    recenter: 'root',
+    scale: 0.069861000000000006,
+  },
+  samplers: [
+    {
+      file: 'sampledata/models/055 - Golduck\\Textures\\GolduckDh.png',
+      name: 'GolduckDh',
+      pipeline_name: 'Textures\\GolduckDh.tga',
+    },
+    {
+      file: 'sampledata/models/055 - Golduck\\Textures\\GolduckEyeDh.png',
+      name: 'GolduckEyeDh',
+      pipeline_name: 'Textures\\GolduckEyeDh.tga',
+    },
+  ],
+  version: '0.54:2',
+}

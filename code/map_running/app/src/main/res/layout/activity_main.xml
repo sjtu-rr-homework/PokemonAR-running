@@ -15,25 +15,14 @@
         <RelativeLayout
             android:id="@+id/ly_top_bar"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:background="@color/bg_topbar">
-
-            <TextView
-                android:id="@+id/txt_topbar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:gravity="center"
-                android:textSize="18sp"
-                android:textColor="@color/text_topbar"
-                android:text="信息"/>
 
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2px"
-                android:background="@color/div_white"
-                android:layout_alignParentBottom="true"/>
+                android:layout_height="0dp"
+                android:background="@color/div_white"/>
 
         </RelativeLayout>
 
@@ -45,6 +34,7 @@
             android:layout_height="56dp"
             android:layout_alignParentBottom="true"
             android:background="@color/bg_white"
+            android:paddingTop="0dp"
             android:orientation="horizontal">
 
             <TextView
@@ -57,7 +47,7 @@
                 android:drawableTop="@drawable/tab_menu_channel"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="@string/tab_menu_alert"
+                android:text="精灵"
                 android:textColor="@drawable/tab_menu_text"
                 android:textSize="16sp" />
 
@@ -71,7 +61,7 @@
                 android:drawableTop="@drawable/tab_menu_message"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="@string/tab_menu_profile"
+                android:text="跑步"
                 android:textColor="@drawable/tab_menu_text"
                 android:textSize="16sp" />
 
@@ -85,7 +75,7 @@
                 android:drawableTop="@drawable/tab_menu_better"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="@string/tab_menu_pay"
+                android:text="我的"
                 android:textColor="@drawable/tab_menu_text"
                 android:textSize="16sp" />
 

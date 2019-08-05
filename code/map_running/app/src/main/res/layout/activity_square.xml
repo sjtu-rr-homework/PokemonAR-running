@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".SquareActivity">
+
+
+    <LinearLayout
+        android:id="@+id/fg_elf_topbar"
+        android:background="@drawable/bg_blue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:fitsSystemWindows="true"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <TextView
+            android:id="@+id/act_square_left_arrow"
+            android:layout_weight="1.2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#"
+            android:layout_marginLeft="10dp"
+            android:textColor="#ffffff"
+            android:textSize="30sp"/>
+        <TextView
+            android:layout_marginVertical="15dp"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户动态"
+            android:textColor="#ffffff"
+            android:textSize="20sp"/>
+        <ImageView
+            android:id="@+id/act_squre_to_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_add_circle_white_36dp"
+            android:layout_marginRight="10dp"/>
+    </LinearLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_below="@id/fg_elf_topbar"
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView_forum"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#D4D4D4"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</RelativeLayout>
+

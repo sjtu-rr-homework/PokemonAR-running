@@ -1,12 +1,26 @@
 package example.com.pkmnavidemo4;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Vibrator;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -17,29 +31,43 @@ import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
+import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.maps.model.Polyline;
 import com.amap.api.maps.model.PolylineOptions;
-import com.amap.api.maps.model.Text;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
+import example.com.pkmnavidemo4.classes.ElfPoint;
+import example.com.pkmnavidemo4.classes.ElfPointController;
+import example.com.pkmnavidemo4.classes.HttpHandler;
 import example.com.pkmnavidemo4.classes.RunningMessage;
+import example.com.pkmnavidemo4.classes.UserData;
 
 public class MapActivity extends AppCompatActivity implements LocationSource, AMapLocationListener {
 
     MapView mMapView = null;
-    private TextView positionText;
+    private int countDown=0;
     private TextView distText;
     private TextView timePerKM;
     private TextView timeText;
+    private TextView exp;
+    private Button endButton;
     private StringBuilder currentPosition;
     private RunningMessage runningMessage;
+    private ElfPointController elfPointController;
+    private List<ElfPoint> presentElfPoint=new ArrayList<ElfPoint>();
+    private int type;//0为约束跑模式，1为自由跑模式
+    private Vibrator vibrator;
     //private List<LatLng> latLngs=new ArrayList<LatLng>();
     //private double run_dist=0;
 
@@ -55,16 +83,31 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
     //定位蓝点
     MyLocationStyle myLocationStyle;
 
+    //是否第一次定位
+    boolean isFirstLocate=true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+
+        Intent intent=getIntent();
+        type=intent.getIntExtra("type",-1);
+        if(type==1){
+            Toast.makeText(MapActivity.this,"自由跑模式",Toast.LENGTH_SHORT).show();
+        }else if(type==0){
+            Toast.makeText(MapActivity.this,"定点跑模式",Toast.LENGTH_SHORT).show();
+        }
+
         //绑定文本控件
-        positionText=(TextView)findViewById(R.id.act_map_textView);
         distText=(TextView)findViewById(R.id.act_map_textView_dist);
         timePerKM=(TextView)findViewById(R.id.act_map_textView_speed);
         timeText=(TextView)findViewById(R.id.act_map_textView_time);
+        exp=(TextView)findViewById(R.id.act_map_textView_exp);
+
+        endButton=(Button)findViewById(R.id.act_map_endButton);
 
         //获取地图控件引用
         mMapView = (MapView) findViewById(R.id.map);
@@ -76,6 +119,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         //设置初始点位
         LatLng latLng = new LatLng(31.02228,121.442316);//构造一个位置
         aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,16));
+
         //设置地图的放缩级别
         aMap.moveCamera(CameraUpdateFactory.zoomTo(19));
         // 设置定位监听
@@ -91,6 +135,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         myLocationStyle.interval(2000); //设置连续定位模式下的定位间隔，只在连续定位模式下生效，单次定位模式下不会生效。单位为毫秒。
         aMap.setMyLocationStyle(myLocationStyle);//设置定位蓝点的Style
         //aMap.getUiSettings().setMyLocationButtonEnabled(true);设置默认定位按钮是否显示，非必需设置。
+        aMap.getUiSettings().setZoomControlsEnabled(false);
         aMap.setMyLocationEnabled(true);// 设置为true表示启动显示定位蓝点，false表示隐藏定位蓝点并不进行定位，默认是false。
         myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE);//连续定位、且将视角移动到地图中心点，定位点依照设备方向旋转，并且会跟随设备移动。（1秒1次定位）默认执行此种模式。
 
@@ -104,17 +149,29 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
             }
         });
 
-        //初始化跑步信息管理器
         Date date=new Date(System.currentTimeMillis());
         //System.out.println(date);
         runningMessage=new RunningMessage(date);
+        elfPointController=new ElfPointController();
+        elfPointController.setMax_id(5);
 
-        drawPoint();
-    }
+        aMap.setOnMarkerClickListener(new AMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                Intent intent=new Intent(MapActivity.this,SceneformActivity.class);
+                int id=Integer.parseInt(marker.getSnippet());
+                intent.putExtra("variety",id);
+                MapActivity.this.startActivity(intent);
+                return true;
+            }
+        });
 
-    private void drawPoint(){
-        LatLng latlng =new LatLng(31.0239310214,121.4350658655);
-        final Marker marker=aMap.addMarker(new MarkerOptions().position(latlng).title("王凯源法学院").snippet("DefaultMarker"));
+        endButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                MapActivity.this.finish();
+            }
+        });
     }
 
     private void drawLine(LatLng latLng){
@@ -143,43 +200,34 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
             Date tmpdate=new Date(runningMessage.getLastTime()*1000-8*3600*1000);
             SimpleDateFormat formater=new SimpleDateFormat("HH:mm:ss");
             timeText.setText(formater.format(tmpdate));
-            //显示跑步总时长，格式XX:XX:XX
-            /*int hou=0;
-            sec=(int)runningMessage.getLastTime()%60;
-            min=(int)runningMessage.getLastTime()/60%60;
-            hou=(int)runningMessage.getLastTime()/60/60;
-            String timeString;
-            if(hou==0){
-                timeString="00";
-            }
-            else if(hou>0&&hou<10){
-                timeString="0"+hou;
-            }
-            else {
-                timeString=""+hou;
-            }
-            if(min==0){
-                timeString+=":00";
-            }
-            else if(min>0&&min<10){
-                timeString+=(":0"+min);
-            }
-            else{
-                timeString+=(":"+min);
-            }
-            if(sec==0){
-                timeString+=":00";
-            }
-            else if(sec>0&&sec<10){
-                timeString+=(":0"+sec);
-            }
-            else{
-                timeString+=(":"+sec);
-            }
-            timeText.setText(timeString);*/
+            exp.setText(String.valueOf(runningMessage.getExp()));
         }
     }
 
+    public void showCatchMessage(int id,Marker marker){
+        AlertDialog alertDialog = new AlertDialog.Builder(MapActivity.this)
+                .setTitle("你已到达一个精灵点位")
+                .setMessage("是否开始捕捉")
+                .setPositiveButton("确定，开始捕捉", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(MapActivity.this, "开始捕捉", Toast.LENGTH_SHORT).show();
+                        marker.remove();
+                        Intent intent=new Intent(MapActivity.this,SceneformActivity.class);
+                        intent.putExtra("variety",id);
+                        MapActivity.this.startActivity(intent);
+                    }
+                })
+                .setNegativeButton("放弃，继续跑步", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(MapActivity.this, "继续跑步", Toast.LENGTH_SHORT).show();
+                        countDown=3;
+                        return;
+                    }
+                }).create();
+        alertDialog.show();
+    }
 
     @Override
     protected void onResume() {
@@ -224,7 +272,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
             //设置定位参数
             mlocationClient.setLocationOption(mLocationOption);
             // 此方法为每隔固定时间会发起一次定位请求，为了减少电量消耗或网络流量消耗，
-            // 注意设置合适的定位时间的间隔（最小间隔支持为2000ms），并且在合适时间调用stopLocation()方法来取消定位请求
+            // 注意设置合适的定位时间的间隔（最小间隔支持为1000ms），并且在合适时间调用stopLocation()方法来取消定位请求
             // 在定位结束后，在合适的生命周期调用onDestroy()方法
             // 在单次定位情况下，定位无论成功与否，都无需调用stopLocation()方法移除请求，定位sdk内部会移除
             mlocationClient.startLocation();//启动定位
@@ -251,14 +299,59 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
     public void onLocationChanged(AMapLocation aMapLocation) {
         if (mListener != null && aMapLocation != null) {
             if (aMapLocation != null && aMapLocation.getErrorCode() == 0) {
+                if(isFirstLocate){
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            LatLng start=new LatLng(aMapLocation.getLatitude(),aMapLocation.getLongitude());
+                            HttpHandler.postPosition(start);
+                            if(type==0){
+                                HttpHandler.getflag(aMap,start,MapActivity.this);
+                            }
+                            elfPointController.generateElfPoing(getApplicationContext(),aMap,start);
+                            presentElfPoint=elfPointController.getPresentElfPoint();
+                            //elfPoint.showAllPoints(aMap);
+                        }
+                    });
+                    isFirstLocate=false;
+                }
+                else{
+                    LatLng present=new LatLng(aMapLocation.getLatitude(),aMapLocation.getLongitude());
+                    List<Marker> mapScreenMarkers=aMap.getMapScreenMarkers();
+                    for (int i = 0; i < mapScreenMarkers.size(); ++i) {
+                        Marker marker = mapScreenMarkers.get(i);
+                        LatLng point = marker.getPosition();
+                        float distance = AMapUtils.calculateLineDistance(point, present);
+                        if (distance < 10) {
+                            if(marker.getTitle().equals("elf")&&countDown==0) {
+                                showCatchMessage(Integer.parseInt(marker.getSnippet()), marker);
+                                break;
+                            }
+                            else if(marker.getTitle().equals("flag")){
+                                vibrator.vibrate(500);
+                                Toast.makeText(MapActivity.this,"经过一个必经点位",Toast.LENGTH_SHORT).show();
+                                View view = View.inflate(MapActivity.this, R.layout.view_marker_done, null);
+                                Bitmap bitmap = ElfPointController.convertViewToBitmap(view);
+                                marker.setTitle("flag_done");
+                                UserData.flagNum--;
+                                marker.setIcon(BitmapDescriptorFactory.fromBitmap(bitmap));
+                                break;
+                            }
+                        }
+                    }
+                    if(countDown>=1){
+                        --countDown;
+                    }
+                    /*
+                    for(int i=0;i<presentElfPoint.size();++i){
+                        float distance=AMapUtils.calculateLineDistance(present,presentElfPoint.get(i).getLatLng());
+                        if(distance<10){
+                            showCatchMessage(presentElfPoint.get(i).getElfId());
+                            break;
+                        }
+                    }*/
+                }
                 mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点
-                //Date date=new Date(System.currentTimeMillis());
-                //SimpleDateFormat formatter=new SimpleDateFormat("HH:mm:ss");
-                currentPosition=new StringBuilder();
-                currentPosition.append("经度：").append(aMapLocation.getLongitude()).append("\n");
-                currentPosition.append("纬度：").append(aMapLocation.getLatitude()).append("\n");
-                //currentPosition.append("时间：").append(date.getTime()).append("\n");
-                positionText.setText(currentPosition);
                 LatLng latLng=new LatLng(aMapLocation.getLatitude(),aMapLocation.getLongitude());
                 drawLine(latLng);
 
@@ -269,6 +362,128 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         }
     }
 
+
+    @Override
+    public void finish() {
+        if(type==1) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(MapActivity.this);
+            dialog.setTitle("温馨提示");
+            dialog.setMessage("是否结束跑步并分享动态？");
+            dialog.setCancelable(false);
+            dialog.setNeutralButton("退出并分享", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    UserData.successRun();
+                    HttpHandler.postRunningRecord1(runningMessage);
+                    HttpHandler.addDistance(UserData.getUserName(), runningMessage.getLength());
+                    UserData.distance+=runningMessage.getLength();
+                    HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
+                    UserData.addExp(runningMessage.getExp());
+                    Timestamp time = new Timestamp(System.currentTimeMillis());
+                    HttpHandler.postPic(new ArrayList<>(),time.toString(),UserData.getUserName(),"我跑了"+(int)runningMessage.getLength()+"米");
+                    MapActivity.super.finish();
+                }
+            });
+            dialog.setPositiveButton("仅退出", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    UserData.successRun();
+                    HttpHandler.postRunningRecord1(runningMessage);
+                    HttpHandler.addDistance(UserData.getUserName(), runningMessage.getLength());
+                    UserData.distance+=runningMessage.getLength();
+                    HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
+                    UserData.addExp(runningMessage.getExp());
+                    MapActivity.super.finish();
+                }
+            });
+            dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    return;
+                }
+            });
+            dialog.show();
+        }
+        else if(type==0){
+            AlertDialog.Builder dialog = new AlertDialog.Builder(MapActivity.this);
+            if(checkFlagDone()&&(UserData.lower_border>=0&&UserData.upper_border>=0&&
+                    (runningMessage.getTimePerKM()/60)>=UserData.lower_border&&
+                    (runningMessage.getTimePerKM()/60)<=UserData.upper_border||UserData.lower_border<0||UserData.upper_border<0)) {
+                dialog.setTitle("你即将结束定点跑步");
+                dialog.setMessage("是否结束跑步并分享动态？");
+                dialog.setCancelable(false);
+                dialog.setNeutralButton("退出并分享", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        UserData.successRun();
+                        HttpHandler.postRunningRecord1(runningMessage);
+                        HttpHandler.addDistance(UserData.getUserName(), runningMessage.getLength());
+                        UserData.distance+=runningMessage.getLength();
+                        HttpHandler.finishRestrainRun(runningMessage.getLength());
+                        UserData.setMileage(runningMessage.getLength()+UserData.getMileage());
+                        HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
+                        UserData.addExp(runningMessage.getExp());
+                        Timestamp time = new Timestamp(System.currentTimeMillis());
+                        HttpHandler.postPic(new ArrayList<>(),time.toString(),UserData.getUserName(),"我跑了"+(int)runningMessage.getLength()+"米");
+                        MapActivity.super.finish();
+                    }
+                });
+                dialog.setPositiveButton("仅退出", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        UserData.successRun();
+                        HttpHandler.postRunningRecord1(runningMessage);
+                        HttpHandler.addDistance(UserData.getUserName(), runningMessage.getLength());
+                        UserData.distance+=runningMessage.getLength();
+                        HttpHandler.finishRestrainRun(runningMessage.getLength());
+                        UserData.setMileage(runningMessage.getLength()+UserData.getMileage());
+                        HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
+                        UserData.addExp(runningMessage.getExp());
+                        MapActivity.super.finish();
+                    }
+                });
+                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        return;
+                    }
+                });
+                dialog.show();
+            }
+            else{
+                dialog.setTitle("你还没有经过所有必经点位或配速未达到要求");
+                dialog.setMessage("现在结束跑步得不到任何经验和精灵，是否结束跑步？");
+                dialog.setCancelable(false);
+                dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        UserData.failRun();
+                        HttpHandler.postRunningRecord1(runningMessage);
+                        HttpHandler.addDistance(UserData.getUserName(), runningMessage.getLength());
+                        UserData.distance+=runningMessage.getLength();
+                        HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
+                        MapActivity.super.finish();
+                    }
+                });
+                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        return;
+                    }
+                });
+                dialog.show();
+            }
+        }
+    }
+
+    private boolean checkFlagDone(){
+        if(UserData.flagNum>0){
+            return false;
+        }
+        return true;
+    }
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -277,5 +492,31 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         if (null != mlocationClient) {
             mlocationClient.onDestroy();
         }
+    }
+
+    public static String sHA1(Context context) {
+        try {
+            PackageInfo info = context.getPackageManager().getPackageInfo(
+                    context.getPackageName(), PackageManager.GET_SIGNATURES);
+            byte[] cert = info.signatures[0].toByteArray();
+            MessageDigest md = MessageDigest.getInstance("SHA1");
+            byte[] publicKey = md.digest(cert);
+            StringBuffer hexString = new StringBuffer();
+            for (int i = 0; i < publicKey.length; i++) {
+                String appendString = Integer.toHexString(0xFF & publicKey[i])
+                        .toUpperCase(Locale.US);
+                if (appendString.length() == 1)
+                    hexString.append("0");
+                hexString.append(appendString);
+                hexString.append(":");
+            }
+            String result = hexString.toString();
+            return result.substring(0, result.length()-1);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

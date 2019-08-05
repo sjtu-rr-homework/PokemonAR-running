@@ -20,6 +20,7 @@ public class RunningMessage {
         runningTraceCollector=new RunningTraceCollector();
         length=0;
         LastTime=0;
+        exp=0;
     }
     public void newPoing(LatLng newLatLng,Date present){
         runningTraceCollector.addLatLng(newLatLng);
@@ -29,9 +30,13 @@ public class RunningMessage {
         if(length!=0) {
             timePerKM = (int) (LastTime * 1000 / (int) length);
         }
+        exp=(int)(length/20+LastTime/5);
     }
     public List<LatLng> getAllLatLng(){
         return runningTraceCollector.getAllLatLng();
+    }
+    public void setAllLatLng(List<LatLng> latLngList){
+        runningTraceCollector.setAllLatLng(latLngList);
     }
     public List<LatLng> getPresentLatLng(){
         return runningTraceCollector.getAllLatLng();
@@ -44,5 +49,11 @@ public class RunningMessage {
     }
     public int getTimePerKM(){
         return timePerKM;
+    }
+    public Date getStart(){
+        return this.start;
+    }
+    public int getExp(){
+        return exp;
     }
 }

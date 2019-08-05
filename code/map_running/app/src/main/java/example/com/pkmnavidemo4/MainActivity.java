@@ -1,15 +1,18 @@
 package example.com.pkmnavidemo4;
 
 import android.Manifest;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -17,20 +20,22 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import example.com.pkmnavidemo4.Fragments.ElfsFragment;
 import example.com.pkmnavidemo4.Fragments.MyFragment;
 import example.com.pkmnavidemo4.Fragments.RunningFragment;
+import example.com.pkmnavidemo4.classes.HttpHandler;
+import example.com.pkmnavidemo4.classes.TestRecycleViewAdapter;
+import example.com.pkmnavidemo4.classes.UserData;
 
 /**
  * Created by Coder-pig on 2015/8/28 0028.
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-
     //UI Object
-    private TextView txt_topbar;
     private TextView txt_channel;
     private TextView txt_message;
     private TextView txt_better;
@@ -48,7 +53,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-        fManager = getFragmentManager();
+        //HttpHandler.finishRestrainRun(1000);
+        HttpHandler.getUserInfo();
+        fManager = getSupportFragmentManager();
         bindViews();
         List<String> permissionList = new ArrayList<>();
         //如果没有启动下面权限，就询问用户让用户打开
@@ -69,10 +76,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ActivityCompat.requestPermissions(MainActivity.this, permissions, 1);
         }
         else {
-            txt_message.performClick();   //模拟一次点击，既进去后选择第一项
+            txt_message.performClick();//模拟一次点击，既进去后选择第一项
         }
 
     }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        TextView mileage;
+        mileage=(TextView)findViewById(R.id.fg_running_calculate);
+        DecimalFormat format=new DecimalFormat("#0.00");
+        mileage.setText("计入成绩："+ format.format(UserData.getMileage()/1000)+"公里");
+    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -98,7 +115,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //UI组件初始化与事件绑定
     private void bindViews() {
-        txt_topbar = (TextView) findViewById(R.id.txt_topbar);
         txt_channel = (TextView) findViewById(R.id.txt_channel);
         txt_message = (TextView) findViewById(R.id.txt_message);
         txt_better = (TextView) findViewById(R.id.txt_better);
@@ -121,6 +137,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(elfsFragment != null)fragmentTransaction.hide(elfsFragment);
         if(runningFragment != null)fragmentTransaction.hide(runningFragment);
         if(fg3 != null)fragmentTransaction.hide(fg3);
+    }
+
+    private void refresh( RecyclerView mRecyclerView){
+        HttpHandler.getElfs(MainActivity.this, UserData.getUserName());
+        if(!UserData.getOnlyHave())
+            return;
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        TestRecycleViewAdapter adapter = new TestRecycleViewAdapter(MainActivity.this,UserData.getElfList());
+        mRecyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -152,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setSelected();
                 txt_better.setSelected(true);
                 if(fg3 == null){
-                    fg3 = new MyFragment("第三个Fragment");
+                    fg3 = new MyFragment();
                     fTransaction.add(R.id.ly_content,fg3);
                 }else{
                     fTransaction.show(fg3);
@@ -160,5 +189,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
         fTransaction.commit();
+    }
+    public ElfsFragment getElfsFragment(){
+        return elfsFragment;
     }
 }

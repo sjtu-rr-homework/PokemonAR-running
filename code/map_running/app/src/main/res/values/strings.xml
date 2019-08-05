@@ -5,9 +5,18 @@
     <string name="action_settings">Settings</string>
 
 
-
     <string name="tab_menu_alert">提醒</string>
     <string name="tab_menu_profile">信息</string>
     <string name="tab_menu_pay">我的</string>
     <string name="tab_menu_setting">设置</string>
+    <string name="player1Fight1"><Data><![CDATA[<font color="blue">%1$s</font>打出了普通一击]]></Data></string>
+    <string name="player1Fight2"><Data><![CDATA[<font color="blue">%1$s</font>的攻击MISS了]]></Data></string>
+    <string name="player1Fight3"><Data><![CDATA[<font color="blue">%1$s</font>打出了会心一击]]></Data></string>
+    <string name="player1Fight4"><Data><![CDATA[<font color="blue">%1$s</font>打出了致命一击]]></Data></string>
+    <string name="player2Fight1"><Data><![CDATA[<font color="red">%1$s</font>打出了普通一击]]></Data></string>
+    <string name="player2Fight2"><Data><![CDATA[<font color="red">%1$s</font>的攻击MISS了]]></Data></string>
+    <string name="player2Fight3"><Data><![CDATA[<font color="red">%1$s</font>打出了会心一击]]></Data></string>
+    <string name="player2Fight4"><Data><![CDATA[<font color="red">%1$s</font>打出了致命一击]]></Data></string>
+    <string name="player12"><Data><![CDATA[<font color="blue">%1$s</font>对<font color="red">%2$s</font>造成了%3$s血量的伤害]]></Data></string>
+    <string name="player21"><Data><![CDATA[<font color="red">%2$s</font>对<font color="blue">%1$s</font>造成了%3$s血量的伤害]]></Data></string>
 </resources>

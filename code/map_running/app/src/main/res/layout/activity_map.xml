@@ -16,13 +16,22 @@
             android:id="@+id/map"
             android:layout_width="match_parent"
             android:layout_height="match_parent"></com.amap.api.maps.MapView>
-
-        <TextView
-            android:id="@+id/act_map_textView"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
-
+            android:fitsSystemWindows="true">
+            <Button
+                android:id="@+id/act_map_endButton"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/button_circle_white"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:text="结束"
+                android:visibility="visible" />
+        </RelativeLayout>
         <RelativeLayout
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
@@ -122,7 +131,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="40px"
                     android:textStyle="bold"
-                    android:text="1520" />
+                    android:text="0" />
             </RelativeLayout>
         </RelativeLayout>
 
