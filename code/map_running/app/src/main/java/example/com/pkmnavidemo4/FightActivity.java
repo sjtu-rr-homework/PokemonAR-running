@@ -224,13 +224,13 @@ public class FightActivity extends AppCompatActivity {
                     case 6:
                     case 7:
                         adapter.addData( Html.fromHtml(getResources().getString(R.string.player1Fight1,ElfSourceController.getName(leftElf,leftGrade))));
-                        rightExplode.setBackgroundResource(R.drawable.bz1);
+                        rightExplode.setBackgroundResource(R.drawable.bz4);
                        // adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "打出了普通一击"));
                         break;
                     case 8:
                     case 9:
                         adapter.addData( Html.fromHtml(getResources().getString(R.string.player1Fight3,ElfSourceController.getName(leftElf,leftGrade))));
-                        rightExplode.setBackgroundResource(R.drawable.bz2);
+                        rightExplode.setBackgroundResource(R.drawable.bz6);
                        // adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "打出了会心一击"));
                         attack *= 2;
                         break;

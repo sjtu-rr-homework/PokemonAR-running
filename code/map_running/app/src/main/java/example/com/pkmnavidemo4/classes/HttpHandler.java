@@ -54,9 +54,9 @@ import example.com.pkmnavidemo4.R;
 
 public class HttpHandler {
 
-   // private static String UrlHead="http://5c789fc3.ngrok.io";
+   private static String UrlHead="http://202.120.40.8:30751";
 
-    private static String UrlHead="http://b54463c0.ngrok.io";
+    //private static String UrlHead="http://b54463c0.ngrok.io";
 
 
     @Nullable
@@ -98,7 +98,7 @@ public class HttpHandler {
                     while((s = br.readLine())!=null){
                         sb.append(s);
                     }
-                    Log.d("123","---"+sb.toString());
+                    Log.d("34516654654","---"+sb.toString());
                     JSONArray jsonArray = new JSONArray(sb.toString());
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject item = jsonArray.getJSONObject(i); // 得到每个对象
@@ -637,7 +637,7 @@ public class HttpHandler {
                     while((s = br.readLine())!=null){
                         sb.append(s);
                     }
-                    Log.d("133","---"+sb.toString());
+                    Log.d("15555583","---"+sb.toString());
                     JSONObject jsonobject = new JSONObject(sb.toString());
                     double distance = jsonobject.getDouble("distance"); // 获取对象对应的值
                     int pet =jsonobject.getInt("pet");
@@ -650,6 +650,7 @@ public class HttpHandler {
                     if(variety==2)
                     UserData.isFriendInfoGet=false;
                     UserData.setUserInfoMap(map,variety);
+                    Log.d("dsdssdds",UserData.getUserInfo().toString());
                     //setContent(sb.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
