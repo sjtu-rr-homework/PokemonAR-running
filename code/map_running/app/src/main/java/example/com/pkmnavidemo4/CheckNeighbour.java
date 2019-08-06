@@ -105,11 +105,20 @@ public class CheckNeighbour extends AppCompatActivity implements LocationSource,
                 String username=marker.getTitle();
                 Map petMap= UserData.getFriendInfo(username);
                 intent.putExtra("username",username);
-                intent.putExtra("type",2);
-                intent.putExtra("petType",(int)petMap.get("typeID"));
-                intent.putExtra("exp",(int)petMap.get("exp"));
-                intent.putExtra("grade",(int)petMap.get("grade"));
-                startActivity(intent);
+                intent.putExtra("type",1);
+                int tmp;
+                if(petMap!=null&&petMap.containsKey("typeID")){
+                    intent.putExtra("petType",(int)petMap.get("typeID"));
+                    intent.putExtra("exp",(int)petMap.get("exp"));
+                    intent.putExtra("grade",(int)petMap.get("grade"));
+                }
+                /*
+                else {
+                    intent.putExtra("petType", -1);
+                    intent.putExtra("exp", -1);
+                    intent.putExtra("grade", -1);
+                }*/
+                //startActivity(intent);
                 CheckNeighbour.this.startActivity(intent);
 
                 return true;

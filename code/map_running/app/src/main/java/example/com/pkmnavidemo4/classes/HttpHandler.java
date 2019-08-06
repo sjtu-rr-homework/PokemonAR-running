@@ -56,7 +56,7 @@ public class HttpHandler {
 
    // private static String UrlHead="http://5c789fc3.ngrok.io";
 
-    private static String UrlHead="http://b54463c0.ngrok.io";
+    private static String UrlHead="http://202.120.40.8:30751";
 
 
     @Nullable
