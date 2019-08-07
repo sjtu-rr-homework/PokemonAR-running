@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +54,8 @@ public class FriendActivity extends AppCompatActivity {
         elfImage=findViewById(R.id.act_friend_elf);
         elfImage.setBackgroundResource(ElfSourceController.getBackgroundWithLevel(typeID,grade));
         if(type==1){
+            LinearLayout linearLayout=findViewById(R.id.act_friend_detail_page);
+            linearLayout.setVisibility(View.INVISIBLE);
             addfriend.setVisibility(View.VISIBLE);
             fightfriend.setVisibility(View.INVISIBLE);
         }else if(type==2){
