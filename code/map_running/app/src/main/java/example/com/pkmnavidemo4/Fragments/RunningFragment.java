@@ -89,8 +89,8 @@ public class RunningFragment extends Fragment implements View.OnClickListener{
                 arg0==0的时辰默示什么都没做。*/
             }
         });
-        DecimalFormat format=new DecimalFormat("#0.00");
-        mileage.setText("计入成绩："+ format.format(UserData.getMileage()/1000)+"公里");
+        //DecimalFormat format=new DecimalFormat("#0.00");
+        //mileage.setText("计入成绩："+ format.format(UserData.getMileage()/1000)+"公里");
         toRecord.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){

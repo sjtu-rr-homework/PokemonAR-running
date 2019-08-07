@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         HttpHandler.getUserInfo();
         fManager = getSupportFragmentManager();
         bindViews();
+        /*
         List<String> permissionList = new ArrayList<>();
         //如果没有启动下面权限，就询问用户让用户打开
         if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED)
@@ -77,8 +78,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         else {
             txt_message.performClick();//模拟一次点击，既进去后选择第一项
-        }
-
+        }*/
+        txt_message.performClick();
     }
 
     @Override
