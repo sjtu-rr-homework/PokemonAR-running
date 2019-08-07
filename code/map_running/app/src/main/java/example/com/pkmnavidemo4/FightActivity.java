@@ -101,7 +101,7 @@ public class FightActivity extends AppCompatActivity {
         image2=findViewById(R.id.act_fight_elf_player2);
         image2.setBackgroundResource(ElfSourceController.getBackgroundWithLevel(rightElf,rightGrade));
         leftExplode=findViewById(R.id.act_fight_elf_player1_bz);
-        rightExplode=findViewById(R.id.act_fight_elf_player2_bz);
+        rightExplode=findViewById(R.id.act_fight_elf_player2_bz_1);
     }
 
     private void startFight() {
@@ -224,7 +224,7 @@ public class FightActivity extends AppCompatActivity {
                     case 6:
                     case 7:
                         adapter.addData( Html.fromHtml(getResources().getString(R.string.player1Fight1,ElfSourceController.getName(leftElf,leftGrade))));
-                        rightExplode.setBackgroundResource(R.drawable.bz4);
+                        rightExplode.setBackgroundResource(R.drawable.bz6);
                        // adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "打出了普通一击"));
                         break;
                     case 8:
@@ -236,7 +236,7 @@ public class FightActivity extends AppCompatActivity {
                         break;
                     case 0:
                         adapter.addData( Html.fromHtml(getResources().getString(R.string.player1Fight4,ElfSourceController.getName(leftElf,leftGrade))));
-                        rightExplode.setBackgroundResource(R.drawable.bz3);
+                        rightExplode.setBackgroundResource(R.drawable.bz6);
                         //adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "打出了致命一击"));
                         attack *= 5;
                         break;
