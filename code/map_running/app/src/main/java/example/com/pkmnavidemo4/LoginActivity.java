@@ -113,6 +113,7 @@ public class LoginActivity  extends AppCompatActivity {
                     SharedPreferencesUtil.putBoolean(getApplicationContext(),"isremember",true);
                 }
                 HttpHandler.login(LoginActivity.this,username,password,auto_login.isChecked());
+                Log.d("name",username);
                 HttpHandler.getMileage(username);
                 HttpHandler.getElfs(username);
                 HttpHandler.getExp(username);

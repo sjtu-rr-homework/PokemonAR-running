@@ -48,6 +48,7 @@
             android:max="100"
             android:progress="100"
             />
+
         <ImageView
             android:id="@+id/act_fight_elf_player1"
             android:layout_width="130dp"
@@ -56,6 +57,14 @@
             android:layout_marginTop="30dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/catchball" />
+
+        <ImageView
+            android:id="@+id/act_fight_elf_player1_bz"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="10dp" />
 
         <ProgressBar
             android:id="@+id/act_fight_elf_hp2"
@@ -76,6 +85,15 @@
             android:layout_marginTop="30dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/catchball" />
+
+        <ImageView
+            android:id="@+id/act_fight_elf_player2_bz_1"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginStart="250dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/sceneform_plane" />
 
     </RelativeLayout>
 

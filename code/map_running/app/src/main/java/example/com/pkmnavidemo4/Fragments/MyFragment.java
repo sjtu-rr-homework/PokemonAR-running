@@ -74,7 +74,7 @@ public class MyFragment extends Fragment {
         int typeID = -1;
         int grade = -1;
         int exp = -1;
-        if(!UserData.getElfWithId((int)UserData.getUserInfo().get("pet")).isEmpty()) {
+        if(!UserData.getUserInfo().isEmpty()&&!UserData.getElfWithId((int)UserData.getUserInfo().get("pet")).isEmpty()) {
             typeID = (int) (UserData.getElfWithId((int) UserData.getUserInfo().get("pet")).get("typeID"));
             grade = (int) UserData.getElfWithId(typeID).get("grade");
             exp = (int) UserData.getElfWithId(typeID).get("exp");

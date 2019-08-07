@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TextView mileage;
         mileage=(TextView)findViewById(R.id.fg_running_calculate);
         DecimalFormat format=new DecimalFormat("#0.00");
-        mileage.setText("计入成绩："+ format.format(UserData.getMileage()/1000)+"公里");
+        //mileage.setText("计入成绩："+ format.format(UserData.getMileage()/1000)+"公里");
     }
 
 
