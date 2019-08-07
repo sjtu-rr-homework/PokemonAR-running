@@ -224,19 +224,20 @@ public class FightActivity extends AppCompatActivity {
                     case 6:
                     case 7:
                         adapter.addData( Html.fromHtml(getResources().getString(R.string.player1Fight1,ElfSourceController.getName(leftElf,leftGrade))));
-                        rightExplode.setBackgroundResource(R.drawable.bz6);
+
+                        rightExplode.setBackgroundResource(R.drawable.bz11);
                        // adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "打出了普通一击"));
                         break;
                     case 8:
                     case 9:
                         adapter.addData( Html.fromHtml(getResources().getString(R.string.player1Fight3,ElfSourceController.getName(leftElf,leftGrade))));
-                        rightExplode.setBackgroundResource(R.drawable.bz6);
+                        rightExplode.setBackgroundResource(R.drawable.bz11);
                        // adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "打出了会心一击"));
                         attack *= 2;
                         break;
                     case 0:
                         adapter.addData( Html.fromHtml(getResources().getString(R.string.player1Fight4,ElfSourceController.getName(leftElf,leftGrade))));
-                        rightExplode.setBackgroundResource(R.drawable.bz6);
+                        rightExplode.setBackgroundResource(R.drawable.bz11);
                         //adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "打出了致命一击"));
                         attack *= 5;
                         break;
@@ -276,16 +277,19 @@ public class FightActivity extends AppCompatActivity {
                     case 5:
                     case 6:
                     case 7:
+                        leftExplode.setBackgroundResource(R.drawable.bz11);
                         adapter.addData( Html.fromHtml(getResources().getString(R.string.player2Fight1,ElfSourceController.getName(rightElf,rightGrade))));
                         //adapter.addData(SpannableString.valueOf("" +ElfSourceController.getColorfulElfName(rightElf, rightGrade,1) + "打出了普通一击"));
                         break;
                     case 8:
                     case 9:
+                        leftExplode.setBackgroundResource(R.drawable.bz11);
                         adapter.addData( Html.fromHtml(getResources().getString(R.string.player2Fight3,ElfSourceController.getName(rightElf,rightGrade))));
                         //adapter.addData(SpannableString.valueOf("" +ElfSourceController.getColorfulElfName(rightElf, rightGrade,1) + "打出了会心一击"));
                         attack *= 2.5;
                         break;
                     case 0:
+                        leftExplode.setBackgroundResource(R.drawable.bz11);
                         adapter.addData( Html.fromHtml(getResources().getString(R.string.player2Fight4,ElfSourceController.getName(rightElf,rightGrade))));
                         //adapter.addData(SpannableString.valueOf("" +ElfSourceController.getColorfulElfName(rightElf, rightGrade,1) + "打出了致命一击"));
                         attack *= 6;
@@ -306,6 +310,11 @@ public class FightActivity extends AppCompatActivity {
                 //adapter.addData(SpannableString.valueOf(ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "还有" + leftHp + "%血量"));
                 hpt1.setText(leftHp+"/100");
                 hp1.setProgress(leftHp);
+            try {
+                Thread.sleep(25);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 

@@ -3,6 +3,7 @@ package example.com.pkmnavidemo4.Bitmap;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
@@ -74,6 +75,24 @@ public class BitmapUtils {
 		return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 	}
 
+	/**
+	 * base64转为bitmap缩略图
+	 * @return
+	 */
+	public static Bitmap BitmapCompress(Bitmap bm) {
+		// 获得图片的宽高
+		int width = bm.getWidth();
+		int height = bm.getHeight();
+		// 计算缩放比例
+		float scaleWidth = ((float) 200) / width;
+		float scaleHeight = ((float) 200) / height;
+		// 取得想要缩放的matrix参数
+		Matrix matrix = new Matrix();
+		matrix.postScale(scaleWidth, scaleHeight);
+		// 得到新的图片
+		Bitmap newbm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
+		return newbm;
+	}
 	/**
 	 * bitmap转为base64
 	 * @param bitmap
