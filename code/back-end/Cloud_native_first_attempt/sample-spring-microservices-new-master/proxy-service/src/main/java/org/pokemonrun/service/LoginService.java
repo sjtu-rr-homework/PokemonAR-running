@@ -35,8 +35,6 @@ public class LoginService implements ILoginService
     @Override
     public String login(String username, String password) {
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username,
-                    password));
             if (!UserClient.login(username,password) ) {
                 throw new CustomException("Invalid username or password.", HttpStatus.UNAUTHORIZED);
             }

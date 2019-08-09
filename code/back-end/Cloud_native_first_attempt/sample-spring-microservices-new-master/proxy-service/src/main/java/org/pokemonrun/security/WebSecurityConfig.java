@@ -32,25 +32,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // Entry points
         http.authorizeRequests()
                 .antMatchers("/**/signin/**").permitAll()
-                .antMatchers("/**/register/**").permitAll()
-                // Disallow everything else..
                 .anyRequest().authenticated();
-
-        // If a user try to access a resource without having enough permissions
-        http.exceptionHandling().accessDeniedPage("/login");
 
         // Apply JWT
         http.apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
 
         // Optional, if you want to test the API from a browser
-        // http.httpBasic();
+         http.httpBasic();
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
         // Allow eureka client to be accessed without authentication
         web.ignoring().antMatchers("/*/")
-                .antMatchers("/eureka/**");
+                .antMatchers("/eureka/**")
+                .antMatchers("/**/register/**")
+                .antMatchers(HttpMethod.OPTIONS, "/**"); // Request type options should be allowed.
 
     }
 

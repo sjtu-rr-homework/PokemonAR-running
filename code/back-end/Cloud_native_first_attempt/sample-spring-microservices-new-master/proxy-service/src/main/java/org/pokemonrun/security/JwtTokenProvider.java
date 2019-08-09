@@ -21,10 +21,9 @@ import java.util.List;
 
 @Component
 public class JwtTokenProvider {
-    private static final String AUTH="auth";
     private static final String AUTHORIZATION="Authorization";
     private String secretKey="secret-key";
-    private long validityInMilliseconds = 3600000; // 1h
+    private long validityInMilliseconds = 36000000; // 10h
 
     @Autowired
     private JwtTokenRepository jwtTokenRepository;
@@ -55,9 +54,6 @@ public class JwtTokenProvider {
 
     public String resolveToken(HttpServletRequest req) {
         String bearerToken = req.getHeader(AUTHORIZATION);
-        /*if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7, bearerToken.length());
-        }*/
         if (bearerToken != null ) {
             return bearerToken;
         }
@@ -71,7 +67,6 @@ public class JwtTokenProvider {
     public boolean isTokenPresentInDB (String token) {
         return jwtTokenRepository.findById(token).isPresent();
     }
-    //user details with out database hit
     public UserDetails getUserDetails(String token) {
         return null;
     }
@@ -80,8 +75,7 @@ public class JwtTokenProvider {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
     public Authentication getAuthentication(String token) {
-        UserDetails userDetails = getUserDetails(token);
-        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+        return new UsernamePasswordAuthenticationToken(null, "", null);
     }
 
 }
