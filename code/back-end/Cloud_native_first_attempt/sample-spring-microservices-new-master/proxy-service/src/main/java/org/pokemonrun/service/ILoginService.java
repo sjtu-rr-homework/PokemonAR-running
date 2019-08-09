@@ -1,10 +1,7 @@
 package org.pokemonrun.service;
 
-import com.arjun.gateway.bean.auth.User;
-
 public interface ILoginService {
     String login(String username, String password);
-    User saveUser(User user);
 
     boolean logout(String token);
 

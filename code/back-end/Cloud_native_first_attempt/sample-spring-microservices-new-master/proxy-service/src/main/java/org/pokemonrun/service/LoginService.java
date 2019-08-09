@@ -1,6 +1,9 @@
 package org.pokemonrun.service;
 
 
+import org.pokemonrun.client.UserClient;
+import org.pokemonrun.entity.JwtToken;
+import org.pokemonrun.exception.CustomException;
 import org.pokemonrun.repository.JwtTokenRepository;
 import org.pokemonrun.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -26,29 +30,23 @@ public class LoginService implements ILoginService
     private AuthenticationManager authenticationManager;
     @Autowired
     private JwtTokenRepository jwtTokenRepository;
+    @Autowired
+    private UserClient UserClient;
 
     @Override
     public String login(String username, String password) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username,
                     password));
-            User user = userRepository.findByEmail(username);
-            if (user == null || user.getRole() == null || user.getRole().isEmpty()) {
+            if (UserClient.login(username,password) ) {
                 throw new CustomException("Invalid username or password.", HttpStatus.UNAUTHORIZED);
             }
-            String token =  jwtTokenProvider.createToken(username, user.getRole().stream()
-                    .map((Role role)-> "ROLE_"+role.getRole()).filter(Objects::nonNull).collect(Collectors.toList()));
+            String token =  jwtTokenProvider.createToken(username, Collections.singletonList(password));
             return token;
 
         } catch (AuthenticationException e) {
             throw new CustomException("Invalid username or password.", HttpStatus.UNAUTHORIZED);
         }
-    }
-
-    @Override
-    public User saveUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()) );
-        return userRepository.save(user);
     }
 
     @Override

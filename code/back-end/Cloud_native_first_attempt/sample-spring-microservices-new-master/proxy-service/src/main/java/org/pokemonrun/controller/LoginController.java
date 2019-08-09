@@ -1,6 +1,9 @@
 package org.pokemonrun.controller;
 
 
+import org.pokemonrun.bean.AuthResponse;
+import org.pokemonrun.bean.LoginRequest;
+import org.pokemonrun.service.ILoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
