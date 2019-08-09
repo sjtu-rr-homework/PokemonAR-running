@@ -16,8 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
+
 
 @Service
 public class LoginService implements ILoginService
@@ -38,11 +37,14 @@ public class LoginService implements ILoginService
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username,
                     password));
-            if (UserClient.login(username,password) ) {
+            if (!UserClient.login(username,password) ) {
                 throw new CustomException("Invalid username or password.", HttpStatus.UNAUTHORIZED);
             }
-            String token =  jwtTokenProvider.createToken(username, Collections.singletonList(password));
-            return token;
+            else
+            {
+                String token = jwtTokenProvider.createToken(username, Collections.singletonList(password));
+                return token;
+            }
 
         } catch (AuthenticationException e) {
             throw new CustomException("Invalid username or password.", HttpStatus.UNAUTHORIZED);
