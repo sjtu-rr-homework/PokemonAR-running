@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -37,10 +36,9 @@ public class JwtTokenProvider {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    public String createToken(String username, List<String> roles) {
+    public String createToken(String username) {
 
         Claims claims = Jwts.claims().setSubject(username);
-        claims.put(AUTH,roles);
 
         Date now = new Date();
         Date validity = new Date(now.getTime() + validityInMilliseconds);
@@ -77,18 +75,11 @@ public class JwtTokenProvider {
     public UserDetails getUserDetails(String token) {
         return null;
     }
-    public List<String> getRoleList(String token) {
-        return (List<String>) Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).
-                getBody().get(AUTH);
-    }
 
     public String getUsername(String token) {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
     public Authentication getAuthentication(String token) {
-        //using data base: uncomment when you want to fetch data from data base
-        //UserDetails userDetails = userDetailsService.loadUserByUsername(getUsername(token));
-        //from token take user value. comment below line for changing it taking from data base
         UserDetails userDetails = getUserDetails(token);
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }

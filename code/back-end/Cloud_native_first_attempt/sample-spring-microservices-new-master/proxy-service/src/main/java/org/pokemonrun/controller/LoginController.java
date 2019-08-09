@@ -51,12 +51,7 @@ public class LoginController {
         return new ResponseEntity<AuthResponse>(new AuthResponse("Logout Failed"), headers, HttpStatus.NOT_MODIFIED);
     }
 
-    /**
-     *
-     * @param token
-     * @return boolean.
-     * if request reach here it means it is a valid token.
-     */
+
     @PostMapping("/valid/token")
     @ResponseBody
     public Boolean isValidToken (@RequestHeader(value="Authorization") String token) {

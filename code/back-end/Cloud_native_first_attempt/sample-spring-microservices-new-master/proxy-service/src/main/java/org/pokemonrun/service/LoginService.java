@@ -42,7 +42,7 @@ public class LoginService implements ILoginService
             }
             else
             {
-                String token = jwtTokenProvider.createToken(username, Collections.singletonList(password));
+                String token = jwtTokenProvider.createToken(username);
                 return token;
             }
 
@@ -65,8 +65,7 @@ public class LoginService implements ILoginService
     @Override
     public String createNewToken(String token) {
         String username = jwtTokenProvider.getUsername(token);
-        List<String>roleList = jwtTokenProvider.getRoleList(token);
-        String newToken =  jwtTokenProvider.createToken(username,roleList);
+        String newToken =  jwtTokenProvider.createToken(username);
         return newToken;
     }
 }
