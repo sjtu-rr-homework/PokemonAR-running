@@ -206,7 +206,7 @@ public class MyFragment extends Fragment {
                     String photoPath = cursor.getString(column_index);
                     Log.d("pic1",photoPath);
                     Bitmap term=BitmapFactory.decodeFile(photoPath);
-                    Bitmap bp=BitmapUtils.decodeSampledBitmapFromFd(photoPath,100,100);
+                    Bitmap bp=BitmapUtils.BitmapCompress(term);
                     Log.d("pic2",BitmapUtils.bitmapToBase64(bp));
                     HttpHandler.changeCover(UserData.getUserName(),BitmapUtils.bitmapToBase64(bp));
                     myCover.setBackgroundResource(R.drawable.bg_blue);
