@@ -3,7 +3,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +11,10 @@ import java.util.List;
 import example.com.pkmnavidemo4.ElfDetailsActivity;;
 import example.com.pkmnavidemo4.R;
 
-public class TestRecycleViewAdapter extends RecyclerView.Adapter<TestRecycleViewAdapter.ViewHolderA> {
+public class ElfRecycleViewAdapter extends RecyclerView.Adapter<ElfRecycleViewAdapter.ViewHolderA> {
     private Context mContext;
     private List<String> mList;
-    public TestRecycleViewAdapter(Context context, List<String> list) {
+    public ElfRecycleViewAdapter(Context context, List<String> list) {
         mContext = context;
         mList = list;
     }

@@ -16,7 +16,6 @@ import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -24,17 +23,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import example.com.pkmnavidemo4.classes.ElfSourceController;
 import example.com.pkmnavidemo4.classes.FightTextAdapter;
-import example.com.pkmnavidemo4.classes.HttpHandler;
-import example.com.pkmnavidemo4.classes.TestRecycleViewAdapter;
 import example.com.pkmnavidemo4.classes.UserData;
 
 public class FightActivity extends AppCompatActivity {
