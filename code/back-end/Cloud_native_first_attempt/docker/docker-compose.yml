@@ -1,4 +1,4 @@
-version: "2"
+version: "3.7"
 services:
   config-service:
     hostname: config-service
@@ -171,8 +171,9 @@ services:
       - mongo-moment
     networks:
       - spring-cloud-network 
-    ports:
-      - "10000-10003:8080"      
+    deploy:
+      mode: replicated
+      replicas: 3  
     
   
     
