@@ -167,8 +167,6 @@ services:
     image: macoredroid/forum-service:latest
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
-    depends_on:
-      - mongo-moment
     networks:
       - spring-cloud-network 
     
