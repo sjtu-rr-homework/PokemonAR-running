@@ -183,6 +183,9 @@ services:
       - "8096"
     networks:
       - spring-cloud-network  
+    deploy:
+      mode: replicated
+      replicas: 3
   
     
   
