@@ -1,4 +1,4 @@
-version: "3.7"
+version: "2"
 services:
   config-service:
     hostname: config-service
@@ -171,9 +171,7 @@ services:
       - mongo-moment
     networks:
       - spring-cloud-network 
-    deploy:
-      mode: replicated
-      replicas: 3  
+    
     
   
     
