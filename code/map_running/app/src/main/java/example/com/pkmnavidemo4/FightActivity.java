@@ -206,6 +206,8 @@ public class FightActivity extends AppCompatActivity {
         //判断精灵攻击强度
         Random luck = new Random();
         if (leftHp > 0 && rightHp > 0) {
+                rightExplode.setVisibility(View.VISIBLE);
+                leftExplode.setVisibility(View.VISIBLE);
                 int randomAttack = luck.nextInt(10);
                 if (ElfSourceController.getAttack(leftPower, rightPower)>= 1)
                     attack = ElfSourceController.getAttack(leftPower, rightPower) / 2 + luck.nextInt(ElfSourceController.getAttack(leftPower, rightPower) / 2);
@@ -246,7 +248,14 @@ public class FightActivity extends AppCompatActivity {
                 adapter.addData( Html.fromHtml(getResources().getString(R.string.player12,ElfSourceController.getName(leftElf,leftGrade),ElfSourceController.getName(rightElf,rightGrade),""+attack)));
                //adapter.addData(SpannableString.valueOf("" +ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "对" +ElfSourceController.getColorfulElfName(rightElf, rightGrade,1) + "造成了" + attack + "%血量的伤害"));
                 rightHp -= attack;
+                 new Handler().postDelayed(new Runnable(){
+                     public void run() {
+                          rightExplode.setVisibility(View.INVISIBLE);
+                     }
+                  }, 250);
                 if (rightHp <= 0) {
+                    leftExplode.setVisibility(View.INVISIBLE);
+                    image2.setBackgroundResource(R.drawable.catchball);
                     hp2.setProgress(0);
                     hpt1.setText("Win");
                     hpt2.setText("Lose");
@@ -299,7 +308,14 @@ public class FightActivity extends AppCompatActivity {
                  adapter.addData( Html.fromHtml(getResources().getString(R.string.player21,ElfSourceController.getName(leftElf,leftGrade),ElfSourceController.getName(rightElf,rightGrade),""+attack)));
                  // adapter.addData(SpannableString.valueOf("     " + "" +ElfSourceController.getColorfulElfName(rightElf, rightGrade,1) + "对" + ElfSourceController.getColorfulElfName(leftElf, leftGrade,0) + "造成了" + attack + "%血量的伤害"));
                 leftHp -= attack;
+                new Handler().postDelayed(new Runnable(){
+                    public void run() {
+                        leftExplode.setVisibility(View.INVISIBLE);
+                     }
+                }, 350);
                 if (leftHp <= 0) {
+                    rightExplode.setVisibility(View.INVISIBLE);
+                    image1.setBackgroundResource(R.drawable.catchball);
                     hp1.setProgress(0);
                     hpt1.setText("Lose");
                     hpt2.setText("Win");
