@@ -172,7 +172,7 @@ services:
     networks:
       - spring-cloud-network 
     ports:
-      - 10000-10003:8080      
+      - "10000-10003:8080"      
     
   
     
