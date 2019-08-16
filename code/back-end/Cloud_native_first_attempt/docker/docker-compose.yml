@@ -170,7 +170,9 @@ services:
     depends_on:
       - mongo-moment
     networks:
-      - spring-cloud-network  
+      - spring-cloud-network 
+    ports:
+      - 10000-10003:8080      
     
   
     
