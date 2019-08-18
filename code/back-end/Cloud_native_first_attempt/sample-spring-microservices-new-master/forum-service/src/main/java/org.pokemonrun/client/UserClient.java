@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name = "user-service")
-public interface CoverClient {
+public interface UserClient {
     @GetMapping("/get/cover/username/{username}")
     public Coverinfo getCover(@PathVariable("username") String username);
 }

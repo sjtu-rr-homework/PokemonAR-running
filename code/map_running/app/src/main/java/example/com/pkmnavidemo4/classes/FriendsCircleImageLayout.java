@@ -189,7 +189,11 @@ public class FriendsCircleImageLayout extends ViewGroup {
 
         for (int i = 0; i < images.size(); i++) {
             ImageView imageView = new ImageView(getContext());
-            imageView.setImageBitmap(BitmapUtils.BitmapCompress(BitmapUtils.base64ToBitmap(images.get(i))));
+            //根据图片数量判断显示格式
+            if(images.size()!=1)
+                imageView.setImageBitmap(BitmapUtils.BitmapCompress(BitmapUtils.base64ToBitmap(images.get(i))));
+            else
+                imageView.setImageBitmap(BitmapUtils.base64ToBitmap(images.get(i)));
             addView(imageView);
             //点击查看大图
             int finalI = i;

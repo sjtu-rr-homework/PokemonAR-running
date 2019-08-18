@@ -92,8 +92,6 @@ services:
       - mysql-pet
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
-    ports:
-      - "8091"
     networks:
       - spring-cloud-network
 
@@ -105,8 +103,6 @@ services:
       - mongo-cover
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
-    ports:
-      - "8092"
     networks:
       - spring-cloud-network
 
@@ -117,8 +113,6 @@ services:
       - mysql-record
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
-    ports:
-      - "8093"
     networks:
       - spring-cloud-network
 
@@ -129,8 +123,6 @@ services:
       - mysql-record
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
-    ports:
-      - "8094"
     networks:
       - spring-cloud-network
       
@@ -151,8 +143,6 @@ services:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     depends_on:
       - mysql-rule
-    ports:
-      - "8095"
     networks:
       - spring-cloud-network
       
@@ -173,23 +163,12 @@ services:
       - spring-cloud-network
   
   forum-service:
-    hostname: forum-service
     image: macoredroid/forum-service:latest
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
-    depends_on:
-      - mongo-moment
-    ports:
-      - "8096"
     networks:
-      - spring-cloud-network  
-  
+      - spring-cloud-network 
     
-  
-      
-   
-    
-
 networks:
   spring-cloud-network:
     driver: bridge
