@@ -167,19 +167,8 @@ services:
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     networks:
-      - spring-cloud-network
-    deploy:
-      mode: replicated
-      replicas: 2      
+      - spring-cloud-network 
     
-    
-  
-    
-  
-      
-   
-    
-
 networks:
   spring-cloud-network:
     driver: bridge
