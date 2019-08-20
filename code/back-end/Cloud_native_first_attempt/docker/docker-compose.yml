@@ -1,4 +1,4 @@
-version: "2"
+version: "3.7"
 services:
   config-service:
     hostname: config-service
@@ -163,21 +163,12 @@ services:
       - spring-cloud-network
   
   forum-service:
-    hostname: forum-service
     image: macoredroid/forum-service:latest
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     networks:
       - spring-cloud-network 
     
-    
-  
-    
-  
-      
-   
-    
-
 networks:
   spring-cloud-network:
     driver: bridge
