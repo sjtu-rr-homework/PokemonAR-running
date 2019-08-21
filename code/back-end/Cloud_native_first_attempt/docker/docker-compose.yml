@@ -170,9 +170,12 @@ services:
       - spring-cloud-network 
     environment:
       - "JAVA_OPTS=-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -XX:MaxRAMFraction=1"
-    resources:
-      limits:
-        memory:500M 
+    deploy:
+      resources:
+        limits:
+          memory: 500M 
+        reservations:
+          memory: 200M
     
 networks:
   spring-cloud-network:
