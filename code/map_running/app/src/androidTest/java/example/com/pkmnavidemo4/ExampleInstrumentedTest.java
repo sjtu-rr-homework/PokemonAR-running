@@ -50,32 +50,4 @@ public class ExampleInstrumentedTest {
         assertEquals(R.drawable.elf_5, ElfSourceController.getMapPic(5));
         assertEquals(0, ElfSourceController.getMapPic(6666));
     }
-    @Test
-    public void login(){
-        Log.i("log","http请求");
-        try{
-            HttpHandler.login(InstrumentationRegistry.getTargetContext(),"1","1");
-            assertTrue(true);
-        }catch(Exception ex){
-            assertTrue(false);
-        }
-        try{
-            HttpHandler.login(InstrumentationRegistry.getTargetContext(),"555","1");
-            assertTrue(true);
-        }catch(Exception ex){
-            assertTrue(false);
-        }
-        try{
-            HttpHandler.getElfs("666");
-            assertTrue(true);
-        }catch(Exception ex){
-            assertTrue(false);
-        }
-        try{
-            HttpHandler.getElfs("1");
-            assertTrue(true);
-        }catch(Exception ex){
-            assertTrue(false);
-        }
-    }
 }
