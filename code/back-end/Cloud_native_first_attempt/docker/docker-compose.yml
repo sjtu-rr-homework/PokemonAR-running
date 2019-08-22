@@ -169,14 +169,13 @@ services:
     networks:
       - spring-cloud-network 
     environment:
+      - SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
       - "JAVA_OPTS=-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -XX:MaxRAMFraction=1"
     deploy:
       resources:
         limits:
-          cpus: '0.50'
           memory: 700M 
         reservations:
-          cpus: '0.50'
           memory: 200M
     
 networks:
