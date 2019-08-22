@@ -273,7 +273,7 @@ services:
     
 networks:
   spring-cloud-network:
-    driver: bridge
+    driver: overlay
 
         
  
