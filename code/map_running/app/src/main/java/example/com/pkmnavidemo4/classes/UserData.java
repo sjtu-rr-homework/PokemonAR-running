@@ -96,6 +96,7 @@ public class UserData {
         return oldForumTime;
     }
     public static List<Map> getMoments() {
+        moments=null;
         isMomentsGet=true;
         HttpHandler.getMoments(UserData.getOldForumTime());
         while(isMomentsGet){
@@ -107,9 +108,10 @@ public class UserData {
         }
         return moments;
     }
-    public static List<Map> refreshMoments() {
+    public static List<Map> refreshMoments(Context context) {
+        moments=null;
         isMomentsRefresh=true;
-        HttpHandler.refreshMoments(UserData.getNewForumTime());
+        HttpHandler.refreshMoments(UserData.getNewForumTime(),context);
         while(isMomentsRefresh){
             try {
                 Thread.sleep(10);

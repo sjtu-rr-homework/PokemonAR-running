@@ -9,6 +9,17 @@ services:
       - spring-cloud-network
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"server": {"git" :{"uri": "https://github.com/MaCoredroid/test-config-docker.git"}}}}}}'
+    deploy:
+      resources:
+        limits:
+          memory: 500M 
+        reservations:
+          memory: 200M
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 100
+        window: 120s
 
   mysql-pet:
     hostname: mysql-pet
@@ -84,6 +95,17 @@ services:
       - "30752:30752"
     networks:
       - spring-cloud-network
+    deploy:
+      resources:
+        limits:
+          memory: 500M 
+        reservations:
+          memory: 200M
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 100
+        window: 120s
   
   pet-service:
     hostname: pet-service
@@ -94,6 +116,17 @@ services:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     networks:
       - spring-cloud-network
+    deploy:
+      resources:
+        limits:
+          memory: 500M 
+        reservations:
+          memory: 200M
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 100
+        window: 120s
 
   user-service:
     hostname: user-service
@@ -105,6 +138,17 @@ services:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     networks:
       - spring-cloud-network
+    deploy:
+      resources:
+        limits:
+          memory: 500M 
+        reservations:
+          memory: 200M
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 100
+        window: 120s
 
   record-service:
     hostname: record-service
@@ -115,6 +159,17 @@ services:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     networks:
       - spring-cloud-network
+    deploy:
+      resources:
+        limits:
+          memory: 500M 
+        reservations:
+          memory: 200M
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 100
+        window: 120s
 
   location-service:
     hostname: location-service
@@ -125,6 +180,17 @@ services:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     networks:
       - spring-cloud-network
+    deploy:
+      resources:
+        limits:
+          memory: 500M 
+        reservations:
+          memory: 200M
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 100
+        window: 120s
       
   proxy-service:
     hostname: proxy-service
@@ -135,6 +201,17 @@ services:
       - "30751:30751"
     networks:
       - spring-cloud-network
+    deploy:
+      resources:
+        limits:
+          memory: 700M 
+        reservations:
+          memory: 200M
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 100
+        window: 120s
       
   rule-service:
     hostname: rule-service
@@ -145,6 +222,17 @@ services:
       - mysql-rule
     networks:
       - spring-cloud-network
+    deploy:
+      resources:
+        limits:
+          memory: 500M 
+        reservations:
+          memory: 200M
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 100
+        window: 120s
       
   mongo-moment:
     hostname: mongo-moment
@@ -161,6 +249,7 @@ services:
       - "27018:27017"
     networks:
       - spring-cloud-network
+    
   
   forum-service:
     image: macoredroid/forum-service:latest
@@ -168,6 +257,12 @@ services:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     networks:
       - spring-cloud-network 
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 100
+        window: 120s
     
 networks:
   spring-cloud-network:
