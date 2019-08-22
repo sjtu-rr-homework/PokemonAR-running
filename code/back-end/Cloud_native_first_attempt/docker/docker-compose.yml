@@ -173,8 +173,10 @@ services:
     deploy:
       resources:
         limits:
+          cpus: '0.50'
           memory: 700M 
         reservations:
+          cpus: '0.50'
           memory: 200M
     
 networks:
