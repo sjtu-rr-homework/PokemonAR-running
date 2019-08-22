@@ -260,7 +260,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 500M 
+          memory: 800M 
         reservations:
           memory: 200M
       restart_policy:
