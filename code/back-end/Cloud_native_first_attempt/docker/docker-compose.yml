@@ -12,7 +12,9 @@ services:
     deploy:
       resources:
         limits:
-          memory: 700M
+          memory: 500M 
+        reservations:
+          memory: 200M
       restart_policy:
         condition: on-failure
         delay: 5s
@@ -96,7 +98,9 @@ services:
     deploy:
       resources:
         limits:
-          memory: 700M 
+          memory: 500M 
+        reservations:
+          memory: 200M
       restart_policy:
         condition: on-failure
         delay: 5s
@@ -115,7 +119,9 @@ services:
     deploy:
       resources:
         limits:
-          memory: 700M
+          memory: 500M 
+        reservations:
+          memory: 200M
       restart_policy:
         condition: on-failure
         delay: 5s
@@ -135,7 +141,9 @@ services:
     deploy:
       resources:
         limits:
-          memory: 700M
+          memory: 500M 
+        reservations:
+          memory: 200M
       restart_policy:
         condition: on-failure
         delay: 5s
@@ -154,7 +162,9 @@ services:
     deploy:
       resources:
         limits:
-          memory: 700M
+          memory: 500M 
+        reservations:
+          memory: 200M
       restart_policy:
         condition: on-failure
         delay: 5s
@@ -173,7 +183,9 @@ services:
     deploy:
       resources:
         limits:
-          memory: 700M
+          memory: 500M 
+        reservations:
+          memory: 200M
       restart_policy:
         condition: on-failure
         delay: 5s
@@ -192,7 +204,9 @@ services:
     deploy:
       resources:
         limits:
-          memory: 700M
+          memory: 700M 
+        reservations:
+          memory: 200M
       restart_policy:
         condition: on-failure
         delay: 5s
@@ -211,7 +225,9 @@ services:
     deploy:
       resources:
         limits:
-          memory: 700M
+          memory: 500M 
+        reservations:
+          memory: 200M
       restart_policy:
         condition: on-failure
         delay: 5s
@@ -246,7 +262,9 @@ services:
     deploy:
       resources:
         limits:
-          memory: 700M
+          memory: 500M 
+        reservations:
+          memory: 200M
       restart_policy:
         condition: on-failure
         delay: 5s
