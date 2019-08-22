@@ -1037,7 +1037,7 @@ public class HttpHandler {
 
     }
 
-    public static void refreshMoments(Timestamp t){
+    public static void refreshMoments(Timestamp t,Context context){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -1087,6 +1087,9 @@ public class HttpHandler {
                 } catch (Exception e) {
                     e.printStackTrace();
                     UserData.isMomentsRefresh=false;
+                    Looper.prepare();
+                    Toast.makeText(context,"网络异常",Toast.LENGTH_SHORT).show();
+                    Looper.loop();
                 }finally {
                     UserData.isMomentsRefresh=false;
                     if (conn!=null){
@@ -1160,6 +1163,7 @@ public class HttpHandler {
                 } catch (Exception e) {
                     e.printStackTrace();
                     UserData.isMomentsGet=false;
+
                 }finally {
                     UserData.isMomentsGet=false;
                     if (conn!=null){
