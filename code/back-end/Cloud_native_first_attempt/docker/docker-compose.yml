@@ -1,7 +1,7 @@
 version: "3.7"
 
 networks:
-  default:
+  spring-cloud-network: 
     external:
       name: spring-cloud-network
       
@@ -9,6 +9,8 @@ services:
   config-service:
     hostname: config-service
     image: macoredroid/config-service:latest
+    networks:
+      - spring-cloud-network
     ports:
       - "8088:8088"
     environment:
@@ -28,6 +30,8 @@ services:
   mysql-pet:
     hostname: mysql-pet
     image: mysql:latest
+    networks:
+      - spring-cloud-network
     environment:
       - MYSQL_ROOT_PASSWORD=c7o2r1e4
       - MYSQL_DATABASE=pet
@@ -40,6 +44,8 @@ services:
   mysql-user:
     hostname: mysql-user
     image: mysql:latest
+    networks:
+      - spring-cloud-network
     environment:
       - MYSQL_ROOT_PASSWORD=c7o2r1e4
       - MYSQL_DATABASE=pet
@@ -52,6 +58,8 @@ services:
   mysql-record:
     hostname: mysql-record
     image: mysql:latest
+    networks:
+      - spring-cloud-network
     environment:
       - MYSQL_ROOT_PASSWORD=c7o2r1e4
       - MYSQL_DATABASE=pet
@@ -63,6 +71,8 @@ services:
   mysql-location:
     hostname: mysql-location
     image: mysql:latest
+    networks:
+      - spring-cloud-network
     environment:
       - MYSQL_ROOT_PASSWORD=c7o2r1e4
       - MYSQL_DATABASE=pet
@@ -74,6 +84,8 @@ services:
   mysql-rule:
     hostname: mysql-rule
     image: mysql:latest
+    networks:
+      - spring-cloud-network
     environment:
       - MYSQL_ROOT_PASSWORD=c7o2r1e4
       - MYSQL_DATABASE=pet
@@ -85,6 +97,8 @@ services:
   discovery-service:
     hostname: discovery-service
     image: macoredroid/discovery-service:latest
+    networks:
+      - spring-cloud-network
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     ports:
@@ -104,6 +118,8 @@ services:
   pet-service:
     hostname: pet-service
     image: macoredroid/pet-service:latest
+    networks:
+      - spring-cloud-network
     depends_on:
       - mysql-pet
     environment:
@@ -123,6 +139,8 @@ services:
   user-service:
     hostname: user-service
     image: macoredroid/user-service:latest
+    networks:
+      - spring-cloud-network
     depends_on:
       - mysql-user
       - mongo-cover
@@ -143,6 +161,8 @@ services:
   record-service:
     hostname: record-service
     image: macoredroid/record-service:latest
+    networks:
+      - spring-cloud-network
     depends_on:
       - mysql-record
     environment:
@@ -162,6 +182,8 @@ services:
   location-service:
     hostname: location-service
     image: macoredroid/location-service:latest
+    networks:
+      - spring-cloud-network
     depends_on:
       - mysql-record
     environment:
@@ -181,6 +203,8 @@ services:
   proxy-service:
     hostname: proxy-service
     image: macoredroid/proxy-service:latest
+    networks:
+      - spring-cloud-network
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     ports:
@@ -200,6 +224,8 @@ services:
   rule-service:
     hostname: rule-service
     image: macoredroid/rule-service:latest
+    networks:
+      - spring-cloud-network
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     depends_on:
@@ -218,12 +244,16 @@ services:
       
   mongo-moment:
     hostname: mongo-moment
+    networks:
+      - spring-cloud-network
     image: mongo
     ports:
       - "27017:27017"
       
   mongo-cover:
     hostname: mongo-cover
+    networks:
+      - spring-cloud-network
     image: mongo
     ports:
       - "27018:27017"
@@ -233,6 +263,8 @@ services:
     image: macoredroid/forum-service:latest
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
+    networks:
+      - spring-cloud-network
     deploy:
       resources:
         limits:
