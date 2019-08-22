@@ -64,6 +64,8 @@ public class SquareActivity extends AppCompatActivity implements SwipeRefreshLay
             adapter=new FriendsCircleAdapter(this, moments);
             recyclerView.setAdapter(adapter);
         }
+
+        //上拉加载更多
         recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
             @Override
             public void onLoadMore() {
@@ -106,6 +108,7 @@ public class SquareActivity extends AppCompatActivity implements SwipeRefreshLay
         refreshLayout.setOnRefreshListener(this);
     }
 
+    //下拉加载最新
     @Override
     public void onRefresh() {
         if (!isFresh) {
@@ -113,7 +116,7 @@ public class SquareActivity extends AppCompatActivity implements SwipeRefreshLay
             // 设置可见
             refreshLayout.setRefreshing(true);
             adapter.setLoadState(adapter.LOADING);
-            moments = UserData.refreshMoments();
+            moments = UserData.refreshMoments(SquareActivity.this);
             if (moments != null) {
                 adapter.addStart(moments);
             }
@@ -133,7 +136,7 @@ public class SquareActivity extends AppCompatActivity implements SwipeRefreshLay
             // 设置可见
             refreshLayout.setRefreshing(true);
             adapter.setLoadState(adapter.LOADING);
-            moments = UserData.refreshMoments();
+            moments = UserData.refreshMoments(SquareActivity.this);
             if (moments != null) {
                 adapter.addStart(moments);
             }

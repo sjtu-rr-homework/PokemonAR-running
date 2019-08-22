@@ -128,6 +128,7 @@ public class FriendsCircleAdapter extends RecyclerView.Adapter {
                 case LOADING: // 正在加载
                     footViewHolder.pbLoading.setVisibility(View.VISIBLE);
                     footViewHolder.tvLoading.setVisibility(View.VISIBLE);
+                    footViewHolder.tvLoading.setText("正在加载");
                     footViewHolder.llEnd.setVisibility(View.GONE);
                     break;
 
@@ -140,6 +141,7 @@ public class FriendsCircleAdapter extends RecyclerView.Adapter {
                 case LOADING_END: // 加载到底
                     footViewHolder.pbLoading.setVisibility(View.VISIBLE);
                     footViewHolder.tvLoading.setVisibility(View.VISIBLE);
+                    footViewHolder.tvLoading.setText("无法加载更多");
                     footViewHolder.llEnd.setVisibility(View.GONE);
                     break;
 
