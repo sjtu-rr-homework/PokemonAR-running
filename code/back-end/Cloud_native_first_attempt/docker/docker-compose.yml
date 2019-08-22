@@ -272,7 +272,7 @@ services:
         window: 120s
     
 networks:
-  spring-cloud-network:
+    spring-cloud-network:
     
 
         
