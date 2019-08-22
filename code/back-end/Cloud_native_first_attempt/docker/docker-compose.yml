@@ -1,18 +1,12 @@
 version: "3.7"
-
-networks:
-  spring-cloud-network: 
-    external:
-      name: spring-cloud-network
-      
 services:
   config-service:
     hostname: config-service
     image: macoredroid/config-service:latest
-    networks:
-      - spring-cloud-network
     ports:
       - "8088:8088"
+    networks:
+      - spring-cloud-network
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"server": {"git" :{"uri": "https://github.com/MaCoredroid/test-config-docker.git"}}}}}}'
     deploy:
@@ -30,8 +24,6 @@ services:
   mysql-pet:
     hostname: mysql-pet
     image: mysql:latest
-    networks:
-      - spring-cloud-network
     environment:
       - MYSQL_ROOT_PASSWORD=c7o2r1e4
       - MYSQL_DATABASE=pet
@@ -39,13 +31,12 @@ services:
       - MYSQL_PASSWORD=c7o2r1e4
     ports:
       - "3306:3306"
-  
+    networks:
+      - spring-cloud-network
 
   mysql-user:
     hostname: mysql-user
     image: mysql:latest
-    networks:
-      - spring-cloud-network
     environment:
       - MYSQL_ROOT_PASSWORD=c7o2r1e4
       - MYSQL_DATABASE=pet
@@ -53,13 +44,12 @@ services:
       - MYSQL_PASSWORD=c7o2r1e4
     ports:
       - "3307:3306"
-  
+    networks:
+      - spring-cloud-network
 
   mysql-record:
     hostname: mysql-record
     image: mysql:latest
-    networks:
-      - spring-cloud-network
     environment:
       - MYSQL_ROOT_PASSWORD=c7o2r1e4
       - MYSQL_DATABASE=pet
@@ -67,12 +57,12 @@ services:
       - MYSQL_PASSWORD=c7o2r1e4
     ports:
       - "3308:3306"
+    networks:
+      - spring-cloud-network
 
   mysql-location:
     hostname: mysql-location
     image: mysql:latest
-    networks:
-      - spring-cloud-network
     environment:
       - MYSQL_ROOT_PASSWORD=c7o2r1e4
       - MYSQL_DATABASE=pet
@@ -80,12 +70,12 @@ services:
       - MYSQL_PASSWORD=c7o2r1e4
     ports:
       - "3309:3306"
+    networks:
+      - spring-cloud-network
       
   mysql-rule:
     hostname: mysql-rule
     image: mysql:latest
-    networks:
-      - spring-cloud-network
     environment:
       - MYSQL_ROOT_PASSWORD=c7o2r1e4
       - MYSQL_DATABASE=pet
@@ -93,16 +83,18 @@ services:
       - MYSQL_PASSWORD=c7o2r1e4
     ports:
       - "3310:3306"
+    networks:
+      - spring-cloud-network
 
   discovery-service:
     hostname: discovery-service
     image: macoredroid/discovery-service:latest
-    networks:
-      - spring-cloud-network
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     ports:
       - "30752:30752"
+    networks:
+      - spring-cloud-network
     deploy:
       resources:
         limits:
@@ -118,12 +110,12 @@ services:
   pet-service:
     hostname: pet-service
     image: macoredroid/pet-service:latest
-    networks:
-      - spring-cloud-network
     depends_on:
       - mysql-pet
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
+    networks:
+      - spring-cloud-network
     deploy:
       resources:
         limits:
@@ -139,13 +131,13 @@ services:
   user-service:
     hostname: user-service
     image: macoredroid/user-service:latest
-    networks:
-      - spring-cloud-network
     depends_on:
       - mysql-user
       - mongo-cover
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
+    networks:
+      - spring-cloud-network
     deploy:
       resources:
         limits:
@@ -161,12 +153,12 @@ services:
   record-service:
     hostname: record-service
     image: macoredroid/record-service:latest
-    networks:
-      - spring-cloud-network
     depends_on:
       - mysql-record
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
+    networks:
+      - spring-cloud-network
     deploy:
       resources:
         limits:
@@ -182,12 +174,12 @@ services:
   location-service:
     hostname: location-service
     image: macoredroid/location-service:latest
-    networks:
-      - spring-cloud-network
     depends_on:
       - mysql-record
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
+    networks:
+      - spring-cloud-network
     deploy:
       resources:
         limits:
@@ -203,12 +195,12 @@ services:
   proxy-service:
     hostname: proxy-service
     image: macoredroid/proxy-service:latest
-    networks:
-      - spring-cloud-network
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     ports:
       - "30751:30751"
+    networks:
+      - spring-cloud-network
     deploy:
       resources:
         limits:
@@ -224,12 +216,12 @@ services:
   rule-service:
     hostname: rule-service
     image: macoredroid/rule-service:latest
-    networks:
-      - spring-cloud-network
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     depends_on:
       - mysql-rule
+    networks:
+      - spring-cloud-network
     deploy:
       resources:
         limits:
@@ -244,19 +236,19 @@ services:
       
   mongo-moment:
     hostname: mongo-moment
-    networks:
-      - spring-cloud-network
     image: mongo
     ports:
       - "27017:27017"
+    networks:
+      - spring-cloud-network
       
   mongo-cover:
     hostname: mongo-cover
-    networks:
-      - spring-cloud-network
     image: mongo
     ports:
       - "27018:27017"
+    networks:
+      - spring-cloud-network
     
   
   forum-service:
@@ -264,7 +256,7 @@ services:
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     networks:
-      - spring-cloud-network
+      - spring-cloud-network 
     deploy:
       resources:
         limits:
@@ -276,9 +268,10 @@ services:
         delay: 5s
         max_attempts: 100
         window: 120s
- 
     
-    
+networks:
+  spring-cloud-network:
+    driver: bridge
 
         
  
