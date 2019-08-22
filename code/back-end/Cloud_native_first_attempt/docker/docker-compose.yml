@@ -174,7 +174,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 700M 
+          memory: 200M 
         reservations:
           memory: 200M
     
