@@ -258,6 +258,11 @@ services:
     networks:
       - spring-cloud-network 
     deploy:
+      resources:
+        limits:
+          memory: 500M 
+        reservations:
+          memory: 200M
       restart_policy:
         condition: on-failure
         delay: 5s
