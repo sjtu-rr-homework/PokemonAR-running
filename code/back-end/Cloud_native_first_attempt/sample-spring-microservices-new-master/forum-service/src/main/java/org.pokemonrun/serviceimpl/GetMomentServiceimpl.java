@@ -21,13 +21,12 @@ public class GetMomentServiceimpl implements GetMomentService {
     private UserClient UserClient;
 
     @Override
-    public List<MomentInfo> getAll(String timestamp) {
+    public List<MomentInfo> getAll(long timestamp) {
         List<Moment> templist= MomentDao.getAll();
-        Timestamp ts= Timestamp.valueOf(timestamp);
         List<Moment> beforelist=new ArrayList<>();
         for(Moment tempMoment:templist)
         {
-            if (Timestamp.valueOf(tempMoment.timestamp).before(ts))
+            if (tempMoment.timestamp<timestamp)
             {
                 beforelist.add(tempMoment);
             }
@@ -35,13 +34,13 @@ public class GetMomentServiceimpl implements GetMomentService {
         List<Moment> reslist=new ArrayList<>();
         while(reslist.size()<10&&beforelist.size()>0)
         {
-            Timestamp newest=Timestamp.valueOf(beforelist.get(0).timestamp);
+            long newest=beforelist.get(0).timestamp;
             int index=0;
             for(int i=0;i<beforelist.size();i++)
             {
-                if(Timestamp.valueOf(beforelist.get(i).timestamp).after(newest))
+                if(beforelist.get(i).timestamp>newest)
                 {
-                    newest=Timestamp.valueOf(beforelist.get(i).timestamp);
+                    newest=beforelist.get(i).timestamp;
                     index=i;
                 }
             }
@@ -63,13 +62,12 @@ public class GetMomentServiceimpl implements GetMomentService {
     }
 
     @Override
-    public List<MomentInfo> getOneUser(String username,String timestamp) {
+    public List<MomentInfo> getOneUser(String username,long timestamp) {
         List<Moment> templist= MomentDao.getUserAll(username);
-        Timestamp ts= Timestamp.valueOf(timestamp);
         List<Moment> beforelist=new ArrayList<>();
         for(Moment tempMoment:templist)
         {
-            if (Timestamp.valueOf(tempMoment.timestamp).before(ts))
+            if (tempMoment.timestamp<timestamp)
             {
                 beforelist.add(tempMoment);
             }
@@ -77,13 +75,13 @@ public class GetMomentServiceimpl implements GetMomentService {
         List<Moment> reslist=new ArrayList<>();
         while(reslist.size()<10&&beforelist.size()>0)
         {
-            Timestamp newest=Timestamp.valueOf(beforelist.get(0).timestamp);
+            long newest=beforelist.get(0).timestamp;
             int index=0;
             for(int i=0;i<beforelist.size();i++)
             {
-                if(Timestamp.valueOf(beforelist.get(i).timestamp).after(newest))
+                if(beforelist.get(i).timestamp>newest)
                 {
-                    newest=Timestamp.valueOf(beforelist.get(i).timestamp);
+                    newest=beforelist.get(i).timestamp;
                     index=i;
                 }
             }
@@ -100,13 +98,12 @@ public class GetMomentServiceimpl implements GetMomentService {
     }
 
     @Override
-    public List<MomentInfo> refresh(String timestamp) {
+    public List<MomentInfo> refresh(long timestamp) {
         List<Moment> templist= MomentDao.getAll();
-        Timestamp ts= Timestamp.valueOf(timestamp);
         List<Moment> afterlist=new ArrayList<>();
         for(Moment tempMoment:templist)
         {
-            if (Timestamp.valueOf(tempMoment.timestamp).after(ts))
+            if (tempMoment.timestamp>timestamp)
             {
                 afterlist.add(tempMoment);
             }

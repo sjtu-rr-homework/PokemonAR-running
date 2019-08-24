@@ -12,7 +12,7 @@ public class Moment {
 
     public String text;
 
-    public String timestamp;
+    public long timestamp;
 
     public String username;
 
@@ -27,7 +27,7 @@ public class Moment {
     public byte[] pic9;
 
     public Moment(){}
-    public Moment(String text, String timestamp, String username, byte[] pic1,byte[] pic2,byte[] pic3,byte[] pic4,byte[] pic5,byte[] pic6,byte[] pic7,byte[] pic8,byte[] pic9)
+    public Moment(String text, long timestamp, String username, byte[] pic1,byte[] pic2,byte[] pic3,byte[] pic4,byte[] pic5,byte[] pic6,byte[] pic7,byte[] pic8,byte[] pic9)
     {
         this.text=text;
         this.timestamp=timestamp;
