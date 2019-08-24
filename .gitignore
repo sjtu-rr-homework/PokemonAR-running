@@ -14,3 +14,4 @@ code/AR/pkmnavidemo4/build.gradle
 *.oob
 *.cdb
 *.pdb
+code/map_running/app/local.properties
