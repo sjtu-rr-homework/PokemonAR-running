@@ -1205,12 +1205,15 @@ public class HttpHandler {
                         sb.append(s);
                     }
                     if(!sb.toString().isEmpty()){
+
                         JSONObject item =new JSONObject(sb.toString());
-                        UserData.isCoverGet=false;
                         UserData.setCover(item.getString("pic"));
+                        UserData.isCoverGet=false;
                     }
-                    else
+                    else {
+                        UserData.isCoverGet=false;
                         UserData.setCover("");
+                    }
 
                     //setContent(sb.toString());
                 } catch (Exception e) {
