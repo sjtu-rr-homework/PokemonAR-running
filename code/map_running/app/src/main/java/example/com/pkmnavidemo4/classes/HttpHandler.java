@@ -1156,7 +1156,7 @@ public class HttpHandler {
                         if(i==0)
                             UserData.setNewForumTime(Timestamp.valueOf(time));
                         if(i==jsonArray.length()-1)
-                        UserData.setOldForumTime(Timestamp.valueOf(time));
+                        UserData.setOldForumTime(Timestamp.valueOf(time).getTime());
                     }
                     UserData.setMoments(list);
                     UserData.isMomentsGet=false;

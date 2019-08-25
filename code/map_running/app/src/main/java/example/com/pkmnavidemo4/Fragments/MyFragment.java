@@ -136,7 +136,7 @@ public class MyFragment extends Fragment {
             public void onClick(View view) {
                 UserData.isNewTimeInit=false;
                 UserData.isAllMomentsGet=false;
-                UserData.setOldForumTime(null);
+                UserData.setOldForumTime(-1);
                 Intent intent=new Intent(getActivity(), SquareActivity.class);
                 startActivity(intent);
             }
