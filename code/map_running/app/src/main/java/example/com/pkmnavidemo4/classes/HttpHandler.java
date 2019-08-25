@@ -54,7 +54,7 @@ import example.com.pkmnavidemo4.R;
 
 public class HttpHandler {
 
-   private static String UrlHead="http://202.120.40.8:30751";
+   private static String UrlHead="http://283f59d9.ngrok.io";
     //private static String UrlHead="http://b54463c0.ngrok.io";
 
     @Nullable
@@ -1205,12 +1205,15 @@ public class HttpHandler {
                         sb.append(s);
                     }
                     if(!sb.toString().isEmpty()){
+
                         JSONObject item =new JSONObject(sb.toString());
-                        UserData.isCoverGet=false;
                         UserData.setCover(item.getString("pic"));
+                        UserData.isCoverGet=false;
                     }
-                    else
+                    else {
+                        UserData.isCoverGet=false;
                         UserData.setCover("");
+                    }
 
                     //setContent(sb.toString());
                 } catch (Exception e) {

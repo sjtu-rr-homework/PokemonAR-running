@@ -57,6 +57,7 @@ public class UserData {
     public static int flagNum=0;
     public static Map<Integer,Integer> catchElfList=new HashMap();
     public static List<LatLng> constraint=new ArrayList<LatLng>();
+    //设置头像
     public static void setCover(String getCover){
         if(getCover.length()==0) {
             cover = null;
@@ -65,6 +66,7 @@ public class UserData {
             cover = BitmapUtils.base64ToBitmap(getCover);
         }
     }
+    //得到用户头像
     public static Bitmap getCover(String name){
         isCoverGet=true;
         HttpHandler.getCover(name);
@@ -77,6 +79,7 @@ public class UserData {
         }
         return cover;
     }
+    //设置最新动态的时间标签
     public static void setNewForumTime(Timestamp t){
         //第一次进入时刷新最新动态时间或新得到的时间更新时才能更新
         if(!isNewTimeInit||t.after(newForumTime)) {
@@ -84,12 +87,15 @@ public class UserData {
             isNewTimeInit=true;
         }
     }
+    //得到最新动态的时间标签
     public static Timestamp getNewForumTime(){
         return newForumTime;
     }
+    //设置最老动态的时间标签
     public static void setOldForumTime(Timestamp t){
         oldForumTime=t;
     }
+    //得到最老动态的时间标签
     public static Timestamp getOldForumTime(){
         if(oldForumTime==null)
             return new Timestamp(System.currentTimeMillis());

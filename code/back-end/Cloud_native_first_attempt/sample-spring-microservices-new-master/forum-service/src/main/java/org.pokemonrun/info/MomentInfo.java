@@ -7,7 +7,7 @@ public class MomentInfo implements Serializable {
 
     public String text;
 
-    public String timestamp;
+    public long timestamp;
 
     public String username;
 
@@ -23,7 +23,7 @@ public class MomentInfo implements Serializable {
     public byte[] pic8;
     public byte[] pic9;
 
-    public MomentInfo(String text, String timestamp, String username, byte[] pic1,byte[] pic2,byte[] pic3,byte[] pic4,byte[] pic5,byte[] pic6,byte[] pic7,byte[] pic8,byte[] pic9,byte[] cover)
+    public MomentInfo(String text, long timestamp, String username, byte[] pic1,byte[] pic2,byte[] pic3,byte[] pic4,byte[] pic5,byte[] pic6,byte[] pic7,byte[] pic8,byte[] pic9,byte[] cover)
     {
         this.text=text;
         this.timestamp=timestamp;
