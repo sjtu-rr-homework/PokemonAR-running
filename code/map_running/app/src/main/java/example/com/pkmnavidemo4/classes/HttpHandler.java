@@ -1037,7 +1037,7 @@ public class HttpHandler {
 
     }
 
-    public static void refreshMoments(Timestamp t,Context context){
+    public static void refreshMoments(long t,Context context){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -1108,7 +1108,7 @@ public class HttpHandler {
     }
 
     //得到给定时间前最新的10条动态
-    public static void getMoments(Timestamp t){
+    public static void getMoments(long t){
         new Thread(new Runnable() {
             @Override
             public void run() {
