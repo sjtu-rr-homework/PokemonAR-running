@@ -54,7 +54,7 @@ import example.com.pkmnavidemo4.R;
 
 public class HttpHandler {
 
-   private static String UrlHead="http://283f59d9.ngrok.io";
+    private static String UrlHead="http://5c786775.ngrok.io";
     //private static String UrlHead="http://b54463c0.ngrok.io";
 
     @Nullable
@@ -1037,7 +1037,7 @@ public class HttpHandler {
 
     }
 
-    public static void refreshMoments(Timestamp t,Context context){
+    public static void refreshMoments(long t,Context context){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -1108,7 +1108,7 @@ public class HttpHandler {
     }
 
     //得到给定时间前最新的10条动态
-    public static void getMoments(Timestamp t){
+    public static void getMoments(long t){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -1156,7 +1156,7 @@ public class HttpHandler {
                         if(i==0)
                             UserData.setNewForumTime(Timestamp.valueOf(time));
                         if(i==jsonArray.length()-1)
-                        UserData.setOldForumTime(Timestamp.valueOf(time));
+                        UserData.setOldForumTime(Timestamp.valueOf(time).getTime());
                     }
                     UserData.setMoments(list);
                     UserData.isMomentsGet=false;
@@ -1238,7 +1238,7 @@ public class HttpHandler {
     }
 
     //用户分享动态
-    public static void postPic(List<String> pic,String timestamp,String username,String text){
+    public static void postPic(List<String> pic,long timestamp,String username,String text){
         new Thread(new Runnable() {
             @Override
             public void run() {

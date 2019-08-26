@@ -30,8 +30,8 @@ public class UserData {
     //锁.用来判断得到的新的最新动态时间戳是否更更新
     public static boolean isNewTimeInit;
     //新旧动态时间戳
-    private static Timestamp oldForumTime;
-    private static Timestamp newForumTime;
+    private static long oldForumTime=-1;
+    private static long newForumTime;
     private static double mileage;
     private static double mileageGoal;
     public static double distance;
@@ -82,23 +82,23 @@ public class UserData {
     //设置最新动态的时间标签
     public static void setNewForumTime(Timestamp t){
         //第一次进入时刷新最新动态时间或新得到的时间更新时才能更新
-        if(!isNewTimeInit||t.after(newForumTime)) {
-            newForumTime = t;
+        if(!isNewTimeInit||t.after(new Timestamp(newForumTime))) {
+            newForumTime = t.getTime();
             isNewTimeInit=true;
         }
     }
     //得到最新动态的时间标签
-    public static Timestamp getNewForumTime(){
+    public static long getNewForumTime(){
         return newForumTime;
     }
     //设置最老动态的时间标签
-    public static void setOldForumTime(Timestamp t){
+    public static void setOldForumTime(long t){
         oldForumTime=t;
     }
     //得到最老动态的时间标签
-    public static Timestamp getOldForumTime(){
-        if(oldForumTime==null)
-            return new Timestamp(System.currentTimeMillis());
+    public static long getOldForumTime(){
+        if(oldForumTime==-1)
+            return System.currentTimeMillis();
         return oldForumTime;
     }
     public static List<Map> getMoments() {

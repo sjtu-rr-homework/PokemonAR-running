@@ -163,8 +163,8 @@ public class ElfDetailsActivity extends AppCompatActivity {
                 Resources res = getResources();
                 Bitmap bm= BitmapFactory.decodeResource(res,ElfSourceController.getBackgroundWithLevel(variety,nowGrade));
                 jsonData.add(BitmapUtils.bitmapToBase64(bm));
-                Timestamp time = new Timestamp(System.currentTimeMillis());
-                HttpHandler.postPic(jsonData,time.toString(),UserData.getUserName(),UserData.getUserName()+"分享了他的"+ElfSourceController.getName(variety,nowGrade)+",等级 "+(nowExp/100+1)+",战斗力 "+ ElfSourceController.getPower(variety,(nowExp/100+1),nowGrade));
+                long time = System.currentTimeMillis();
+                HttpHandler.postPic(jsonData,time,UserData.getUserName(),UserData.getUserName()+"分享了他的"+ElfSourceController.getName(variety,nowGrade)+",等级 "+(nowExp/100+1)+",战斗力 "+ ElfSourceController.getPower(variety,(nowExp/100+1),nowGrade));
                 Toast.makeText(getApplicationContext(), "分享成功", Toast.LENGTH_SHORT).show();
                 jsonData.clear();
             }

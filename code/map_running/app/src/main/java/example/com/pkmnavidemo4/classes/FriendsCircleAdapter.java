@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -121,7 +122,7 @@ public class FriendsCircleAdapter extends RecyclerView.Adapter {
             viewHolder.mContentTv.setText(moments.get(position).get("content")+"");
             //int count = (int) (Math.random() * 9);
             viewHolder.mImageLayout.setImageUrls((List<String>)moments.get(position).get("pics"));
-            viewHolder.mTimeTv.setText(moments.get(position).get("time").toString().substring(0,19));
+            viewHolder.mTimeTv.setText(new Timestamp(Long.valueOf(moments.get(position).get("time").toString())).toString());
         } else if (holder instanceof FootViewHolder) {
             FootViewHolder footViewHolder = (FootViewHolder) holder;
             switch (loadState) {
