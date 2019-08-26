@@ -249,6 +249,14 @@ services:
       - "27018:27017"
     networks:
       - spring-cloud-network
+  
+  mongo-auth:
+    hostname: mongo-auth
+    image: mongo
+    ports:
+      - "27019:27017"
+    networks:
+      - spring-cloud-network
     
   
   forum-service:
