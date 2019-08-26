@@ -25,17 +25,17 @@ public class MomentController {
 
     @GetMapping("/get/user/moment/username/{username}/timestamp/{timestamp}")
     public List<MomentInfo> getUserMoment(@PathVariable("username") String username, @PathVariable("timestamp") String timestamp) {
-        return GetMomentService.getOneUser(username,timestamp);
+        return GetMomentService.getOneUser(username,Long.parseLong(timestamp));
     }
 
     @GetMapping("/get/all/moment/timestamp/{timestamp}")
     public List<MomentInfo> getAllMoment(@PathVariable("timestamp") String timestamp) {
-        return GetMomentService.getAll(timestamp);
+        return GetMomentService.getAll(Long.parseLong(timestamp));
     }
 
     @GetMapping("/get/refresh/moment/timestamp/{timestamp}")
     public List<MomentInfo> refreshMoment(@PathVariable("timestamp") String timestamp) {
-        return GetMomentService.refresh(timestamp);
+        return GetMomentService.refresh(Long.parseLong(timestamp));
     }
 
 }
