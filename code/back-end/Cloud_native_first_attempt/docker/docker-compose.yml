@@ -17,9 +17,7 @@ services:
           memory: 200M
       restart_policy:
         condition: on-failure
-        delay: 5s
         max_attempts: 100
-        window: 120s
 
   mysql-pet:
     hostname: mysql-pet
@@ -103,9 +101,7 @@ services:
           memory: 200M
       restart_policy:
         condition: on-failure
-        delay: 5s
         max_attempts: 100
-        window: 120s
   
   pet-service:
     hostname: pet-service
@@ -124,9 +120,7 @@ services:
           memory: 200M
       restart_policy:
         condition: on-failure
-        delay: 5s
         max_attempts: 100
-        window: 120s
 
   user-service:
     hostname: user-service
@@ -146,9 +140,7 @@ services:
           memory: 200M
       restart_policy:
         condition: on-failure
-        delay: 5s
         max_attempts: 100
-        window: 120s
 
   record-service:
     hostname: record-service
@@ -167,9 +159,7 @@ services:
           memory: 200M
       restart_policy:
         condition: on-failure
-        delay: 5s
         max_attempts: 100
-        window: 120s
 
   location-service:
     hostname: location-service
@@ -188,9 +178,7 @@ services:
           memory: 200M
       restart_policy:
         condition: on-failure
-        delay: 5s
         max_attempts: 100
-        window: 120s
       
   proxy-service:
     hostname: proxy-service
@@ -209,9 +197,7 @@ services:
           memory: 200M
       restart_policy:
         condition: on-failure
-        delay: 5s
         max_attempts: 100
-        window: 120s
       
   rule-service:
     hostname: rule-service
@@ -230,9 +216,7 @@ services:
           memory: 200M
       restart_policy:
         condition: on-failure
-        delay: 5s
         max_attempts: 100
-        window: 120s
       
   mongo-moment:
     hostname: mongo-moment
@@ -273,9 +257,8 @@ services:
           memory: 200M
       restart_policy:
         condition: on-failure
-        delay: 5s
         max_attempts: 100
-        window: 120s
+
     
 networks:
   spring-cloud-network:
