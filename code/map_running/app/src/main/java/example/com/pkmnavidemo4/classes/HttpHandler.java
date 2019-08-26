@@ -1238,7 +1238,7 @@ public class HttpHandler {
     }
 
     //用户分享动态
-    public static void postPic(List<String> pic,String timestamp,String username,String text){
+    public static void postPic(List<String> pic,long timestamp,String username,String text){
         new Thread(new Runnable() {
             @Override
             public void run() {

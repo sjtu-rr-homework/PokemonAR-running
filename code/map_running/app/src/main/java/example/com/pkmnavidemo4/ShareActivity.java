@@ -94,8 +94,8 @@ public class ShareActivity extends Activity {
 					Toast.makeText(getApplicationContext(), "不能发送空的动态!", Toast.LENGTH_SHORT).show();
             		return;
 				}
-                Timestamp time = new Timestamp(System.currentTimeMillis());
-                HttpHandler.postPic(jsonData,time.toString(), UserData.getUserName(),content.getText().toString());
+                long time =System.currentTimeMillis();
+                HttpHandler.postPic(jsonData,time, UserData.getUserName(),content.getText().toString());
                 finish();
             }
         });

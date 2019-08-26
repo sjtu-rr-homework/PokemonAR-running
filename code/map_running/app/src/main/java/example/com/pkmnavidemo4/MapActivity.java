@@ -379,8 +379,8 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                     UserData.distance+=runningMessage.getLength();
                     HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
                     UserData.addExp(runningMessage.getExp());
-                    Timestamp time = new Timestamp(System.currentTimeMillis());
-                    HttpHandler.postPic(new ArrayList<>(),time.toString(),UserData.getUserName(),"我跑了"+(int)runningMessage.getLength()+"米");
+                    long time = System.currentTimeMillis();
+                    HttpHandler.postPic(new ArrayList<>(),time,UserData.getUserName(),"我跑了"+(int)runningMessage.getLength()+"米");
                     MapActivity.super.finish();
                 }
             });
@@ -423,8 +423,8 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                         UserData.setMileage(runningMessage.getLength()+UserData.getMileage());
                         HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
                         UserData.addExp(runningMessage.getExp());
-                        Timestamp time = new Timestamp(System.currentTimeMillis());
-                        HttpHandler.postPic(new ArrayList<>(),time.toString(),UserData.getUserName(),"我跑了"+(int)runningMessage.getLength()+"米");
+                        long time = System.currentTimeMillis();
+                        HttpHandler.postPic(new ArrayList<>(),time,UserData.getUserName(),"我跑了"+(int)runningMessage.getLength()+"米");
                         MapActivity.super.finish();
                     }
                 });
