@@ -54,7 +54,7 @@ import example.com.pkmnavidemo4.R;
 
 public class HttpHandler {
 
-    private static String UrlHead="http://e0a8cfdf.ngrok.io";
+    private static String UrlHead="http://5c786775.ngrok.io";
     //private static String UrlHead="http://b54463c0.ngrok.io";
 
     @Nullable
