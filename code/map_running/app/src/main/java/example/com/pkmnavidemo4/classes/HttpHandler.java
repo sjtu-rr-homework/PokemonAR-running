@@ -97,7 +97,7 @@ public class HttpHandler {
                     while((s = br.readLine())!=null){
                         sb.append(s);
                     }
-                    Log.d("34516654654","---"+sb.toString());
+                    //Log.d("34516654654","---"+sb.toString());
                     JSONArray jsonArray = new JSONArray(sb.toString());
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject item = jsonArray.getJSONObject(i); // 得到每个对象
@@ -164,7 +164,7 @@ public class HttpHandler {
                     while((s = br.readLine())!=null){
                         sb.append(s);
                     }
-                    Log.d("123","---"+sb.toString());
+                   // Log.d("123","---"+sb.toString());
                     JSONArray jsonArray = new JSONArray(sb.toString());
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject item = jsonArray.getJSONObject(i); // 得到每个对象
@@ -408,7 +408,7 @@ public class HttpHandler {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Log.d("haha","go1");
+               // Log.d("haha","go1");
                 HttpURLConnection conn=null;
                 BufferedReader br=null;
                 String loginUrl=UrlHead+"/user/login/username/"+username+"/password/"+password;
@@ -445,13 +445,13 @@ public class HttpHandler {
                         Looper.loop();
                     }
                     //setContent(sb.toString());
-                    Log.d("123","---"+sb.toString());
+                    //Log.d("123","---"+sb.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
                     Looper.prepare();
                     Toast.makeText(context,"网络异常",Toast.LENGTH_SHORT).show();
                     Looper.loop();
-                    Log.d("haha",e.getMessage());
+                   // Log.d("haha",e.getMessage());
                 }finally {
                     if (conn!=null){
                         conn.disconnect();
@@ -494,10 +494,10 @@ public class HttpHandler {
 
                     UserData.setExp(Integer.valueOf(sb.toString()));
                     //setContent(sb.toString());
-                    Log.d("123","---"+sb.toString());
+                    //Log.d("123","---"+sb.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.d("haha",e.getMessage());
+                   // Log.d("haha",e.getMessage());
                 }finally {
                     if (conn!=null){
                         conn.disconnect();
@@ -538,8 +538,8 @@ public class HttpHandler {
                     while((s = br.readLine())!=null){
                         sb.append(s);
                     }
-                    Log.d("holytryer",sb.toString());
-                    Log.d("holytryer",username);
+                   // Log.d("holytryer",sb.toString());
+                    //Log.d("holytryer",username);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }finally {
@@ -580,7 +580,7 @@ public class HttpHandler {
                     while((s = br.readLine())!=null){
                         sb.append(s);
                     }
-                    Log.d("123","---"+sb.toString());
+                   // Log.d("123","---"+sb.toString());
                     JSONObject jsonobject = new JSONObject(sb.toString());
                     int exp = jsonobject.getInt("exp"); // 获取对象对应的值
                     int grade =jsonobject.getInt("grade");
@@ -592,10 +592,10 @@ public class HttpHandler {
                     UserData.isFriendInfoGet=false;
                     UserData.setFriengPetInfoMap(map);
                     //setContent(sb.toString());
-                    Log.d("123","---"+sb.toString());
+                   // Log.d("123","---"+sb.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.d("haha",e.getMessage());
+                    //Log.d("haha",e.getMessage());
                 }finally {
                     if (conn!=null){
                         conn.disconnect();
@@ -636,7 +636,7 @@ public class HttpHandler {
                     while((s = br.readLine())!=null){
                         sb.append(s);
                     }
-                    Log.d("15555583","---"+sb.toString());
+                   // Log.d("15555583","---"+sb.toString());
                     JSONObject jsonobject = new JSONObject(sb.toString());
                     double distance = jsonobject.getDouble("distance"); // 获取对象对应的值
                     int pet =jsonobject.getInt("pet");
@@ -649,11 +649,11 @@ public class HttpHandler {
                     if(variety==2)
                     UserData.isFriendInfoGet=false;
                     UserData.setUserInfoMap(map,variety);
-                    Log.d("dsdssdds",UserData.getUserInfo().toString());
+                    //Log.d("dsdssdds",UserData.getUserInfo().toString());
                     //setContent(sb.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.d("haha",e.getMessage());
+                   // Log.d("haha",e.getMessage());
                 }finally {
                     if (conn!=null){
                         conn.disconnect();
@@ -675,7 +675,7 @@ public class HttpHandler {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Log.d("haha","go1");
+              //  Log.d("haha","go1");
                 HttpURLConnection conn=null;
                 BufferedReader br=null;
                 String registerUrl=UrlHead+"/user/register/username/"+username+"/password/"+password+"/email/"+email;
@@ -709,10 +709,10 @@ public class HttpHandler {
                         Looper.loop();
                     }
                     //setContent(sb.toString());
-                    Log.d("123","---"+sb.toString());
+                  //  Log.d("123","---"+sb.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.d("haha",e.getMessage());
+                  //  Log.d("haha",e.getMessage());
                 }finally {
                     if (conn!=null){
                         conn.disconnect();
@@ -786,10 +786,10 @@ public class HttpHandler {
                         outwritestream.write(Json.getBytes());
                         outwritestream.flush();
                         outwritestream.close();
-                        Log.d("hlhupload", "doJsonPost: conn" + conn.getResponseCode());
+                       // Log.d("hlhupload", "doJsonPost: conn" + conn.getResponseCode());
                     }
                     if (conn.getResponseCode() == 200) {
-                        Log.d("success","connected!!!!!");
+                      //  Log.d("success","connected!!!!!");
                         reader = new BufferedReader(
                                 new InputStreamReader(conn.getInputStream()));
                         result = reader.readLine();
@@ -844,10 +844,10 @@ public class HttpHandler {
                         outwritestream.write(Json.getBytes());
                         outwritestream.flush();
                         outwritestream.close();
-                        Log.d("hlhupload", "doJsonPost: conn" + conn.getResponseCode());
+                      //  Log.d("hlhupload", "doJsonPost: conn" + conn.getResponseCode());
                     }
                     if (conn.getResponseCode() == 200) {
-                        Log.d("success","connected!!!!!");
+                       // Log.d("success","connected!!!!!");
                         reader = new BufferedReader(
                                 new InputStreamReader(conn.getInputStream()));
                         StringBuilder sb = new StringBuilder();
@@ -855,7 +855,7 @@ public class HttpHandler {
                         while ((s = reader.readLine()) != null) {
                             sb.append(s);
                         }
-                        Log.d("mess",sb.toString());
+                      //  Log.d("mess",sb.toString());
                         JSONArray json = new JSONArray(sb.toString());
                         for (int i = 0; i < json.length(); i++) {
                             JSONObject jb = json.getJSONObject(i);
@@ -909,10 +909,10 @@ public class HttpHandler {
                     JSONObject jb = new JSONObject(sb.toString());
                     UserData.setMileage(Double.parseDouble(jb.getString("mileage")));
                     UserData.setMileageGoal(Double.parseDouble(jb.getString("mileageGoal")));
-                    Log.d("123","---"+sb.toString());
+                  //  Log.d("123","---"+sb.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.d("haha",e.getMessage());
+                   // Log.d("haha",e.getMessage());
                 }finally {
                     if (conn!=null){
                         conn.disconnect();
@@ -935,7 +935,7 @@ public class HttpHandler {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Log.d("haha","go1");
+                //Log.d("haha","go1");
                 HttpURLConnection conn=null;
                 BufferedReader br=null;
                 String Url=UrlHead+"/rule/rule/route/start_lng/"+latLng.longitude+"/start_lat/"+latLng.latitude;
@@ -970,12 +970,12 @@ public class HttpHandler {
                                 .icon(BitmapDescriptorFactory.fromBitmap(bitmap));
                         Marker marker = aMap.addMarker(markerOptions);
                         UserData.flagNum++;
-                        Log.d("CCC", jjj.getString("lat") + "," + jjj.getString("lng"));
+                       // Log.d("CCC", jjj.getString("lat") + "," + jjj.getString("lng"));
                     }
-                    Log.d("123","---"+sb.toString());
+                //    Log.d("123","---"+sb.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.d("haha",e.getMessage());
+                 //   Log.d("haha",e.getMessage());
                 }finally {
                     if (conn!=null){
                         conn.disconnect();
@@ -997,7 +997,7 @@ public class HttpHandler {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Log.d("haha","go1");
+               // Log.d("haha","go1");
                 HttpURLConnection conn=null;
                 BufferedReader br=null;
                 String Url=UrlHead+"/rule/admin/rule/basic";
@@ -1017,10 +1017,10 @@ public class HttpHandler {
                     JSONObject jjj = new JSONObject(sb.toString());
                     UserData.upper_border=Double.parseDouble(jjj.getString("minSpeed"));
                     UserData.lower_border=Double.parseDouble(jjj.getString("maxSpeed"));
-                    Log.d("123","---"+sb.toString());
+                   // Log.d("123","---"+sb.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.d("haha",e.getMessage());
+                  //  Log.d("haha",e.getMessage());
                 }finally {
                     if (conn!=null){
                         conn.disconnect();
@@ -1254,7 +1254,7 @@ public class HttpHandler {
                     for(int i=1;i<=pic.size();i++)
                     un.put("pic"+i,pic.get(i-1));
                     String Json=un.toString();
-                    Log.d("5555",Json);
+                   // Log.d("5555",Json);
                     //String urlPath = UrlHead+"/record/refresh/location";
                     String urlPath = UrlHead+"/forum/add/moment";
                     URL url = new URL(urlPath);
@@ -1279,10 +1279,10 @@ public class HttpHandler {
                         outwritestream.write(Json.getBytes());
                         outwritestream.flush();
                         outwritestream.close();
-                        Log.d("hlhupload", "doJsonPost: conn" + conn.getResponseCode());
+                        //Log.d("hlhupload", "doJsonPost: conn" + conn.getResponseCode());
                     }
                     if (conn.getResponseCode() == 200) {
-                        Log.d("success","connected!!!!!");
+                      //  Log.d("success","connected!!!!!");
                         reader = new BufferedReader(
                                 new InputStreamReader(conn.getInputStream()));
                         StringBuilder sb = new StringBuilder();
@@ -1290,7 +1290,7 @@ public class HttpHandler {
                         while ((s = reader.readLine()) != null) {
                             sb.append(s);
                         }
-                        Log.d("mess",sb.toString());
+                     //   Log.d("mess",sb.toString());
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -1344,10 +1344,10 @@ public class HttpHandler {
                         outwritestream.write(Json.getBytes());
                         outwritestream.flush();
                         outwritestream.close();
-                        Log.d("hlhupload", "doJsonPost: conn" + conn.getResponseCode());
+                        //Log.d("hlhupload", "doJsonPost: conn" + conn.getResponseCode());
                     }
                     if (conn.getResponseCode() == 200) {
-                        Log.d("success","connected!!!!!");
+                        //Log.d("success","connected!!!!!");
                         reader = new BufferedReader(
                                 new InputStreamReader(conn.getInputStream()));
                         StringBuilder sb = new StringBuilder();
@@ -1355,7 +1355,7 @@ public class HttpHandler {
                         while ((s = reader.readLine()) != null) {
                             sb.append(s);
                         }
-                        Log.d("mess",sb.toString());
+                        //Log.d("mess",sb.toString());
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -1408,10 +1408,10 @@ public class HttpHandler {
                         outwritestream.write(Json.getBytes());
                         outwritestream.flush();
                         outwritestream.close();
-                        Log.d("hlhupload", "doJsonPost: conn" + conn.getResponseCode());
+                        //Log.d("hlhupload", "doJsonPost: conn" + conn.getResponseCode());
                     }
                     if (conn.getResponseCode() == 200) {
-                        Log.d("success","connected!!!!!");
+                       // Log.d("success","connected!!!!!");
                         reader = new BufferedReader(
                                 new InputStreamReader(conn.getInputStream()));
                         StringBuilder sb = new StringBuilder();
@@ -1419,7 +1419,7 @@ public class HttpHandler {
                         while ((s = reader.readLine()) != null) {
                             sb.append(s);
                         }
-                        Log.d("mess",sb.toString());
+                       // Log.d("mess",sb.toString());
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -1440,7 +1440,7 @@ public class HttpHandler {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Log.d("haha","go1");
+               // Log.d("haha","go1");
                 HttpURLConnection conn=null;
                 BufferedReader br=null;
                 String recordUrl=UrlHead+"/record/running/record/user/"+UserData.getUserName();
@@ -1461,7 +1461,7 @@ public class HttpHandler {
                         while ((s = br.readLine()) != null) {
                             sb.append(s);
                         }
-                        Log.d("mse", sb.toString());
+                        //Log.d("mse", sb.toString());
                         try {
                             if (UserData.rocordLength.size()>0) {
                                 UserData.recordLastTime.clear();
@@ -1474,7 +1474,7 @@ public class HttpHandler {
                                 UserData.isrecordGet = false;
                             }
                             JSONArray json = new JSONArray(sb.toString());
-                            Log.d("length", "" + json.length());
+                           // Log.d("length", "" + json.length());
                             for (int i = 0; i < json.length(); i++) {
                                 JSONObject jb = json.getJSONObject(i);
                                 //Log.d("AAA", jb.getString("username"));
@@ -1486,21 +1486,21 @@ public class HttpHandler {
                                 double cLength = Double.parseDouble(courseLength) / 1000;
                                 String cls = clformat.format(cLength) + "公里";
                                 UserData.rocordLength.add(cls);
-                                Log.d("length", cls);
+                               // Log.d("length", cls);
 
                                 long du = Long.parseLong(duration);
                                 Date dudate = new Date(du * 1000 - 8 * 3600 * 1000);
                                 SimpleDateFormat duformat = new SimpleDateFormat("HH:mm:ss");
                                 String dus = duformat.format(dudate);
                                 UserData.recordLastTime.add(dus);
-                                Log.d("duration", dus);
+                               // Log.d("duration", dus);
 
                                 long st = Long.parseLong(startTime);
                                 Date stdate = new Date(st);
                                 SimpleDateFormat stformater = new SimpleDateFormat("yyyy.MM.dd HH:mm");
                                 String dateString = stformater.format(stdate);
                                 UserData.startTime.add(dateString);
-                                Log.d("startTime", dateString);
+                                //Log.d("startTime", dateString);
 
                                 JSONArray array = new JSONArray(jb.getString("course"));
                                 List<LatLng> runRecord = new ArrayList<LatLng>();
@@ -1508,7 +1508,7 @@ public class HttpHandler {
                                     JSONObject jjj = array.getJSONObject(j);
                                     LatLng point = new LatLng(jjj.getDouble("lat"), jjj.getDouble("lng"));
                                     runRecord.add(point);
-                                    Log.d("CCC", jjj.getString("lat") + "," + jjj.getString("lng"));
+                                    //Log.d("CCC", jjj.getString("lat") + "," + jjj.getString("lng"));
                                 }
                                 UserData.recordLatLngList.add(runRecord);
                                 //UserData.rocordLength.add(Double.parseDouble(courseLength));
