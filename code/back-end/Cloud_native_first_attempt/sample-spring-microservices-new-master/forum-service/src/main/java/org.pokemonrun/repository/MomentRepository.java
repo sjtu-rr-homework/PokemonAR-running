@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface MomentRepository extends MongoRepository<Moment,String> {
     List<Moment> findAllByUsername(String username);
+    List<Moment> findTop10ByTimestampLessThanOrderBytOrderByTimestampAsc(long timestamp);
+    List<Moment> findTop10ByTimestampGreaterThanOrderByTimestampDesc(long timestamp);
 }
