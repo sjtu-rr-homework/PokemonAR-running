@@ -27,4 +27,14 @@ public class MomentDaoimpl implements MomentDao {
     public void save(Moment moment) {
         MomentRepository.save(moment);
     }
+
+    @Override
+    public List<Moment> gettenhistorymoment(long timestamp) {
+        return MomentRepository.findTop10ByTimestampLessThanOrderByTimestampDesc(timestamp);
+    }
+
+    @Override
+    public List<Moment> gettennewmoment(long timestamp) {
+        return MomentRepository.findTop10ByTimestampGreaterThanOrderByTimestampAsc(timestamp);
+    }
 }
