@@ -122,7 +122,7 @@ public class FriendsCircleAdapter extends RecyclerView.Adapter {
             viewHolder.mContentTv.setText(moments.get(position).get("content")+"");
             //int count = (int) (Math.random() * 9);
             viewHolder.mImageLayout.setImageUrls((List<String>)moments.get(position).get("pics"));
-            viewHolder.mTimeTv.setText(new Timestamp(Long.valueOf(moments.get(position).get("time").toString())).toString());
+            viewHolder.mTimeTv.setText(new Timestamp(Long.valueOf(moments.get(position).get("time").toString())).toString().substring(0,19));
         } else if (holder instanceof FootViewHolder) {
             FootViewHolder footViewHolder = (FootViewHolder) holder;
             switch (loadState) {
