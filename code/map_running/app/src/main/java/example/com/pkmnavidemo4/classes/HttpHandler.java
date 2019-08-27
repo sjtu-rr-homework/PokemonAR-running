@@ -54,8 +54,7 @@ import example.com.pkmnavidemo4.R;
 
 public class HttpHandler {
 
-    private static String UrlHead="http://5c786775.ngrok.io";
-    //private static String UrlHead="http://b54463c0.ngrok.io";
+     private static String UrlHead="http://471644b1.ngrok.io";
 
     @Nullable
     public static Activity findActivity(Context context) {
@@ -1080,7 +1079,7 @@ public class HttpHandler {
                         map.put("pics", pics );
                         list.add(map);
                         if(i==jsonArray.length()-1)
-                            UserData.setNewForumTime(Timestamp.valueOf(time));
+                            UserData.setNewForumTime(Long.valueOf(time));
                     }
                     UserData.setMoments(list);
                     UserData.isMomentsRefresh=false;
@@ -1154,9 +1153,9 @@ public class HttpHandler {
                         map.put("cover", cover);
                         list.add(map);
                         if(i==0)
-                            UserData.setNewForumTime(Timestamp.valueOf(time));
+                            UserData.setNewForumTime(Long.valueOf(time));
                         if(i==jsonArray.length()-1)
-                        UserData.setOldForumTime(Timestamp.valueOf(time).getTime());
+                        UserData.setOldForumTime(Long.valueOf(time));
                     }
                     UserData.setMoments(list);
                     UserData.isMomentsGet=false;

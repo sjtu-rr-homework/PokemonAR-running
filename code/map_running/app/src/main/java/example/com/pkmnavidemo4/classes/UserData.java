@@ -80,10 +80,10 @@ public class UserData {
         return cover;
     }
     //设置最新动态的时间标签
-    public static void setNewForumTime(Timestamp t){
+    public static void setNewForumTime(long t){
         //第一次进入时刷新最新动态时间或新得到的时间更新时才能更新
-        if(!isNewTimeInit||t.after(new Timestamp(newForumTime))) {
-            newForumTime = t.getTime();
+        if(!isNewTimeInit||t>newForumTime) {
+            newForumTime = t;
             isNewTimeInit=true;
         }
     }
