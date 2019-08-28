@@ -1,6 +1,7 @@
 package example.com.pkmnavidemo4.Fragments;
 
 
+import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -9,6 +10,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -24,12 +27,14 @@ import java.text.DecimalFormat;
 import example.com.pkmnavidemo4.Bitmap.BitmapUtils;
 import example.com.pkmnavidemo4.CheckNeighbour;
 import example.com.pkmnavidemo4.FriendPageActivity;
+import example.com.pkmnavidemo4.LoginActivity;
 import example.com.pkmnavidemo4.R;
 import example.com.pkmnavidemo4.RecordActivity;
 import example.com.pkmnavidemo4.SquareActivity;
 import example.com.pkmnavidemo4.classes.ElfSourceController;
 import example.com.pkmnavidemo4.classes.HttpHandler;
 import example.com.pkmnavidemo4.classes.UserData;
+import example.com.pkmnavidemo4.classes.WeiboDialogUtils;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -53,7 +58,18 @@ public class MyFragment extends Fragment {
     private TextView level;
     private TextView fightPoint;
     private TextView myExp;
-
+    private Dialog mWeiboDialog;
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    WeiboDialogUtils.closeDialog(mWeiboDialog);
+                    break;
+            }
+        }
+    };
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fg_content,container,false);
@@ -134,6 +150,8 @@ public class MyFragment extends Fragment {
         checkBBS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mWeiboDialog = WeiboDialogUtils.createLoadingDialog(getActivity(), "加载动态中");
+                mHandler.sendEmptyMessageDelayed(1, 1000);
                 UserData.isNewTimeInit=false;
                 UserData.isAllMomentsGet=false;
                 UserData.setOldForumTime(-1);

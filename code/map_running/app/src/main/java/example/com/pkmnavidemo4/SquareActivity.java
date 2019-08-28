@@ -1,9 +1,11 @@
 package example.com.pkmnavidemo4;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +25,7 @@ import example.com.pkmnavidemo4.classes.EndlessRecyclerOnScrollListener;
 import example.com.pkmnavidemo4.classes.FriendsCircleAdapter;
 import example.com.pkmnavidemo4.classes.HttpHandler;
 import example.com.pkmnavidemo4.classes.UserData;
+import example.com.pkmnavidemo4.classes.WeiboDialogUtils;
 
 public class SquareActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     boolean isScrollListenerAvailable=true;
