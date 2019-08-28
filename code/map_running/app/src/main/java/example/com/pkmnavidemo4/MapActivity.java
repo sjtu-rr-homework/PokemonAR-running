@@ -308,8 +308,14 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                             if(type==0){
                                 HttpHandler.getflag(aMap,start,MapActivity.this);
                             }
-                            elfPointController.generateElfPoing(getApplicationContext(),aMap,start);
-                            presentElfPoint=elfPointController.getPresentElfPoint();
+                            if(UserData.place_choice==0){
+                                elfPointController.generateElfPoing(getApplicationContext(),aMap,start);
+                                presentElfPoint=elfPointController.getPresentElfPoint();
+                            }
+                            else if(UserData.place_choice==1){
+                                elfPointController.generate_point_free(getApplicationContext(),aMap,start);
+                                presentElfPoint=elfPointController.getPresentElfPoint();
+                            }
                             //elfPoint.showAllPoints(aMap);
                         }
                     });
@@ -318,11 +324,15 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                 else{
                     LatLng present=new LatLng(aMapLocation.getLatitude(),aMapLocation.getLongitude());
                     List<Marker> mapScreenMarkers=aMap.getMapScreenMarkers();
+                    double limit_distance=10;
+                    if(UserData.place_choice==1){
+                        limit_distance=50;
+                    }
                     for (int i = 0; i < mapScreenMarkers.size(); ++i) {
                         Marker marker = mapScreenMarkers.get(i);
                         LatLng point = marker.getPosition();
                         float distance = AMapUtils.calculateLineDistance(point, present);
-                        if (distance < 10) {
+                        if (distance < limit_distance) {
                             if(marker.getTitle().equals("elf")&&countDown==0) {
                                 showCatchMessage(Integer.parseInt(marker.getSnippet()), marker);
                                 break;

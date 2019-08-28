@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import example.com.pkmnavidemo4.MapActivity;
 import example.com.pkmnavidemo4.R;
+import example.com.pkmnavidemo4.classes.UserData;
 
 public class RestrainModeFragment extends Fragment {
     private Button run;
@@ -33,9 +34,15 @@ public class RestrainModeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //Toast.makeText(getActivity(),"开始定点跑",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), ""+UserData.place_choice,Toast.LENGTH_SHORT).show();
+                if(UserData.place_choice==0){
                 Intent intent=new Intent(getActivity(), MapActivity.class);
                 intent.putExtra("type",0);
                 startActivity(intent);
+                }
+                else {
+                    Toast.makeText(getActivity(),"选择“自由地点”时，无法进行约束跑",Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

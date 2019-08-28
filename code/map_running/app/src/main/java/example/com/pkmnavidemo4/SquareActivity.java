@@ -1,9 +1,11 @@
 package example.com.pkmnavidemo4;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,8 +25,10 @@ import example.com.pkmnavidemo4.classes.EndlessRecyclerOnScrollListener;
 import example.com.pkmnavidemo4.classes.FriendsCircleAdapter;
 import example.com.pkmnavidemo4.classes.HttpHandler;
 import example.com.pkmnavidemo4.classes.UserData;
+import example.com.pkmnavidemo4.classes.WeiboDialogUtils;
 
 public class SquareActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+    boolean isScrollListenerAvailable=true;
     boolean isAdd=false;
     boolean isFresh=false;
     private TextView back_arrow;
@@ -39,7 +43,7 @@ public class SquareActivity extends AppCompatActivity implements SwipeRefreshLay
     public void onCreate(Bundle savedInstanceState) {
         moments = UserData.getMoments();
         super.onCreate(savedInstanceState);
-        setTitle("仿微信朋友圈");
+        //setTitle("仿微信朋友圈");
         setContentView(R.layout.activity_square);
         initRefreshLayout();
         back_arrow=findViewById(R.id.act_square_left_arrow);
@@ -69,34 +73,38 @@ public class SquareActivity extends AppCompatActivity implements SwipeRefreshLay
         recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
             @Override
             public void onLoadMore() {
-                if (!isAdd) {
-                    isAdd=true;
-                    adapter.setLoadState(adapter.LOADING);
-                    if(!UserData.isAllMomentsGet) {
-                        moments = UserData.getMoments();
+                if (isScrollListenerAvailable){
+                    isScrollListenerAvailable=false;
+                    if (!isAdd) {
+                        isAdd = true;
+                        adapter.setLoadState(adapter.LOADING);
+                        if (!UserData.isAllMomentsGet) {
+                            moments = UserData.getMoments();
+                        } else
+                            moments = null;
+
+                        if (moments != null && moments.size() != 0) {
+                            new Timer().schedule(new TimerTask() {
+                                @Override
+                                public void run() {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            adapter.setLoadState(adapter.LOADING);
+                                        }
+                                    });
+                                }
+                            }, 100);
+                            adapter.addEnd(moments);
+                        } else {
+                            // 显示加载到底的提示
+                            UserData.isAllMomentsGet = true;
+                            adapter.setLoadState(adapter.LOADING_END);
+                        }
                     }
-                    else
-                        moments=null;
-                    if (moments!=null&&moments.size()!= 0) {
-                        new Timer().schedule(new TimerTask() {
-                            @Override
-                            public void run() {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        adapter.setLoadState(adapter.LOADING_COMPLETE);
-                                    }
-                                });
-                            }
-                        }, 1000);
-                        adapter.addEnd(moments);
-                    } else {
-                        // 显示加载到底的提示
-                        UserData.isAllMomentsGet=true;
-                        adapter.setLoadState(adapter.LOADING_END);
-                    }
-                }
-                isAdd=false;
+                    isAdd = false;
+                    isScrollListenerAvailable=true;
+            }
             }
         });
     }

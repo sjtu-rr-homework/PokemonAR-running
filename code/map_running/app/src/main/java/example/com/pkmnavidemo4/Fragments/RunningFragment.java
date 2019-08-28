@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.DialogPreference;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -31,7 +33,8 @@ public class RunningFragment extends Fragment implements View.OnClickListener{
     //private Button button;
     private TextView mileage;
     //private String content;
-
+    private TextView place;
+    private int place_choice=0;
     //public RunningFragment(String content) {
         //this.content = content;
     //}
@@ -41,6 +44,8 @@ public class RunningFragment extends Fragment implements View.OnClickListener{
     private RestrainModeFragment restrainModeFragment;
     private List<Fragment> mFragmentList = new ArrayList<Fragment>();
     private FragmentAdapter mFragmentAdapter;
+
+    private String[] place_choices={"上海交通大学 闵行校区", "自由地点"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,6 +62,7 @@ public class RunningFragment extends Fragment implements View.OnClickListener{
         Log.d("hahahaha","oncreate");
         mileage=(TextView)getActivity().findViewById(R.id.fg_running_calculate);
         mileageGoal=(TextView)getActivity().findViewById(R.id.fg_running_goal) ;
+        place=(TextView)getActivity().findViewById(R.id.fg_running_place_message);
         //button = (Button) getActivity().findViewById(R.id.button3);
         //toRecord=(TextView)getActivity().findViewById(R.id.fg_running_textView);
         //checkNeighbour=(ImageView)getActivity().findViewById(R.id.fg_running_checkneighbour);
@@ -110,6 +116,33 @@ public class RunningFragment extends Fragment implements View.OnClickListener{
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         return;
+                    }
+                });
+                dialog.show();
+            }
+        });
+        place.setOnClickListener(new View.OnClickListener() {
+            int place_mode=place_choice;
+            @Override
+            public void onClick(View view) {
+                UserData.place_choice=place_choice;
+                AlertDialog.Builder dialog=new AlertDialog.Builder(getActivity());
+                dialog.setTitle("请选择跑步地点");
+                dialog.setSingleChoiceItems(place_choices, place_mode,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                place_mode=i;
+                                //Toast.makeText(getActivity(),""+i,Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        place_choice=place_mode;
+                        place.setText(place_choices[place_choice]);
+                        UserData.place_choice=place_choice;
+                        Toast.makeText(getActivity(),""+place_mode,Toast.LENGTH_SHORT).show();
                     }
                 });
                 dialog.show();
