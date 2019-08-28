@@ -1,19 +1,28 @@
 package example.com.pkmnavidemo4;
 
+import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import example.com.pkmnavidemo4.Fragments.ElfsFragment;
 import example.com.pkmnavidemo4.Fragments.MyFragment;
@@ -79,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TextView mileage;
         mileage=(TextView)findViewById(R.id.fg_running_calculate);
         DecimalFormat format=new DecimalFormat("#0.00");
-        //mileage.setText("计入成绩："+ format.format(UserData.getMileage()/1000)+"公里");
+        mileage.setText("计入成绩："+ format.format(UserData.getMileage()/1000)+"公里");
     }
 
 
