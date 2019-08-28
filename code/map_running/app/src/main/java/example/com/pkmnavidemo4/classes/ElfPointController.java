@@ -284,6 +284,34 @@ public class ElfPointController {
         }
     }
 
+    public void generate_point_free(Context context,AMap aMap,LatLng latLng){
+        int number=10;
+        LatLng[] latLngs=new LatLng[number];
+        for(int i=0;i<3;++i){
+            latLngs[i]=randomlatlng(latLng.latitude+0.001,latLng.latitude-0.001,latLng.longitude+0.001,latLng.longitude-0.001);
+        }
+        for(int i=3;i<7;++i){
+            latLngs[i]=randomlatlng(latLng.latitude+0.005,latLng.latitude-0.005,latLng.longitude+0.005,latLng.longitude-0.005);
+        }
+        for(int i=7;i<number;++i){
+            latLngs[i]=randomlatlng(latLng.latitude+0.01,latLng.latitude-0.01,latLng.longitude+0.01,latLng.longitude-0.01);
+        }
+        for(int i=0;i<number;++i){
+            int id=(int)(Math.random()*max_id+1);
+            LatLng point=latLngs[i];
+            ElfPoint elfPoint=new ElfPoint(point,id);
+            presentElfPoint.add(elfPoint);
+            addMarkersToMap(context,aMap,point,id);
+        }
+    }
+
+    private LatLng randomlatlng(double maxlat,double minlat,double maxlng,double minlng){
+        double newlat=Math.random()*(maxlat-minlat)+minlat;
+        double newlng=Math.random()*(maxlng-minlng)+minlng;
+        LatLng latLng=new LatLng(newlat,newlng);
+        return latLng;
+    }
+
     public static void addMarkersToMap(Context context, AMap aMap, LatLng latlng,int id) {
         if (aMap != null) {
             View view = View.inflate(context, R.layout.view_marker, null);

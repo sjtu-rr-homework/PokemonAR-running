@@ -54,7 +54,10 @@ import example.com.pkmnavidemo4.R;
 
 public class HttpHandler {
 
-     private static String UrlHead="http://471644b1.ngrok.io";
+    //private static String UrlHead="http://e8145c0f.ngrok.io";
+
+    private static String UrlHead="http://202.120.40.8:30751";
+
 
     @Nullable
     public static Activity findActivity(Context context) {
@@ -85,6 +88,7 @@ public class HttpHandler {
                     conn.setRequestMethod("GET");
                     conn.setConnectTimeout(888000);
                     conn.setReadTimeout(888000);
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
                    /* InputStream is = conn.getInputStream(); // 获取输入流
                     byte[] data = read(is);*/
                     InputStream in=conn.getInputStream();
@@ -95,7 +99,7 @@ public class HttpHandler {
                     while((s = br.readLine())!=null){
                         sb.append(s);
                     }
-                    Log.d("34516654654","---"+sb.toString());
+                    Log.d("123","---"+sb.toString());
                     JSONArray jsonArray = new JSONArray(sb.toString());
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject item = jsonArray.getJSONObject(i); // 得到每个对象
@@ -151,6 +155,7 @@ public class HttpHandler {
                     conn.setRequestMethod("GET");
                     conn.setConnectTimeout(888000);
                     conn.setReadTimeout(888000);
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
                    /* InputStream is = conn.getInputStream(); // 获取输入流
                     byte[] data = read(is);*/
 
@@ -215,6 +220,7 @@ public class HttpHandler {
                     conn.setRequestMethod("GET");
                     conn.setConnectTimeout(8000);
                     conn.setReadTimeout(8000);
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
                     InputStream in=conn.getInputStream();
                     br=new BufferedReader(new InputStreamReader(in));
 
@@ -255,6 +261,7 @@ public class HttpHandler {
                     conn.setRequestMethod("GET");
                     conn.setConnectTimeout(8000);
                     conn.setReadTimeout(8000);
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
                     InputStream in=conn.getInputStream();
 
                     br=new BufferedReader(new InputStreamReader(in));
@@ -296,6 +303,7 @@ public class HttpHandler {
                     conn.setRequestMethod("GET");
                     conn.setConnectTimeout(8000);
                     conn.setReadTimeout(8000);
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
                     InputStream in=conn.getInputStream();
                     br=new BufferedReader(new InputStreamReader(in));
 
@@ -336,6 +344,7 @@ public class HttpHandler {
                     conn.setRequestMethod("GET");
                     conn.setConnectTimeout(8000);
                     conn.setReadTimeout(8000);
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
                     InputStream in=conn.getInputStream();
                     br=new BufferedReader(new InputStreamReader(in));
 
@@ -376,6 +385,7 @@ public class HttpHandler {
                     conn.setRequestMethod("GET");
                     conn.setConnectTimeout(8000);
                     conn.setReadTimeout(8000);
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
                     InputStream in=conn.getInputStream();
                     br=new BufferedReader(new InputStreamReader(in));
 
@@ -402,7 +412,7 @@ public class HttpHandler {
         }).start();
     }
 
-    public static void login(Context context,String username, String password,boolean isauto) {
+    /*public static void login(Context context,String username, String password,boolean isauto) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -465,7 +475,88 @@ public class HttpHandler {
                 }
             }
         }).start();
+    }*/
+
+    public static void login(Context context,String username, String password,boolean isauto) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String result = "";
+                BufferedReader reader = null;
+                try {
+                    JSONObject un=new JSONObject();
+                    un.put("username",username);
+                    un.put("password",password);
+                    String Json=un.toString();
+                    String urlPath = UrlHead+"/api/signin";
+                    URL url = new URL(urlPath);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("POST");
+                    conn.setDoOutput(true);
+                    conn.setDoInput(true);
+                    conn.setUseCaches(false);
+                    conn.setRequestProperty("Connection", "Keep-Alive");
+                    conn.setRequestProperty("Charset", "UTF-8");
+                    // 设置文件类型:
+                    conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                    // 设置接收类型否则返回415错误
+                    //conn.setRequestProperty("accept","*/*")此处为暴力方法设置接受所有类型，以此来防范返回415;
+                    conn.setRequestProperty("accept", "application/json");
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
+                    // 往服务器里面发送数据
+                    if (Json != null && !TextUtils.isEmpty(Json)) {
+                        byte[] writebytes = Json.getBytes();
+                        // 设置文件长度
+                        conn.setRequestProperty("Content-Length", String.valueOf(writebytes.length));
+                        OutputStream outwritestream = conn.getOutputStream();
+                        outwritestream.write(Json.getBytes());
+                        outwritestream.flush();
+                        outwritestream.close();
+                        Log.d("hlhupload", "doJsonPost: conn" + conn.getResponseCode());
+                    }
+                    if (conn.getResponseCode() == 201) {
+                        Log.d("success", "connected!!!!!");
+                        reader = new BufferedReader(
+                                new InputStreamReader(conn.getInputStream()));
+                        StringBuilder sb = new StringBuilder();
+                        String s;
+                        while ((s = reader.readLine()) != null) {
+                            sb.append(s);
+                        }
+                        JSONObject jb=new JSONObject(sb.toString());
+                        UserData.accessToken=jb.getString("accessToken");
+                        if (isauto) {
+                            SharedPreferencesUtil.putBoolean(context.getApplicationContext(), "isauto", true);
+                        }
+                        Log.d("aaaa", UserData.accessToken);
+                        Log.d("aaaa", sb.toString());
+                        Looper.prepare();
+                        UserData.setUserName(username);
+                        Toast.makeText(context, "登陆成功", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(context, MainActivity.class);
+                        context.startActivity(intent);
+                        Looper.loop();
+                    }
+                    else{
+                        Looper.prepare();
+                        Toast.makeText(context,"登录失败",Toast.LENGTH_SHORT).show();
+                        Looper.loop();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (reader != null) {
+                        try {
+                            reader.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }).start();
     }
+
 
     public static void getExp(String username) {
         new Thread(new Runnable() {
@@ -481,6 +572,7 @@ public class HttpHandler {
                     conn.setRequestMethod("GET");
                     conn.setConnectTimeout(8000);
                     conn.setReadTimeout(8000);
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
                     InputStream in=conn.getInputStream();
                     br=new BufferedReader(new InputStreamReader(in));
 
@@ -528,6 +620,7 @@ public class HttpHandler {
                     conn.setRequestMethod("GET");
                     conn.setConnectTimeout(8000);
                     conn.setReadTimeout(8000);
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
                     InputStream in=conn.getInputStream();
                     br=new BufferedReader(new InputStreamReader(in));
 
@@ -570,6 +663,7 @@ public class HttpHandler {
                     conn.setRequestMethod("GET");
                     conn.setConnectTimeout(8000);
                     conn.setReadTimeout(8000);
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
                     InputStream in=conn.getInputStream();
                     br=new BufferedReader(new InputStreamReader(in));
 
@@ -626,6 +720,7 @@ public class HttpHandler {
                     conn.setRequestMethod("GET");
                     conn.setConnectTimeout(8000);
                     conn.setReadTimeout(8000);
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
                     InputStream in=conn.getInputStream();
                     br=new BufferedReader(new InputStreamReader(in));
 
@@ -634,7 +729,7 @@ public class HttpHandler {
                     while((s = br.readLine())!=null){
                         sb.append(s);
                     }
-                    Log.d("15555583","---"+sb.toString());
+                    Log.d("133","---"+sb.toString());
                     JSONObject jsonobject = new JSONObject(sb.toString());
                     double distance = jsonobject.getDouble("distance"); // 获取对象对应的值
                     int pet =jsonobject.getInt("pet");
@@ -647,7 +742,6 @@ public class HttpHandler {
                     if(variety==2)
                     UserData.isFriendInfoGet=false;
                     UserData.setUserInfoMap(map,variety);
-                    Log.d("dsdssdds",UserData.getUserInfo().toString());
                     //setContent(sb.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -775,6 +869,7 @@ public class HttpHandler {
                     // 设置接收类型否则返回415错误
                     //conn.setRequestProperty("accept","*/*")此处为暴力方法设置接受所有类型，以此来防范返回415;
                     conn.setRequestProperty("accept", "application/json");
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
                     // 往服务器里面发送数据
                     if (Json != null && !TextUtils.isEmpty(Json)) {
                         byte[] writebytes = Json.getBytes();
@@ -833,6 +928,7 @@ public class HttpHandler {
                     // 设置接收类型否则返回415错误
                     //conn.setRequestProperty("accept","*/*")此处为暴力方法设置接受所有类型，以此来防范返回415;
                     conn.setRequestProperty("accept", "application/json");
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
                     // 往服务器里面发送数据
                     if (Json != null && !TextUtils.isEmpty(Json)) {
                         byte[] writebytes = Json.getBytes();
@@ -896,6 +992,7 @@ public class HttpHandler {
                     conn.setRequestMethod("GET");
                     conn.setConnectTimeout(8000);
                     conn.setReadTimeout(8000);
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
                     InputStream in=conn.getInputStream();
                     br=new BufferedReader(new InputStreamReader(in));
 
@@ -943,6 +1040,7 @@ public class HttpHandler {
                     conn.setRequestMethod("GET");
                     conn.setConnectTimeout(8000);
                     conn.setReadTimeout(8000);
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
                     InputStream in=conn.getInputStream();
                     br=new BufferedReader(new InputStreamReader(in));
 
@@ -1005,6 +1103,7 @@ public class HttpHandler {
                     conn.setRequestMethod("GET");
                     conn.setConnectTimeout(8000);
                     conn.setReadTimeout(8000);
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
                     InputStream in=conn.getInputStream();
                     br=new BufferedReader(new InputStreamReader(in));
                     StringBuilder sb=new StringBuilder();
@@ -1051,6 +1150,7 @@ public class HttpHandler {
                     conn.setRequestMethod("GET");
                     conn.setConnectTimeout(888000);
                     conn.setReadTimeout(888000);
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
                    /* InputStream is = conn.getInputStream(); // 获取输入流
                     byte[] data = read(is);*/
                     InputStream in=conn.getInputStream();
@@ -1086,7 +1186,7 @@ public class HttpHandler {
                 } catch (Exception e) {
                     e.printStackTrace();
                     UserData.isMomentsRefresh=false;
-                    Looper.prepare();
+					Looper.prepare();
                     Toast.makeText(context,"网络异常",Toast.LENGTH_SHORT).show();
                     Looper.loop();
                 }finally {
@@ -1122,6 +1222,7 @@ public class HttpHandler {
                     conn.setRequestMethod("GET");
                     conn.setConnectTimeout(888000);
                     conn.setReadTimeout(888000);
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
                    /* InputStream is = conn.getInputStream(); // 获取输入流
                     byte[] data = read(is);*/
 
@@ -1155,14 +1256,13 @@ public class HttpHandler {
                         if(i==0)
                             UserData.setNewForumTime(Long.valueOf(time));
                         if(i==jsonArray.length()-1)
-                        UserData.setOldForumTime(Long.valueOf(time));
+							UserData.setOldForumTime(Long.valueOf(time));
                     }
                     UserData.setMoments(list);
                     UserData.isMomentsGet=false;
                 } catch (Exception e) {
                     e.printStackTrace();
                     UserData.isMomentsGet=false;
-
                 }finally {
                     UserData.isMomentsGet=false;
                     if (conn!=null){
@@ -1195,6 +1295,7 @@ public class HttpHandler {
                     conn.setRequestMethod("GET");
                     conn.setConnectTimeout(8000);
                     conn.setReadTimeout(8000);
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
                     InputStream in=conn.getInputStream();
                     br=new BufferedReader(new InputStreamReader(in));
 
@@ -1204,16 +1305,14 @@ public class HttpHandler {
                         sb.append(s);
                     }
                     if(!sb.toString().isEmpty()){
-
                         JSONObject item =new JSONObject(sb.toString());
-                        UserData.setCover(item.getString("pic"));
+						UserData.setCover(item.getString("pic"));
                         UserData.isCoverGet=false;
                     }
                     else {
                         UserData.isCoverGet=false;
                         UserData.setCover("");
-                    }
-
+					}
                     //setContent(sb.toString());
                 } catch (Exception e) {
                     UserData.isCoverGet=false;
@@ -1268,6 +1367,7 @@ public class HttpHandler {
                     // 设置接收类型否则返回415错误
                     //conn.setRequestProperty("accept","*/*")此处为暴力方法设置接受所有类型，以此来防范返回415;
                     conn.setRequestProperty("accept", "application/json");
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
                     // 往服务器里面发送数据
                     if (Json != null && !TextUtils.isEmpty(Json)) {
                         byte[] writebytes = Json.getBytes();
@@ -1333,6 +1433,7 @@ public class HttpHandler {
                     // 设置接收类型否则返回415错误
                     //conn.setRequestProperty("accept","*/*")此处为暴力方法设置接受所有类型，以此来防范返回415;
                     conn.setRequestProperty("accept", "application/json");
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
                     // 往服务器里面发送数据
                     if (Json != null && !TextUtils.isEmpty(Json)) {
                         byte[] writebytes = Json.getBytes();
@@ -1397,6 +1498,7 @@ public class HttpHandler {
                     // 设置接收类型否则返回415错误
                     //conn.setRequestProperty("accept","*/*")此处为暴力方法设置接受所有类型，以此来防范返回415;
                     conn.setRequestProperty("accept", "application/json");
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
                     // 往服务器里面发送数据
                     if (Json != null && !TextUtils.isEmpty(Json)) {
                         byte[] writebytes = Json.getBytes();
@@ -1450,10 +1552,11 @@ public class HttpHandler {
                     conn.setRequestMethod("GET");
                     conn.setConnectTimeout(8000);
                     conn.setReadTimeout(8000);
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
                     InputStream in=conn.getInputStream();
                     br=new BufferedReader(new InputStreamReader(in));
 
-                    if(conn.getResponseCode()==200) {
+                    if(conn.getResponseCode()==200||conn.getResponseCode()==201) {
                         StringBuilder sb = new StringBuilder();
                         String s;
                         while ((s = br.readLine()) != null) {
@@ -1570,6 +1673,7 @@ public class HttpHandler {
                     conn.setRequestMethod("GET");
                     conn.setConnectTimeout(8000);
                     conn.setReadTimeout(8000);
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
                     InputStream in=conn.getInputStream();
                     br=new BufferedReader(new InputStreamReader(in));
 
@@ -1630,6 +1734,7 @@ public class HttpHandler {
                     conn.setRequestMethod("GET");
                     conn.setConnectTimeout(8000);
                     conn.setReadTimeout(8000);
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
                     InputStream in=conn.getInputStream();
                     br=new BufferedReader(new InputStreamReader(in));
 
@@ -1715,6 +1820,7 @@ public class HttpHandler {
                     // 设置接收类型否则返回415错误
                     //conn.setRequestProperty("accept","*/*")此处为暴力方法设置接受所有类型，以此来防范返回415;
                     conn.setRequestProperty("accept", "application/json");
+                    conn.setRequestProperty("Authorization",UserData.accessToken);
                     if (conn.getResponseCode() == 200) {
                         Log.d("success","connected!!!!!");
                         reader = new BufferedReader(

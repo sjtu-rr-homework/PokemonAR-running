@@ -55,9 +55,11 @@ public class UserData {
     //锁,自己信息获取的锁
     public static boolean isUserinfoGet=false;
     public static int flagNum=0;
+    public static int place_choice=0;
     public static Map<Integer,Integer> catchElfList=new HashMap();
     public static List<LatLng> constraint=new ArrayList<LatLng>();
-    //设置头像
+    public static String accessToken;
+	//设置头像
     public static void setCover(String getCover){
         if(getCover.length()==0) {
             cover = null;
@@ -66,7 +68,7 @@ public class UserData {
             cover = BitmapUtils.base64ToBitmap(getCover);
         }
     }
-    //得到用户头像
+	//得到用户头像
     public static Bitmap getCover(String name){
         isCoverGet=true;
         HttpHandler.getCover(name);
@@ -79,7 +81,7 @@ public class UserData {
         }
         return cover;
     }
-    //设置最新动态的时间标签
+	//设置最新动态的时间标签
     public static void setNewForumTime(long t){
         //第一次进入时刷新最新动态时间或新得到的时间更新时才能更新
         if(!isNewTimeInit||t>newForumTime) {
@@ -87,11 +89,11 @@ public class UserData {
             isNewTimeInit=true;
         }
     }
-    //得到最新动态的时间标签
+	//得到最新动态的时间标签
     public static long getNewForumTime(){
         return newForumTime;
     }
-    //设置最老动态的时间标签
+	//设置最老动态的时间标签
     public static void setOldForumTime(long t){
         oldForumTime=t;
     }
@@ -102,7 +104,7 @@ public class UserData {
         return oldForumTime;
     }
     public static List<Map> getMoments() {
-        moments=null;
+		moments=null;
         isMomentsGet=true;
         HttpHandler.getMoments(UserData.getOldForumTime());
         while(isMomentsGet){
@@ -114,7 +116,7 @@ public class UserData {
         }
         return moments;
     }
-    public static List<Map> refreshMoments(Context context) {
+	public static List<Map> refreshMoments(Context context) {
         moments=null;
         isMomentsRefresh=true;
         HttpHandler.refreshMoments(UserData.getNewForumTime(),context);
