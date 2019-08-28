@@ -45,6 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         // Allow eureka client to be accessed without authentication
         web.ignoring()
+                .antMatchers("/*/")
                 .antMatchers("/eureka/**")
                 .antMatchers("/**/register/**")
                 .antMatchers(HttpMethod.OPTIONS, "/**"); // Request type options should be allowed.
