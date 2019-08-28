@@ -32,7 +32,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // Entry points
         http.authorizeRequests()
                 .antMatchers("/**/signin/**").permitAll()
-                .antMatchers("/**").permitAll()
                 .anyRequest().authenticated();
 
         // Apply JWT
@@ -45,7 +44,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         // Allow eureka client to be accessed without authentication
-        web.ignoring().antMatchers("/eureka/**")
+        web.ignoring()
+                .antMatchers("/eureka/**")
                 .antMatchers("/**/register/**")
                 .antMatchers(HttpMethod.OPTIONS, "/**"); // Request type options should be allowed.
 
