@@ -7,7 +7,6 @@ import example.com.pkmnavidemo4.R;
 import static org.junit.Assert.*;
 
 public class ElfSourceControllerTest {
-
     @Test
     public void getAttack() {
         //对战伤害测试
