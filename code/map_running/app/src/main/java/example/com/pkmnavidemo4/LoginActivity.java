@@ -95,11 +95,12 @@ public class LoginActivity  extends AppCompatActivity {
                 String username=usernameText.getText().toString();
                 String password=passwordText.getText().toString();
                 HttpHandler.login(LoginActivity.this,username,password,auto_login.isChecked());
+                /*
                 HttpHandler.getMileage(username);
                 HttpHandler.getElfs(username);
                 HttpHandler.getExp(username);
                 UserData.setUserInfo(username,1);
-                UserData.initonlyHave();
+                UserData.initonlyHave();*/
             }
         }
         login.setOnClickListener(new View.OnClickListener() {
@@ -111,14 +112,17 @@ public class LoginActivity  extends AppCompatActivity {
                     SharedPreferencesUtil.putString(getApplicationContext(),"username",username);
                     SharedPreferencesUtil.putString(getApplicationContext(),"password",password);
                     SharedPreferencesUtil.putBoolean(getApplicationContext(),"isremember",true);
+                    if(auto_login.isChecked()){
+                        SharedPreferencesUtil.putBoolean(getApplicationContext(),"isauto",true);
+                    }
+                    else{
+                        SharedPreferencesUtil.putBoolean(getApplicationContext(),"isauto",false);
+                    }
+                }
+                else{
+                    SharedPreferencesUtil.putBoolean(getApplicationContext(),"isremember",false);
                 }
                 HttpHandler.login(LoginActivity.this,username,password,auto_login.isChecked());
-                HttpHandler.getMileage(username);
-                HttpHandler.getElfs(username);
-                HttpHandler.getExp(username);
-                UserData.setUserInfo(username,1);
-                UserData.initonlyHave();
-
             }
         });
         auto_login.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
