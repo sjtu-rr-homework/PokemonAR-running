@@ -90,11 +90,17 @@ public class MyFragment extends Fragment {
         int typeID = -1;
         int grade = -1;
         int exp = -1;
+        Log.d("msetest","test1");
+        //Log.d("msetest",""+UserData.getUserInfo().get("pet").toString());
         if(!UserData.getUserInfo().isEmpty()&&!UserData.getElfWithId((int)UserData.getUserInfo().get("pet")).isEmpty()) {
+            Log.d("mestest","point1");
             typeID = (int) (UserData.getElfWithId((int) UserData.getUserInfo().get("pet")).get("typeID"));
             grade = (int) UserData.getElfWithId(typeID).get("grade");
             exp = (int) UserData.getElfWithId(typeID).get("exp");
+            Log.d("mestest","point2");
+            //Log.d("mse",""+UserData.getElfWithId(typeID).get("exp")+"exp");
         }
+        Log.d("msetest","exp");
         username=(TextView)view.findViewById(R.id.fg_username);
         username.setText(UserData.getUserName());
         elfname=(TextView)view.findViewById(R.id.fg_elfname);

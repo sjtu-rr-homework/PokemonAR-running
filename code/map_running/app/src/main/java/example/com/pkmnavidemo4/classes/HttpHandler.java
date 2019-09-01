@@ -533,6 +533,11 @@ public class HttpHandler {
                         Looper.prepare();
                         UserData.setUserName(username);
                         Toast.makeText(context, "登陆成功", Toast.LENGTH_SHORT).show();
+                        HttpHandler.getMileage(username);
+                        HttpHandler.getElfs(username);
+                        HttpHandler.getExp(username);
+                        UserData.setUserInfo(username,1);
+                        UserData.initonlyHave();
                         Intent intent = new Intent(context, MainActivity.class);
                         context.startActivity(intent);
                         Looper.loop();
@@ -881,7 +886,7 @@ public class HttpHandler {
                         outwritestream.close();
                         Log.d("hlhupload", "doJsonPost: conn" + conn.getResponseCode());
                     }
-                    if (conn.getResponseCode() == 200) {
+                    if (conn.getResponseCode() == 200||conn.getResponseCode() == 201) {
                         Log.d("success","connected!!!!!");
                         reader = new BufferedReader(
                                 new InputStreamReader(conn.getInputStream()));
@@ -940,7 +945,7 @@ public class HttpHandler {
                         outwritestream.close();
                         Log.d("hlhupload", "doJsonPost: conn" + conn.getResponseCode());
                     }
-                    if (conn.getResponseCode() == 200) {
+                    if (conn.getResponseCode() == 200||conn.getResponseCode() == 201) {
                         Log.d("success","connected!!!!!");
                         reader = new BufferedReader(
                                 new InputStreamReader(conn.getInputStream()));
@@ -1379,7 +1384,7 @@ public class HttpHandler {
                         outwritestream.close();
                         Log.d("hlhupload", "doJsonPost: conn" + conn.getResponseCode());
                     }
-                    if (conn.getResponseCode() == 200) {
+                    if (conn.getResponseCode() == 200||conn.getResponseCode() == 201) {
                         Log.d("success","connected!!!!!");
                         reader = new BufferedReader(
                                 new InputStreamReader(conn.getInputStream()));
@@ -1445,7 +1450,7 @@ public class HttpHandler {
                         outwritestream.close();
                         Log.d("hlhupload", "doJsonPost: conn" + conn.getResponseCode());
                     }
-                    if (conn.getResponseCode() == 200) {
+                    if (conn.getResponseCode() == 200||conn.getResponseCode() == 201) {
                         Log.d("success","connected!!!!!");
                         reader = new BufferedReader(
                                 new InputStreamReader(conn.getInputStream()));
@@ -1510,7 +1515,7 @@ public class HttpHandler {
                         outwritestream.close();
                         Log.d("hlhupload", "doJsonPost: conn" + conn.getResponseCode());
                     }
-                    if (conn.getResponseCode() == 200) {
+                    if (conn.getResponseCode() == 200||conn.getResponseCode() == 201) {
                         Log.d("success","connected!!!!!");
                         reader = new BufferedReader(
                                 new InputStreamReader(conn.getInputStream()));
@@ -1821,7 +1826,7 @@ public class HttpHandler {
                     //conn.setRequestProperty("accept","*/*")此处为暴力方法设置接受所有类型，以此来防范返回415;
                     conn.setRequestProperty("accept", "application/json");
                     conn.setRequestProperty("Authorization",UserData.accessToken);
-                    if (conn.getResponseCode() == 200) {
+                    if (conn.getResponseCode() == 200||conn.getResponseCode() == 201) {
                         Log.d("success","connected!!!!!");
                         reader = new BufferedReader(
                                 new InputStreamReader(conn.getInputStream()));
