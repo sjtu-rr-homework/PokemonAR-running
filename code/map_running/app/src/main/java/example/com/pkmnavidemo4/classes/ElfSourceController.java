@@ -135,7 +135,7 @@ public class ElfSourceController {
         }
     }
 
-    private static SpannableString getColorfulName(String content,int who,int len)
+    /*private static SpannableString getColorfulName(String content,int who,int len)
     {
         SpannableStringBuilder ssb = new SpannableStringBuilder(content);
         if(who==0)
@@ -200,7 +200,7 @@ public class ElfSourceController {
             default:
                 return getColorfulName("无",0,1);
         }
-    }
+    }*/
     //得到精灵名字
     public static String getName(int id, int level){
         switch (id){
