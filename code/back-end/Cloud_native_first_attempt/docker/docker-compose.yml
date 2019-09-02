@@ -165,7 +165,7 @@ services:
     hostname: location-service
     image: macoredroid/location-service:latest
     depends_on:
-      - mysql-record
+      - mysql-location
     environment:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-service:8088"}}}}'
     networks:
