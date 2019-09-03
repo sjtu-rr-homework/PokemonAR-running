@@ -14,7 +14,9 @@ import java.io.IOException;
  */
 public class BitmapUtils {
 
-	private static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+	public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+		if(options==null)
+			return 0;
 		final int height = options.outHeight;
 		final int width = options.outWidth;
 		int inSampleSize = 1;
@@ -56,6 +58,8 @@ public class BitmapUtils {
 	 * @return
 	 */
 	public static Bitmap decodeSampledBitmapFromFd(String pathName, int reqWidth, int reqHeight) {
+		if(pathName==null)
+			return null;
 		final BitmapFactory.Options options = new BitmapFactory.Options();
 		options.inJustDecodeBounds = true;
 		BitmapFactory.decodeFile(pathName, options);
@@ -71,6 +75,8 @@ public class BitmapUtils {
 	 * @return
 	 */
 	public static Bitmap base64ToBitmap(String base64Data) {
+		if(base64Data==null)
+			return null;
 		byte[] bytes = Base64.decode(base64Data, Base64.DEFAULT);
 		return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 	}
@@ -80,6 +86,8 @@ public class BitmapUtils {
 	 * @return
 	 */
 	public static Bitmap BitmapCompress(Bitmap bm) {
+		if(bm==null)
+			return null;
 		// 获得图片的宽高
 		int width = bm.getWidth();
 		int height = bm.getHeight();
