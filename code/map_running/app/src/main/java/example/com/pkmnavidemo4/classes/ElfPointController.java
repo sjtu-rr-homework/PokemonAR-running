@@ -288,13 +288,52 @@ public class ElfPointController {
         int number=10;
         LatLng[] latLngs=new LatLng[number];
         for(int i=0;i<3;++i){
-            latLngs[i]=randomlatlng(latLng.latitude+0.001,latLng.latitude-0.001,latLng.longitude+0.001,latLng.longitude-0.001);
+            boolean isclose=false;
+            LatLng newlatlng;
+            do{
+                isclose=false;
+                newlatlng=randomlatlng(latLng.latitude+0.003,latLng.latitude-0.003,latLng.longitude+0.003,latLng.longitude-0.003);
+                for(int j=0;j<i;j++){
+                    float distance=AMapUtils.calculateLineDistance(newlatlng,latLngs[j]);
+                    if(distance<200){
+                        isclose=true;
+                        break;
+                    }
+                }
+            }while(isclose);
+            latLngs[i]=newlatlng;
         }
         for(int i=3;i<7;++i){
-            latLngs[i]=randomlatlng(latLng.latitude+0.005,latLng.latitude-0.005,latLng.longitude+0.005,latLng.longitude-0.005);
+            boolean isclose=false;
+            LatLng newlatlng;
+            do{
+                isclose=false;
+                newlatlng=randomlatlng(latLng.latitude+0.008,latLng.latitude-0.008,latLng.longitude+0.008,latLng.longitude-0.008);
+                for(int j=0;j<i;j++){
+                    float distance=AMapUtils.calculateLineDistance(newlatlng,latLngs[j]);
+                    if(distance<200){
+                        isclose=true;
+                        break;
+                    }
+                }
+            }while(isclose);
+            latLngs[i]=newlatlng;
         }
         for(int i=7;i<number;++i){
-            latLngs[i]=randomlatlng(latLng.latitude+0.01,latLng.latitude-0.01,latLng.longitude+0.01,latLng.longitude-0.01);
+            boolean isclose=false;
+            LatLng newlatlng;
+            do{
+                isclose=false;
+                newlatlng=randomlatlng(latLng.latitude+0.015,latLng.latitude-0.015,latLng.longitude+0.015,latLng.longitude-0.015);
+                for(int j=0;j<i;j++){
+                    float distance=AMapUtils.calculateLineDistance(newlatlng,latLngs[j]);
+                    if(distance<200){
+                        isclose=true;
+                        break;
+                    }
+                }
+            }while(isclose);
+            latLngs[i]=newlatlng;
         }
         for(int i=0;i<number;++i){
             int id=(int)(Math.random()*max_id+1);
