@@ -1,4 +1,7 @@
 # Pokemen-run
+[![CodeFactor](https://www.codefactor.io/repository/github/84461810/pokemen-run/badge)](https://www.codefactor.io/repository/github/84461810/pokemen-run)
+
+---
 ​		本项目“跑Kemon-Go”，通过增强现实AR技术将趣味性寓于跑步打卡软件
 
 中，通过GPS高精度定位与服务器端的数据处理实现学生跑步情况的统计与管理，
