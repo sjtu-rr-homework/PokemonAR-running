@@ -1,6 +1,7 @@
 package example.com.pkmnavidemo4.Fragments;
 
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -47,6 +48,9 @@ public class MyFragment extends Fragment {
     private LinearLayout checkneighbour;
     private LinearLayout checkrecord;
     private LinearLayout checkBBS;
+    private LinearLayout contactus;
+    private LinearLayout loginset;
+
     private TextView distance;
     private TextView mileage;
     private TextView mileageGoal;
@@ -101,6 +105,8 @@ public class MyFragment extends Fragment {
             //Log.d("mse",""+UserData.getElfWithId(typeID).get("exp")+"exp");
         }
         Log.d("msetest","exp");
+        loginset=view.findViewById(R.id.fg_my_login_setup);
+        contactus=view.findViewById(R.id.fg_my_contact_us);
         username=(TextView)view.findViewById(R.id.fg_username);
         username.setText(UserData.getUserName());
         elfname=(TextView)view.findViewById(R.id.fg_elfname);
@@ -119,6 +125,22 @@ public class MyFragment extends Fragment {
             myCover.setBackgroundResource(R.drawable.bg_blue);
             myCover.setImageBitmap(UserData.getCover(UserData.getUserName()));
         }
+        loginset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
+            }
+        });
+        contactus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog dialog;
+                dialog=new AlertDialog.Builder(getActivity()).setTitle("联系我们")
+                        .setMessage("2260352695@qq.com")
+                        .setNegativeButton("返回",null).create();
+                dialog.show();
+            }
+        });
         //用户点击头像设置头像
         myCover.setOnClickListener(new View.OnClickListener() {
             @Override

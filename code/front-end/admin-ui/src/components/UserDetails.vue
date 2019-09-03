@@ -12,8 +12,8 @@
         <div v-else class="bg-white p-2"></div>
         <div class="bg-light p-2 h5">约束跑信息</div>
         <div class="bg-white p-2 row">
-            <div v-if="user.info.star!=1" class="col-12">（该用户无需约束跑）</div>
-            <div v-else class="row col-12">
+            <!--div v-if="user.info.star!=1" class="col-12">（该用户无需约束跑）</div-->
+            <div class="row col-12">
                 <div class="offset-3 col-3">里程（m）：</div>
                 <div class="col-3">{{user.campus.mileage}} / {{user.campus.mileageGoal}}</div>
             </div>

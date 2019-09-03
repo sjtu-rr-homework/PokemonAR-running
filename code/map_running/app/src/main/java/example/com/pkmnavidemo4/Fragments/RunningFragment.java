@@ -206,6 +206,14 @@ public class RunningFragment extends Fragment implements View.OnClickListener{
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("hahahaha","onresume");
+        place_choice=UserData.place_choice;
+        place.setText(place_choices[place_choice]);
+    }
+
+    @Override
     public void onHiddenChanged(boolean hidden){
         super.onHiddenChanged(hidden);
         if (!hidden) {
