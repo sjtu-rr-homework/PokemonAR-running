@@ -1,7 +1,7 @@
 <template>
     <div class="text-center row">
         <!-- Management Entries -->
-        <div class="col-2">
+        <div v-if="isLogin()" class="col-2">
             <button v-for="(entry, index) in entries" v-bind:key="index"
                     class="btn btn-block btn-implicit-primary p-4" v-on:click="switchEntry(index)">{{ entry }}</button>
         </div>
@@ -18,6 +18,7 @@
 <script>
     import UserManager from '@/components/UserManager.vue'
     import RuleManager from '@/components/RuleManager.vue'
+    import * as login from '@/js/login.js'
 
     export default {
         name: 'Manager',
@@ -36,7 +37,7 @@
                 return this.managerType === 1;
             },
             isUnLogin: function () {
-                return this.managerType === -1;
+                return this.managerType === -1 || login.isLogin();
             }
         },
         data: function () {
@@ -47,6 +48,9 @@
         methods: {
             switchEntry: function(index) {
                 this.managerType = index;
+            },
+            isLogin: function () {
+                return login.isLogin();
             }
         }
     }
