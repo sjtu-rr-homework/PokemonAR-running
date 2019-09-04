@@ -26,10 +26,18 @@ public class GetMomentServiceimpl implements GetMomentService {
         List<MomentInfo> tempInfoList=new ArrayList<>();
         for(Moment tempMoment:templist)
         {
-            if(tempMoment!=null&&UserClient.getCover(tempMoment.username)!=null)
+            if(tempMoment!=null)
             {
-                MomentInfo tempInfo = new MomentInfo(tempMoment.text, tempMoment.timestamp, tempMoment.username, tempMoment.pic1, tempMoment.pic2, tempMoment.pic3, tempMoment.pic4, tempMoment.pic5, tempMoment.pic6, tempMoment.pic7, tempMoment.pic8, tempMoment.pic9, UserClient.getCover(tempMoment.username).pic);
-                tempInfoList.add(tempInfo);
+                if(UserClient.getCover(tempMoment.username)!=null)
+                {
+                    MomentInfo tempInfo = new MomentInfo(tempMoment.text, tempMoment.timestamp, tempMoment.username, tempMoment.pic1, tempMoment.pic2, tempMoment.pic3, tempMoment.pic4, tempMoment.pic5, tempMoment.pic6, tempMoment.pic7, tempMoment.pic8, tempMoment.pic9, UserClient.getCover(tempMoment.username).pic);
+                    tempInfoList.add(tempInfo);
+                }
+                else
+                {
+                    MomentInfo tempInfo = new MomentInfo(tempMoment.text, tempMoment.timestamp, tempMoment.username, tempMoment.pic1, tempMoment.pic2, tempMoment.pic3, tempMoment.pic4, tempMoment.pic5, tempMoment.pic6, tempMoment.pic7, tempMoment.pic8, tempMoment.pic9, null);
+                    tempInfoList.add(tempInfo);
+                }
             }
 
         }
@@ -43,8 +51,19 @@ public class GetMomentServiceimpl implements GetMomentService {
         for(int i=templist.size()-1;i>=0;i--)
         {
             Moment tempMoment=templist.get(i);
-            MomentInfo tempInfo=new MomentInfo(tempMoment.text,tempMoment.timestamp,tempMoment.username,tempMoment.pic1,tempMoment.pic2,tempMoment.pic3,tempMoment.pic4,tempMoment.pic5,tempMoment.pic6,tempMoment.pic7,tempMoment.pic8,tempMoment.pic9, UserClient.getCover(tempMoment.username).pic);
-            tempInfoList.add(tempInfo);
+            if(tempMoment!=null)
+            {
+                if(UserClient.getCover(tempMoment.username)!=null)
+                {
+                    MomentInfo tempInfo = new MomentInfo(tempMoment.text, tempMoment.timestamp, tempMoment.username, tempMoment.pic1, tempMoment.pic2, tempMoment.pic3, tempMoment.pic4, tempMoment.pic5, tempMoment.pic6, tempMoment.pic7, tempMoment.pic8, tempMoment.pic9, UserClient.getCover(tempMoment.username).pic);
+                    tempInfoList.add(tempInfo);
+                }
+                else
+                {
+                    MomentInfo tempInfo = new MomentInfo(tempMoment.text, tempMoment.timestamp, tempMoment.username, tempMoment.pic1, tempMoment.pic2, tempMoment.pic3, tempMoment.pic4, tempMoment.pic5, tempMoment.pic6, tempMoment.pic7, tempMoment.pic8, tempMoment.pic9, null);
+                    tempInfoList.add(tempInfo);
+                }
+            }
         }
         return tempInfoList;
 
