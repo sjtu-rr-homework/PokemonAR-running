@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/blockuser/username/**").permitAll()
                 .antMatchers("/record/running/record/user/**").permitAll()
                 .antMatchers("/actuator/**").permitAll()
-                .antMatchers("/swagger-ui").permitAll()
+                .antMatchers("/swagger-ui.html").permitAll()
                 .anyRequest().authenticated();
 
         // Apply JWT
@@ -58,6 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring()
                 .antMatchers("/eureka/**")
                 .antMatchers("/**/register/**")
+                .antMatchers("/**/v2/api-docs", "/configuration/**", "/swagger-resources/**",  "/swagger-ui.html", "/webjars/**", "/api-docs/**")
                 .antMatchers(HttpMethod.OPTIONS, "/**"); // Request type options should be allowed.
 
     }
