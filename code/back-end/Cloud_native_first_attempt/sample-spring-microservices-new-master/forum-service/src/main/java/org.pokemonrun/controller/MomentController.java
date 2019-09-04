@@ -23,12 +23,12 @@ public class MomentController {
         return AddMomentService.addMoment(MomentInfo);
     }
 
-    @GetMapping("/get/all/moment/timestamp/{timestamp}")
+    @GetMapping("/get/all/moment/timestamp/{timestamp}")//get ten moments which is uploaded before the timestamp
     public List<MomentInfo> getAllMoment(@PathVariable("timestamp") String timestamp) {
         return GetMomentService.getAll(Long.parseLong(timestamp));
     }
 
-    @GetMapping("/get/refresh/moment/timestamp/{timestamp}")
+    @GetMapping("/get/refresh/moment/timestamp/{timestamp}")//get ten moments which is posted after the timestamp
     public List<MomentInfo> refreshMoment(@PathVariable("timestamp") String timestamp) {
         return GetMomentService.refresh(Long.parseLong(timestamp));
     }

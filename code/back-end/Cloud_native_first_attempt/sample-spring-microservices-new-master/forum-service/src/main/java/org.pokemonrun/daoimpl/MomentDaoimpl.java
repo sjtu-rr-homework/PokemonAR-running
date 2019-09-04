@@ -14,16 +14,6 @@ public class MomentDaoimpl implements MomentDao {
     private MomentRepository MomentRepository;
 
     @Override
-    public List<Moment> getAll() {
-        return MomentRepository.findAll();
-    }
-
-    @Override
-    public List<Moment> getUserAll(String username) {
-        return MomentRepository.findAllByUsername(username);
-    }
-
-    @Override
     public void save(Moment moment) {
         MomentRepository.save(moment);
     }
