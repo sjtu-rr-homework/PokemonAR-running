@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/blockuser/username/**").permitAll()
                 .antMatchers("/record/running/record/user/**").permitAll()
                 .antMatchers("/actuator/**").permitAll()
-                .antMatchers("/swagger-ui.html").permitAll()
+                .antMatchers("/swagger-ui").permitAll()
                 .anyRequest().authenticated();
 
         // Apply JWT
