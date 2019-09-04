@@ -70,7 +70,7 @@ services:
       - "3309:3306"
     networks:
       - spring-cloud-network
-      
+
   mysql-rule:
     hostname: mysql-rule
     image: mysql:latest
@@ -102,7 +102,7 @@ services:
       restart_policy:
         condition: on-failure
         max_attempts: 100
-  
+
   pet-service:
     hostname: pet-service
     image: macoredroid/pet-service:latest
@@ -179,7 +179,7 @@ services:
       restart_policy:
         condition: on-failure
         max_attempts: 100
-      
+
   proxy-service:
     hostname: proxy-service
     image: macoredroid/proxy-service:latest
@@ -198,7 +198,7 @@ services:
       restart_policy:
         condition: on-failure
         max_attempts: 100
-      
+
   rule-service:
     hostname: rule-service
     image: macoredroid/rule-service:latest
@@ -217,7 +217,7 @@ services:
       restart_policy:
         condition: on-failure
         max_attempts: 100
-      
+
   mongo-moment:
     hostname: mongo-moment
     image: mongo
@@ -241,8 +241,7 @@ services:
       - "27019:27017"
     networks:
       - spring-cloud-network
-    
-  
+
   forum-service:
     image: macoredroid/forum-service:latest
     environment:
@@ -258,11 +257,7 @@ services:
       restart_policy:
         condition: on-failure
         max_attempts: 100
-
-    
+        
 networks:
   spring-cloud-network:
     driver: bridge
-
-        
- 
