@@ -75,4 +75,4 @@
 用户可以在用户论坛进行交流（优先级：低）
 
 
-[![image.jpg](https://i.postimg.cc/593GP541/image.jpg)](https://postimg.cc/XXrQqCBD)
+[![image.jpg](https://i.postimg.cc/wB47z4dz/image.jpg)](https://postimg.cc/wtJ6cVv4)
