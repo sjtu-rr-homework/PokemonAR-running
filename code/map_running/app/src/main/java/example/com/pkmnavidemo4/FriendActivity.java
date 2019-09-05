@@ -68,6 +68,10 @@ public class FriendActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"该用户未设置出战精灵", Toast.LENGTH_SHORT).show();
                         return;
                     }
+                    if((int)(UserData.getUserInfo().get("pet"))==-1){
+                        Toast.makeText(getApplicationContext(),"你未设置出战精灵", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     int myPet=(int)(UserData.getElfWithId((int)UserData.getUserInfo().get("pet")).get("typeID"));
                     Intent intent=new Intent(FriendActivity.this,FightActivity.class);
                     intent.putExtra("leftElf",myPet);

@@ -114,7 +114,7 @@ public class FriendsCircleAdapter extends RecyclerView.Adapter {
                 viewHolder.mAvatarView.setBackgroundResource(R.drawable.pikachu);
             }
             else {
-                Log.d("dsds",moments.get(position).get("cover").toString());
+                //Log.d("dsds",moments.get(position).get("cover").toString());
                 viewHolder.mAvatarView.setBackgroundResource(R.drawable.bg_blue);
                 viewHolder.mAvatarView.setImageBitmap(BitmapUtils.base64ToBitmap(moments.get(position).get("cover").toString()));
             }
