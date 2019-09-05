@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "mount")
 public class Moment {
     @Id
-    public String momentid;
+    public String momentid;//generate automatically
 
     public String text;
 
