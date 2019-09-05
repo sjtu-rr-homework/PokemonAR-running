@@ -536,6 +536,7 @@ public class HttpHandler {
                         HttpHandler.getMileage(username);
                         HttpHandler.getElfs(username);
                         HttpHandler.getExp(username);
+                        UserData.getCover(username);
                         UserData.setUserInfo(username,1);
                         UserData.initonlyHave();
                         Intent intent = new Intent(context, MainActivity.class);
