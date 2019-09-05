@@ -161,7 +161,8 @@ public class ElfDetailsActivity extends AppCompatActivity {
                 }
                 List<String> jsonData=new ArrayList<>();
                 Resources res = getResources();
-                Bitmap bm= BitmapFactory.decodeResource(res,ElfSourceController.getBackgroundWithLevel(variety,nowGrade));
+                //重新绘制bitmap
+                Bitmap bm= BitmapUtils.getRoundCornerImage(BitmapFactory.decodeResource(res,ElfSourceController.getBackgroundWithLevel(variety,nowGrade)),0);
                 jsonData.add(BitmapUtils.bitmapToBase64(bm));
                 long time = System.currentTimeMillis();
                 HttpHandler.postPic(jsonData,time,UserData.getUserName(),UserData.getUserName()+"分享了他的"+ElfSourceController.getName(variety,nowGrade)+",等级 "+(nowExp/100+1)+",战斗力 "+ ElfSourceController.getPower(variety,(nowExp/100+1),nowGrade));
