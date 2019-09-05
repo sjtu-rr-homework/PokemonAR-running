@@ -19,19 +19,19 @@ public class LocationServiceimpl implements LocationService {
         List<Location> templist = LocationDao.GetAll();
         double longitude= Double.parseDouble(Locationinfo.longitude);
         double latitude = Double.parseDouble(Locationinfo.latitude);
-        double r = 6371;//地球半径千米
-        double dis = 0.5;//0.5千米距离
+        double r = 6371;//the redius of the earth
+        double dis = 2.5;//the distance is no more than 2.5 km
         double dlng =  2*Math.asin(Math.sin(dis/(2*r))/Math.cos(latitude*Math.PI/180));
         dlng = dlng*180/Math.PI;//角度转为弧度
         double dlat = dis/r;
         dlat = dlat*180/Math.PI;
-        double minlat =latitude-dlat;
+        double minlat =latitude-dlat;// the latitude range
         double maxlat = latitude+dlat;
-        double minlng = longitude -dlng;
+        double minlng = longitude -dlng;//the longitude range
         double maxlng = longitude + dlng;
         List<Location> res = new ArrayList<>();
         String tempName=Locationinfo.username;
-        for(int i=0;i<templist.size();i++)
+        for(int i=0;i<templist.size();i++)//pack into a list
         {
             double tempLong=templist.get(i).getLongitude();
             double tempLati=templist.get(i).getLatitude();
@@ -47,7 +47,7 @@ public class LocationServiceimpl implements LocationService {
             resinfo.add(tempinfo);
         }
         Location temp= LocationDao.GetOneLocation(Locationinfo.username);
-        if(temp==null)
+        if(temp==null)//refresh location
         {
             Location temp1 = new Location(Locationinfo.username, Double.parseDouble(Locationinfo.longitude), Double.parseDouble(Locationinfo.latitude));
             LocationDao.save(temp1);
@@ -68,12 +68,12 @@ public class LocationServiceimpl implements LocationService {
     @Override
     public boolean refreshLocation(Locationinfo Locationinfo) {
         Location temp= LocationDao.GetOneLocation(Locationinfo.username);
-        if(temp==null)
+        if(temp==null)// have no location for this user
         {
             Location temp1 = new Location(Locationinfo.username, Double.parseDouble(Locationinfo.longitude), Double.parseDouble(Locationinfo.latitude));
             LocationDao.save(temp1);
         }
-        else
+        else//replace the old location , no duplicate
         {
             temp.setLatitude(Double.parseDouble(Locationinfo.latitude));
             temp.setLongitude(Double.parseDouble(Locationinfo.longitude));
