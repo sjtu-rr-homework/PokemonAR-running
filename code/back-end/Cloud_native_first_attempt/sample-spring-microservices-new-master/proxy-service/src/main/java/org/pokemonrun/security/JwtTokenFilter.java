@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class JwtTokenFilter extends GenericFilterBean {
+public class JwtTokenFilter extends GenericFilterBean {//check if jwt token is valid
     private JwtTokenProvider jwtTokenProvider;
 
     public JwtTokenFilter(JwtTokenProvider jwtTokenProvider) {
