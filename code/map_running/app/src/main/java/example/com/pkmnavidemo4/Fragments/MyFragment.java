@@ -50,6 +50,7 @@ public class MyFragment extends Fragment {
     private LinearLayout checkBBS;
     private LinearLayout contactus;
     private LinearLayout loginset;
+
     private TextView distance;
     private TextView mileage;
     private TextView mileageGoal;
@@ -133,8 +134,8 @@ public class MyFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 AlertDialog dialog;
-                dialog=new AlertDialog.Builder(getActivity()).setTitle("联系我们")
-                        .setMessage("2260352695@qq.com")
+                dialog=new AlertDialog.Builder(getActivity()).setTitle("github地址")
+                        .setMessage("https://github.com/sjtu-rr-homework/Pokemen-run")
                         .setNegativeButton("返回",null).create();
                 dialog.show();
             }

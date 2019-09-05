@@ -12,12 +12,12 @@ import javax.persistence.*;
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "petID")
 public class Pet {
-    private int petID;
+    private int petID;//user can only have at most one type each type
     private String username;
-    private int grade;
-    private int typeID;
-    private int exp;
-    private int num;
+    private int grade;//pet's grade
+    private int typeID;//pet's type
+    private int exp;//experience
+    private int num;//the num of this type which is captured by this user
 
     @Id
     @Column(name = "petID")

@@ -16,7 +16,6 @@ public class LocationServiceimpl implements LocationService {
 
     @Override
     public List<Locationinfo> getNearBy(Locationinfo Locationinfo) {
-        //List<Location> templist = LocationDao.GetAll();
         double longitude= Double.parseDouble(Locationinfo.longitude);
         double latitude = Double.parseDouble(Locationinfo.latitude);
         double r = 6371;//the redius of the earth
@@ -30,15 +29,6 @@ public class LocationServiceimpl implements LocationService {
         double minlng = longitude -dlng;//the longitude range
         double maxlng = longitude + dlng;
         String tempName=Locationinfo.username;
-        /*for(int i=0;i<templist.size();i++)//pack into a list
-        {
-            double tempLong=templist.get(i).getLongitude();
-            double tempLati=templist.get(i).getLatitude();
-            if(tempLong>minlng&&tempLong<maxlng&&tempLati>minlat&&tempLati<maxlat&&!(templist.get(i).getUsername().equals(tempName)))
-            {
-                res.add(templist.get(i));
-            }
-        }*/
         List<Location> res=LocationDao.GetNearBy(minlat,maxlat,minlng,maxlng);
         List<Locationinfo> resinfo = new ArrayList<>();
         for(int j=0;j<res.size();j++)

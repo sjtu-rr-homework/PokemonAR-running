@@ -20,10 +20,13 @@ public class PetInfoServiceImpl implements PetInfoService {
     public List<Petinfo> GetPets(String username) {
         List<Pet> templist= petDao.GetPets(username);
         List<Petinfo> tempinfolist=new ArrayList<>();
-        for(Pet tempPet:templist)
+        for(Pet tempPet:templist)//turn pet entity into petinfo
         {
-            Petinfo tempInfo=new Petinfo(tempPet.getPetID(),tempPet.getUsername(),tempPet.getTypeID(),tempPet.getExp(),tempPet.getNum(),tempPet.getGrade());
-            tempinfolist.add(tempInfo);
+            if(tempPet!=null)
+            {
+                Petinfo tempInfo = new Petinfo(tempPet.getPetID(), tempPet.getUsername(), tempPet.getTypeID(), tempPet.getExp(), tempPet.getNum(), tempPet.getGrade());
+                tempinfolist.add(tempInfo);
+            }
         }
         return tempinfolist;
     }
@@ -31,7 +34,7 @@ public class PetInfoServiceImpl implements PetInfoService {
     @Override
     public Petinfo GetOnePet(String username, int typeID) {
         Pet tempPet = petDao.GetOnePet(username, typeID);
-        if(tempPet!=null)
+        if(tempPet!=null)//turn pet entity into petinfo
         {
             Petinfo tempInfo=new Petinfo(tempPet.getPetID(),tempPet.getUsername(),tempPet.getTypeID(),tempPet.getExp(),tempPet.getNum(),tempPet.getGrade());
             return tempInfo;
