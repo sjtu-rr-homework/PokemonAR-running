@@ -14,17 +14,12 @@ public class LocationDaoImpl implements LocationDao {
     LocationRepository LocationRepository;
 
     @Override
-    public List<Location> GetAll() {
-        return LocationRepository.findAll();
-    }
-
-    @Override
     public List<Location> GetNearBy(double minlat, double maxlat, double minlong, double maxlong) { return LocationRepository.findByLatitudeBetweenaAndLongitudeBetween(minlat,maxlat,minlong,maxlong); }
 
     @Override
     public Location GetOneLocation(String username) {
         return LocationRepository.findByUsername(username);
-    }
+    }//get someone's location according to username
 
     @Override
     public void save(Location location) {
