@@ -440,7 +440,10 @@ public class RuleadminApplicationTests {
         mockMvc.perform(post("/rule/campus/user/_1/length/10"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
-        mockMvc.perform(post("/rule/campus/user/_1/length/5"))
+        mockMvc.perform(post("/rule/campus/user/_1/length/3"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+        mockMvc.perform(post("/rule/campus/user/_1/length/2"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
         mockMvc.perform(post("/rule/campus/user/_2/length/10"))
