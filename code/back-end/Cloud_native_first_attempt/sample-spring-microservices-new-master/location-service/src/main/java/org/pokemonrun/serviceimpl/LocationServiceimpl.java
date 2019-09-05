@@ -46,7 +46,7 @@ public class LocationServiceimpl implements LocationService {
             Locationinfo tempinfo= new Locationinfo(res.get(j).getUsername(),Double.toString(res.get(j).getLongitude()),Double.toString(res.get(j).getLatitude()));
             resinfo.add(tempinfo);
         }
-        Location temp= LocationDao.GetOneLocation(Locationinfo.username);
+        Location temp= LocationDao.GetOneLocation(Locationinfo.username);//get old location for this user
         if(temp==null)//refresh location
         {
             Location temp1 = new Location(Locationinfo.username, Double.parseDouble(Locationinfo.longitude), Double.parseDouble(Locationinfo.latitude));
@@ -58,7 +58,7 @@ public class LocationServiceimpl implements LocationService {
             temp.setLongitude(Double.parseDouble(Locationinfo.longitude));
             LocationDao.save(temp);
         }
-        if(resinfo.size()==0)
+        if(resinfo.size()==0)//just for fault handling
         {
             return null;
         }
