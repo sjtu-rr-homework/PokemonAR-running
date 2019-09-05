@@ -13,7 +13,7 @@ public class LocationDaoImpl implements LocationDao {
     @Autowired
     LocationRepository LocationRepository;
 
-    @Override
+    @Override//get nearby according to range
     public List<Location> GetNearBy(double minlat, double maxlat, double minlong, double maxlong) { return LocationRepository.findByLatitudeBetweenaAndLongitudeBetween(minlat,maxlat,minlong,maxlong); }
 
     @Override
