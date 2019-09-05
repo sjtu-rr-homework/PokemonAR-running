@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Primary;
 import springfox.documentation.swagger.web.SwaggerResource;
 import springfox.documentation.swagger.web.SwaggerResourcesProvider;
 
-@Configuration
+@Configuration//for apiauto document---swagger ui
 public class ProxyApi {
 
 	@Autowired

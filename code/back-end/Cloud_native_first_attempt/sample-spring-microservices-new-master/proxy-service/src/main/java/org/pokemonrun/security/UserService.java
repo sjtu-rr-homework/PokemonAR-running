@@ -19,7 +19,7 @@ public class UserService implements UserDetailsService{
         String [] authorities=new String[0];
         authorities[0]="ROLE_USER";
         MongoUserDetails userDetails = new MongoUserDetails(username,"hhh",1,
-                false, false,true,authorities);
+                false, false,true,authorities);//create a new user detail
         return userDetails;
     }
 
