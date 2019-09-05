@@ -310,7 +310,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                             if(type==0){
                                 HttpHandler.getflag(aMap,start,MapActivity.this);
                             }
-                            if(AMapUtils.calculateLineDistance(start, school)<2000&&UserData.place_choice==1){
+                            else if(AMapUtils.calculateLineDistance(start, school)<2000&&UserData.place_choice==1){
                                 AlertDialog.Builder dialog = new AlertDialog.Builder(MapActivity.this);
                                 dialog.setTitle("系统检测到您目前的定位在交大闵行校区内");
                                 dialog.setMessage("是否将跑步地点切换至“交大闵行校区”？");
@@ -447,7 +447,9 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                     HttpHandler.postRunningRecord1(runningMessage);
                     HttpHandler.addDistance(UserData.getUserName(), runningMessage.getLength());
                     UserData.distance+=runningMessage.getLength();
-                    HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
+                    if(runningMessage.getPresentLatLng().size()>=1) {
+                        HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
+                    }
                     UserData.addExp(runningMessage.getExp());
                     MapActivity.super.finish();
                 }

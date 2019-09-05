@@ -36,7 +36,7 @@
 
     <application
         android:allowBackup="false"
-        android:icon="@drawable/ic_launcher_pikachu"
+        android:icon="@drawable/ic_launcher_psyduck"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"

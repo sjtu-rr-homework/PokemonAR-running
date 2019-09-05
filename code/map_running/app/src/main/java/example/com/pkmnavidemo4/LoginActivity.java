@@ -34,7 +34,7 @@ import example.com.pkmnavidemo4.classes.WeiboDialogUtils;
 
 public class LoginActivity  extends AppCompatActivity {
     private Button login;
-    private TextView toRegister;
+    private Button toRegister;
     private Dialog mWeiboDialog;
     EditText usernameText;
     EditText passwordText;
