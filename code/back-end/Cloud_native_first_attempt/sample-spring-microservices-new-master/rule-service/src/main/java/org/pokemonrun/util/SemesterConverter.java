@@ -24,13 +24,15 @@ public class SemesterConverter {
         String mile = Double.toString(mileage);
         Timestamp endTime = semester.getEndTime();
         String end = DateUtils.format(endTime);
+        String endLong = String.valueOf(endTime.getTime());
         Timestamp startTime = semester.getStartTime();
         String start = DateUtils.format(startTime);
+        String startLong = String.valueOf(startTime.getTime());
         double minSpeed = rule.getMinSpeed();
         String minSpd = String.valueOf(minSpeed);
         double maxSpeed = rule.getMaxSpeed();
         String maxSpd = String.valueOf(maxSpeed);
-        return new SemesterDetailedInfo(mile, end, start, minSpd, maxSpd);
+        return new SemesterDetailedInfo(mile, end, start, endLong, startLong, minSpd, maxSpd);
     }
     public static SemesterInfo toInfo(Semester semester){
         double mileage = semester.getMileageGoal();
