@@ -1,7 +1,9 @@
 package org.pokemonrun.serviceimpl;
 
+import org.pokemonrun.dao.BasicRuleDao;
 import org.pokemonrun.dao.CampusRecordDao;
 import org.pokemonrun.dao.SemesterDao;
+import org.pokemonrun.entity.BasicRule;
 import org.pokemonrun.entity.Semester;
 import org.pokemonrun.info.SemesterDetailedInfo;
 import org.pokemonrun.info.SemesterInfo;
@@ -18,6 +20,8 @@ public class SemesterServiceImpl implements SemesterService {
     private SemesterDao semesterDao;
     @Autowired
     private CampusRecordDao campusRecordDao;
+    @Autowired
+    private BasicRuleDao basicRuleDao;
 
     private Semester testSemester(SemesterInfo info){
         Semester semester = SemesterConverter.toEntity(info);
@@ -77,9 +81,10 @@ public class SemesterServiceImpl implements SemesterService {
     @Override
     public SemesterDetailedInfo getSemesterDetails() {
         Semester semester = semesterDao.getSemester();
-        if(semester == null){
+        BasicRule rule = basicRuleDao.getBasicRule();
+        if(semester == null || rule == null){
             return null;
         }
-        return SemesterConverter.toDetails(semester);
+        return SemesterConverter.toDetails(semester, rule);
     }
 }

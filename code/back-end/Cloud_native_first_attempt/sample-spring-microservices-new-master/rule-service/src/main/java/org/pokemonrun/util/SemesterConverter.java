@@ -1,5 +1,6 @@
 package org.pokemonrun.util;
 
+import org.pokemonrun.entity.BasicRule;
 import org.pokemonrun.entity.Semester;
 import org.pokemonrun.info.SemesterDetailedInfo;
 import org.pokemonrun.info.SemesterInfo;
@@ -18,14 +19,18 @@ public class SemesterConverter {
         semester.setEndTime(endTime);
         return semester;
     }
-    public static SemesterDetailedInfo toDetails(Semester semester){
+    public static SemesterDetailedInfo toDetails(Semester semester, BasicRule rule){
         double mileage = semester.getMileageGoal();
         String mile = Double.toString(mileage);
         Timestamp endTime = semester.getEndTime();
         String end = DateUtils.format(endTime);
         Timestamp startTime = semester.getStartTime();
         String start = DateUtils.format(startTime);
-        return new SemesterDetailedInfo(mile, end, start);
+        double minSpeed = rule.getMinSpeed();
+        String minSpd = String.valueOf(minSpeed);
+        double maxSpeed = rule.getMaxSpeed();
+        String maxSpd = String.valueOf(maxSpeed);
+        return new SemesterDetailedInfo(mile, end, start, minSpd, maxSpd);
     }
     public static SemesterInfo toInfo(Semester semester){
         double mileage = semester.getMileageGoal();
