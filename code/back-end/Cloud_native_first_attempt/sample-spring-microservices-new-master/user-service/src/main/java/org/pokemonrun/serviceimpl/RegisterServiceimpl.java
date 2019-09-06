@@ -18,7 +18,7 @@ public class RegisterServiceimpl implements RegisterService {
             UserDao.save(username, password, email, star);
             return true;
         }
-        else
+        else//already registered
         {
             return false;
         }
