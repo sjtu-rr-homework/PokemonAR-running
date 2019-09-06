@@ -2,13 +2,11 @@ package org.pokemonrun.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.List;
-
+//at most nine pic in one moment
 @Document(collection = "mount")
 public class Moment {
     @Id
-    public String momentid;
+    public String momentid;//generate automatically
 
     public String text;
 

@@ -23,7 +23,7 @@ public class LoginController {
 
     @CrossOrigin("*")
     @PostMapping("/signin")
-    @ResponseBody
+    @ResponseBody//give out the generated token
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest) {
         String token = iLoginService.login(loginRequest.getUsername(),loginRequest.getPassword());
         HttpHeaders headers = new HttpHeaders();

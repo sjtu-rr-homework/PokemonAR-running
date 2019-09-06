@@ -83,7 +83,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/act_login_button_login"
@@ -92,9 +93,20 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:gravity="center"
-            android:text="登 陆"
+            android:text="登 录"
             android:textColor="#ffffffff"
             android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/act_login_text_new"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:textColor="#ffffffff"
+            android:textSize="16sp"
+            android:text="注 册"/>
 
     </LinearLayout>
 
@@ -111,16 +123,15 @@
             android:layout_gravity="bottom"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:text="jaccount" />
+            android:text="" />
 
         <TextView
-            android:id="@+id/act_login_text_new"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_gravity="bottom|right"
             android:gravity="left"
-            android:text="新用户" />
+            android:text="" />
     </LinearLayout>
 
 

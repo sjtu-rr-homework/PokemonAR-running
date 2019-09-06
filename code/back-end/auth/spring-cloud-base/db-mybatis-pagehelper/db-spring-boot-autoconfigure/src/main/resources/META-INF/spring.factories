@@ -1,3 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.peng.db.spring.boot.autoconfigure.config.mapper.MapperConfiguration,\
-com.peng.db.spring.boot.autoconfigure.config.pagehelper.PageHelperAutoConfiguration

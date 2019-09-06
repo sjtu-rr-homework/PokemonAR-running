@@ -1,6 +1,7 @@
 package example.com.pkmnavidemo4.Fragments;
 
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -47,6 +48,9 @@ public class MyFragment extends Fragment {
     private LinearLayout checkneighbour;
     private LinearLayout checkrecord;
     private LinearLayout checkBBS;
+    private LinearLayout contactus;
+    private LinearLayout loginset;
+
     private TextView distance;
     private TextView mileage;
     private TextView mileageGoal;
@@ -101,6 +105,8 @@ public class MyFragment extends Fragment {
             //Log.d("mse",""+UserData.getElfWithId(typeID).get("exp")+"exp");
         }
         Log.d("msetest","exp");
+        loginset=view.findViewById(R.id.fg_my_login_setup);
+        contactus=view.findViewById(R.id.fg_my_contact_us);
         username=(TextView)view.findViewById(R.id.fg_username);
         username.setText(UserData.getUserName());
         elfname=(TextView)view.findViewById(R.id.fg_elfname);
@@ -112,13 +118,28 @@ public class MyFragment extends Fragment {
         elfImage=view.findViewById(R.id.fg_elf);
         elfImage.setBackgroundResource(ElfSourceController.getBackgroundWithLevel(typeID,grade));
         myExp.setText(UserData.getExp()+"");
-        if(UserData.getCover(UserData.getUserName())==null) {
+        if(UserData.getCoverImmediately(UserData.getUserName())==null) {
             myCover.setBackgroundResource(R.drawable.pikachu);
         }
         else{
-            myCover.setBackgroundResource(R.drawable.bg_blue);
-            myCover.setImageBitmap(UserData.getCover(UserData.getUserName()));
+            myCover.setImageBitmap(UserData.getCoverImmediately(UserData.getUserName()));
         }
+        loginset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
+            }
+        });
+        contactus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog dialog;
+                dialog=new AlertDialog.Builder(getActivity()).setTitle("github地址")
+                        .setMessage("https://github.com/sjtu-rr-homework/Pokemen-run")
+                        .setNegativeButton("返回",null).create();
+                dialog.show();
+            }
+        });
         //用户点击头像设置头像
         myCover.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -201,11 +222,10 @@ public class MyFragment extends Fragment {
             fightPoint.setText(""+ElfSourceController.getPower(typeID,exp/100+1,grade));
             elfImage.setBackgroundResource(ElfSourceController.getBackgroundWithLevel(typeID,grade));
             myExp.setText(UserData.getExp()+"");
-            if(UserData.getCover(UserData.getUserName())==null)
+            if(UserData.getCoverImmediately(UserData.getUserName())==null)
                 myCover.setBackgroundResource(R.drawable.pikachu);
             else {
-                myCover.setBackgroundResource(R.drawable.bg_blue);
-                myCover.setImageBitmap(UserData.getCover(UserData.getUserName()));
+                myCover.setImageBitmap(UserData.getCoverImmediately(UserData.getUserName()));
             }
         }
     }
@@ -228,12 +248,10 @@ public class MyFragment extends Fragment {
                     cursor.moveToFirst();
                     // 最后根据索引值获取图片路径
                     String photoPath = cursor.getString(column_index);
-                    Log.d("pic1",photoPath);
                     Bitmap term=BitmapFactory.decodeFile(photoPath);
                     Bitmap bp=BitmapUtils.BitmapCompress(term);
-                    Log.d("pic2",BitmapUtils.bitmapToBase64(bp));
+                    UserData.setCover(BitmapUtils.bitmapToBase64(bp));
                     HttpHandler.changeCover(UserData.getUserName(),BitmapUtils.bitmapToBase64(bp));
-                    myCover.setBackgroundResource(R.drawable.bg_blue);
                     myCover.setImageBitmap(bp);
                 } catch (Exception e) {
                     e.printStackTrace();

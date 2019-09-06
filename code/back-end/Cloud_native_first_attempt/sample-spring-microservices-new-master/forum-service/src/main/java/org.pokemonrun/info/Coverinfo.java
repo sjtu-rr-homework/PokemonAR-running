@@ -1,5 +1,5 @@
 package org.pokemonrun.info;
-
+//one username and one Avatar
 public class Coverinfo {
     public String username;
     public byte[] pic;

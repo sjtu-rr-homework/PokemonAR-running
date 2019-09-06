@@ -153,7 +153,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="10dp"
                 android:textSize="10sp"
-                android:text="已连续跑步0天"/>
+                android:text=""/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -358,6 +358,7 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true">
                 <LinearLayout
+                    android:id="@+id/fg_my_contact_us"
                     android:layout_marginVertical="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -388,6 +389,7 @@
                 android:layout_height="0.3dp"
                 android:background="#808080"/>
             <LinearLayout
+                android:id="@+id/fg_my_login_setup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?android:attr/selectableItemBackground"
@@ -407,7 +409,7 @@
                         android:layout_weight="1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="登录设置"/>
+                        android:text="重新登录"/>
                     <TextView
                         android:layout_marginRight="10dp"
                         android:layout_width="wrap_content"

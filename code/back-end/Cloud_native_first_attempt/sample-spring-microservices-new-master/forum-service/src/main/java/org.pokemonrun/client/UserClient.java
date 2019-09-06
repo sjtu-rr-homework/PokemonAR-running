@@ -8,5 +8,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name = "user-service")
 public interface UserClient {
     @GetMapping("/get/cover/username/{username}")
-    public Coverinfo getCover(@PathVariable("username") String username);
+    public Coverinfo getCover(@PathVariable("username") String username);//get cover from feign client
 }

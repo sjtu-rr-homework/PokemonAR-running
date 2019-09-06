@@ -54,7 +54,7 @@ import example.com.pkmnavidemo4.R;
 
 public class HttpHandler {
 
-    //private static String UrlHead="http://e8145c0f.ngrok.io";
+    //private static String UrlHead="http://5c60d654.ngrok.io";
 
     private static String UrlHead="http://202.120.40.8:30751";
 
@@ -536,6 +536,7 @@ public class HttpHandler {
                         HttpHandler.getMileage(username);
                         HttpHandler.getElfs(username);
                         HttpHandler.getExp(username);
+                        UserData.getCover(username);
                         UserData.setUserInfo(username,1);
                         UserData.initonlyHave();
                         Intent intent = new Intent(context, MainActivity.class);

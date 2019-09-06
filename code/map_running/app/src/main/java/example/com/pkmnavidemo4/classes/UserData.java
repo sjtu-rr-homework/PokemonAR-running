@@ -81,6 +81,10 @@ public class UserData {
         }
         return cover;
     }
+    //直接得到用户头像
+    public static Bitmap getCoverImmediately(String name){
+        return cover;
+    }
 	//设置最新动态的时间标签
     public static void setNewForumTime(long t){
         //第一次进入时刷新最新动态时间或新得到的时间更新时才能更新

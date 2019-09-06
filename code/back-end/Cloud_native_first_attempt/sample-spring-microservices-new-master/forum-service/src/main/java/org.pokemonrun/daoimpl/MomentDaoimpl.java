@@ -14,27 +14,17 @@ public class MomentDaoimpl implements MomentDao {
     private MomentRepository MomentRepository;
 
     @Override
-    public List<Moment> getAll() {
-        return MomentRepository.findAll();
-    }
-
-    @Override
-    public List<Moment> getUserAll(String username) {
-        return MomentRepository.findAllByUsername(username);
-    }
-
-    @Override
     public void save(Moment moment) {
         MomentRepository.save(moment);
     }
 
     @Override
     public List<Moment> gettenhistorymoment(long timestamp) {
-        return MomentRepository.findTop10ByTimestampLessThanOrderByTimestampDesc(timestamp);
+        return MomentRepository.findTop10ByTimestampLessThanOrderByTimestampDesc(timestamp);//get ten moments which is uploaded before the timestamp and order by time
     }
 
     @Override
     public List<Moment> gettennewmoment(long timestamp) {
-        return MomentRepository.findTop10ByTimestampGreaterThanOrderByTimestampAsc(timestamp);
+        return MomentRepository.findTop10ByTimestampGreaterThanOrderByTimestampAsc(timestamp);//get ten moments which is uploaded after the timestamp and order by time
     }
 }

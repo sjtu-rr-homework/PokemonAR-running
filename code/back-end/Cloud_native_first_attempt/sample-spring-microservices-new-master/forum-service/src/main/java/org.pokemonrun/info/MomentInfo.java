@@ -2,7 +2,7 @@ package org.pokemonrun.info;
 
 import java.io.Serializable;
 import java.util.List;
-
+//one moment which is displayed , containes username ,avatar , timestamp , text , and nine pics
 public class MomentInfo implements Serializable {
 
     public String text;

@@ -24,10 +24,17 @@ public class GetMomentServiceimpl implements GetMomentService {
     public List<MomentInfo> getAll(long timestamp) {
         List<Moment> templist= MomentDao.gettenhistorymoment(timestamp);
         List<MomentInfo> tempInfoList=new ArrayList<>();
-        for(Moment tempMoment:templist)
+        for(Moment tempMoment:templist)//in the original order
         {
-            MomentInfo tempInfo=new MomentInfo(tempMoment.text,tempMoment.timestamp,tempMoment.username,tempMoment.pic1,tempMoment.pic2,tempMoment.pic3,tempMoment.pic4,tempMoment.pic5,tempMoment.pic6,tempMoment.pic7,tempMoment.pic8,tempMoment.pic9, UserClient.getCover(tempMoment.username).pic);
-            tempInfoList.add(tempInfo);
+            if(tempMoment!=null)//check to avoid null pointer
+            {
+                if(UserClient.getCover(tempMoment.username)!=null)//check to avoid null pointer
+                {
+                    MomentInfo tempInfo = new MomentInfo(tempMoment.text, tempMoment.timestamp, tempMoment.username, tempMoment.pic1, tempMoment.pic2, tempMoment.pic3, tempMoment.pic4, tempMoment.pic5, tempMoment.pic6, tempMoment.pic7, tempMoment.pic8, tempMoment.pic9, UserClient.getCover(tempMoment.username).pic);
+                    tempInfoList.add(tempInfo);
+                }
+            }
+
         }
         return tempInfoList;
     }
@@ -36,11 +43,17 @@ public class GetMomentServiceimpl implements GetMomentService {
     public List<MomentInfo> refresh(long timestamp) {
         List<Moment> templist= MomentDao.gettennewmoment(timestamp);
         List<MomentInfo> tempInfoList=new ArrayList<>();
-        for(int i=templist.size()-1;i>=0;i--)
+        for(int i=templist.size()-1;i>=0;i--)//reverse the order
         {
             Moment tempMoment=templist.get(i);
-            MomentInfo tempInfo=new MomentInfo(tempMoment.text,tempMoment.timestamp,tempMoment.username,tempMoment.pic1,tempMoment.pic2,tempMoment.pic3,tempMoment.pic4,tempMoment.pic5,tempMoment.pic6,tempMoment.pic7,tempMoment.pic8,tempMoment.pic9, UserClient.getCover(tempMoment.username).pic);
-            tempInfoList.add(tempInfo);
+            if(tempMoment!=null)//check to avoid null pointer
+            {
+                if(UserClient.getCover(tempMoment.username)!=null)//check to avoid null pointer
+                {
+                    MomentInfo tempInfo = new MomentInfo(tempMoment.text, tempMoment.timestamp, tempMoment.username, tempMoment.pic1, tempMoment.pic2, tempMoment.pic3, tempMoment.pic4, tempMoment.pic5, tempMoment.pic6, tempMoment.pic7, tempMoment.pic8, tempMoment.pic9, UserClient.getCover(tempMoment.username).pic);
+                    tempInfoList.add(tempInfo);
+                }
+            }
         }
         return tempInfoList;
 

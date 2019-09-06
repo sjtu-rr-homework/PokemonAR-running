@@ -158,10 +158,11 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
         aMap.setOnMarkerClickListener(new AMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
+                /*
                 Intent intent=new Intent(MapActivity.this,SceneformActivity.class);
                 int id=Integer.parseInt(marker.getSnippet());
                 intent.putExtra("variety",id);
-                MapActivity.this.startActivity(intent);
+                MapActivity.this.startActivity(intent);*/
                 return true;
             }
         });
@@ -304,11 +305,56 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                         @Override
                         public void run() {
                             LatLng start=new LatLng(aMapLocation.getLatitude(),aMapLocation.getLongitude());
+                            LatLng school=new LatLng(31.025626,121.436882);
                             HttpHandler.postPosition(start);
                             if(type==0){
                                 HttpHandler.getflag(aMap,start,MapActivity.this);
                             }
-                            if(UserData.place_choice==0){
+                            else if(AMapUtils.calculateLineDistance(start, school)<2000&&UserData.place_choice==1){
+                                AlertDialog.Builder dialog = new AlertDialog.Builder(MapActivity.this);
+                                dialog.setTitle("系统检测到您目前的定位在交大闵行校区内");
+                                dialog.setMessage("是否将跑步地点切换至“交大闵行校区”？");
+                                dialog.setCancelable(false);
+                                dialog.setPositiveButton("是", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        UserData.place_choice=0;
+                                        elfPointController.generateElfPoing(getApplicationContext(),aMap,start);
+                                        presentElfPoint=elfPointController.getPresentElfPoint();
+                                    }
+                                });
+                                dialog.setNegativeButton("否", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        elfPointController.generate_point_free(getApplicationContext(),aMap,start);
+                                        presentElfPoint=elfPointController.getPresentElfPoint();
+                                    }
+                                });
+                                dialog.show();
+                            }
+                            else if(AMapUtils.calculateLineDistance(start, school)>=2000&&UserData.place_choice==0){
+                                AlertDialog.Builder dialog = new AlertDialog.Builder(MapActivity.this);
+                                dialog.setTitle("系统检测到您目前的定位在交大闵行校区外");
+                                dialog.setMessage("是否将跑步地点切换至“自由模式”？");
+                                dialog.setCancelable(false);
+                                dialog.setPositiveButton("是", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        UserData.place_choice=1;
+                                        elfPointController.generate_point_free(getApplicationContext(),aMap,start);
+                                        presentElfPoint=elfPointController.getPresentElfPoint();
+                                    }
+                                });
+                                dialog.setNegativeButton("否", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        elfPointController.generateElfPoing(getApplicationContext(),aMap,start);
+                                        presentElfPoint=elfPointController.getPresentElfPoint();
+                                    }
+                                });
+                                dialog.show();
+                            }
+                            else if(UserData.place_choice==0){
                                 elfPointController.generateElfPoing(getApplicationContext(),aMap,start);
                                 presentElfPoint=elfPointController.getPresentElfPoint();
                             }
@@ -401,7 +447,9 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
                     HttpHandler.postRunningRecord1(runningMessage);
                     HttpHandler.addDistance(UserData.getUserName(), runningMessage.getLength());
                     UserData.distance+=runningMessage.getLength();
-                    HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
+                    if(runningMessage.getPresentLatLng().size()>=1) {
+                        HttpHandler.postPosition(runningMessage.getPresentLatLng().get(runningMessage.getPresentLatLng().size() - 1));
+                    }
                     UserData.addExp(runningMessage.getExp());
                     MapActivity.super.finish();
                 }

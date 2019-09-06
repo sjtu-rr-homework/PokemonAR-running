@@ -9,8 +9,8 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 @SpringBootApplication
 @EnableEurekaServer
-@EnableDiscoveryClient
-@EnableAdminServer
+@EnableDiscoveryClient//Spring Cloud Eureka
+@EnableAdminServer//spring boot admin
 public class DiscoveryApplication {
 
 	public static void main(String[] args) {

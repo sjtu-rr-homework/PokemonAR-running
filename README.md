@@ -74,5 +74,9 @@
 
 用户可以在用户论坛进行交流（优先级：低）
 
+[![image.jpg](https://i.postimg.cc/wB47z4dz/image.jpg)](https://postimg.cc/wtJ6cVv4)
 
-[![emm.jpg](https://i.postimg.cc/Bn6ZJwT7/emm.jpg)](https://postimg.cc/nCyfk2wq)
+[Back-end localhost cloud config repo](https://github.com/sjtu-rr-homework/test-config-localhost)
+
+[Back-end docker cloud config repo](https://github.com/MaCoredroid/test-config-docker)
+
