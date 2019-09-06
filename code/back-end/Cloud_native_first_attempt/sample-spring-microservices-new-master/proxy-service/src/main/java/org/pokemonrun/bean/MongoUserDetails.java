@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-@JsonDeserialize(as = MongoUserDetails.class)//override default userdetail
+@JsonDeserialize(as = MongoUserDetails.class)
 public class MongoUserDetails implements UserDetails
 {
 

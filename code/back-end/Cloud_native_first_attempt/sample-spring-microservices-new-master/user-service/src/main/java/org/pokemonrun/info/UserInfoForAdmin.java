@@ -1,6 +1,6 @@
 package org.pokemonrun.info;
 
-public class UserInfoForAdmin {//user info which is visible to admin
+public class UserInfoForAdmin {
     public int userID;
     public String username;
     public int star;

@@ -25,7 +25,7 @@ public class User implements Serializable {
     private int exp;
     private int pet;
     private double distance;
-    private Set<User> following = new HashSet<User>();//self joint many to many
+    private Set<User> following = new HashSet<User>();
     private Set<User> followers = new HashSet<User>();
 
     @Id
@@ -104,12 +104,12 @@ public class User implements Serializable {
     public Set<User> getFollowing(){return following; }
     public void setFollowing(Set<User> following) {this.following= following; }
 
-    private User()//used by system
+    private User()
     {
 
     }
 
-    public User(String username,String password,String email,int star,int exp,int pet)//used by programmer
+    public User(String username,String password,String email,int star,int exp,int pet)
     {
         this.username=username;
         this.password=password;

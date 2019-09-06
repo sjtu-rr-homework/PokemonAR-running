@@ -25,7 +25,7 @@ public class GetUserInfoimpl implements GetUserInfo {
     @Override
     public Userinfo getUserInfo(String username) {
         User temp=UserDao.findOne(username);
-        if(temp==null)//fault handling
+        if(temp==null)
         {
             return null;
         }
@@ -33,10 +33,10 @@ public class GetUserInfoimpl implements GetUserInfo {
         {
             List<Friendinfo> friends = new ArrayList<>();
             Set<User> friendsset= temp.getFollowers();
-            for(User tempUser:friendsset)//get friend
+            for(User tempUser:friendsset)
             {
-                Friendinfo tempfriendInfo=new Friendinfo(tempUser.getUsername());
-                friends.add(tempfriendInfo);
+                Friendinfo tempInfo=new Friendinfo(tempUser.getUsername());
+                friends.add(tempInfo);
             }
             Userinfo tempinfo=new Userinfo(temp.getUsername(),temp.getStar(),temp.getEmail(),temp.getExp(),temp.getPet(),temp.getDistance(),friends);
             return tempinfo;
@@ -60,13 +60,14 @@ public class GetUserInfoimpl implements GetUserInfo {
     @Override
     public int GetPet(String username) {
         User temp=UserDao.findOne(username);
-        if(temp==null)//fault handling
+        if(temp==null)
         {
             return -1;
         }
         else
         {
-            return temp.getPet();
+            int temppet=temp.getPet();
+            return temppet;
         }
     }
 
@@ -74,7 +75,7 @@ public class GetUserInfoimpl implements GetUserInfo {
     public List<String> GetAllUser() {
         List<User> tempList=UserDao.findAll();
         List<String> usernamelist=new ArrayList<>();
-        for(User tempUser:tempList)//get all user's name
+        for(User tempUser:tempList)
         {
             usernamelist.add(tempUser.getUsername());
         }
@@ -89,7 +90,7 @@ public class GetUserInfoimpl implements GetUserInfo {
             return null;
         }
         Cover tempCover=CoverDao.getOneCover(username);
-        if(tempCover==null)//fault handling
+        if(tempCover==null)
         {
             return null;
         }
@@ -103,7 +104,7 @@ public class GetUserInfoimpl implements GetUserInfo {
     @Override
     public int getExp(String username) {
         User tempUser=UserDao.findOne(username);
-        if(tempUser==null)//fault handling
+        if(tempUser==null)
         {
             return 0;
         }

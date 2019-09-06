@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "cover")
 public class Cover {
     @Id
-    public String momentid;//generate automatically
+    public String momentid;
 
     public String username;
 

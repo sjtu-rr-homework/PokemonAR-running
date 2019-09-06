@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 @Component
-public class JwtTokenProvider {//check if the token is valid and not expired
+public class JwtTokenProvider {
     private static final String AUTHORIZATION="Authorization";
     private String secretKey="secret-key";
     private long validityInMilliseconds = 36000000; // 10h

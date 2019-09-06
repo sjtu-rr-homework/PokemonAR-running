@@ -1,6 +1,6 @@
 package org.pokemonrun.bean;
 
-public class LoginRequest {//login with username and password
+public class LoginRequest {
     private String username;
     private String password;
 

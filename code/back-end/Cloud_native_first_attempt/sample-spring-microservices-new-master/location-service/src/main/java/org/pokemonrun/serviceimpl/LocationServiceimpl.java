@@ -33,11 +33,8 @@ public class LocationServiceimpl implements LocationService {
         List<Locationinfo> resinfo = new ArrayList<>();
         for(int j=0;j<res.size();j++)
         {
-            if(!res.get(j).getUsername().equals(Locationinfo.username))
-            {
-                Locationinfo tempinfo = new Locationinfo(res.get(j).getUsername(), Double.toString(res.get(j).getLongitude()), Double.toString(res.get(j).getLatitude()));
-                resinfo.add(tempinfo);
-            }
+            Locationinfo tempinfo= new Locationinfo(res.get(j).getUsername(),Double.toString(res.get(j).getLongitude()),Double.toString(res.get(j).getLatitude()));
+            resinfo.add(tempinfo);
         }
         Location temp= LocationDao.GetOneLocation(Locationinfo.username);//get old location for this user
         if(temp==null)//refresh location

@@ -9,8 +9,8 @@ import java.util.List;
 public interface GetUserInfo {
     public Userinfo getUserInfo(String username);
     public UserInfoForAdmin AdminGetUserInfo(String username);
-    public int GetPet(String username);//get the pet which is going to fight
-    public List<String> GetAllUser();//used for admin to get all username
-    public Coverinfo getCover(String username);//get avatar
+    public int GetPet(String username);
+    public List<String> GetAllUser();
+    public Coverinfo getCover(String username);
     public int getExp(String username);
 }

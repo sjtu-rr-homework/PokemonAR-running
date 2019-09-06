@@ -2,7 +2,7 @@ package org.pokemonrun.info;
 
 import java.util.List;
 
-public class Userinfo {//userinfo which is visible to user
+public class Userinfo {
     public String username;
     public int star;
     public String email;
