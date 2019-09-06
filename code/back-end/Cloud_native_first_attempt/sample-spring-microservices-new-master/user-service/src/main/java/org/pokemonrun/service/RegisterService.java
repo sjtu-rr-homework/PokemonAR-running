@@ -1,5 +1,5 @@
 package org.pokemonrun.service;
 
 public interface RegisterService {
-     boolean Register(String username, String password, String email, int star);
+     boolean Register(String username, String password, String email, int star);//no duplicate username
 }
