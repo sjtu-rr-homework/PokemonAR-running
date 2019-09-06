@@ -14,12 +14,12 @@ public class PetDaoImpl implements PetDao {
     PetRepository petRepository;
 
 
-    @Override
+    @Override//get all pets belong to one user
     public List<Pet> GetPets(String username) {
         return petRepository.findAllByUsername(username);
     }
 
-    @Override
+    @Override//get one pet belong to one user
     public Pet GetOnePet(String username, int typeID) {
         return petRepository.findByUsernameAndTypeID(username, typeID);
     }

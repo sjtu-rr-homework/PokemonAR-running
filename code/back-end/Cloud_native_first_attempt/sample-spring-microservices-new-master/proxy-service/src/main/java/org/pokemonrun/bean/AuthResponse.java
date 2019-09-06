@@ -1,6 +1,6 @@
 package org.pokemonrun.bean;
 
-public class AuthResponse {
+public class AuthResponse {//give accesstoken
     private String accessToken ;
 
     public AuthResponse(String accessToken) {
