@@ -15,8 +15,8 @@ import java.sql.Timestamp;
 public class Semester {
     private int semesterID;
     private double mileageGoal;
-    private Timestamp endTime;
-    private Timestamp startTime;
+    private long endTime;
+    private long startTime;
 
     @Id
     @Column(name = "semesterID")
@@ -41,21 +41,21 @@ public class Semester {
 
     @Basic
     @Column(name = "endTime")
-    public Timestamp getEndTime() {
+    public long getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Timestamp endTime) {
+    public void setEndTime(long endTime) {
         this.endTime = endTime;
     }
 
     @Basic
     @Column(name = "startTime")
-    public Timestamp getStartTime() {
+    public long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Timestamp startTime) {
+    public void setStartTime(long startTime) {
         this.startTime = startTime;
     }
 }

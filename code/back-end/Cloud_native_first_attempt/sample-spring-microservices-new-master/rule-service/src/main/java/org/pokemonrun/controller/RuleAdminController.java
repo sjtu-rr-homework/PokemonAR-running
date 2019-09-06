@@ -88,6 +88,7 @@ public class RuleAdminController {
     public SemesterDetailedInfo getSemesterDetails(){
         return semesterService.getSemesterDetails();
     }
+
 }
 
 

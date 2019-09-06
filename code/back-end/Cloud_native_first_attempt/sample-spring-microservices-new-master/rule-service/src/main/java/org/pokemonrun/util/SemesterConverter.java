@@ -12,8 +12,7 @@ public class SemesterConverter {
         String mile = info.getMileageGoal();
         double mileage = Double.parseDouble(mile);
         String end = info.getEndTime();
-        end = end.replace('T', ' ');
-        Timestamp endTime = DateUtils.parse(end, "yyyy-MM-dd HH:mm");
+        long endTime = Long.parseLong(end);
         Semester semester = new Semester();
         semester.setMileageGoal(mileage);
         semester.setEndTime(endTime);
@@ -22,23 +21,21 @@ public class SemesterConverter {
     public static SemesterDetailedInfo toDetails(Semester semester, BasicRule rule){
         double mileage = semester.getMileageGoal();
         String mile = Double.toString(mileage);
-        Timestamp endTime = semester.getEndTime();
-        String end = DateUtils.format(endTime);
-        String endLong = String.valueOf(endTime.getTime());
-        Timestamp startTime = semester.getStartTime();
-        String start = DateUtils.format(startTime);
-        String startLong = String.valueOf(startTime.getTime());
+        long endTime = semester.getEndTime();
+        String end = String.valueOf(endTime);
+        long startTime = semester.getStartTime();
+        String start = String.valueOf(startTime);
         double minSpeed = rule.getMinSpeed();
         String minSpd = String.valueOf(minSpeed);
         double maxSpeed = rule.getMaxSpeed();
         String maxSpd = String.valueOf(maxSpeed);
-        return new SemesterDetailedInfo(mile, end, start, endLong, startLong, minSpd, maxSpd);
+        return new SemesterDetailedInfo(mile, end, start, minSpd, maxSpd);
     }
     public static SemesterInfo toInfo(Semester semester){
         double mileage = semester.getMileageGoal();
         String mile = Double.toString(mileage);
-        Timestamp endTime = semester.getEndTime();
-        String end = DateUtils.format(endTime);
+        long endTime = semester.getEndTime();
+        String end = String.valueOf(endTime);
         return new SemesterInfo(mile, end);
     }
 }

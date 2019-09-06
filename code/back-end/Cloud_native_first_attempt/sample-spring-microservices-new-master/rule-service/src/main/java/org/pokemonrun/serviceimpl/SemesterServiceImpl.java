@@ -29,10 +29,10 @@ public class SemesterServiceImpl implements SemesterService {
         if(semester.getMileageGoal() < 0){
             return null;
         }
-        // past time as end time
-        Timestamp end = semester.getEndTime();
-        Timestamp now = new Timestamp(System.currentTimeMillis());
-        if(!now.before(end)){
+        // Invalid: past time as end time
+        long end = semester.getEndTime();
+        long now = System.currentTimeMillis();
+        if(now >= end){
             return null;
         }
         return semester;
@@ -48,7 +48,7 @@ public class SemesterServiceImpl implements SemesterService {
         if(!campusRecordDao.reset()){
             return false;
         }
-        semester.setStartTime(new Timestamp(System.currentTimeMillis()));
+        semester.setStartTime(System.currentTimeMillis());
         return semesterDao.setSemester(semester);
     }
 
