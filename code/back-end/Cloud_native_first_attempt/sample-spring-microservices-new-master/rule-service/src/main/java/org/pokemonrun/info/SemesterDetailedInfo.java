@@ -7,6 +7,8 @@ public class SemesterDetailedInfo {
     private String startTime;
     private String minSpeed;
     private String maxSpeed;
+    private String minSpeedLong;
+    private String maxSpeedLong;
     public SemesterDetailedInfo(String mileageGoal, String endTime, String startTime,
                                 String minSpeed, String maxSpeed){
         this.mileageGoal = mileageGoal;
@@ -14,6 +16,8 @@ public class SemesterDetailedInfo {
         this.startTime = startTime;
         this.minSpeed = minSpeed;
         this.maxSpeed = maxSpeed;
+        this.minSpeedLong = minSpeed;
+        this.maxSpeedLong = maxSpeed;
     }
 
     public String getMileageGoal() {
@@ -34,5 +38,13 @@ public class SemesterDetailedInfo {
 
     public String getMaxSpeed() {
         return maxSpeed;
+    }
+
+    public String getMinSpeedLong() {
+        return minSpeedLong;
+    }
+
+    public String getMaxSpeedLong() {
+        return maxSpeedLong;
     }
 }
