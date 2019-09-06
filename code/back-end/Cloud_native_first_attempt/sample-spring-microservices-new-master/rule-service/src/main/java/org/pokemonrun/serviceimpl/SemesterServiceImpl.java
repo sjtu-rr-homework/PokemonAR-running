@@ -1,7 +1,9 @@
 package org.pokemonrun.serviceimpl;
 
+import org.pokemonrun.dao.BasicRuleDao;
 import org.pokemonrun.dao.CampusRecordDao;
 import org.pokemonrun.dao.SemesterDao;
+import org.pokemonrun.entity.BasicRule;
 import org.pokemonrun.entity.Semester;
 import org.pokemonrun.info.SemesterDetailedInfo;
 import org.pokemonrun.info.SemesterInfo;
@@ -18,6 +20,8 @@ public class SemesterServiceImpl implements SemesterService {
     private SemesterDao semesterDao;
     @Autowired
     private CampusRecordDao campusRecordDao;
+    @Autowired
+    private BasicRuleDao basicRuleDao;
 
     private Semester testSemester(SemesterInfo info){
         Semester semester = SemesterConverter.toEntity(info);
@@ -25,10 +29,10 @@ public class SemesterServiceImpl implements SemesterService {
         if(semester.getMileageGoal() < 0){
             return null;
         }
-        // past time as end time
-        Timestamp end = semester.getEndTime();
-        Timestamp now = new Timestamp(System.currentTimeMillis());
-        if(!now.before(end)){
+        // Invalid: past time as end time
+        long end = semester.getEndTime();
+        long now = System.currentTimeMillis();
+        if(now >= end){
             return null;
         }
         return semester;
@@ -44,7 +48,7 @@ public class SemesterServiceImpl implements SemesterService {
         if(!campusRecordDao.reset()){
             return false;
         }
-        semester.setStartTime(new Timestamp(System.currentTimeMillis()));
+        semester.setStartTime(System.currentTimeMillis());
         return semesterDao.setSemester(semester);
     }
 
@@ -77,9 +81,10 @@ public class SemesterServiceImpl implements SemesterService {
     @Override
     public SemesterDetailedInfo getSemesterDetails() {
         Semester semester = semesterDao.getSemester();
-        if(semester == null){
+        BasicRule rule = basicRuleDao.getBasicRule();
+        if(semester == null || rule == null){
             return null;
         }
-        return SemesterConverter.toDetails(semester);
+        return SemesterConverter.toDetails(semester, rule);
     }
 }

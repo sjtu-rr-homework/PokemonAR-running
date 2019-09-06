@@ -443,8 +443,8 @@
                 this.$http.get(api.ruleApi('rule/campus/semester'),
                 ).then((resp) => {
                     this.mileageGoal = resp.data.mileageGoal;
-                    this.endTime = resp.data.endTime;
-                    this.startTime = resp.data.startTime;
+                    this.endTime = new Date(Number(resp.data.endTime));
+                    this.startTime = new Date(Number(resp.data.startTime));
                     this.gettingSemester = false;
                 }, () => {
                     this.getSemesterFail = true;
@@ -475,7 +475,7 @@
                 this.$http.post(api.ruleApi('rule/campus/semester'),
                     {
                         mileageGoal: this.modifier.mileageGoal,
-                        endTime: this.modifier.endTime
+                        endTime: new Date(this.modifier.endTime).getTime()
                     }
                 ).then((resp) => {
                     this.modifySemesterFail = false;
@@ -492,7 +492,7 @@
                 this.$http.put(api.ruleApi('rule/campus/semester'),
                     {
                         mileageGoal: this.modifier.mileageGoal,
-                        endTime: this.modifier.endTime
+                        endTime: new Date(this.modifier.endTime).getTime()
                     }
                 ).then((resp) => {
                     this.modifySemesterFail = false;

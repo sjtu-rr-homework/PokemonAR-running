@@ -13,8 +13,8 @@ import javax.persistence.*;
         property = "ruleID")
 public class BasicRule {
     private int ruleID;
-    private Double minSpeed = null;
-    private Double maxSpeed = null;
+    private Double minSpeed = 1.0;
+    private Double maxSpeed = 1.0;
 
     public BasicRule(){
         // empty

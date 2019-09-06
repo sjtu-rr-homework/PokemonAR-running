@@ -19,13 +19,13 @@ public class CampusRecordServiceImpl implements CampusRecordService {
     private SemesterDao semesterDao;
 
     private boolean isInTimeWindow(){
-        Timestamp now = new Timestamp(System.currentTimeMillis());
+        long now = System.currentTimeMillis();
         Semester semester = semesterDao.getSemester();
         if(semester == null){
             return false;
         }
-        Timestamp end = semester.getEndTime();
-        return !now.after(end);
+        long end = semester.getEndTime();
+        return now <= end;
     }
 
     @Override

@@ -380,7 +380,7 @@ public class RuleadminApplicationTests {
                 .contentType("application/json;charset=UTF-8")
                 .content("{" +
                         "\"mileageGoal\":\"8888\"," +
-                        "\"endTime\":\"2019-09-31T23:59\"}"))
+                        "\"endTime\":\"1569859199000\"}")) // 2019-9-30 23:59:59 GMT+8
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
         // new user
@@ -426,7 +426,7 @@ public class RuleadminApplicationTests {
                 .contentType("application/json;charset=UTF-8")
                 .content("{" +
                         "\"mileageGoal\":\"8888\"," +
-                        "\"endTime\":\"2019-09-31T23:59\"}"))
+                        "\"endTime\":\"1569859199000\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
         // test data
@@ -440,7 +440,10 @@ public class RuleadminApplicationTests {
         mockMvc.perform(post("/rule/campus/user/_1/length/10"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
-        mockMvc.perform(post("/rule/campus/user/_1/length/5"))
+        mockMvc.perform(post("/rule/campus/user/_1/length/3"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+        mockMvc.perform(post("/rule/campus/user/_1/length/2"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
         mockMvc.perform(post("/rule/campus/user/_2/length/10"))
@@ -492,7 +495,7 @@ public class RuleadminApplicationTests {
                 .contentType("application/json;charset=UTF-8")
                 .content("{" +
                         "\"mileageGoal\":\"8888\"," +
-                        "\"endTime\":\"2019-09-31T23:59\"}"))
+                        "\"endTime\":\"1569859199000\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
     }
@@ -503,7 +506,7 @@ public class RuleadminApplicationTests {
                 .contentType("application/json;charset=UTF-8")
                 .content("{" +
                         "\"mileageGoal\":\"-1\"," +
-                        "\"endTime\":\"2019-09-31T23:59\"}"))
+                        "\"endTime\":\"1569859199000\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("false"));
     }
@@ -514,7 +517,7 @@ public class RuleadminApplicationTests {
                 .contentType("application/json;charset=UTF-8")
                 .content("{" +
                         "\"mileageGoal\":\"1\"," +
-                        "\"endTime\":\"2000-01-01T23:59\"}"))
+                        "\"endTime\":\"946742399000\"}")) // 2000/1/1 23:59:59 GMT+8
                 .andExpect(status().isOk())
                 .andExpect(content().string("false"));
     }
@@ -532,14 +535,14 @@ public class RuleadminApplicationTests {
                 .contentType("application/json;charset=UTF-8")
                 .content("{" +
                         "\"mileageGoal\":\"8888\"," +
-                        "\"endTime\":\"2019-09-31T23:59\"}"))
+                        "\"endTime\":\"1569859199000\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
         mockMvc.perform(put("/rule/campus/semester")
                 .contentType("application/json;charset=UTF-8")
                 .content("{" +
                         "\"mileageGoal\":\"1\"," +
-                        "\"endTime\":\"2019-09-31T23:59\"}"))
+                        "\"endTime\":\"1569859199000\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
         // negative mileage goal
@@ -547,7 +550,7 @@ public class RuleadminApplicationTests {
                 .contentType("application/json;charset=UTF-8")
                 .content("{" +
                         "\"mileageGoal\":\"-1\"," +
-                        "\"endTime\":\"2019-09-31T23:59\"}"))
+                        "\"endTime\":\"1569859199000\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("false"));
         // past time as end time
@@ -555,14 +558,14 @@ public class RuleadminApplicationTests {
                 .contentType("application/json;charset=UTF-8")
                 .content("{" +
                         "\"mileageGoal\":\"1\"," +
-                        "\"endTime\":\"2000-09-31T23:59\"}"))
+                        "\"endTime\":\"970329599000\"}")) // 2000/9/30 23:59:59
                 .andExpect(status().isOk())
                 .andExpect(content().string("false"));
         mockMvc.perform(put("/rule/campus/semester")
                 .contentType("application/json;charset=UTF-8")
                 .content("{" +
                         "\"mileageGoal\":\"1\"," +
-                        "\"endTime\":\"2019-07-21T23:59\"}"))
+                        "\"endTime\":\"1563724799000\"}")) // 2019/7/21 23:59:59
                 .andExpect(status().isOk())
                 .andExpect(content().string("false"));
     }

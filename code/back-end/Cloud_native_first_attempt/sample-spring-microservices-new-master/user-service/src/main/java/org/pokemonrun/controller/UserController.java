@@ -98,7 +98,6 @@ public class UserController {
 	public int getExp(@PathVariable("username") String username)
 	{
 		return GetUserInfo.getExp(username);
-
 	}
 
 }
