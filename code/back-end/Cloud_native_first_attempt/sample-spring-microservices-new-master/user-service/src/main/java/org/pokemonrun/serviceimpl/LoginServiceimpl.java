@@ -22,7 +22,7 @@ public class LoginServiceimpl implements LoginService {
         }
         else
         {
-            if(tempUser.getStar()==-1)
+            if(tempUser.getStar()==-1)//blocked user
             {
                 return false;
             }

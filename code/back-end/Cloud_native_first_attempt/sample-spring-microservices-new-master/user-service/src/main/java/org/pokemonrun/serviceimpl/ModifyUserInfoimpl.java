@@ -20,7 +20,7 @@ public class ModifyUserInfoimpl implements ModifyUserInfo {
     @Override
     public boolean ModifyExp(String username, int num) {
         User temp=UserDao.findOne(username);
-        if(temp==null)
+        if(temp==null)//fault handling
         {
             return false;
         }
@@ -28,18 +28,18 @@ public class ModifyUserInfoimpl implements ModifyUserInfo {
         {
             int oldexp=temp.getExp();
             int newexp=oldexp+num;
-            if(newexp<0)
+            if(newexp<0)//fault handling
             {
                 return false;
             }
             temp.setExp(newexp);
-            UserDao.save(temp);
+            UserDao.save(temp);//will automatically overwrite the old one, keep the same ID
         }
         return true;
     }
 
     @Override
-    public boolean blockUser(String username) {
+    public boolean blockUser(String username) {//block and unblock , back and forth
         User temp=UserDao.findOne(username);
         if(temp==null)
         {
@@ -48,23 +48,15 @@ public class ModifyUserInfoimpl implements ModifyUserInfo {
         else
         {
             int star=temp.getStar();
-            if(star==-1)
+            if(star==-1)//unblock
             {
                 temp.setStar(0);
             }
-            else if(star==-2)
-            {
-                temp.setStar(1);
-            }
-            else if(star==1)
-            {
-                temp.setStar(-2);
-            }
-            else if(star==0)
+            else if(star==0)//block
             {
                 temp.setStar(-1);
             }
-            else
+            else//fault handling
             {
                 return false;
             }
@@ -116,14 +108,14 @@ public class ModifyUserInfoimpl implements ModifyUserInfo {
     public boolean addFriend(String username, String friendname) {
         User temp1=UserDao.findOne(username);
         User temp2=UserDao.findOne(friendname);
-        if(temp1==null||temp2==null)
+        if(temp1==null||temp2==null)//fault handling
         {
             return false;
         }
         else
         {
             Set<User> follower1=temp1.getFollowers();
-            if(follower1.contains(temp2))
+            if(follower1.contains(temp2))//already friend
             {
                 return false;
             }
@@ -133,7 +125,7 @@ public class ModifyUserInfoimpl implements ModifyUserInfo {
             following1.add(temp2);
             temp1.setFollowing(following1);
 
-            UserDao.save(temp1);
+            UserDao.save(temp1);//and user2 as user1's friend
 
             Set<User> follower2=temp2.getFollowers();
             follower2.add(temp1);
@@ -144,7 +136,7 @@ public class ModifyUserInfoimpl implements ModifyUserInfo {
             following2.add(temp1);
             temp2.setFollowing(following2);
 
-            UserDao.save(temp2);
+            UserDao.save(temp2);//add user1 as user2's friend
             return true;
         }
     }

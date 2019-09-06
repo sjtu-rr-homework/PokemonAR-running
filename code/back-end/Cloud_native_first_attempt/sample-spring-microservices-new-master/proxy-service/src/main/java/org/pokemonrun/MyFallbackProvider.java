@@ -10,7 +10,7 @@ import org.springframework.http.client.ClientHttpResponse;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-@Configuration
+@Configuration//hytrix fallback
 class MyFallbackProvider implements FallbackProvider {
     @Override
     public String getRoute() {
