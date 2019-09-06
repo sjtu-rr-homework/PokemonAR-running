@@ -443,8 +443,8 @@
                 this.$http.get(api.ruleApi('rule/campus/semester'),
                 ).then((resp) => {
                     this.mileageGoal = resp.data.mileageGoal;
-                    this.endTime = new Date(resp.data.endTime);
-                    this.startTime = new Date(resp.data.startTime);
+                    this.endTime = new Date(Number(resp.data.endTime));
+                    this.startTime = new Date(Number(resp.data.startTime));
                     this.gettingSemester = false;
                 }, () => {
                     this.getSemesterFail = true;
