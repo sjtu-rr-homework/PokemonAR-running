@@ -72,7 +72,7 @@ public class ForumServiceTests {
                     .andExpect(content().string("true"));
         }
         String str1 = "[", str2 = "[";
-        for (int i = 10; i >= 0; i--) {
+        for (int i = 6; i >= 0; i--) {
             str1 += "{" +
                     "\"text\":\"test" + i + "\"," +
                     "\"timestamp\":" + (111111111 + i * 2000) + "," +
@@ -90,13 +90,13 @@ public class ForumServiceTests {
                     "}" + (i == 0 ? "" : ",");
         }
         str1 += "]";
-        mockMvc.perform(get("/get/all/moment/timestamp/111132111"))
+        mockMvc.perform(get("/get/all/moment/timestamp/111124111"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(str1));
-        for (int i = 24; i >= 0; i--) {
+        for (int i = 24; i >= 15; i--) {
             str2 += "{" +
                     "\"text\":\"test" + i + "\"," +
-                    "\"timestamp\":\"" + (111111111 + i * 2000) + "\"," +
+                    "\"timestamp\":" + (111111111 + i * 2000) + "," +
                     "\"username\":\"wzr\"," +
                     "\"cover\":\"\"," +
                     "\"pic1\":\"" + (i % 9 == 0 ? "1234" : "") + "\"," +
@@ -108,7 +108,7 @@ public class ForumServiceTests {
                     "\"pic7\":\"" + (i % 9 == 6 ? "7234" : "") + "\"," +
                     "\"pic8\":\"" + (i % 9 == 7 ? "8234" : "") + "\"," +
                     "\"pic9\":\"" + (i % 9 == 8 ? "9234" : "") + "\"" +
-                    "}" + (i == 0 ? "" : ",");
+                    "}" + (i == 15 ? "" : ",");
         }
         str2 += "]";
         mockMvc.perform(get("/get/all/moment/timestamp/111171111"))
