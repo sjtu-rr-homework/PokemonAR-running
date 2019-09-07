@@ -50,8 +50,7 @@ public class FlagServiceImpl implements FlagService {
         List<Point> points = new LinkedList<>();
         List<FlagInfo> route = new LinkedList<>();
         // generate route
-        int num = 5
-                ;
+        int num = 5;
         double range = 0.00926275;
         //double range = 0.002;
         Point start = new Point(lng, lat * 2);
