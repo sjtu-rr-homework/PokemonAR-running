@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 
 @Entity
 @JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
