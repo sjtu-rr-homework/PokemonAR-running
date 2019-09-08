@@ -1,0 +1,59 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: UserClient</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">org.pokemonrun.client</a> ]
+</div>
+
+<h1>Coverage Summary for Class: UserClient (org.pokemonrun.client)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">UserClient</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package org.pokemonrun.client;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import org.pokemonrun.info.Coverinfo;
+<i>4</i>&nbsp;import org.springframework.cloud.openfeign.FeignClient;
+<i>5</i>&nbsp;import org.springframework.web.bind.annotation.GetMapping;
+<i>6</i>&nbsp;import org.springframework.web.bind.annotation.PathVariable;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;@FeignClient(name = &quot;user-service&quot;)
+<i>9</i>&nbsp;public interface UserClient {
+<i>10</i>&nbsp;    @GetMapping(&quot;/get/cover/username/{username}&quot;)
+<i>11</i>&nbsp;    public Coverinfo getCover(@PathVariable(&quot;username&quot;) String username);//get cover from feign client
+<i>12</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-09-08 16:19</div>
+</div>
+</body>
+</html>
