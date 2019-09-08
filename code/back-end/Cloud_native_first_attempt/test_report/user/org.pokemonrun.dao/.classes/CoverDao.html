@@ -5,7 +5,7 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html id="htmlId">
 <head>
-  <title>Coverage Report :: UserDao</title>
+  <title>Coverage Report :: CoverDao</title>
   <style type="text/css">
     @import "../../.css/coverage.css";
   </style>
@@ -20,14 +20,14 @@
     [ <a href="../index.html">org.pokemonrun.dao</a> ]
 </div>
 
-<h1>Coverage Summary for Class: UserDao (org.pokemonrun.dao)</h1>
+<h1>Coverage Summary for Class: CoverDao (org.pokemonrun.dao)</h1>
 
 <table class="coverageStats">
 <tr>
   <th class="name">Class</th>
 </tr>
 <tr>
-  <td class="name">UserDao</td>
+  <td class="name">CoverDao</td>
 </tr>
 
 </table>
@@ -38,19 +38,12 @@
 
 <div class="sourceCode"><i>1</i>&nbsp;package org.pokemonrun.dao;
 <i>2</i>&nbsp;
-<i>3</i>&nbsp;import org.pokemonrun.entity.User;
+<i>3</i>&nbsp;import org.pokemonrun.entity.Cover;
 <i>4</i>&nbsp;
-<i>5</i>&nbsp;import java.util.List;
-<i>6</i>&nbsp;
-<i>7</i>&nbsp;
-<i>8</i>&nbsp;public interface UserDao {
-<i>9</i>&nbsp;    User findOne(String username);//find one user by username (no duplicate)
-<i>10</i>&nbsp;    User findById(int id);//find one user by ID, no duplicate
-<i>11</i>&nbsp;    void save(String username, String password, String email, int star);//save one user , no duplicate username
-<i>12</i>&nbsp;    void save(User user);//save one user , no duplicate username
-<i>13</i>&nbsp;    List&lt;User&gt; findAll();//find all user
-<i>14</i>&nbsp;
-<i>15</i>&nbsp;}
+<i>5</i>&nbsp;public interface CoverDao {
+<i>6</i>&nbsp;    Cover getOneCover(String username);//get avatar
+<i>7</i>&nbsp;    void save(Cover cover);//set avatar
+<i>8</i>&nbsp;}
 </div>
 </div>
 

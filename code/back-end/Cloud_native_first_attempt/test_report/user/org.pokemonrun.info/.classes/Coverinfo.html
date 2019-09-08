@@ -5,7 +5,7 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html id="htmlId">
 <head>
-  <title>Coverage Report :: Userinfo</title>
+  <title>Coverage Report :: Coverinfo</title>
   <style type="text/css">
     @import "../../.css/coverage.css";
   </style>
@@ -20,7 +20,7 @@
     [ <a href="../index.html">org.pokemonrun.info</a> ]
 </div>
 
-<h1>Coverage Summary for Class: Userinfo (org.pokemonrun.info)</h1>
+<h1>Coverage Summary for Class: Coverinfo (org.pokemonrun.info)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -39,7 +39,7 @@
 </th>
 </tr>
 <tr>
-  <td class="name">Userinfo</td>
+  <td class="name">Coverinfo</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -61,7 +61,7 @@
     100%
   </span>
   <span class="absValue">
-    (9/ 9)
+    (4/ 4)
   </span>
 </td>
 </tr>
@@ -74,27 +74,15 @@
 
 <div class="sourceCode"><i>1</i>&nbsp;package org.pokemonrun.info;
 <i>2</i>&nbsp;
-<i>3</i>&nbsp;import java.util.List;
-<i>4</i>&nbsp;
-<i>5</i>&nbsp;public class Userinfo {//userinfo which is visible to user
-<i>6</i>&nbsp;    public String username;
-<i>7</i>&nbsp;    public int star;
-<i>8</i>&nbsp;    public String email;
-<i>9</i>&nbsp;    public int exp;
-<i>10</i>&nbsp;    public int pet;
-<i>11</i>&nbsp;    public double distance;
-<i>12</i>&nbsp;    public List&lt;Friendinfo&gt; friends;
-<i>13</i>&nbsp;    public Userinfo(String username,int star,String email,int exp,int pet, double distance,List&lt;Friendinfo&gt; friends)
-<b class="fc"><i>14</i>&nbsp;    {</b>
-<b class="fc"><i>15</i>&nbsp;        this.username=username;</b>
-<b class="fc"><i>16</i>&nbsp;        this.email=email;</b>
-<b class="fc"><i>17</i>&nbsp;        this.star=star;</b>
-<b class="fc"><i>18</i>&nbsp;        this.exp=exp;</b>
-<b class="fc"><i>19</i>&nbsp;        this.pet=pet;</b>
-<b class="fc"><i>20</i>&nbsp;        this.distance=distance;</b>
-<b class="fc"><i>21</i>&nbsp;        this.friends=friends;</b>
-<b class="fc"><i>22</i>&nbsp;    }</b>
-<i>23</i>&nbsp;}
+<i>3</i>&nbsp;public class Coverinfo {
+<i>4</i>&nbsp;    public String username;
+<i>5</i>&nbsp;    public byte[] pic;
+<i>6</i>&nbsp;    public Coverinfo(String username, byte[] pic)
+<b class="fc"><i>7</i>&nbsp;    {</b>
+<b class="fc"><i>8</i>&nbsp;        this.username=username;</b>
+<b class="fc"><i>9</i>&nbsp;        this.pic=pic;</b>
+<b class="fc"><i>10</i>&nbsp;    }</b>
+<i>11</i>&nbsp;}
 </div>
 </div>
 
