@@ -42,26 +42,26 @@
   <td class="name">Semester</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/ 1)
+    (1/ 1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/ 9)
+    (9/ 9)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/ 9)
+    (13/ 13)
   </span>
 </td>
 </tr>
@@ -79,66 +79,65 @@
 <i>5</i>&nbsp;import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 <i>6</i>&nbsp;
 <i>7</i>&nbsp;import javax.persistence.*;
-<i>8</i>&nbsp;import java.sql.Timestamp;
-<i>9</i>&nbsp;
-<i>10</i>&nbsp;@Entity
-<i>11</i>&nbsp;@JsonIgnoreProperties(value = {&quot;handler&quot;,&quot;hibernateLazyInitializer&quot;,&quot;fieldHandler&quot;})
-<i>12</i>&nbsp;@JsonIdentityInfo(
-<i>13</i>&nbsp;        generator = ObjectIdGenerators.PropertyGenerator.class,
-<i>14</i>&nbsp;        property = &quot;semesterID&quot;)
-<b class="nc"><i>15</i>&nbsp;public class Semester {</b>
-<i>16</i>&nbsp;    private int semesterID;
-<i>17</i>&nbsp;    private double mileageGoal;
-<i>18</i>&nbsp;    private Timestamp endTime;
-<i>19</i>&nbsp;    private Timestamp startTime;
-<i>20</i>&nbsp;
-<i>21</i>&nbsp;    @Id
-<i>22</i>&nbsp;    @Column(name = &quot;semesterID&quot;)
-<i>23</i>&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
-<i>24</i>&nbsp;    public int getSemesterID() {
-<b class="nc"><i>25</i>&nbsp;        return semesterID;</b>
-<i>26</i>&nbsp;    }
-<i>27</i>&nbsp;
-<i>28</i>&nbsp;    public void setSemesterID(int semesterID) {
-<b class="nc"><i>29</i>&nbsp;        this.semesterID = semesterID;</b>
-<i>30</i>&nbsp;    }
-<i>31</i>&nbsp;
-<i>32</i>&nbsp;    @Basic
-<i>33</i>&nbsp;    @Column(name = &quot;mileageGoal&quot;)
-<i>34</i>&nbsp;    public double getMileageGoal() {
-<b class="nc"><i>35</i>&nbsp;        return mileageGoal;</b>
-<i>36</i>&nbsp;    }
-<i>37</i>&nbsp;
-<i>38</i>&nbsp;    public void setMileageGoal(double mileageGoal) {
-<b class="nc"><i>39</i>&nbsp;        this.mileageGoal = mileageGoal;</b>
-<i>40</i>&nbsp;    }
-<i>41</i>&nbsp;
-<i>42</i>&nbsp;    @Basic
-<i>43</i>&nbsp;    @Column(name = &quot;endTime&quot;)
-<i>44</i>&nbsp;    public Timestamp getEndTime() {
-<b class="nc"><i>45</i>&nbsp;        return endTime;</b>
-<i>46</i>&nbsp;    }
-<i>47</i>&nbsp;
-<i>48</i>&nbsp;    public void setEndTime(Timestamp endTime) {
-<b class="nc"><i>49</i>&nbsp;        this.endTime = endTime;</b>
-<i>50</i>&nbsp;    }
-<i>51</i>&nbsp;
-<i>52</i>&nbsp;    @Basic
-<i>53</i>&nbsp;    @Column(name = &quot;startTime&quot;)
-<i>54</i>&nbsp;    public Timestamp getStartTime() {
-<b class="nc"><i>55</i>&nbsp;        return startTime;</b>
-<i>56</i>&nbsp;    }
-<i>57</i>&nbsp;
-<i>58</i>&nbsp;    public void setStartTime(Timestamp startTime) {
-<b class="nc"><i>59</i>&nbsp;        this.startTime = startTime;</b>
-<i>60</i>&nbsp;    }
-<i>61</i>&nbsp;}
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;@Entity
+<i>10</i>&nbsp;@JsonIgnoreProperties(value = {&quot;handler&quot;,&quot;hibernateLazyInitializer&quot;,&quot;fieldHandler&quot;})
+<i>11</i>&nbsp;@JsonIdentityInfo(
+<i>12</i>&nbsp;        generator = ObjectIdGenerators.PropertyGenerator.class,
+<i>13</i>&nbsp;        property = &quot;semesterID&quot;)
+<b class="fc"><i>14</i>&nbsp;public class Semester {</b>
+<i>15</i>&nbsp;    private int semesterID;
+<i>16</i>&nbsp;    private double mileageGoal;
+<i>17</i>&nbsp;    private long endTime;
+<i>18</i>&nbsp;    private long startTime;
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    @Id
+<i>21</i>&nbsp;    @Column(name = &quot;semesterID&quot;)
+<i>22</i>&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+<i>23</i>&nbsp;    public int getSemesterID() {
+<b class="fc"><i>24</i>&nbsp;        return semesterID;</b>
+<i>25</i>&nbsp;    }
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    public void setSemesterID(int semesterID) {
+<b class="fc"><i>28</i>&nbsp;        this.semesterID = semesterID;</b>
+<b class="fc"><i>29</i>&nbsp;    }</b>
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    @Basic
+<i>32</i>&nbsp;    @Column(name = &quot;mileageGoal&quot;)
+<i>33</i>&nbsp;    public double getMileageGoal() {
+<b class="fc"><i>34</i>&nbsp;        return mileageGoal;</b>
+<i>35</i>&nbsp;    }
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    public void setMileageGoal(double mileageGoal) {
+<b class="fc"><i>38</i>&nbsp;        this.mileageGoal = mileageGoal;</b>
+<b class="fc"><i>39</i>&nbsp;    }</b>
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    @Basic
+<i>42</i>&nbsp;    @Column(name = &quot;endTime&quot;)
+<i>43</i>&nbsp;    public long getEndTime() {
+<b class="fc"><i>44</i>&nbsp;        return endTime;</b>
+<i>45</i>&nbsp;    }
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    public void setEndTime(long endTime) {
+<b class="fc"><i>48</i>&nbsp;        this.endTime = endTime;</b>
+<b class="fc"><i>49</i>&nbsp;    }</b>
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;    @Basic
+<i>52</i>&nbsp;    @Column(name = &quot;startTime&quot;)
+<i>53</i>&nbsp;    public long getStartTime() {
+<b class="fc"><i>54</i>&nbsp;        return startTime;</b>
+<i>55</i>&nbsp;    }
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;    public void setStartTime(long startTime) {
+<b class="fc"><i>58</i>&nbsp;        this.startTime = startTime;</b>
+<b class="fc"><i>59</i>&nbsp;    }</b>
+<i>60</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2019-08-01 16:06</div>
+    <div style="float:right;">generated on 2019-09-08 17:15</div>
 </div>
 </body>
 </html>

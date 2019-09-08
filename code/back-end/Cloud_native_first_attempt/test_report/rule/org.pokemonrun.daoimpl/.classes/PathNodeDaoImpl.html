@@ -23,12 +23,9 @@
 <h1>Coverage Summary for Class: PathNodeDaoImpl (org.pokemonrun.daoimpl)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -42,30 +39,49 @@
   <td class="name">PathNodeDaoImpl</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/ 1)
+    (3/ 3)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/ 3)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/ 5)
+    (5/ 5)
   </span>
 </td>
 </tr>
-
+  <tr>
+    <td class="name">PathNodeDaoImpl$$EnhancerBySpringCGLIB$$be097dbf</td>
+  </tr>
+  <tr>
+    <td class="name">PathNodeDaoImpl$$EnhancerBySpringCGLIB$$be097dbf$$FastClassBySpringCGLIB$$979a0e53</td>
+  </tr>
+  <tr>
+    <td class="name">PathNodeDaoImpl$$FastClassBySpringCGLIB$$21f8f5e3</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/ 5)
+  </span>
+</td>
+</tr>
 </table>
 
 <br/>
@@ -83,20 +99,20 @@
 <i>9</i>&nbsp;import java.util.List;
 <i>10</i>&nbsp;
 <i>11</i>&nbsp;@Repository
-<b class="nc"><i>12</i>&nbsp;public class PathNodeDaoImpl implements PathNodeDao {</b>
+<b class="fc"><i>12</i>&nbsp;public class PathNodeDaoImpl implements PathNodeDao {</b>
 <i>13</i>&nbsp;    @Autowired
 <i>14</i>&nbsp;    private PathNodeRepository pathNodeRepository;
 <i>15</i>&nbsp;
 <i>16</i>&nbsp;    @Override
 <i>17</i>&nbsp;    public List&lt;PathNode&gt; getNodes() {
-<b class="nc"><i>18</i>&nbsp;        return pathNodeRepository.findAll();</b>
+<b class="fc"><i>18</i>&nbsp;        return pathNodeRepository.findAll();</b>
 <i>19</i>&nbsp;    }
 <i>20</i>&nbsp;
 <i>21</i>&nbsp;    @Override
 <i>22</i>&nbsp;    public boolean replaceNodes(List&lt;PathNode&gt; nodes){
-<b class="nc"><i>23</i>&nbsp;        pathNodeRepository.deleteAll();</b>
-<b class="nc"><i>24</i>&nbsp;        pathNodeRepository.saveAll(nodes);</b>
-<b class="nc"><i>25</i>&nbsp;        return true;</b>
+<b class="fc"><i>23</i>&nbsp;        pathNodeRepository.deleteAll();</b>
+<b class="fc"><i>24</i>&nbsp;        pathNodeRepository.saveAll(nodes);</b>
+<b class="fc"><i>25</i>&nbsp;        return true;</b>
 <i>26</i>&nbsp;    }
 <i>27</i>&nbsp;}
 </div>
@@ -104,7 +120,7 @@
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2019-08-01 16:06</div>
+    <div style="float:right;">generated on 2019-09-08 17:15</div>
 </div>
 </body>
 </html>

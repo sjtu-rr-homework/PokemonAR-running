@@ -42,26 +42,26 @@
   <td class="name">Edge</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/ 1)
+    (1/ 1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/ 7)
+    (7/ 7)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    86.2%
   </span>
   <span class="absValue">
-    (0/ 28)
+    (25/ 29)
   </span>
 </td>
 </tr>
@@ -77,53 +77,53 @@
 <i>3</i>&nbsp;public class Edge {
 <i>4</i>&nbsp;    private double x1, x2;
 <i>5</i>&nbsp;    private double y1, y2;
-<b class="nc"><i>6</i>&nbsp;    public Edge(double x1, double y1, double x2, double y2){</b>
-<b class="nc"><i>7</i>&nbsp;        this.x1 = x1;</b>
-<b class="nc"><i>8</i>&nbsp;        this.y1 = y1;</b>
-<b class="nc"><i>9</i>&nbsp;        this.x2 = x2;</b>
-<b class="nc"><i>10</i>&nbsp;        this.y2 = y2;</b>
-<i>11</i>&nbsp;    }
+<b class="fc"><i>6</i>&nbsp;    public Edge(double x1, double y1, double x2, double y2){</b>
+<b class="fc"><i>7</i>&nbsp;        this.x1 = x1;</b>
+<b class="fc"><i>8</i>&nbsp;        this.y1 = y1;</b>
+<b class="fc"><i>9</i>&nbsp;        this.x2 = x2;</b>
+<b class="fc"><i>10</i>&nbsp;        this.y2 = y2;</b>
+<b class="fc"><i>11</i>&nbsp;    }</b>
 <i>12</i>&nbsp;    private double cross(double x1, double y1, double x2, double y2){
-<b class="nc"><i>13</i>&nbsp;        return x1 * y2 - x2 * y1;</b>
+<b class="fc"><i>13</i>&nbsp;        return x1 * y2 - x2 * y1;</b>
 <i>14</i>&nbsp;    }
 <i>15</i>&nbsp;    // whether the 2 nodes are at both sides of edge e
 <i>16</i>&nbsp;    private boolean biside(Edge e){
-<b class="nc"><i>17</i>&nbsp;        return cross(x1 - e.x1, y1 - e.y1, x1 - e.x2, y1 - e.y2)</b>
-<b class="nc"><i>18</i>&nbsp;                * cross(x2 - e.x1, y2 - e.y1, x2 - e.x2, y2 - e.y2) &lt; 0;</b>
+<b class="fc"><i>17</i>&nbsp;        return cross(x1 - e.x1, y1 - e.y1, x1 - e.x2, y1 - e.y2)</b>
+<b class="fc"><i>18</i>&nbsp;                * cross(x2 - e.x1, y2 - e.y1, x2 - e.x2, y2 - e.y2) &lt; 0;</b>
 <i>19</i>&nbsp;    }
 <i>20</i>&nbsp;    public boolean intersects(Edge e){
-<b class="nc"><i>21</i>&nbsp;        boolean ip1 = isPoint(), ip2 = e.isPoint();</b>
-<b class="nc"><i>22</i>&nbsp;        if(ip1 &amp;&amp; ip2){</b>
+<b class="fc"><i>21</i>&nbsp;        boolean ip1 = isPoint(), ip2 = e.isPoint();</b>
+<b class="fc"><i>22</i>&nbsp;        if(ip1 &amp;&amp; ip2){</b>
 <b class="nc"><i>23</i>&nbsp;            return equals(e);</b>
-<b class="nc"><i>24</i>&nbsp;        }else if(ip1){</b>
+<b class="fc"><i>24</i>&nbsp;        }else if(ip1){</b>
 <b class="nc"><i>25</i>&nbsp;            return e.contains(x1, y1);</b>
-<b class="nc"><i>26</i>&nbsp;        }else if(ip2){</b>
+<b class="fc"><i>26</i>&nbsp;        }else if(ip2){</b>
 <b class="nc"><i>27</i>&nbsp;            return contains(e.x1, e.y1);</b>
 <i>28</i>&nbsp;        }else{
 <i>29</i>&nbsp;            // 2 edges
-<b class="nc"><i>30</i>&nbsp;            if(contains(e.x1, e.y1) || contains(e.x2, e.y2)</b>
-<b class="nc"><i>31</i>&nbsp;                    || e.contains(x1, y1) || e.contains(x2, y2)){</b>
-<b class="nc"><i>32</i>&nbsp;                return true;</b>
+<b class="fc"><i>30</i>&nbsp;            if(contains(e.x1, e.y1) || contains(e.x2, e.y2)</b>
+<b class="fc"><i>31</i>&nbsp;                    || e.contains(x1, y1) || e.contains(x2, y2)){</b>
+<b class="fc"><i>32</i>&nbsp;                return true;</b>
 <i>33</i>&nbsp;            }
-<b class="nc"><i>34</i>&nbsp;            return biside(e) &amp;&amp; e.biside(this);</b>
+<b class="fc"><i>34</i>&nbsp;            return biside(e) &amp;&amp; e.biside(this);</b>
 <i>35</i>&nbsp;        }
 <i>36</i>&nbsp;    }
 <i>37</i>&nbsp;    public boolean contains(double x, double y){
-<b class="nc"><i>38</i>&nbsp;        if((x1 == x &amp;&amp; y1 == y) || (x2 == x &amp;&amp; y2 == y)){</b>
-<b class="nc"><i>39</i>&nbsp;            return true;</b>
+<b class="fc"><i>38</i>&nbsp;        if((x1 == x &amp;&amp; y1 == y) || (x2 == x &amp;&amp; y2 == y)){</b>
+<b class="fc"><i>39</i>&nbsp;            return true;</b>
 <i>40</i>&nbsp;        }
-<b class="nc"><i>41</i>&nbsp;        return (x - x1) * (x - x2) + (y - y1) * (y - y2) &lt; 0</b>
-<b class="nc"><i>42</i>&nbsp;                &amp;&amp; cross(x - x1, y - y1, x - x2, y - y2) == 0;</b>
+<b class="fc"><i>41</i>&nbsp;        return (x - x1) * (x - x2) + (y - y1) * (y - y2) &lt; 0</b>
+<b class="fc"><i>42</i>&nbsp;                &amp;&amp; cross(x - x1, y - y1, x - x2, y - y2) == 0;</b>
 <i>43</i>&nbsp;    }
 <i>44</i>&nbsp;    public boolean isPoint(){
-<b class="nc"><i>45</i>&nbsp;        return x1 == x2 &amp;&amp; y1 == y2;</b>
+<b class="fc"><i>45</i>&nbsp;        return x1 == x2 &amp;&amp; y1 == y2;</b>
 <i>46</i>&nbsp;    }
 <i>47</i>&nbsp;
 <i>48</i>&nbsp;    @Override
 <i>49</i>&nbsp;    public boolean equals(Object o){
-<b class="nc"><i>50</i>&nbsp;        if(o instanceof Edge){</b>
-<b class="nc"><i>51</i>&nbsp;            Edge e = (Edge)o;</b>
-<b class="nc"><i>52</i>&nbsp;            return (x1 == e.x1 &amp;&amp; y1 == e.y1 &amp;&amp; x2 == e.x2 &amp;&amp; y2 == e.y2)</b>
+<b class="fc"><i>50</i>&nbsp;        if(o instanceof Edge){</b>
+<b class="fc"><i>51</i>&nbsp;            Edge e = (Edge)o;</b>
+<b class="fc"><i>52</i>&nbsp;            return (x1 == e.x1 &amp;&amp; y1 == e.y1 &amp;&amp; x2 == e.x2 &amp;&amp; y2 == e.y2)</b>
 <i>53</i>&nbsp;                    || (x1 == e.x2 &amp;&amp; y1 == e.y2 &amp;&amp; x2 == e.x1 &amp;&amp; y2 == e.y1);
 <i>54</i>&nbsp;        }
 <b class="nc"><i>55</i>&nbsp;        return false;</b>
@@ -134,7 +134,7 @@
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2019-08-01 16:06</div>
+    <div style="float:right;">generated on 2019-09-08 17:15</div>
 </div>
 </body>
 </html>
