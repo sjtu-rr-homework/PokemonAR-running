@@ -20,6 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
+// IMPORTANT: Data in MongoDB must be cleared before testing Add/Get Cover!
 public class UserServiceApplicationTests {
     @Autowired
     private MockMvc mockMvc;
@@ -197,5 +198,60 @@ public class UserServiceApplicationTests {
                 .andExpect(status().isOk())
                 .andExpect(content().string("[" +
                         "\"wzr\",\"wzr2\"]"));
+    }
+
+    @Test
+    public void testAddCover() throws Exception {
+        mockMvc.perform(post("/add/cover").contentType("application/json;charset=UTF-8")
+                .content("{\"username\":\"wzr\"," +
+                        "\"pic\":\"1234\"" +
+                        "}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+        mockMvc.perform(post("/add/cover").contentType("application/json;charset=UTF-8")
+                .content("{\"username\":\"wzr\"," +
+                        "\"pic\":\"1234\"" +
+                        "}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+        mockMvc.perform(post("/add/cover").contentType("application/json;charset=UTF-8")
+                .content("{\"username\":\"wzr\"," +
+                        "\"pic\":\"4321\"" +
+                        "}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+        mockMvc.perform(post("/add/cover").contentType("application/json;charset=UTF-8")
+                .content("{\"username\":\"nonexist_user\"," +
+                        "\"pic\":\"1234\"" +
+                        "}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("false"));
+    }
+
+    @Test
+    public void testGetCover() throws Exception {
+        // data
+        mockMvc.perform(post("/add/cover").contentType("application/json;charset=UTF-8")
+                .content("{\"username\":\"wzr\"," +
+                        "\"pic\":\"4321\"" +
+                        "}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+        mockMvc.perform(get("/register/username/wzr2/password/rzw/email/w2@w.w"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+        // test
+        mockMvc.perform(get("/get/cover/username/wzr"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("{" +
+                        "\"username\":\"wzr\"," +
+                        "\"pic\":\"4321\"" +
+                        "}"));
+        mockMvc.perform(get("/get/cover/username/wzr2"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(""));
+        mockMvc.perform(get("/get/cover/username/nonexist_user"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(""));
     }
 }

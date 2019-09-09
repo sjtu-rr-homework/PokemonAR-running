@@ -42,26 +42,26 @@
   <td class="name">BasicRuleServiceImpl</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/ 1)
+    (1/ 1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/ 3)
+    (3/ 3)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/ 9)
+    (9/ 9)
   </span>
 </td>
 </tr>
@@ -83,25 +83,25 @@
 <i>9</i>&nbsp;import org.springframework.stereotype.Service;
 <i>10</i>&nbsp;
 <i>11</i>&nbsp;@Service
-<b class="nc"><i>12</i>&nbsp;public class BasicRuleServiceImpl implements BasicRuleService {</b>
+<b class="fc"><i>12</i>&nbsp;public class BasicRuleServiceImpl implements BasicRuleService {</b>
 <i>13</i>&nbsp;    @Autowired
 <i>14</i>&nbsp;    private BasicRuleDao basicRuleDao;
 <i>15</i>&nbsp;
 <i>16</i>&nbsp;    @Override
 <i>17</i>&nbsp;    public BasicRuleInfo getBasicRule() {
-<b class="nc"><i>18</i>&nbsp;        BasicRule rule = basicRuleDao.getBasicRule();</b>
-<b class="nc"><i>19</i>&nbsp;        return BasicRuleConverter.toInfo(rule);</b>
+<b class="fc"><i>18</i>&nbsp;        BasicRule rule = basicRuleDao.getBasicRule();</b>
+<b class="fc"><i>19</i>&nbsp;        return BasicRuleConverter.toInfo(rule);</b>
 <i>20</i>&nbsp;    }
 <i>21</i>&nbsp;
 <i>22</i>&nbsp;    @Override
 <i>23</i>&nbsp;    public boolean setBasicRule(BasicRuleInfo info) {
-<b class="nc"><i>24</i>&nbsp;        BasicRule rule = BasicRuleConverter.toEntity(info);</b>
-<b class="nc"><i>25</i>&nbsp;        Double min = rule.getMinSpeed();</b>
-<b class="nc"><i>26</i>&nbsp;        Double max = rule.getMaxSpeed();</b>
-<b class="nc"><i>27</i>&nbsp;        if(min != null &amp;&amp; max != null &amp;&amp; (min &lt;= max || max &lt;= 0)){</b>
-<b class="nc"><i>28</i>&nbsp;            return false;</b>
+<b class="fc"><i>24</i>&nbsp;        BasicRule rule = BasicRuleConverter.toEntity(info);</b>
+<b class="fc"><i>25</i>&nbsp;        Double min = rule.getMinSpeed();</b>
+<b class="fc"><i>26</i>&nbsp;        Double max = rule.getMaxSpeed();</b>
+<b class="fc"><i>27</i>&nbsp;        if(min != null &amp;&amp; max != null &amp;&amp; (min &lt;= max || max &lt;= 0)){</b>
+<b class="fc"><i>28</i>&nbsp;            return false;</b>
 <i>29</i>&nbsp;        }
-<b class="nc"><i>30</i>&nbsp;        return basicRuleDao.replaceBasicRule(rule);</b>
+<b class="fc"><i>30</i>&nbsp;        return basicRuleDao.replaceBasicRule(rule);</b>
 <i>31</i>&nbsp;    }
 <i>32</i>&nbsp;}
 </div>
@@ -109,7 +109,7 @@
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2019-08-01 16:06</div>
+    <div style="float:right;">generated on 2019-09-08 17:15</div>
 </div>
 </body>
 </html>

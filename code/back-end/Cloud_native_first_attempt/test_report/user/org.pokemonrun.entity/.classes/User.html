@@ -99,7 +99,7 @@
 <i>25</i>&nbsp;    private int exp;
 <i>26</i>&nbsp;    private int pet;
 <i>27</i>&nbsp;    private double distance;
-<b class="fc"><i>28</i>&nbsp;    private Set&lt;User&gt; following = new HashSet&lt;User&gt;();</b>
+<b class="fc"><i>28</i>&nbsp;    private Set&lt;User&gt; following = new HashSet&lt;User&gt;();//self joint many to many</b>
 <b class="fc"><i>29</i>&nbsp;    private Set&lt;User&gt; followers = new HashSet&lt;User&gt;();</b>
 <i>30</i>&nbsp;
 <i>31</i>&nbsp;    @Id
@@ -178,12 +178,12 @@
 <b class="fc"><i>104</i>&nbsp;    public Set&lt;User&gt; getFollowing(){return following; }</b>
 <b class="fc"><i>105</i>&nbsp;    public void setFollowing(Set&lt;User&gt; following) {this.following= following; }</b>
 <i>106</i>&nbsp;
-<i>107</i>&nbsp;    private User()
+<i>107</i>&nbsp;    private User()//used by system
 <b class="fc"><i>108</i>&nbsp;    {</b>
 <i>109</i>&nbsp;
 <b class="fc"><i>110</i>&nbsp;    }</b>
 <i>111</i>&nbsp;
-<i>112</i>&nbsp;    public User(String username,String password,String email,int star,int exp,int pet)
+<i>112</i>&nbsp;    public User(String username,String password,String email,int star,int exp,int pet)//used by programmer
 <b class="fc"><i>113</i>&nbsp;    {</b>
 <b class="fc"><i>114</i>&nbsp;        this.username=username;</b>
 <b class="fc"><i>115</i>&nbsp;        this.password=password;</b>
@@ -202,7 +202,7 @@
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2019-08-01 16:11</div>
+    <div style="float:right;">generated on 2019-09-08 17:07</div>
 </div>
 </body>
 </html>

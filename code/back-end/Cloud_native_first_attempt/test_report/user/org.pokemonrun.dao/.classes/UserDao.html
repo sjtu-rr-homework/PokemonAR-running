@@ -44,20 +44,19 @@
 <i>6</i>&nbsp;
 <i>7</i>&nbsp;
 <i>8</i>&nbsp;public interface UserDao {
-<i>9</i>&nbsp;    User findOne(String username);
-<i>10</i>&nbsp;    User findById(int id);
-<i>11</i>&nbsp;    void save(String username, String password, String email, int star);
-<i>12</i>&nbsp;    void save(User user);
-<i>13</i>&nbsp;    List&lt;User&gt; findAll();
-<i>14</i>&nbsp;    void remove(Integer id);
-<i>15</i>&nbsp;    List&lt;User&gt; getAllUser();
-<i>16</i>&nbsp;}
+<i>9</i>&nbsp;    User findOne(String username);//find one user by username (no duplicate)
+<i>10</i>&nbsp;    User findById(int id);//find one user by ID, no duplicate
+<i>11</i>&nbsp;    void save(String username, String password, String email, int star);//save one user , no duplicate username
+<i>12</i>&nbsp;    void save(User user);//save one user , no duplicate username
+<i>13</i>&nbsp;    List&lt;User&gt; findAll();//find all user
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2019-08-01 16:11</div>
+    <div style="float:right;">generated on 2019-09-08 17:07</div>
 </div>
 </body>
 </html>

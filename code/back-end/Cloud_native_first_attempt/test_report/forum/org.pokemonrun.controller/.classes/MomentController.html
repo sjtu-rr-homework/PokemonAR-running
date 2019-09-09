@@ -1,0 +1,119 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: MomentController</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">org.pokemonrun.controller</a> ]
+</div>
+
+<h1>Coverage Summary for Class: MomentController (org.pokemonrun.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MomentController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/ 4)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package org.pokemonrun.controller;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import org.pokemonrun.info.MomentInfo;
+<i>4</i>&nbsp;import org.pokemonrun.service.AddMomentService;
+<i>5</i>&nbsp;import org.pokemonrun.service.GetMomentService;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>8</i>&nbsp;import org.springframework.stereotype.Controller;
+<i>9</i>&nbsp;import org.springframework.web.bind.annotation.*;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;import java.util.List;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;@RestController
+<b class="fc"><i>14</i>&nbsp;public class MomentController {</b>
+<i>15</i>&nbsp;    @Autowired
+<i>16</i>&nbsp;    private AddMomentService AddMomentService;
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    @Autowired
+<i>19</i>&nbsp;    private GetMomentService GetMomentService;
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    @PostMapping(&quot;/add/moment&quot;)
+<i>22</i>&nbsp;    public boolean AddMoment(@RequestBody MomentInfo MomentInfo) {
+<b class="fc"><i>23</i>&nbsp;        return AddMomentService.addMoment(MomentInfo);</b>
+<i>24</i>&nbsp;    }
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    @GetMapping(&quot;/get/all/moment/timestamp/{timestamp}&quot;)//get ten moments which is uploaded before the timestamp
+<i>27</i>&nbsp;    public List&lt;MomentInfo&gt; getAllMoment(@PathVariable(&quot;timestamp&quot;) String timestamp) {
+<b class="fc"><i>28</i>&nbsp;        return GetMomentService.getAll(Long.parseLong(timestamp));</b>
+<i>29</i>&nbsp;    }
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    @GetMapping(&quot;/get/refresh/moment/timestamp/{timestamp}&quot;)//get ten moments which is posted after the timestamp
+<i>32</i>&nbsp;    public List&lt;MomentInfo&gt; refreshMoment(@PathVariable(&quot;timestamp&quot;) String timestamp) {
+<b class="fc"><i>33</i>&nbsp;        return GetMomentService.refresh(Long.parseLong(timestamp));</b>
+<i>34</i>&nbsp;    }
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-09-08 16:19</div>
+</div>
+</body>
+</html>

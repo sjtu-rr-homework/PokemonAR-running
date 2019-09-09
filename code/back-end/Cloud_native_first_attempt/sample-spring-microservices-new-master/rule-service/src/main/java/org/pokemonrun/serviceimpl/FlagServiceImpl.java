@@ -44,6 +44,14 @@ public class FlagServiceImpl implements FlagService {
         return true;
     }
 
+    /**
+     * Generate a route containing at most 5 points.
+     * All the points are selected from flags
+     * and should be near enough to the reference point (lng, lat)
+     * @param lng longitude of the reference point
+     * @param lat latitude of the reference point
+     * @return a list of points indicating the route
+     */
     @Override
     public List<FlagInfo> getRandomRoute(double lng, double lat) {
         List<Flag> flags = flagDao.getFlags();

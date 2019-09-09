@@ -42,26 +42,26 @@
   <td class="name">Cover</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/ 1)
+    (1/ 1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    50%
   </span>
   <span class="absValue">
-    (0/ 2)
+    (1/ 2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    20%
   </span>
   <span class="absValue">
-    (0/ 15)
+    (1/ 5)
   </span>
 </td>
 </tr>
@@ -80,47 +80,27 @@
 <i>6</i>&nbsp;@Document(collection = &quot;cover&quot;)
 <i>7</i>&nbsp;public class Cover {
 <i>8</i>&nbsp;    @Id
-<i>9</i>&nbsp;    public String momentid;
+<i>9</i>&nbsp;    public String momentid;//generate automatically
 <i>10</i>&nbsp;
-<i>11</i>&nbsp;    public String text;
+<i>11</i>&nbsp;    public String username;
 <i>12</i>&nbsp;
-<i>13</i>&nbsp;    public String timestamp;
+<i>13</i>&nbsp;    public byte[] pic;
 <i>14</i>&nbsp;
-<i>15</i>&nbsp;    public String username;
-<i>16</i>&nbsp;
-<i>17</i>&nbsp;    public byte[] pic1;
-<i>18</i>&nbsp;    public byte[] pic2;
-<i>19</i>&nbsp;    public byte[] pic3;
-<i>20</i>&nbsp;    public byte[] pic4;
-<i>21</i>&nbsp;    public byte[] pic5;
-<i>22</i>&nbsp;    public byte[] pic6;
-<i>23</i>&nbsp;    public byte[] pic7;
-<i>24</i>&nbsp;    public byte[] pic8;
-<i>25</i>&nbsp;    public byte[] pic9;
-<i>26</i>&nbsp;
-<b class="nc"><i>27</i>&nbsp;    public Cover(){}</b>
-<i>28</i>&nbsp;    public Cover(String text, String timestamp, String username, byte[] pic1, byte[] pic2, byte[] pic3, byte[] pic4, byte[] pic5, byte[] pic6, byte[] pic7, byte[] pic8, byte[] pic9)
-<b class="nc"><i>29</i>&nbsp;    {</b>
-<b class="nc"><i>30</i>&nbsp;        this.text=text;</b>
-<b class="nc"><i>31</i>&nbsp;        this.timestamp=timestamp;</b>
-<b class="nc"><i>32</i>&nbsp;        this.username=username;</b>
-<b class="nc"><i>33</i>&nbsp;        this.pic1=pic1;</b>
-<b class="nc"><i>34</i>&nbsp;        this.pic2=pic2;</b>
-<b class="nc"><i>35</i>&nbsp;        this.pic3=pic3;</b>
-<b class="nc"><i>36</i>&nbsp;        this.pic4=pic4;</b>
-<b class="nc"><i>37</i>&nbsp;        this.pic5=pic5;</b>
-<b class="nc"><i>38</i>&nbsp;        this.pic6=pic6;</b>
-<b class="nc"><i>39</i>&nbsp;        this.pic7=pic7;</b>
-<b class="nc"><i>40</i>&nbsp;        this.pic8=pic8;</b>
-<b class="nc"><i>41</i>&nbsp;        this.pic9=pic9;</b>
-<b class="nc"><i>42</i>&nbsp;    }</b>
-<i>43</i>&nbsp;}
+<b class="fc"><i>15</i>&nbsp;    public Cover(){}</b>
+<i>16</i>&nbsp;    public Cover(String username, byte[] pic)
+<b class="nc"><i>17</i>&nbsp;    {</b>
+<i>18</i>&nbsp;
+<b class="nc"><i>19</i>&nbsp;        this.username=username;</b>
+<b class="nc"><i>20</i>&nbsp;        this.pic=pic;</b>
+<i>21</i>&nbsp;
+<b class="nc"><i>22</i>&nbsp;    }</b>
+<i>23</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2019-08-01 16:11</div>
+    <div style="float:right;">generated on 2019-09-08 17:07</div>
 </div>
 </body>
 </html>

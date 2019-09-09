@@ -38,19 +38,22 @@
 
 <div class="sourceCode"><i>1</i>&nbsp;package org.pokemonrun.service;
 <i>2</i>&nbsp;
-<i>3</i>&nbsp;public interface ModifyUserInfo {
-<i>4</i>&nbsp;    public boolean ModifyExp(String username,int num);
-<i>5</i>&nbsp;    public boolean blockUser(String username);
-<i>6</i>&nbsp;    public boolean SetPet(String username, int pet);
-<i>7</i>&nbsp;    public boolean AddDistance(String username, double distance);
-<i>8</i>&nbsp;    public boolean addFriend(String username,String friendname);
-<i>9</i>&nbsp;}
+<i>3</i>&nbsp;import org.pokemonrun.info.Coverinfo;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;public interface ModifyUserInfo {
+<i>6</i>&nbsp;    public boolean ModifyExp(String username,int num);
+<i>7</i>&nbsp;    public boolean blockUser(String username);//block user from login (set star)
+<i>8</i>&nbsp;    public boolean SetPet(String username, int pet);//user set the pet to fight
+<i>9</i>&nbsp;    public boolean AddDistance(String username, double distance);//add to the whole distance a user has run
+<i>10</i>&nbsp;    public boolean addFriend(String username,String friendname);//add a user as another user&#39;s friend, automatically back and forth
+<i>11</i>&nbsp;    public boolean addCover(Coverinfo Coverinfo);
+<i>12</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2019-08-01 16:11</div>
+    <div style="float:right;">generated on 2019-09-08 17:07</div>
 </div>
 </body>
 </html>

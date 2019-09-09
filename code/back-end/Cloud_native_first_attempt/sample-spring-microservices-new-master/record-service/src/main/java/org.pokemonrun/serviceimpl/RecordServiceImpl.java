@@ -24,6 +24,7 @@ public class RecordServiceImpl implements RecordService {
         runningRecordDao.save(record);
         return true;
     }
+
     @Override
     public List<RunningRecordInfo> getUserRecordList(String username) {
         List<RunningRecord> list = runningRecordDao.findByUsername(username);
