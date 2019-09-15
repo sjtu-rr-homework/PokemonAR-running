@@ -80,3 +80,4 @@
 
 [Back-end docker cloud config repo](https://github.com/MaCoredroid/test-config-docker)
 
+You can use docker-compose file to deploy the whole back-end , [docker hub link](https://hub.docker.com/u/macoredroid)
